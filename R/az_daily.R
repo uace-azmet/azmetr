@@ -9,9 +9,9 @@
 #'
 #' @examples
 #' az_daily()
+#' TODO: args should be start_date, end_date.  Do the parsing in the function I think.
 az_daily <- function(station_id = NULL, date_time_start = NULL, time_interval = NULL) {
   check_internet()
-  path <- c("v1", "observations", "daily")
 
   #validate and URL encode args
 
@@ -36,12 +36,13 @@ az_daily <- function(station_id = NULL, date_time_start = NULL, time_interval = 
   if(!is.null(time_interval)) {
 
     #"Collection interval must be in a valid ISO-8601 interval format: P1DT23H, where 1 is number of days and 23 is the number of hours."
-    #TODO figure out if there is an "R" way to supply this or if this note should just be in the documentation:
+    #TODO figure out if there is an "R" way to supply this or if this note should just be in the documentation
+    #TODO: this isn't only the interval, but the number of results to return.
 
   } else {
     time_interval <- "*"
   }
-
+  path <- c("v1", "observations", "daily", station_id, date_time_start, time_interval)
   res <- httr::GET(base_url, path = path, httr::accept_json())
   check_status(res)
   data_raw <- httr::content(res, as = "parsed")
