@@ -8,4 +8,15 @@ check_status <- function(res){
               msg = "The API returned an error")
 }
 
+ping_service <- function() {
+  path <- c("v1", "observations", "daily", "az01")
+  res <- httr::GET(base_url, path = path, httr::accept_json())
+  status <- httr::status_code(res)
+  if(status == 200){
+    return(TRUE)
+  } else {
+    return(FALSE)
+  }
+}
+
 base_url <- "https://api.azmet.arizona.edu/v1/"
