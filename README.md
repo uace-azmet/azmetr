@@ -13,7 +13,8 @@ The goal of azmetr is to ...
 You can install the development version of azmetr like so:
 
 ``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+# install.packages("remotes")
+remotes::install_github("cct-datascience/azmetr")
 ```
 
 ## Example
