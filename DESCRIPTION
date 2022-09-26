@@ -10,7 +10,9 @@ Imports:
     attempt,
     curl,
     httr,
-    lubridate
+    lubridate,
+    purrr,
+    tibble
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1

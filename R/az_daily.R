@@ -43,7 +43,15 @@ az_daily <- function(station_id = NULL, date_time_start = NULL, time_interval = 
 
   res <- httr::GET(base_url, path = path, httr::accept_json())
   check_status(res)
-  data_raw <- httr::parsed_content(res)
-  #TODO: parse into dataframe with errors as attributes and return
-  data_raw
+  data_raw <- httr::content(res, as = "parsed")
+  data_tidy <- data_raw$data |> purrr::map_df(tibble::as_tibble)
+  attributes(data_tidy) <-
+    append(attributes(data_tidy), list(
+      errors = data_raw$errors,
+      i = data_raw$i,
+      l = data_raw$l,
+      s = data_raw$s,
+      t = data_raw$t
+      ))
+  data_tidy
 }
