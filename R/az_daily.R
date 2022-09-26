@@ -16,7 +16,7 @@ az_daily <- function(station_id = NULL, date_time_start = NULL, time_interval = 
   #validate and URL encode args
 
   if(!is.null(station_id)) {
-    #TODO: figure out what station IDs are valid
+    #TODO: figure out what station IDs are valid.  Looks like they take the form of "az01", etc.  Could allow numeric and convert or could require this format.
     #validation
   } else {
     station_id <- "*"
@@ -27,15 +27,16 @@ az_daily <- function(station_id = NULL, date_time_start = NULL, time_interval = 
     if(is.character(date_time_start)) {
       date_time_start <- lubridate::ymd_hm(date_time_start)
     }
+    #TODO write tests for datetime, POSIXct, or character inputs
     date_time_start <- format(date_time_start, format = "%Y-%m-%dT%H:%M")
   } else {
     date_time_start <- "*"
   }
 
   if(!is.null(time_interval)) {
-    #TODO figure out if there is an "R" way to supply this or if this note should just be in the documentation:
 
-  #"Collection interval must be in a valid ISO-8601 interval format: P1DT23H, where 1 is number of days and 23 is the number of hours."
+    #"Collection interval must be in a valid ISO-8601 interval format: P1DT23H, where 1 is number of days and 23 is the number of hours."
+    #TODO figure out if there is an "R" way to supply this or if this note should just be in the documentation:
 
   } else {
     time_interval <- "*"
