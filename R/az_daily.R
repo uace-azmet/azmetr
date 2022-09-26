@@ -1,3 +1,14 @@
+#' Retrieve Daily Weather Data
+#'
+#' @param station_id station ID. If left blank data for all stations will be returned
+#' @param date_time_start When to start data return in YYYY-MM-DD HH:MM format.  If left blank the most recent day of data will be returned
+#' @param time_interval time interval
+#'
+#' @return a data frame
+#' @export
+#'
+#' @examples
+#' az_daily()
 az_daily <- function(station_id = NULL, date_time_start = NULL, time_interval = NULL) {
   check_internet()
   path <- c("v1", "observations", "daily")
@@ -30,9 +41,9 @@ az_daily <- function(station_id = NULL, date_time_start = NULL, time_interval = 
     time_interval <- "*"
   }
 
-  res <- httr::GET(base_url, path = path, accept_json())
+  res <- httr::GET(base_url, path = path, httr::accept_json())
   check_status(res)
-  data_raw <- parsed_content(res)
+  data_raw <- httr::parsed_content(res)
   #TODO: parse into dataframe with errors as attributes and return
   data_raw
 }
