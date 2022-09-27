@@ -4,12 +4,7 @@
 \alias{az_daily}
 \title{Retrieve Daily Weather Data}
 \usage{
-az_daily(
-  station_id = NULL,
-  start_date = NULL,
-  end_date = NULL,
-  time_interval = NULL
-)
+az_daily(station_id = NULL, start_date = NULL, end_date = NULL)
 }
 \arguments{
 \item{station_id}{station ID can be supplied as numeric vector (e.g.
@@ -20,8 +15,9 @@ stations will be returned}
 \item{start_date}{character; in YYYY-MM-DD or another format that can be
 parsed by \code{\link[lubridate:ymd]{lubridate::ymd()}}}
 
-\item{end_date}{character; in YYYY-MM-DD in YYYY-MM-DD or another format that can be
-parsed by \code{\link[lubridate:ymd]{lubridate::ymd()}}.  Defaults to the current date if left blank.}
+\item{end_date}{character; in YYYY-MM-DD in YYYY-MM-DD or another format that
+can be parsed by \code{\link[lubridate:ymd]{lubridate::ymd()}}.  Defaults to the current date if left
+blank.}
 }
 \value{
 a data frame
@@ -30,9 +26,27 @@ a data frame
 Retrieve Daily Weather Data
 }
 \details{
-If neither \code{start_date} nor \code{end_date} are supplied, the most recent day of data will be returned.  If only \code{start_date} is supplied, then the end date defaults to the current date.  Supplying only \code{end_date} will result in an error.
+If neither \code{start_date} nor \code{end_date} are supplied, the most recent
+day of data will be returned.  If only \code{start_date} is supplied, then the
+end date defaults to the current date.  Supplying only \code{end_date} will
+result in an error.
+}
+\note{
+If \code{station_id} is supplied as a vector, multiple successive calls to
+the API will be made.  You may find better performance getting data for all
+the stations by leaving \code{station_id} blank and subsetting the resulting
+dataframe.
 }
 \examples{
+# Most recent data for all stations:
 az_daily()
-TODO: args should be start_date, end_date.  Do the parsing in the function I think.
+
+# Specify stations:
+az_daily(station_id = c(1, 2))
+az_daily(station_id = c("az01", "az02"))
+
+# Specify dates:
+az_daily(start_date = "2022-09-25")
+az_daily(start_date = "2022-09-25", end_date = "2022-09-26")
+
 }
