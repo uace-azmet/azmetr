@@ -35,7 +35,7 @@
 az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
 
   #TODO: document output columns or link to API docs if appropriate
-
+  #TODO: check for valid station IDs
   check_internet()
 
   if(!is.null(station_id)) {
@@ -108,7 +108,8 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
       purrr::map_df(tibble::as_tibble) |>
       #move metadata to beginning
       dplyr::select(starts_with("meta_"), everything()) |>
-      dplyr::mutate(across(c(-meta_station_id, -meta_station_name, -datetime), as.numeric))
+      dplyr::mutate(across(c(-meta_station_id, -meta_station_name, -datetime), as.numeric)) |>
+      dplyr::mutate(datetime = lubridate::ymd(datetime))
 
     attributes(data_tidy) <-
       append(attributes(data_tidy), list(
