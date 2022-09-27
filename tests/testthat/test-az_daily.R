@@ -17,4 +17,5 @@ test_that("invalid station IDs error", {
   expect_error(az_daily(station_id = 200))
   expect_error(az_daily(station_id = "bz09"))
   expect_error(az_daily(station_id = "az2"))
+  expect_error(az_daily(station_id = TRUE))
 })

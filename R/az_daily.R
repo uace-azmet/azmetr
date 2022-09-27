@@ -27,7 +27,7 @@ az_daily <- function(station_id = NULL, date_time_start = NULL, time_interval = 
       station_id <- paste0("az", station_id)
     }
     #validation
-    if(!all(grepl("$az\\d{2}^", station_id))) {
+    if(!all(grepl("^az\\d{2}$", station_id))) {
       stop("`station_id` must be numeric or character in the format 'az01'")
     }
 
