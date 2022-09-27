@@ -4,17 +4,18 @@
 #'   `station_id = c(8, 37)`) or as character vector with the prefix "az" and 2
 #'   digits (e.g. `station_id = c("az08", "az37")`) If left blank data for all
 #'   stations will be returned
-#' @param date_time_start When to start data return in YYYY-MM-DD HH:MM format.
-#'   If left blank the most recent day of data will be returned
-#' @param time_interval time interval
-#'
+#' @param start_date character; in YYYY-MM-DD or another format that can be
+#'   parsed by [lubridate::ymd()]
+#' @param end_date character; in YYYY-MM-DD in YYYY-MM-DD or another format that can be
+#'   parsed by [lubridate::ymd()].  Defaults to the current date if left blank.
+#' @details If neither `start_date` nor `end_date` are supplied, the most recent day of data will be returned.  If only `start_date` is supplied, then the end date defaults to the current date.  Supplying only `end_date` will result in an error.
 #' @return a data frame
 #' @export
 #'
 #' @examples
 #' az_daily()
 #' TODO: args should be start_date, end_date.  Do the parsing in the function I think.
-az_daily <- function(station_id = NULL, date_time_start = NULL, time_interval = NULL) {
+az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL, time_interval = NULL) {
 
   check_internet()
 
@@ -26,50 +27,80 @@ az_daily <- function(station_id = NULL, date_time_start = NULL, time_interval = 
       station_id <- formatC(station_id, flag = 0, width = 2)
       station_id <- paste0("az", station_id)
     }
-    #validation
+    # Validate station IDs
     if(!all(grepl("^az\\d{2}$", station_id))) {
       stop("`station_id` must be numeric or character in the format 'az01'")
     }
-
   } else {
     station_id <- "*"
   }
 
-  if(!is.null(date_time_start)) {
-  #"Start date time must be in a valid date time in formatted as YYYY-MM-DDTHH:MM."
-    if(is.character(date_time_start)) {
-      date_time_start <- lubridate::ymd_hm(date_time_start)
-    }
-    #TODO write tests for datetime, POSIXct, or character inputs
-    date_time_start <- format(date_time_start, format = "%Y-%m-%dT%H:%M")
-  } else {
-    date_time_start <- "*"
+  if(!is.null(end_date) & is.null(start_date)) {
+    stop("If you supply `end_date`, you must also supply `start_date`")
   }
 
-  if(!is.null(time_interval)) {
+# Parse start and end dates
+  if(!is.null(start_date)) {
+    start_date <-
+      withCallingHandlers(
+        lubridate::ymd(start_date),
+        warning = function(w) {
+          if (conditionMessage(w) == "All formats failed to parse. No formats found.") {
+            stop("`start_date` failed to parse", call. = FALSE)
+          }
+        }
+      )
 
-    #"Collection interval must be in a valid ISO-8601 interval format: P1DT23H, where 1 is number of days and 23 is the number of hours."
-    #TODO figure out if there is an "R" way to supply this or if this note should just be in the documentation
-    #TODO: this isn't only the interval, but the number of results to return.
+    start_date_f <- format(start_date, format = "%Y-%m-%dT%H:%M")
+  } else {
+    start_date_f <- "*" #default is today
+  }
 
+  if(!is.null(end_date)) {
+    end_date <-
+      withCallingHandlers(
+        lubridate::ymd(end_date),
+        warning = function(w) {
+          if (conditionMessage(w) == "All formats failed to parse. No formats found.") {
+            stop("`end_date` failed to parse", call. = FALSE)
+          }
+        }
+      )
+  } else {
+    end_date <- lubridate::today()
+  }
+
+  if ((!is.null(start_date))) {
+    if(end_date < start_date) {
+      stop("`end_date` is before `start_date`!")
+    }
+
+    # Construct time_interval
+    d <- lubridate::as.period(end_date - start_date)
+    time_interval <- lubridate::format_ISO8601(d)
   } else {
     time_interval <- "*"
   }
 
-  #TODO: if station_id is a vector, this needs to be vectorized.  API can't handle multiple stations.
-
-  path <- c("v1", "observations", "daily", station_id, date_time_start, time_interval)
-  res <- httr::GET(base_url, path = path, httr::accept_json())
-  check_status(res)
-  data_raw <- httr::content(res, as = "parsed")
-  data_tidy <- data_raw$data |> purrr::map_df(tibble::as_tibble)
-  attributes(data_tidy) <-
-    append(attributes(data_tidy), list(
-      errors = data_raw$errors,
-      i = data_raw$i,
-      l = data_raw$l,
-      s = data_raw$s,
-      t = data_raw$t
-      ))
-  data_tidy
+  retrieve_daily <- function(station_id, start_date_f, time_interval) {
+    path <- c("v1", "observations", "daily", station_id, start_date_f, time_interval)
+    res <- httr::GET(base_url, path = path, httr::accept_json())
+    check_status(res)
+    data_raw <- httr::content(res, as = "parsed")
+    data_tidy <- data_raw$data |> purrr::map_df(tibble::as_tibble)
+    attributes(data_tidy) <-
+      append(attributes(data_tidy), list(
+        errors = data_raw$errors,
+        i = data_raw$i,
+        l = data_raw$l,
+        s = data_raw$s,
+        t = data_raw$t
+        ))
+    data_tidy
+  }
+  if (length(station_id) == 1) {
+    retrieve_daily(station_id, start_date_f, time_interval)
+  } else if (length(station_id) > 1) {
+    purrr::map_df(station_id, function(x) retrieve_daily(x, start_date_f, time_interval))
+  }
 }

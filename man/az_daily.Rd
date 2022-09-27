@@ -4,7 +4,12 @@
 \alias{az_daily}
 \title{Retrieve Daily Weather Data}
 \usage{
-az_daily(station_id = NULL, date_time_start = NULL, time_interval = NULL)
+az_daily(
+  station_id = NULL,
+  start_date = NULL,
+  end_date = NULL,
+  time_interval = NULL
+)
 }
 \arguments{
 \item{station_id}{station ID can be supplied as numeric vector (e.g.
@@ -12,16 +17,20 @@ az_daily(station_id = NULL, date_time_start = NULL, time_interval = NULL)
 digits (e.g. \code{station_id = c("az08", "az37")}) If left blank data for all
 stations will be returned}
 
-\item{date_time_start}{When to start data return in YYYY-MM-DD HH:MM format.
-If left blank the most recent day of data will be returned}
+\item{start_date}{character; in YYYY-MM-DD or another format that can be
+parsed by \code{\link[lubridate:ymd]{lubridate::ymd()}}}
 
-\item{time_interval}{time interval}
+\item{end_date}{character; in YYYY-MM-DD in YYYY-MM-DD or another format that can be
+parsed by \code{\link[lubridate:ymd]{lubridate::ymd()}}.  Defaults to the current date if left blank.}
 }
 \value{
 a data frame
 }
 \description{
 Retrieve Daily Weather Data
+}
+\details{
+If neither \code{start_date} nor \code{end_date} are supplied, the most recent day of data will be returned.  If only \code{start_date} is supplied, then the end date defaults to the current date.  Supplying only \code{end_date} will result in an error.
 }
 \examples{
 az_daily()
