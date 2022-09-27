@@ -7,9 +7,13 @@
 az_daily(station_id = NULL, date_time_start = NULL, time_interval = NULL)
 }
 \arguments{
-\item{station_id}{station ID. If left blank data for all stations will be returned}
+\item{station_id}{station ID can be supplied as numeric vector (e.g.
+\code{station_id = c(8, 37)}) or as character vector with the prefix "az" and 2
+digits (e.g. \code{station_id = c("az08", "az37")}) If left blank data for all
+stations will be returned}
 
-\item{date_time_start}{When to start data return in YYYY-MM-DD HH:MM format.  If left blank the most recent day of data will be returned}
+\item{date_time_start}{When to start data return in YYYY-MM-DD HH:MM format.
+If left blank the most recent day of data will be returned}
 
 \item{time_interval}{time interval}
 }
@@ -21,4 +25,5 @@ Retrieve Daily Weather Data
 }
 \examples{
 az_daily()
+TODO: args should be start_date, end_date.  Do the parsing in the function I think.
 }

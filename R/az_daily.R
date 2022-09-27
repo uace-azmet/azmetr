@@ -1,7 +1,11 @@
 #' Retrieve Daily Weather Data
 #'
-#' @param station_id station ID. If left blank data for all stations will be returned
-#' @param date_time_start When to start data return in YYYY-MM-DD HH:MM format.  If left blank the most recent day of data will be returned
+#' @param station_id station ID can be supplied as numeric vector (e.g.
+#'   `station_id = c(8, 37)`) or as character vector with the prefix "az" and 2
+#'   digits (e.g. `station_id = c("az08", "az37")`) If left blank data for all
+#'   stations will be returned
+#' @param date_time_start When to start data return in YYYY-MM-DD HH:MM format.
+#'   If left blank the most recent day of data will be returned
 #' @param time_interval time interval
 #'
 #' @return a data frame
@@ -11,13 +15,22 @@
 #' az_daily()
 #' TODO: args should be start_date, end_date.  Do the parsing in the function I think.
 az_daily <- function(station_id = NULL, date_time_start = NULL, time_interval = NULL) {
+
   check_internet()
 
   #validate and URL encode args
 
   if(!is.null(station_id)) {
-    #TODO: figure out what station IDs are valid.  Looks like they take the form of "az01", etc.  Could allow numeric and convert or could require this format.
+    if(is.numeric(station_id)) {
+      #add leading 0 if < 10
+      station_id <- formatC(station_id, flag = 0, width = 2)
+      station_id <- paste0("az", station_id)
+    }
     #validation
+    if(!all(grepl("$az\\d{2}^", station_id))) {
+      stop("`station_id` must be numeric or character in the format 'az01'")
+    }
+
   } else {
     station_id <- "*"
   }
@@ -42,6 +55,9 @@ az_daily <- function(station_id = NULL, date_time_start = NULL, time_interval = 
   } else {
     time_interval <- "*"
   }
+
+  #TODO: if station_id is a vector, this needs to be vectorized.  API can't handle multiple stations.
+
   path <- c("v1", "observations", "daily", station_id, date_time_start, time_interval)
   res <- httr::GET(base_url, path = path, httr::accept_json())
   check_status(res)
