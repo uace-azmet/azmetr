@@ -1,3 +1,14 @@
+#' Parse input parameters for AZMet API
+#'
+#' @param station_id character or numeric vector
+#' @param start character; start date or date time that can be parsed by
+#'   [lubridate::ymd()] or [lubridate::ymd_h()]
+#' @param end character; end date or date time that can be parsed by
+#'   [lubridate::ymd()] or [lubridate::ymd_h()]
+#' @param hour logical; do `start` and `end` contain hours?
+#'
+#' @return a list
+#' @noRd
 parse_params <- function(station_id, start, end, hour = FALSE) {
 
   if(hour) {

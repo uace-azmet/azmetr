@@ -1,11 +1,11 @@
-#' Title
+#' Retrieve data from AZMet API
 #'
-#' @param station_id numeric or character vector
-#' @param start_f ISO formatted date time string
-#' @param time_interval ISO8601 formatted time interval string
-#' @param endpoint
+#' @param station_id character; in the format of "az01"
+#' @param start_f character; ISO formatted date time string
+#' @param time_interval character; ISO8601 formatted time interval string
+#' @param endpoint character; one of "daily", "hourly", or "hueto"
 #'
-#' @return
+#' @return tibble
 #' @noRd
 #'
 retrieve_data <- function(station_id, start_f, time_interval,
