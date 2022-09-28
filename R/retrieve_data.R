@@ -27,4 +27,5 @@ retrieve_data <- function(station_id, start_f, time_interval,
       t = data_raw$t
     ))
   data_tidy
+  #TODO: check for 0x0 tibble and error
 }
