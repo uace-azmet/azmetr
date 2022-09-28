@@ -29,3 +29,5 @@ test_that("works with station_id as a vector", {
   expect_equal(unique(res$meta_station_id), c("az01", "az02"))
   expect_s3_class(az_daily(station_id = c("az01", "az02")), "data.frame")
 })
+
+#TODO: data tests (numeric? date?)

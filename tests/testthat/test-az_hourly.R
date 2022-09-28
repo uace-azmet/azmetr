@@ -44,3 +44,5 @@ test_that("works with station_id as a vector", {
     "data.frame"
   )
 })
+
+#TODO: data tests (numeric? date?)

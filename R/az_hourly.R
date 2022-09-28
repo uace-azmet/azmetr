@@ -42,18 +42,24 @@ params <-
   parse_params(station_id = station_id, start = start_date_time,
                end = end_date_time, hour = TRUE)
 
-# Query API and wrangle output --------------------------------------------
+# Query API --------------------------------------------
   if (length(station_id) <= 1) {
     out <-
-      retrieve_hourly(params$station_id, params$start, params$time_interval)
+      retrieve_data(params$station_id,
+                    params$start,
+                    params$time_interval,
+                    endpoint = "hourly")
   } else if (length(station_id) > 1) {
     out <-
       purrr::map_df(
         params$station_id,
-        function(x) retrieve_hourly(x, params$start, params$time_interval)
+        function(x) {
+          retrieve_data(x, params$start, params$time_interval, endpoint = "hourly")
+        }
       )
   }
-  out
+
+# Wrangle output ----------------------------------------------------------
   out |>
     #move metadata to beginning
     dplyr::select(dplyr::starts_with("meta_"), dplyr::everything()) |>
@@ -68,23 +74,3 @@ params <-
     )) |>
     dplyr::mutate(date_datetime = lubridate::ymd_hms(date_datetime))
 }
-
-retrieve_hourly <- function(station_id, start_f, time_interval) {
-  path <- c("v1", "observations", "hourly", station_id, start_f, time_interval)
-  res <- httr::GET(base_url, path = path, httr::accept_json())
-  check_status(res)
-  data_raw <- httr::content(res, as = "parsed")
-  data_tidy <- data_raw$data |>
-    purrr::map_df(tibble::as_tibble)
-
-  attributes(data_tidy) <-
-    append(attributes(data_tidy), list(
-      errors = data_raw$errors,
-      i = data_raw$i,
-      l = data_raw$l,
-      s = data_raw$s,
-      t = data_raw$t
-    ))
-  data_tidy
-}
-

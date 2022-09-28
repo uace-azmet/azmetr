@@ -40,39 +40,29 @@ az_heat <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
 
   params <- parse_params(station_id, start = start_date, end = end_date)
 
-  # Query API and wrangle output --------------------------------------------
+  # Query API --------------------------------------------
   if (length(station_id) <= 1) {
-    out <- retrieve_heat(params$station_id, params$start, params$time_interval)
+    out <-
+      retrieve_data(params$station_id,
+                    params$start,
+                    params$time_interval,
+                    endpoint = "hueto")
   } else if (length(station_id) > 1) {
     out <- purrr::map_df(
       params$station_id,
-      function(x) retrieve_heat(x, params$start, params$time_interval)
+      function(x) {
+        retrieve_data(x, params$start, params$time_interval, endpoint = "hueto")
+      }
     )
   }
+
+# Wrangle output ----------------------------------------------------------
   out |>
     #move metadata to beginning
     dplyr::select(starts_with("meta_"), everything()) |>
-    dplyr::mutate(across(c(-meta_station_id, -meta_station_name, -datetime_last),
-                         as.numeric)) |>
+    dplyr::mutate(across(
+      c(-"meta_station_id",-"meta_station_name",-"datetime_last"),
+      as.numeric
+    )) |>
     dplyr::mutate(datetime_last = lubridate::ymd(datetime_last))
-}
-
-
-retrieve_heat <- function(station_id, start_f, time_interval) {
-  path <- c("v1", "observations", "hueto", station_id, start_f, time_interval)
-  res <- httr::GET(base_url, path = path, httr::accept_json())
-  check_status(res)
-  data_raw <- httr::content(res, as = "parsed")
-  data_tidy <- data_raw$data |>
-    purrr::map_df(tibble::as_tibble)
-
-  attributes(data_tidy) <-
-    append(attributes(data_tidy), list(
-      errors = data_raw$errors,
-      i = data_raw$i,
-      l = data_raw$l,
-      s = data_raw$s,
-      t = data_raw$t
-    ))
-  data_tidy
 }
