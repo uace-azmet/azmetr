@@ -38,6 +38,7 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
   #TODO: check for valid station IDs
   check_internet()
 
+# Parse station IDs -------------------------------------------------------
   if(!is.null(station_id)) {
     if(is.numeric(station_id)) {
       #add leading 0 if < 10
@@ -52,11 +53,12 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
     station_id <- "*"
   }
 
+# Check that args make sense ----------------------------------------------
   if(!is.null(end_date_time) & is.null(start_date_time)) {
     stop("If you supply `end_date_time`, you must also supply `start_date_time`")
   }
 
-  # Parse start and end dates
+# Parse Dates -------------------------------------------------------------
   if(!is.null(start_date_time)) {
     start_date_time <-
       withCallingHandlers(
@@ -92,13 +94,14 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
       stop("`end_date_time` is before `start_date_time`!")
     }
 
-    # Construct time_interval
+# Construct time interval for API -----------------------------------------
     d <- lubridate::as.period(end_date_time - start_date_time)
     time_interval <- lubridate::format_ISO8601(d)
   } else {
     time_interval <- "*"
   }
 
+# Function to query API ---------------------------------------------------
   retrieve_hourly <- function(station_id, start_f, time_interval) {
     path <- c("v1", "observations", "hourly", station_id, start_f, time_interval)
     res <- httr::GET(base_url, path = path, httr::accept_json())
@@ -117,6 +120,8 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
       ))
     data_tidy
   }
+
+# Query API and wrangle output --------------------------------------------
   if (length(station_id) == 1) {
     out <- retrieve_hourly(station_id, start_f, time_interval)
   } else if (length(station_id) > 1) {

@@ -38,6 +38,7 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
   #TODO: check for valid station IDs
   check_internet()
 
+# Parse station IDs -------------------------------------------------------
   if(!is.null(station_id)) {
     if(is.numeric(station_id)) {
       #add leading 0 if < 10
@@ -52,12 +53,15 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
     station_id <- "*"
   }
 
+
+# Check that args make sense ----------------------------------------------
   if(!is.null(end_date) & is.null(start_date)) {
     stop("If you supply `end_date`, you must also supply `start_date`")
   }
 
-# Parse start and end dates
+# Parse Dates -------------------------------------------------------------
   if(!is.null(start_date)) {
+    #capture parsing warning and turn it into an error
     start_date <-
       withCallingHandlers(
         lubridate::ymd(start_date),
@@ -67,13 +71,13 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
           }
         }
       )
-
-    start_date_f <- format(start_date, format = "%Y-%m-%dT%H:%M")
+    start_f <- format(start_date, format = "%Y-%m-%dT%H:%M")
   } else {
-    start_date_f <- "*" #default is today
+    start_f <- "*" #default is today
   }
 
   if(!is.null(end_date)) {
+    #capture parsing warning and turn it into an error
     end_date <-
       withCallingHandlers(
         lubridate::ymd(end_date),
@@ -92,15 +96,18 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
       stop("`end_date` is before `start_date`!")
     }
 
-    # Construct time_interval
+
+# Construct time interval for API -----------------------------------------
     d <- lubridate::as.period(end_date - start_date)
     time_interval <- lubridate::format_ISO8601(d)
   } else {
     time_interval <- "*"
   }
 
-  retrieve_daily <- function(station_id, start_date_f, time_interval) {
-    path <- c("v1", "observations", "daily", station_id, start_date_f, time_interval)
+
+# Function to query API ---------------------------------------------------
+  retrieve_daily <- function(station_id, start_f, time_interval) {
+    path <- c("v1", "observations", "daily", station_id, start_f, time_interval)
     res <- httr::GET(base_url, path = path, httr::accept_json())
     check_status(res)
     data_raw <- httr::content(res, as = "parsed")
@@ -117,10 +124,12 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
         ))
     data_tidy
   }
+
+# Query API and wrangle output --------------------------------------------
   if (length(station_id) == 1) {
-    out <- retrieve_daily(station_id, start_date_f, time_interval)
+    out <- retrieve_daily(station_id, start_f, time_interval)
   } else if (length(station_id) > 1) {
-    out <- purrr::map_df(station_id, function(x) retrieve_daily(x, start_date_f, time_interval))
+    out <- purrr::map_df(station_id, function(x) retrieve_daily(x, start_f, time_interval))
   }
   out |>
     #move metadata to beginning
