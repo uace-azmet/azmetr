@@ -1,4 +1,16 @@
-retrieve_data <- function(station_id, start_f, time_interval, endpoint) {
+#' Title
+#'
+#' @param station_id numeric or character vector
+#' @param start_f ISO formatted date time string
+#' @param time_interval ISO8601 formatted time interval string
+#' @param endpoint
+#'
+#' @return
+#' @noRd
+#'
+retrieve_data <- function(station_id, start_f, time_interval,
+                          endpoint = c("daily", "hourly", "hueto")) {
+  endpoint <- match.arg(endpoint)
   path <- c("v1", "observations", endpoint, station_id, start_f, time_interval)
   res <- httr::GET(base_url, path = path, httr::accept_json())
   check_status(res)
