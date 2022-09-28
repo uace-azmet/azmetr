@@ -105,11 +105,7 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
     check_status(res)
     data_raw <- httr::content(res, as = "parsed")
     data_tidy <- data_raw$data |>
-      purrr::map_df(tibble::as_tibble) |>
-      #move metadata to beginning
-      dplyr::select(starts_with("meta_"), everything()) |>
-      dplyr::mutate(across(c(-meta_station_id, -meta_station_name, -datetime), as.numeric)) |>
-      dplyr::mutate(datetime = lubridate::ymd(datetime))
+      purrr::map_df(tibble::as_tibble)
 
     attributes(data_tidy) <-
       append(attributes(data_tidy), list(
@@ -122,8 +118,13 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
     data_tidy
   }
   if (length(station_id) == 1) {
-    retrieve_daily(station_id, start_date_f, time_interval)
+    out <- retrieve_daily(station_id, start_date_f, time_interval)
   } else if (length(station_id) > 1) {
-    purrr::map_df(station_id, function(x) retrieve_daily(x, start_date_f, time_interval))
+    out <- purrr::map_df(station_id, function(x) retrieve_daily(x, start_date_f, time_interval))
   }
+  out |>
+    #move metadata to beginning
+    dplyr::select(starts_with("meta_"), everything()) |>
+    dplyr::mutate(across(c(-meta_station_id, -meta_station_name, -datetime), as.numeric)) |>
+    dplyr::mutate(datetime = lubridate::ymd(datetime))
 }
