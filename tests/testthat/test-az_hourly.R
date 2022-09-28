@@ -48,11 +48,11 @@ test_that("start_date_time works as expected", {
   skip_if_offline()
   skip_if_not(ping_service())
   end <- floor_date(now(), "hour")
-  last_12 <- end - lubridate::hours(6)
+  start <- end - lubridate::hours(4)
   expect_equal(
     az_hourly(
       station_id = 1,
-      start_date_time = format(last_12, "%Y/%m/%d %H"),
+      start_date_time = format(start, "%Y/%m/%d %H"),
       end_date_time = format(end, "%Y/%m/%d %H")
     ) |> nrow(),
     5

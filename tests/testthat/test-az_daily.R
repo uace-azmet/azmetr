@@ -1,7 +1,7 @@
 test_that("all stations return data", {
   skip_if_offline()
   skip_if_not(ping_service())
-  expect_equal(nrow(az_daily()), 28)
+  expect_equal(nrow(az_daily()), 28) #this seems to be inconsistent.  Not all stations reporting every day?  Not all at the same time?
 })
 
 test_that("numeric station_ids work", {
@@ -32,9 +32,9 @@ test_that("start_date works as expected", {
     az_daily(station_id = 1, start_date = "2022/09/23"),
     "data.frame"
     )
-  last_week <- lubridate::now() - lubridate::weeks(1)
+  start <- lubridate::now() - lubridate::weeks(1)
   expect_equal(
-    az_daily(station_id = 1, start_date = format(last_week, "%Y-%m-%d")) |>
+    az_daily(station_id = 1, start_date = format(start, "%Y-%m-%d")) |>
       nrow(),
     7
   )

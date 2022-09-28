@@ -130,7 +130,7 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
   out
   out |>
     #move metadata to beginning
-    dplyr::select(starts_with("meta_"), everything()) |>
-    dplyr::mutate(across(c(-meta_station_id, -meta_station_name, -date_datetime, -date_hour), as.numeric)) |>
+    dplyr::select(dplyr::starts_with("meta_"), dplyr::everything()) |>
+    dplyr::mutate(dplyr::across(c(-"meta_station_id", -"meta_station_name", -"date_datetime", -"date_hour"), as.numeric)) |>
     dplyr::mutate(date_datetime = lubridate::ymd_hms(date_datetime))
 }
