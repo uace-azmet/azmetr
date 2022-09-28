@@ -4,11 +4,11 @@
 #'   `station_id = c(8, 37)`) or as character vector with the prefix "az" and 2
 #'   digits (e.g. `station_id = c("az08", "az37")`) If left blank data for all
 #'   stations will be returned
-#' @param start_date_time character; in YYYY-MM-DD HH or another format that can be
-#'   parsed by [lubridate::ymd_h()]
-#' @param end_date_time character; in YYYY-MM-DD in YYYY-MM-DD HH or another format that
-#'   can be parsed by [lubridate::ymd_h()].  Defaults to the current time if left
-#'   blank.
+#' @param start_date_time character; in YYYY-MM-DD HH or another format that can
+#'   be parsed by [lubridate::ymd_h()]
+#' @param end_date_time character; in YYYY-MM-DD in YYYY-MM-DD HH or another
+#'   format that can be parsed by [lubridate::ymd_h()].  Defaults to the current
+#'   time if left blank.
 #' @details If neither `start_date_time` nor `end_date_time` are supplied, the
 #'   most recent day of data will be returned.  If only `start_date_time` is
 #'   supplied, then `end_date_time` defaults to the current time.  Supplying
@@ -38,11 +38,11 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
   #TODO: check for valid station IDs
   check_internet()
 
-params <-
-  parse_params(station_id = station_id, start = start_date_time,
-               end = end_date_time, hour = TRUE)
+  params <-
+    parse_params(station_id = station_id, start = start_date_time,
+                 end = end_date_time, hour = TRUE)
 
-# Query API --------------------------------------------
+  # Query API --------------------------------------------
   if (length(station_id) <= 1) {
     out <-
       retrieve_data(params$station_id,
@@ -59,7 +59,7 @@ params <-
       )
   }
 
-# Wrangle output ----------------------------------------------------------
+  # Wrangle output ----------------------------------------------------------
   out |>
     #move metadata to beginning
     dplyr::select(dplyr::starts_with("meta_"), dplyr::everything()) |>

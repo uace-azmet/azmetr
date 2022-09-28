@@ -59,9 +59,9 @@ az_heat <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
 # Wrangle output ----------------------------------------------------------
   out |>
     #move metadata to beginning
-    dplyr::select(starts_with("meta_"), everything()) |>
-    dplyr::mutate(across(
-      c(-"meta_station_id",-"meta_station_name",-"datetime_last"),
+    dplyr::select(dplyr::starts_with("meta_"), dplyr::everything()) |>
+    dplyr::mutate(dplyr::across(
+      c(-"meta_station_id", -"meta_station_name", -"datetime_last"),
       as.numeric
     )) |>
     dplyr::mutate(datetime_last = lubridate::ymd(datetime_last))

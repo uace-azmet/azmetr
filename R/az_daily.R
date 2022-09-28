@@ -38,10 +38,10 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
   #TODO: check for valid station IDs
   check_internet()
 
-params <-
-  parse_params(station_id = station_id, start = start_date, end = end_date)
+  params <-
+    parse_params(station_id = station_id, start = start_date, end = end_date)
 
-# Query API  --------------------------------------------
+  # Query API  --------------------------------------------
   if (length(station_id) <= 1) {
     out <-
       retrieve_data(params$station_id,
@@ -59,11 +59,13 @@ params <-
   }
 
 
-# Wrangle output ----------------------------------------------------------
+  # Wrangle output ----------------------------------------------------------
   out |>
     #move metadata to beginning
-    dplyr::select(starts_with("meta_"), everything()) |>
-    dplyr::mutate(across(c(-meta_station_id, -meta_station_name, -datetime),
-                         as.numeric)) |>
+    dplyr::select(dplyr::starts_with("meta_"), dplyr::everything()) |>
+    dplyr::mutate(dplyr::across(
+      c(-"meta_station_id",-"meta_station_name",-"datetime"),
+      as.numeric
+    )) |>
     dplyr::mutate(datetime = lubridate::ymd(datetime))
 }
