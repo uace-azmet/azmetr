@@ -18,6 +18,10 @@ retrieve_data <- function(station_id, start_f, time_interval,
   data_tidy <- data_raw$data |>
     purrr::map_df(tibble::as_tibble)
 
+  if (length(data_raw$errors) > 0) {
+    stop(paste0(data_raw$errors, "\n "))
+  }
+
   attributes(data_tidy) <-
     append(attributes(data_tidy), list(
       errors = data_raw$errors,
