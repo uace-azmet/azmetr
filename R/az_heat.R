@@ -56,8 +56,13 @@ az_heat <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
     )
   }
 
+  if(nrow(out) == 0) {
+    warning("No data retrieved from API.  Returning NA")
+    return(NA)
+  }
+
 # Wrangle output ----------------------------------------------------------
-  out |>
+  out <- out |>
     #move metadata to beginning
     dplyr::select(dplyr::starts_with("meta_"), dplyr::everything()) |>
     dplyr::mutate(dplyr::across(
@@ -65,4 +70,5 @@ az_heat <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
       as.numeric
     )) |>
     dplyr::mutate(datetime_last = lubridate::ymd(datetime_last))
+  return(out)
 }
