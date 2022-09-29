@@ -7,7 +7,7 @@
 [![Codecov test coverage](https://codecov.io/gh/cct-datascience/azmetr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/cct-datascience/azmetr?branch=main)
 <!-- badges: end -->
 
-The goal of azmetr is to ...
+The goal of azmetr is to provide programmatic access to the [Arizona Meteorological Network](https://ag.arizona.edu/azmet/) (AZMet) [API](https://app.swaggerhub.com/apis/mattjh/AZMetAPI/1.0#/) in R.
 
 ## Installation
 
@@ -20,11 +20,14 @@ remotes::install_github("cct-datascience/azmetr")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+For the most recent day of data from all stations, run functions without any arguments:
 
 ``` r
 library(azmetr)
-## basic example code
+
+az_daily()
+az_hourly()
+az_heat()
 ```
 
 ## Code of Conduct
