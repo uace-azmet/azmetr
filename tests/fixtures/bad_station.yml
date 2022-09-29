@@ -1,0 +1,27 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://api.azmet.arizona.edu/v1/observations/daily/bz01/*/*
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept: application/json
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      date: Thu, 29 Sep 2022 20:13:47 GMT
+      content-type: application/json
+      content-length: '96'
+      server: Apache/2.4.38 (Debian)
+    body:
+      encoding: UTF-8
+      file: no
+      string: |
+        {"data":[],"errors":["Station requested is not found."],"i":"*","l":"bz01","s":"*","t":"daily"}
+  recorded_at: 2022-09-29 20:13:47 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.2

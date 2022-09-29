@@ -1,55 +1,54 @@
-test_that("bad station IDs error", {
-  expect_error(
-    retrieve_data(
-      station_id = "bz01",
-      start_f = "*",
-      time_interval = "*",
-      endpoint = "daily"
-    ),
-    "Station requested is not found."
-  )
-  expect_error(
-    retrieve_data(
-      station_id = utils::URLencode("station one"),
-      start_f = "*",
-      time_interval = "*",
-      endpoint = "daily"
-    ),
-    "Station requested is not found."
-  )
+vcr::use_cassette("bad_station", {
+  test_that("bad station IDs error", {
+
+    expect_error(
+      retrieve_data(
+        station_id = "bz01",
+        start_f = "*",
+        time_interval = "*",
+        endpoint = "daily"
+      ), "Station requested is not found.")
+  })
 })
 
-test_that("bad dates error", {
-  expect_error(
-    retrieve_data(
-      station_id = "az01",
-      start_f = "now",
-      time_interval = "*",
-      endpoint = "daily"
-    ),
-    "Start date time must be in a valid date time in formatted as YYYY-MM-DDTHH:MM."
-  )
+vcr::use_cassette("bad_start", {
+  test_that("bad dates error", {
+
+    expect_error(
+      retrieve_data(
+        station_id = "az01",
+        start_f = "now",
+        time_interval = "*",
+        endpoint = "daily"
+      ),
+      "Start date time must be in a valid date time in formatted as YYYY-MM-DDTHH:MM.")
+  })
 })
 
-test_that("bad time interval errors", {
-  expect_error(
-    retrieve_data(
-      station_id = "az01",
-      start_f = "*",
-      time_interval = "a%20day",
-      endpoint = "daily"
+vcr::use_cassette("bad_interval", {
+
+  test_that("bad time interval errors", {
+    expect_error(
+      retrieve_data(
+        station_id = "az01",
+        start_f = "*",
+        time_interval = "a%20day",
+        endpoint = "daily"
+      )
     )
-  )
+  })
 })
 
-test_that("multiple errors work", {
-  expect_error(
-    retrieve_data(
-      station_id = "bz01",
-      start_f = "now",
-      time_interval = "a%20day",
-      endpoint = "daily"
-    ),
-    "Collection interval must be in a valid ISO-8601 interval format: P1DT23H, where 1 is number of days and 23 is the number of hours."
-  )
+vcr::use_cassette("bad_everything", {
+
+  test_that("multiple errors work", {
+    expect_error(
+      retrieve_data(
+        station_id = "bz01",
+        start_f = "now",
+        time_interval = "a%20day",
+        endpoint = "daily"
+      )
+    )
+  })
 })
