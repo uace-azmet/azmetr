@@ -1,7 +1,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.azmet.arizona.edu/v1/observations/hourly/az01/2022-09-28T13:00/PT0S
+    uri: https://api.azmet.arizona.edu/v1/observations/hourly/az01/2022-09-28T12:00/PT0S
     body:
       encoding: ''
       string: ''
@@ -14,20 +14,20 @@ http_interactions:
       reason: OK
       message: 'Success: (200) OK'
     headers:
-      date: Thu, 29 Sep 2022 20:39:43 GMT
+      date: Thu, 29 Sep 2022 20:48:52 GMT
       content-type: application/json
-      content-length: '952'
+      content-length: '953'
       server: Apache/2.4.38 (Debian)
     body:
       encoding: UTF-8
       file: no
       string: |
-        {"a":"TUC","data":[{"date_datetime":"2022-09-28 13:00:00","date_doy":"271","date_hour":"1300","date_year":"2022","dwpt":"14.6","dwptF":"58.2","eto_azmet":"0.3","eto_azmet_in":"0.01","heatstress_cottonC":"26.0","heatstress_cottonF":"78.8","meta_bat_volt":"13.66","meta_needs_review":0,"meta_station_id":"az01","meta_station_name":"Tucson","meta_version":1,"precip_total":"2.8","precip_total_in":"0.11","relative_humidity":"44","sol_rad_total":"1.23","sol_rad_total_ly":"29.40","temp_airC":"28.8","temp_airF":"83.8","temp_soil_10cmC":"25.6","temp_soil_10cmF":"78.1","temp_soil_50cmC":"25.2","temp_soil_50cmF":"77.4","vp_actual":"1.66","vp_deficit":"2.34","wind_spd_max_mph":"22.1","wind_spd_max_mps":"9.9","wind_spd_mph":"8.9","wind_spd_mps":"4.0","wind_vector_dir":"47","wind_vector_dir_stand_dev":"43","wind_vector_magnitude":"2.9","wind_vector_magnitude_mph":"6.5"}],"errors":[],"i":"PT0S","l":"az01","n":"Tucson","s":"2022-09-28T13:00","t":"hourly"}
-  recorded_at: 2022-09-29 20:39:43 GMT
+        {"a":"TUC","data":[{"date_datetime":"2022-09-28 12:00:00","date_doy":"271","date_hour":"1200","date_year":"2022","dwpt":"11.6","dwptF":"52.9","eto_azmet":"0.8","eto_azmet_in":"0.03","heatstress_cottonC":"28.7","heatstress_cottonF":"83.6","meta_bat_volt":"13.73","meta_needs_review":0,"meta_station_id":"az01","meta_station_name":"Tucson","meta_version":1,"precip_total":"0.0","precip_total_in":"0.00","relative_humidity":"26","sol_rad_total":"3.04","sol_rad_total_ly":"72.66","temp_airC":"33.6","temp_airF":"92.5","temp_soil_10cmC":"25.1","temp_soil_10cmF":"77.2","temp_soil_50cmC":"25.2","temp_soil_50cmF":"77.4","vp_actual":"1.37","vp_deficit":"3.83","wind_spd_max_mph":"16.3","wind_spd_max_mps":"7.3","wind_spd_mph":"8.5","wind_spd_mps":"3.8","wind_vector_dir":"118","wind_vector_dir_stand_dev":"23","wind_vector_magnitude":"3.5","wind_vector_magnitude_mph":"7.8"}],"errors":[],"i":"PT0S","l":"az01","n":"Tucson","s":"2022-09-28T12:00","t":"hourly"}
+  recorded_at: 2022-09-29 20:48:52 GMT
   recorded_with: vcr/1.0.2, webmockr/0.8.2
 - request:
     method: get
-    uri: https://api.azmet.arizona.edu/v1/observations/hourly/az02/2022-09-28T13:00/PT0S
+    uri: https://api.azmet.arizona.edu/v1/observations/hourly/az02/2022-09-28T12:00/PT0S
     body:
       encoding: ''
       string: ''
@@ -40,14 +40,14 @@ http_interactions:
       reason: OK
       message: 'Success: (200) OK'
     headers:
-      date: Thu, 29 Sep 2022 20:39:43 GMT
+      date: Thu, 29 Sep 2022 20:48:52 GMT
       content-type: application/json
-      content-length: '963'
+      content-length: '965'
       server: Apache/2.4.38 (Debian)
     body:
       encoding: UTF-8
       file: no
       string: |
-        {"a":"YUV","data":[{"date_datetime":"2022-09-28 13:00:00","date_doy":"271","date_hour":"1300","date_year":"2022","dwpt":"18.4","dwptF":"65.2","eto_azmet":"0.8","eto_azmet_in":"0.03","heatstress_cottonC":"31.3","heatstress_cottonF":"88.4","meta_bat_volt":"13.21","meta_needs_review":0,"meta_station_id":"az02","meta_station_name":"Yuma Valley","meta_version":1,"precip_total":"0.0","precip_total_in":"0.00","relative_humidity":"35","sol_rad_total":"2.76","sol_rad_total_ly":"65.97","temp_airC":"36.5","temp_airF":"97.7","temp_soil_10cmC":"30.8","temp_soil_10cmF":"87.4","temp_soil_50cmC":"28.1","temp_soil_50cmF":"82.6","vp_actual":"2.12","vp_deficit":"3.98","wind_spd_max_mph":"15.4","wind_spd_max_mps":"6.9","wind_spd_mph":"8.9","wind_spd_mps":"4.0","wind_vector_dir":"143","wind_vector_dir_stand_dev":"18","wind_vector_magnitude":"3.8","wind_vector_magnitude_mph":"8.5"}],"errors":[],"i":"PT0S","l":"az02","n":"Yuma Valley","s":"2022-09-28T13:00","t":"hourly"}
-  recorded_at: 2022-09-29 20:39:43 GMT
+        {"a":"YUV","data":[{"date_datetime":"2022-09-28 12:00:00","date_doy":"271","date_hour":"1200","date_year":"2022","dwpt":"19.1","dwptF":"66.4","eto_azmet":"0.8","eto_azmet_in":"0.03","heatstress_cottonC":"31.0","heatstress_cottonF":"87.8","meta_bat_volt":"13.25","meta_needs_review":0,"meta_station_id":"az02","meta_station_name":"Yuma Valley","meta_version":1,"precip_total":"0.0","precip_total_in":"0.00","relative_humidity":"38","sol_rad_total":"2.63","sol_rad_total_ly":"62.86","temp_airC":"35.6","temp_airF":"96.1","temp_soil_10cmC":"29.8","temp_soil_10cmF":"85.6","temp_soil_50cmC":"28.2","temp_soil_50cmF":"82.8","vp_actual":"2.21","vp_deficit":"3.59","wind_spd_max_mph":"17.7","wind_spd_max_mps":"7.9","wind_spd_mph":"10.5","wind_spd_mps":"4.7","wind_vector_dir":"154","wind_vector_dir_stand_dev":"20","wind_vector_magnitude":"4.5","wind_vector_magnitude_mph":"10.1"}],"errors":[],"i":"PT0S","l":"az02","n":"Yuma Valley","s":"2022-09-28T12:00","t":"hourly"}
+  recorded_at: 2022-09-29 20:48:52 GMT
   recorded_with: vcr/1.0.2, webmockr/0.8.2
