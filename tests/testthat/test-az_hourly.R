@@ -1,8 +1,9 @@
 library(lubridate)
-dt <-
-  (lubridate::now() - days(1)) |>
-  floor_date("hour") |>
-  format("%Y-%m-%d %H")
+# dt <-
+#   (lubridate::now() - days(1)) |>
+#   floor_date("hour") |>
+#   format("%Y-%m-%d %H")
+dt <- "2022-09-28 12"
 
 test_that("all stations return data", {
   skip_if_offline()
