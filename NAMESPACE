@@ -3,3 +3,4 @@
 export(az_daily)
 export(az_heat)
 export(az_hourly)
+importFrom(rlang,.data)

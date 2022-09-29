@@ -18,6 +18,7 @@
 #'   the stations by leaving `station_id` blank and subsetting the resulting
 #'   dataframe.
 #' @return a data frame
+#' @importFrom rlang .data
 #' @export
 #'
 #' @examples
@@ -38,102 +39,37 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
   #TODO: check for valid station IDs
   check_internet()
 
-# Parse station IDs -------------------------------------------------------
-  if(!is.null(station_id)) {
-    if(is.numeric(station_id)) {
-      #add leading 0 if < 10
-      station_id <- formatC(station_id, flag = 0, width = 2)
-      station_id <- paste0("az", station_id)
-    }
-    # Validate station IDs
-    if(!all(grepl("^az\\d{2}$", station_id))) {
-      stop("`station_id` must be numeric or character in the format 'az01'")
-    }
-  } else {
-    station_id <- "*"
-  }
+  params <-
+    parse_params(station_id = station_id, start = start_date, end = end_date)
 
-
-# Check that args make sense ----------------------------------------------
-  if(!is.null(end_date) & is.null(start_date)) {
-    stop("If you supply `end_date`, you must also supply `start_date`")
-  }
-
-# Parse Dates -------------------------------------------------------------
-  if(!is.null(start_date)) {
-    #capture parsing warning and turn it into an error
-    start_date <-
-      withCallingHandlers(
-        lubridate::ymd(start_date),
-        warning = function(w) {
-          if (conditionMessage(w) == "All formats failed to parse. No formats found.") {
-            stop("`start_date` failed to parse", call. = FALSE)
-          }
-        }
-      )
-    start_f <- format(start_date, format = "%Y-%m-%dT%H:%M")
-  } else {
-    start_f <- "*" #default is today
-  }
-
-  if(!is.null(end_date)) {
-    #capture parsing warning and turn it into an error
-    end_date <-
-      withCallingHandlers(
-        lubridate::ymd(end_date),
-        warning = function(w) {
-          if (conditionMessage(w) == "All formats failed to parse. No formats found.") {
-            stop("`end_date` failed to parse", call. = FALSE)
-          }
-        }
-      )
-  } else {
-    end_date <- lubridate::today()
-  }
-
-  if ((!is.null(start_date))) {
-    if(end_date < start_date) {
-      stop("`end_date` is before `start_date`!")
-    }
-
-
-# Construct time interval for API -----------------------------------------
-    d <- lubridate::as.period(end_date - start_date)
-    time_interval <- lubridate::format_ISO8601(d)
-  } else {
-    time_interval <- "*"
-  }
-
-
-# Function to query API ---------------------------------------------------
-  retrieve_daily <- function(station_id, start_f, time_interval) {
-    path <- c("v1", "observations", "daily", station_id, start_f, time_interval)
-    res <- httr::GET(base_url, path = path, httr::accept_json())
-    check_status(res)
-    data_raw <- httr::content(res, as = "parsed")
-    data_tidy <- data_raw$data |>
-      purrr::map_df(tibble::as_tibble)
-
-    attributes(data_tidy) <-
-      append(attributes(data_tidy), list(
-        errors = data_raw$errors,
-        i = data_raw$i,
-        l = data_raw$l,
-        s = data_raw$s,
-        t = data_raw$t
-        ))
-    data_tidy
-  }
-
-# Query API and wrangle output --------------------------------------------
-  if (length(station_id) == 1) {
-    out <- retrieve_daily(station_id, start_f, time_interval)
+  # Query API  --------------------------------------------
+  if (length(station_id) <= 1) {
+    out <-
+      retrieve_data(params$station_id,
+                    params$start,
+                    params$time_interval,
+                    endpoint = "daily")
   } else if (length(station_id) > 1) {
-    out <- purrr::map_df(station_id, function(x) retrieve_daily(x, start_f, time_interval))
+    out <-
+      purrr::map_df(
+        params$station_id,
+        function(x) {
+          retrieve_data(x, params$start, params$time_interval, endpoint = "daily")
+        }
+      )
   }
-  out |>
+ if(nrow(out) == 0) {
+   warning("No data retrieved from API.  Returning NA")
+   return(NA)
+ }
+  # Wrangle output ----------------------------------------------------------
+  out <- out |>
     #move metadata to beginning
-    dplyr::select(starts_with("meta_"), everything()) |>
-    dplyr::mutate(across(c(-meta_station_id, -meta_station_name, -datetime), as.numeric)) |>
-    dplyr::mutate(datetime = lubridate::ymd(datetime))
+    dplyr::select(dplyr::starts_with("meta_"), dplyr::everything()) |>
+    dplyr::mutate(dplyr::across(
+      c(-"meta_station_id", -"meta_station_name", -"datetime"),
+      as.numeric
+    )) |>
+    dplyr::mutate(datetime = lubridate::ymd(.data$datetime))
+  return(out)
 }

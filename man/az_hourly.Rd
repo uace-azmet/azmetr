@@ -12,12 +12,12 @@ az_hourly(station_id = NULL, start_date_time = NULL, end_date_time = NULL)
 digits (e.g. \code{station_id = c("az08", "az37")}) If left blank data for all
 stations will be returned}
 
-\item{start_date_time}{character; in YYYY-MM-DD HH or another format that can be
-parsed by \code{\link[lubridate:ymd_hms]{lubridate::ymd_h()}}}
+\item{start_date_time}{character; in YYYY-MM-DD HH or another format that can
+be parsed by \code{\link[lubridate:ymd_hms]{lubridate::ymd_h()}}}
 
-\item{end_date_time}{character; in YYYY-MM-DD in YYYY-MM-DD HH or another format that
-can be parsed by \code{\link[lubridate:ymd_hms]{lubridate::ymd_h()}}.  Defaults to the current time if left
-blank.}
+\item{end_date_time}{character; in YYYY-MM-DD in YYYY-MM-DD HH or another
+format that can be parsed by \code{\link[lubridate:ymd_hms]{lubridate::ymd_h()}}.  Defaults to the current
+time if left blank.}
 }
 \value{
 a data frame
