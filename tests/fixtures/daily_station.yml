@@ -1,0 +1,27 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://api.azmet.arizona.edu/v1/observations/daily/az09/*/*
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept: application/json
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      date: Thu, 29 Sep 2022 19:58:46 GMT
+      content-type: application/json
+      content-length: '1838'
+      server: Apache/2.4.38 (Debian)
+    body:
+      encoding: UTF-8
+      file: no
+      string: |
+        {"a":"BON","data":[{"chill_hours_0C":"0","chill_hours_20C":"12","chill_hours_32F":"0","chill_hours_45F":"0","chill_hours_68F":"12","chill_hours_7C":"0","date_doy":"271","date_year":"2022","datetime":"2022-09-28","dwpt_mean":"7.8","dwpt_meanF":"46.1","eto_azmet":"6.0","eto_azmet_in":"0.24","eto_pen_mon":"5.4","eto_pen_mon_in":"0.21","heat_units_10C":"12.0","heat_units_13C":"9.3","heat_units_3413C":"9.3","heat_units_45F":"26.7","heat_units_50F":"21.7","heat_units_55F":"16.7","heat_units_7C":"14.8","heat_units_9455F":"16.7","heatstress_cotton_meanC":"18.7","heatstress_cotton_meanF":"65.6","meta_bat_volt_max":"14.01","meta_bat_volt_mean":"13.24","meta_bat_volt_min":"12.59","meta_needs_review":0,"meta_station_id":"az09","meta_station_name":"Bonita","meta_version":1,"precip_total_in":"0.00","precip_total_mm":"0.0","relative_humidity_max":"80","relative_humidity_mean":"43","relative_humidity_min":"19","sol_rad_total":"20.95","sol_rad_total_ly":"500.72","temp_air_maxC":"29.4","temp_air_maxF":"84.9","temp_air_meanC":"21.7","temp_air_meanF":"71.1","temp_air_minC":"14.7","temp_air_minF":"58.5","temp_soil_10cm_maxC":"30.2","temp_soil_10cm_maxF":"86.4","temp_soil_10cm_meanC":"26.5","temp_soil_10cm_meanF":"79.7","temp_soil_10cm_minC":"23.4","temp_soil_10cm_minF":"74.1","temp_soil_50cm_maxC":"26.6","temp_soil_50cm_maxF":"79.9","temp_soil_50cm_meanC":"26.4","temp_soil_50cm_meanF":"79.5","temp_soil_50cm_minC":"26.2","temp_soil_50cm_minF":"79.2","vp_actual_max":"1.50","vp_actual_mean":"1.06","vp_actual_min":"0.59","vp_deficit_mean":"1.63","wind_spd_max_mph":"24.4","wind_spd_max_mps":"10.9","wind_spd_mean_mph":"6.0","wind_spd_mean_mps":"2.7","wind_vector_dir":"89","wind_vector_dir_stand_dev":"32","wind_vector_magnitude":"2.2","wind_vector_magnitude_mph":"4.9"}],"errors":[],"i":"*","l":"az09","n":"Bonita","s":"*","t":"daily"}
+  recorded_at: 2022-09-29 19:58:46 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.2
