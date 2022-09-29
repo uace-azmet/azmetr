@@ -10,7 +10,7 @@ test_that("bad station IDs error", {
   )
   expect_error(
     retrieve_data(
-      station_id = URLencode("station one"),
+      station_id = utils::URLencode("station one"),
       start_f = "*",
       time_interval = "*",
       endpoint = "daily"

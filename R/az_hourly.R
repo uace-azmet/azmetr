@@ -18,6 +18,7 @@
 #'   the stations by leaving `station_id` blank and subsetting the resulting
 #'   dataframe.
 #' @return a data frame
+#' @importFrom rlang .data
 #' @export
 #'
 #' @examples
@@ -75,6 +76,6 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
       ),
       as.numeric
     )) |>
-    dplyr::mutate(date_datetime = lubridate::ymd_hms(date_datetime))
+    dplyr::mutate(date_datetime = lubridate::ymd_hms(.data$date_datetime))
   return(out)
 }

@@ -18,6 +18,7 @@
 #'   the stations by leaving `station_id` blank and subsetting the resulting
 #'   dataframe.
 #' @return a data frame
+#' @importFrom rlang .data
 #' @export
 #'
 #' @examples
@@ -69,6 +70,6 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
       c(-"meta_station_id", -"meta_station_name", -"datetime"),
       as.numeric
     )) |>
-    dplyr::mutate(datetime = lubridate::ymd(datetime))
+    dplyr::mutate(datetime = lubridate::ymd(.data$datetime))
   return(out)
 }

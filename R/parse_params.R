@@ -91,8 +91,8 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
   #URLencode isn't strictly necessary, but it'll make the correct error print
   #when a param is not properly specified instead of a generic "bad URL" error
   list(
-    station_id = sapply(station_id, URLencode, USE.NAMES = FALSE),
-    start = URLencode(start_f),
-    time_interval = URLencode(time_interval)
+    station_id = sapply(station_id, utils::URLencode, USE.NAMES = FALSE),
+    start = utils::URLencode(start_f),
+    time_interval = utils::URLencode(time_interval)
   )
 }
