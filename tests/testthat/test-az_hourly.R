@@ -18,13 +18,11 @@ test_that("all stations return data", {
 test_that("start_date_time works as expected", {
   skip_if_offline()
   skip_if_not(ping_service())
-  end <- floor_date(now(), "hour")
-  start <- end - lubridate::hours(4)
   vcr::use_cassette("hourly_start", {
     res <- az_hourly(
       station_id = 1,
-      start_date_time = format(start, "%Y/%m/%d %H"),
-      end_date_time = format(end, "%Y/%m/%d %H")
+      start_date_time = "2022-09-29 09",
+      end_date_time = "2022-09-29 13"
     )
   })
   expect_equal(nrow(res), 5)

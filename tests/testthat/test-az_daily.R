@@ -19,9 +19,10 @@ test_that("numeric station_ids work", {
 test_that("start_date works as expected", {
   skip_if_offline()
   skip_if_not(ping_service())
-  start <- lubridate::now() - lubridate::weeks(1)
+  # start <- lubridate::now() - lubridate::weeks(1)
+  start <- "2022-09-22"
   vcr::use_cassette("daily_start", {
-    res_start <- az_daily(station_id = 1, start_date = format(start, "%Y-%m-%d"))
+    res_start <- az_daily(station_id = 1, start_date = start)
   })
   expect_equal(nrow(res_start), 7)
 })
