@@ -74,7 +74,7 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
     }
   }
 
-  if ((!is.null(start))) {
+  if (!is.null(start)) {
     if(end < start) {
       stop("`end_date` is before `start_date`!")
     }
