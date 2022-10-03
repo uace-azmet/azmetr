@@ -1,12 +1,3 @@
-vcr::use_cassette("daily_default", {
-  res_default <- az_daily()
-})
-
-test_that("all stations return data", {
-  skip_if_offline()
-  skip_if_not(ping_service())
-  expect_equal(nrow(res_default), 28) #this seems to be inconsistent.  Not all stations reporting every day?  Not all at the same time?
-})
 
 test_that("numeric station_ids work", {
   skip_if_offline()
@@ -30,6 +21,8 @@ test_that("start_date works as expected", {
 
 
 test_that("works with station_id as a vector", {
+  skip_if_offline()
+  skip_if_not(ping_service())
   vcr::use_cassette("daily_station_vector", {
     res_2 <- az_daily(station_id = c(1, 2))
   })
@@ -38,6 +31,11 @@ test_that("works with station_id as a vector", {
 })
 
 test_that("data is in correct format", {
+  skip_if_offline()
+  skip_if_not(ping_service())
+  vcr::use_cassette("daily_default", {
+    res_default <- az_daily()
+  })
   expect_type(res_default$meta_station_name, "character")
   expect_type(res_default$precip_total_mm, "double")
   expect_s3_class(res_default$datetime, "Date")
