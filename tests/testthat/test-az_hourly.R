@@ -42,4 +42,8 @@ test_that("works with station_id as a vector", {
   expect_equal(unique(res$meta_station_id), c("az01", "az02"))
 })
 
-#TODO: data tests (numeric? date?)
+test_that("data is in correct format", {
+  expect_type(res_default$meta_station_name, "character")
+  expect_type(res_default$eto_pen_mon_in, "double")
+  expect_s3_class(res_default$datetime_last, "Date")
+})
