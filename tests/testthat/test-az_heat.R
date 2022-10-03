@@ -15,7 +15,7 @@ test_that("numeric station_ids work", {
   expect_s3_class(res_station, "data.frame")
 })
 
-test_that("start_date works as expected", {
+test_that("az_heat() returns only one row per station even with dates", {
   skip_if_offline()
   skip_if_not(ping_service())
   start <- "2022-09-20"
@@ -23,7 +23,7 @@ test_that("start_date works as expected", {
   vcr::use_cassette("heat_start", {
     res_start <- az_heat(station_id = 1, start_date = start, end_date = end)
   })
-  expect_equal(nrow(res_start), 7)
+  expect_equal(nrow(res_start), 1)
 })
 
 
