@@ -1,5 +1,7 @@
 # azmetr (development version)
 
+- functions now check if supplied `station_id` is valid and an active station before querying the API
+
 # azmetr 0.0.0.9000
 
 * Functions for accessing hourly (`az_hourly()`) and daily (`az_daily()`) weather, and cumulative heat units / ETO (`az_heat()`) added.
