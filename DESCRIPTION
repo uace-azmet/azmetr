@@ -4,7 +4,7 @@ Version: 0.0.0.9000
 Authors@R: 
     person("Eric", "Scott", , "ericrscott@arizona.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-7430-7879"))
-Description: Provides R functions to access AZMet API endpoints
+Description: Provides R functions to access the Arizona Meterological Network (AZMet) API.  Functions are more than just "thin wrappers" and do some parsing of input parameters and wrangling of output data.
 License: MIT + file LICENSE
 Imports: 
     attempt,

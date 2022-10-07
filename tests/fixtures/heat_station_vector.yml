@@ -1,0 +1,53 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://api.azmet.arizona.edu/v1/observations/hueto/az01/*/*
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept: application/json
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      date: Thu, 29 Sep 2022 22:45:41 GMT
+      content-type: application/json
+      content-length: '510'
+      server: Apache/2.4.38 (Debian)
+    body:
+      encoding: UTF-8
+      file: no
+      string: |
+        {"a":"TUC","data":[{"datetime_last":"2022-09-28","eto_azmet_in":"0.14173200000000002","eto_azmet_in_sum":65.54901763463226,"eto_pen_mon_in":"0.17756072003896958","eto_pen_mon_in_sum":57.366000620425865,"heat_units_45F_sum":6978.988024500005,"heat_units_50F_sum":5801.263586499999,"heat_units_55F_sum":4694.657171000002,"meta_station_id":"az01","meta_station_name":"Tucson","precip_total_in":"0.2499995","precip_total_in_sum":6.640380919999998}],"errors":[],"i":"*","l":"az01","n":"Tucson","s":"*","t":"hueto"}
+  recorded_at: 2022-09-29 22:45:41 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.2
+- request:
+    method: get
+    uri: https://api.azmet.arizona.edu/v1/observations/hueto/az02/*/*
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept: application/json
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      date: Thu, 29 Sep 2022 22:45:41 GMT
+      content-type: application/json
+      content-length: '514'
+      server: Apache/2.4.38 (Debian)
+    body:
+      encoding: UTF-8
+      file: no
+      string: |
+        {"a":"YUV","data":[{"datetime_last":"2022-09-28","eto_azmet_in":"0.24409400000000003","eto_azmet_in_sum":70.36584817659627,"eto_pen_mon_in":"0.23673087434603157","eto_pen_mon_in_sum":66.34930445465695,"heat_units_45F_sum":7705.056868500005,"heat_units_50F_sum":6441.011262399999,"heat_units_55F_sum":5235.962666900003,"meta_station_id":"az02","meta_station_name":"Yuma Valley","precip_total_in":"0.0","precip_total_in_sum":1.7299965400000004}],"errors":[],"i":"*","l":"az02","n":"Yuma Valley","s":"*","t":"hueto"}
+  recorded_at: 2022-09-29 22:45:41 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.2

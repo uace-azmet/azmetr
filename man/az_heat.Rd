@@ -13,7 +13,8 @@ digits (e.g. \code{station_id = c("az08", "az37")}) If left blank data for all
 stations will be returned}
 
 \item{start_date}{character; in YYYY-MM-DD or another format that can be
-parsed by \code{\link[lubridate:ymd]{lubridate::ymd()}}}
+parsed by \code{\link[lubridate:ymd]{lubridate::ymd()}}. Defaults to January 1st of the current year
+if left blank.}
 
 \item{end_date}{character; in YYYY-MM-DD in YYYY-MM-DD or another format that
 can be parsed by \code{\link[lubridate:ymd]{lubridate::ymd()}}.  Defaults to the current date if left
@@ -26,10 +27,9 @@ a data frame
 Retrieve Accumulated Heat Units and Evapotranspiration
 }
 \details{
-If neither \code{start_date} nor \code{end_date} are supplied, the most recent
-day of data will be returned.  If only \code{start_date} is supplied, then the
-end date defaults to the current date.  Supplying only \code{end_date} will
-result in an error.
+Unlike \code{\link[=az_daily]{az_daily()}}, only one row of data per station is returned,
+regardless of \code{start_date} and \code{end_date}. However, the data returned is
+cumulative over the time period specified by \code{start_date} and \code{end_date}.
 }
 \note{
 If \code{station_id} is supplied as a vector, multiple successive calls to
@@ -39,14 +39,19 @@ dataframe.
 }
 \examples{
 # Most recent data for all stations:
-az_daily()
+az_heat()
 
 # Specify stations:
-az_daily(station_id = c(1, 2))
-az_daily(station_id = c("az01", "az02"))
+az_heat(station_id = c(1, 2))
+az_heat(station_id = c("az01", "az02"))
 
 # Specify dates:
-az_daily(start_date = "2022-09-25")
-az_daily(start_date = "2022-09-25", end_date = "2022-09-26")
+## Cumulative since October 2022
+az_heat(start_date = "2022-10-01")
+
+## Cumulative from the first of the year through March
+yr <- format(Sys.Date(), "\%Y")
+
+az_heat(end_date = paste(yr, "03", "31", sep = "-"))
 
 }

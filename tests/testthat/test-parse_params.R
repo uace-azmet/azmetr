@@ -1,3 +1,4 @@
+library(lubridate)
 test_that("station_id gets parsed", {
   expect_equal(parse_params(station_id = 1, start = NULL, end = NULL)$station_id, "az01")
   expect_equal(parse_params(station_id = "az01", start = NULL, end = NULL)$station_id, "az01")
@@ -22,6 +23,14 @@ test_that("accepts dates and date times", {
   )
 })
 
+test_that("end defaults to current date", {
+  start <- "2022-10-01"
+  end <- today()
+  time_interval <- format_ISO8601(as.period(ymd(end) - ymd(start)))
+  params <- parse_params(station_id = NULL, start = start, end = NULL)
+  expect_equal(params$time_interval, time_interval)
+})
+
 test_that("time_interval is correctly formed", {
   params <-
     parse_params(station_id = 1,
@@ -44,12 +53,6 @@ test_that("start and end date combos error correctly", {
     parse_params(1, start = "2022-09-23", end = "2022-09-22")
   )
   expect_error(
-    parse_params(1, start = NULL, end = "2022-09-21")
-  )
-  expect_error(
     parse_params(1, start = "2022-09-23 09", end = "2022-09-23 08", hour = TRUE)
-  )
-  expect_error(
-    parse_params(1, start = NULL, end = "2022-09-21 01", hour = TRUE)
   )
 })
