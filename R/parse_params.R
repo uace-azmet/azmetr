@@ -28,6 +28,9 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
     if(!all(grepl("^az\\d{2}$", station_id))) {
       stop("`station_id` must be numeric or character in the format 'az01'")
     }
+    if(!all(station_id %in% station_ids$meta_station_id)) {
+      stop("Invalid `station_id`")
+    }
   } else {
     station_id <- "*"
   }
