@@ -18,6 +18,15 @@ test_that("az_heat() returns only one row per station even with dates", {
   expect_equal(nrow(res_start), 1)
 })
 
+test_that("end_date can be specified without start_date", {
+  skip_if_offline()
+  skip_if_not(ping_service())
+  end <- "2022-09-27"
+  vcr::use_cassette("heat_end", {
+    res_end <- az_heat(station_id = 1, end_date = end)
+  })
+  expect_s3_class(res_end, "data.frame")
+})
 
 test_that("works with station_id as a vector", {
   skip_if_offline()

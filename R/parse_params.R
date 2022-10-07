@@ -32,12 +32,6 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
     station_id <- "*"
   }
 
-
-  # Check that args make sense ----------------------------------------------
-  if(!is.null(end) & is.null(start)) {
-    stop("If you supply `end_date` or `end_date_time`, you must also supply `start_date` or `start_date_time`") #TODO: maybe a method or switch() ?
-  }
-
   # Parse Dates -------------------------------------------------------------
   if(!is.null(start)) {
     #capture parsing warning and turn it into an error

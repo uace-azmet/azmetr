@@ -53,12 +53,6 @@ test_that("start and end date combos error correctly", {
     parse_params(1, start = "2022-09-23", end = "2022-09-22")
   )
   expect_error(
-    parse_params(1, start = NULL, end = "2022-09-21")
-  )
-  expect_error(
     parse_params(1, start = "2022-09-23 09", end = "2022-09-23 08", hour = TRUE)
-  )
-  expect_error(
-    parse_params(1, start = NULL, end = "2022-09-21 01", hour = TRUE)
   )
 })
