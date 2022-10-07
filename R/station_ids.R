@@ -1,3 +1,4 @@
+#internal dataset just used to check that station IDs are valid for now
 station_ids <-
   data.frame(
     stringsAsFactors = FALSE,
