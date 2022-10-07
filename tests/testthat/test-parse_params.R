@@ -56,3 +56,8 @@ test_that("start and end date combos error correctly", {
     parse_params(1, start = "2022-09-23 09", end = "2022-09-23 08", hour = TRUE)
   )
 })
+
+test_that("invalid station_id error", {
+  expect_error(parse_params(3, start = NULL, end = NULL))
+  expect_error(parse_params(100, start = NULL, end = NULL))
+})
