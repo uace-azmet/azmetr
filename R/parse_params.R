@@ -28,7 +28,8 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
     if(!all(grepl("^az\\d{2}$", station_id))) {
       stop("`station_id` must be numeric or character in the format 'az01'")
     }
-    if(!all(station_id %in% station_ids$meta_station_id)) {
+    active_stations <-  azmetr::station_info$meta_station_id
+    if(!all(station_id %in% active_stations)) {
       stop("Invalid `station_id`")
     }
   } else {
