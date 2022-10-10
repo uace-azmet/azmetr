@@ -1,6 +1,7 @@
 # azmetr (development version)
 
 - functions now check if supplied `station_id` is valid and an active station before querying the API
+- added `station_info` dataset with station names, IDs, and location.
 
 # azmetr 0.0.0.9000
 
