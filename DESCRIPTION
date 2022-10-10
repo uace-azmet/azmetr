@@ -1,6 +1,6 @@
 Package: azmetr
 Title: Access the AZMet API
-Version: 0.0.0.9001
+Version: 0.0.0.9002
 Authors@R: 
     person("Eric", "Scott", , "ericrscott@arizona.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-7430-7879"))
