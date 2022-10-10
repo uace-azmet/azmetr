@@ -1,4 +1,3 @@
-
 #' AZMet station names and locations
 #'
 #' Station names, station IDs, and location (lat, lon) of active AZMet weather
