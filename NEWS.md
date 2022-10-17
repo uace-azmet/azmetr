@@ -2,6 +2,7 @@
 
 - functions now check if supplied `station_id` is valid and an active station before querying the API
 - added `station_info` dataset with station names, IDs, and location.
+- `az_daily()` and `az_hourly()` convert values like -999, -9999, etc. into `NA`s
 
 # azmetr 0.0.0.9000
 
