@@ -40,3 +40,15 @@ test_that("data is in correct format", {
   expect_type(res_default$precip_total_mm, "double")
   expect_s3_class(res_default$datetime, "Date")
 })
+
+
+test_that("NAs converted correctly", {
+  skip_if_offline()
+  skip_if_not(ping_service())
+  vcr::use_cassette("daily_missing", {
+    res_missing <- az_daily(station_id = 27, start_date = "2022-09-29", end_date = "2022-09-29")
+  })
+  expect_true(is.na(res_missing$eto_pen_mon_in))
+  expect_true(is.na(res_missing$heat_units_13C))
+  expect_true(is.na(res_missing$relative_humidity_mean))
+})

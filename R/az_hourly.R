@@ -78,6 +78,9 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
       ),
       as.numeric
     )) |>
-    dplyr::mutate(date_datetime = lubridate::ymd_hms(.data$date_datetime))
+    dplyr::mutate(date_datetime = lubridate::ymd_hms(.data$date_datetime)) |>
+    #convert NAs
+    dplyr::mutate(dplyr::across(where(is.numeric), function(x)
+      dplyr::if_else(x %in% c(-999,-9999,-99999), NA_real_, x)))
   return(out)
 }
