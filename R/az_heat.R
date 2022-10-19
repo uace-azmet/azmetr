@@ -76,6 +76,13 @@ az_heat <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
       c(-"meta_station_id", -"meta_station_name", -"datetime_last"),
       as.numeric
     )) |>
-    dplyr::mutate(datetime_last = lubridate::ymd(.data$datetime_last))
+    dplyr::mutate(datetime_last = lubridate::ymd(.data$datetime_last)) |>
+    #convert NAs
+    dplyr::mutate(
+      dplyr::across(
+        tidyselect::where(is.numeric),
+        function(x)
+          dplyr::if_else(x %in% c(-999, -9999, -99999, -7999), NA_real_, x))
+    )
   return(out)
 }
