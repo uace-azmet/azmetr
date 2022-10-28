@@ -11,7 +11,7 @@ The goal of azmetr is to provide programmatic access to the [Arizona Meteorologi
 
 ## Installation
 
-You can install the development version of azmetr like so:
+You can install the development version of `azmetr` like so:
 
 ``` r
 # install.packages("remotes")
