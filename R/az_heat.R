@@ -17,7 +17,7 @@
 #'   the API will be made.  You may find better performance getting data for all
 #'   the stations by leaving `station_id` blank and subsetting the resulting
 #'   dataframe.
-#' @return a data frame
+#' @return a tibble
 #' @importFrom rlang .data
 #' @export
 #'
@@ -64,8 +64,9 @@ az_heat <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
   }
 
   if(nrow(out) == 0) {
-    warning("No data retrieved from API.  Returning NA")
-    return(NA)
+    warning("No data retrieved from API")
+    #return 0x0 tibble
+    return(tibble::tibble())
   }
 
 # Wrangle output ----------------------------------------------------------
