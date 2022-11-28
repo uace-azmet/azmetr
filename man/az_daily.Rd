@@ -20,7 +20,7 @@ can be parsed by \code{\link[lubridate:ymd]{lubridate::ymd()}}.  Defaults to the
 blank.}
 }
 \value{
-a data frame
+a tibble
 }
 \description{
 Retrieve Daily Weather Data
