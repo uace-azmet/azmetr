@@ -44,3 +44,12 @@ test_that("data is in correct format", {
   expect_type(res_default$precip_total, "double")
   expect_s3_class(res_default$date_datetime, "POSIXct")
 })
+
+test_that("no data is returned as 0x0 tibble", {
+  vcr::use_cassette("hourly_nodata", {
+    res_nodata <-
+      suppressWarnings(az_hourly(start_date_time = "2100-01-01 00", end_date_time = "2100-01-02 00"))
+  })
+  expect_true(nrow(res_nodata) == 0)
+  expect_s3_class(res_nodata, "tbl_df")
+})
