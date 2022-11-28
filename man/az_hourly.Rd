@@ -20,7 +20,7 @@ format that can be parsed by \code{\link[lubridate:ymd_hms]{lubridate::ymd_h()}}
 time if left blank.}
 }
 \value{
-a data frame
+a tibble
 }
 \description{
 Retrieve Hourly Weather Data

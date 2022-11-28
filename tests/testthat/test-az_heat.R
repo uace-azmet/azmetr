@@ -50,3 +50,12 @@ test_that("data is in correct format", {
   expect_type(res_default$eto_pen_mon_in, "double")
   expect_s3_class(res_default$datetime_last, "Date")
 })
+
+test_that("no data is returned as 0x0 tibble", {
+  vcr::use_cassette("heat_nodata", {
+    res_nodata <-
+      suppressWarnings(az_heat(start_date = "2100-01-01", end_date = "2100-01-02"))
+  })
+  expect_true(nrow(res_nodata) == 0)
+  expect_s3_class(res_nodata, "tbl_df")
+})

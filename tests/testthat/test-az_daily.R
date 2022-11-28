@@ -52,3 +52,14 @@ test_that("NAs converted correctly", {
   expect_true(is.na(res_missing$heat_units_13C))
   expect_true(is.na(res_missing$relative_humidity_mean))
 })
+
+test_that("no data is returned as 0x0 tibble", {
+  suppressWarnings(
+    vcr::use_cassette("daily_nodata", {
+      res_nodata <-
+        az_daily(start_date = "2100-01-01", end_date = "2100-01-02")
+    })
+  )
+  expect_true(nrow(res_nodata) == 0)
+  expect_s3_class(res_nodata, "tbl_df")
+})
