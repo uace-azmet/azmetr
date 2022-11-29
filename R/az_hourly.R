@@ -79,13 +79,14 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
       ),
       as.numeric
     )) |>
+    dplyr::filter(.data$meta_station_id != "az99") |>
     dplyr::mutate(date_datetime = lubridate::ymd_hms(.data$date_datetime)) |>
     #convert NAs
     dplyr::mutate(
       dplyr::across(
         tidyselect::where(is.numeric),
         function(x)
-          dplyr::if_else(x %in% c(-999, -9999, -99999, -7999), NA_real_, x))
+          dplyr::if_else(x %in% c(-999, -9999, -99999, -7999, 999, 999.9, 9999), NA_real_, x))
     )
   return(out)
 }
