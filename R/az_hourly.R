@@ -85,7 +85,7 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
       dplyr::across(
         tidyselect::where(is.numeric),
         function(x)
-          dplyr::if_else(x %in% c(-999, -9999, -99999, -7999), NA_real_, x))
+          dplyr::if_else(x %in% c(-999, -9999, -99999, -7999, 999, 999.9, 9999), NA_real_, x))
     )
   return(out)
 }
