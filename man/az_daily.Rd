@@ -23,7 +23,8 @@ can be parsed by \code{\link[lubridate:ymd]{lubridate::ymd()}}.  Defaults to the
 blank.}
 }
 \value{
-a tibble
+a tibble. For units and other metadata, see
+\url{https://ag.arizona.edu/azmet/raw2003.htm}
 }
 \description{
 Retrieves daily data from the Arizona Meteorological Network API. For a list

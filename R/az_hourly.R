@@ -20,7 +20,8 @@
 #'   the API will be made.  You may find better performance getting data for all
 #'   the stations by leaving `station_id` blank and subsetting the resulting
 #'   dataframe.
-#' @return a tibble
+#' @return a tibble. For units and other metadata, see
+#'   <https://ag.arizona.edu/azmet/raw2003.htm>
 #' @seealso [az_daily()], [az_heat()]
 #' @source <https://ag.arizona.edu/azmet/>
 #' @importFrom rlang .data

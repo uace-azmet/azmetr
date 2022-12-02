@@ -23,7 +23,8 @@ format that can be parsed by \code{\link[lubridate:ymd_hms]{lubridate::ymd_h()}}
 time if left blank.}
 }
 \value{
-a tibble
+a tibble. For units and other metadata, see
+\url{https://ag.arizona.edu/azmet/raw2003.htm}
 }
 \description{
 Retrieves hourly weather data from the Arizona Meteorological Network API.
