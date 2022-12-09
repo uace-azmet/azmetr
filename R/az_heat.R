@@ -1,5 +1,10 @@
 #' Retrieve Accumulated Heat Units and Evapotranspiration
 #'
+#' Retrieves accumulated heat units and reference evapotranspiration units from
+#' the Arizona Meteorological Network API.  By default, returned values are
+#' cumulative since January 1 of the current year. For a list of weather
+#' stations and their locations see see [station_info].
+#'
 #' @param station_id station ID can be supplied as numeric vector (e.g.
 #'   `station_id = c(8, 37)`) or as character vector with the prefix "az" and 2
 #'   digits (e.g. `station_id = c("az08", "az37")`) If left blank data for all
@@ -17,7 +22,10 @@
 #'   the API will be made.  You may find better performance getting data for all
 #'   the stations by leaving `station_id` blank and subsetting the resulting
 #'   dataframe.
-#' @return a tibble
+#' @return a tibble. For units and other metadata, see
+#'   <https://ag.arizona.edu/azmet/raw2003.htm>
+#' @seealso [az_daily()], [az_hourly()]
+#' @source <https://ag.arizona.edu/azmet/>
 #' @importFrom rlang .data
 #' @export
 #'

@@ -2,7 +2,10 @@
 % Please edit documentation in R/az_daily.R
 \name{az_daily}
 \alias{az_daily}
-\title{Retrieve Daily Weather Data}
+\title{Retrieve Daily Weather Data from AZMET}
+\source{
+\url{https://ag.arizona.edu/azmet/}
+}
 \usage{
 az_daily(station_id = NULL, start_date = NULL, end_date = NULL)
 }
@@ -20,10 +23,12 @@ can be parsed by \code{\link[lubridate:ymd]{lubridate::ymd()}}.  Defaults to the
 blank.}
 }
 \value{
-a tibble
+a tibble. For units and other metadata, see
+\url{https://ag.arizona.edu/azmet/raw2003.htm}
 }
 \description{
-Retrieve Daily Weather Data
+Retrieves daily data from the Arizona Meteorological Network API. For a list
+of weather stations and their locations see see \link{station_info}.
 }
 \details{
 If neither \code{start_date} nor \code{end_date} are supplied, the most recent
@@ -49,4 +54,7 @@ az_daily(station_id = c("az01", "az02"))
 az_daily(start_date = "2022-09-25")
 az_daily(start_date = "2022-09-25", end_date = "2022-09-26")
 
+}
+\seealso{
+\code{\link[=az_hourly]{az_hourly()}}, \code{\link[=az_heat]{az_heat()}}
 }

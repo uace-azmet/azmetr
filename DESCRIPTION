@@ -27,6 +27,7 @@ Suggests:
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
+    units,
     vcr (>= 0.6.0)
 Config/testthat/edition: 3
 VignetteBuilder: knitr

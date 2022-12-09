@@ -3,6 +3,9 @@
 \name{az_heat}
 \alias{az_heat}
 \title{Retrieve Accumulated Heat Units and Evapotranspiration}
+\source{
+\url{https://ag.arizona.edu/azmet/}
+}
 \usage{
 az_heat(station_id = NULL, start_date = NULL, end_date = NULL)
 }
@@ -21,10 +24,14 @@ can be parsed by \code{\link[lubridate:ymd]{lubridate::ymd()}}.  Defaults to the
 blank.}
 }
 \value{
-a tibble
+a tibble. For units and other metadata, see
+\url{https://ag.arizona.edu/azmet/raw2003.htm}
 }
 \description{
-Retrieve Accumulated Heat Units and Evapotranspiration
+Retrieves accumulated heat units and reference evapotranspiration units from
+the Arizona Meteorological Network API.  By default, returned values are
+cumulative since January 1 of the current year. For a list of weather
+stations and their locations see see \link{station_info}.
 }
 \details{
 Unlike \code{\link[=az_daily]{az_daily()}}, only one row of data per station is returned,
@@ -54,4 +61,7 @@ yr <- format(Sys.Date(), "\%Y")
 
 az_heat(end_date = paste(yr, "03", "31", sep = "-"))
 
+}
+\seealso{
+\code{\link[=az_daily]{az_daily()}}, \code{\link[=az_hourly]{az_hourly()}}
 }

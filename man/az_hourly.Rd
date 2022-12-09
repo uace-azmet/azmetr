@@ -3,6 +3,9 @@
 \name{az_hourly}
 \alias{az_hourly}
 \title{Retrieve Hourly Weather Data}
+\source{
+\url{https://ag.arizona.edu/azmet/}
+}
 \usage{
 az_hourly(station_id = NULL, start_date_time = NULL, end_date_time = NULL)
 }
@@ -20,10 +23,12 @@ format that can be parsed by \code{\link[lubridate:ymd_hms]{lubridate::ymd_h()}}
 time if left blank.}
 }
 \value{
-a tibble
+a tibble. For units and other metadata, see
+\url{https://ag.arizona.edu/azmet/raw2003.htm}
 }
 \description{
-Retrieve Hourly Weather Data
+Retrieves hourly weather data from the Arizona Meteorological Network API.
+For a list of weather stations and their locations see see \link{station_info}.
 }
 \details{
 If neither \code{start_date_time} nor \code{end_date_time} are supplied, the
@@ -49,4 +54,7 @@ az_hourly(station_id = c("az01", "az02"))
 az_hourly(start_date_time = "2022-09-25 01")
 az_hourly(start_date_time = "2022-09-25 01", end_date = "2022-09-25 20")
 
+}
+\seealso{
+\code{\link[=az_daily]{az_daily()}}, \code{\link[=az_heat]{az_heat()}}
 }
