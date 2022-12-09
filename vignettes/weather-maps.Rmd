@@ -1,0 +1,81 @@
+---
+title: "Creating weather maps with {azmetr} and {ggplot2}"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Creating weather maps with {azmetr} and {ggplot2}}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Load packages
+
+```{r setup}
+library(azmetr)
+library(ggplot2)
+library(dplyr)
+library(maps)
+```
+
+# Get map data
+
+We can use the `maps` package to get data for drawing the state of Arizona
+
+```{r}
+az <- map_data("state", "arizona")
+p <- 
+  ggplot() +
+  geom_polygon(data = az, aes(x = long, y = lat, group = group), color = "black", fill =  "lightblue") +
+  coord_map()
+p
+```
+
+# Get weather data
+
+Use `az_daily()` without any arguments to retrieve the most recent daily average for each AZMET station.
+
+```{r}
+weather <- az_daily()
+head(weather)
+```
+
+To attach location info to this data we can join it to the `station_info` dataset
+
+```{r}
+df <- left_join(weather, station_info)
+colnames(df)
+```
+
+Now each row has a `latitude` and `longitude` column that can be used for adding points or labels.
+
+```{r}
+p + 
+  geom_point(data = df, aes(x = longitude, y = latitude, color = temp_air_meanC))
+
+#temp as text
+p +
+  geom_text(data = df, aes(x = longitude, y = latitude, label = temp_air_meanC))
+
+#station ID as text and temp as color
+p +
+  geom_text(data = df, aes(x = longitude, y = latitude, label = meta_station_id, color = temp_air_meanC))
+```
+Finally, we can do some styling to improve the appearance of the map and add a title.
+
+```{r}
+p + 
+  geom_point(data = df, aes(x = longitude, y = latitude, color = temp_air_meanC)) +
+  scale_color_viridis_c(option = "C") +
+  theme_void() +
+  labs(
+    title = df$datetime |> unique(),
+    color = "Mean air temp (ºC)"
+  )
+```
+
