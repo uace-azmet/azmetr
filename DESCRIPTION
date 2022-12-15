@@ -12,6 +12,7 @@ Imports:
     dplyr,
     httr,
     lubridate,
+    magrittr,
     purrr,
     rlang,
     tibble,
