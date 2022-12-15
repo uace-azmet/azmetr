@@ -74,7 +74,7 @@ p +
   scale_color_viridis_c(option = "C") +
   theme_void() +
   labs(
-    title = df$datetime |> unique(),
+    title = df$datetime %>% unique(),
     color = "Mean air temp (ºC)"
   )
 ```
