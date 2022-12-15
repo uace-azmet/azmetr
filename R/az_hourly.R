@@ -73,9 +73,9 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
     return(tibble::tibble())
   }
   # Wrangle output ----------------------------------------------------------
-  out <- out |>
+  out <- out %>%
     #move metadata to beginning
-    dplyr::select(dplyr::starts_with("meta_"), dplyr::everything()) |>
+    dplyr::select(dplyr::starts_with("meta_"), dplyr::everything()) %>%
     dplyr::mutate(dplyr::across(
       c(
         -"meta_station_id",
@@ -84,9 +84,9 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
         -"date_hour"
       ),
       as.numeric
-    )) |>
-    dplyr::filter(.data$meta_station_id != "az99") |>
-    dplyr::mutate(date_datetime = lubridate::ymd_hms(.data$date_datetime)) |>
+    )) %>%
+    dplyr::filter(.data$meta_station_id != "az99") %>%
+    dplyr::mutate(date_datetime = lubridate::ymd_hms(.data$date_datetime)) %>%
     #convert NAs
     dplyr::mutate(
       dplyr::across(

@@ -24,7 +24,7 @@ daily_units <-
   az_add_units(daily)
 
 #unit conversions with `units::set_units()`
-daily_units$sol_rad_total |> units::set_units("kW h m-2")
+daily_units$sol_rad_total \%>\% units::set_units("kW h m-2")
 
 #units carry through calculations
 climatic_balance <-
