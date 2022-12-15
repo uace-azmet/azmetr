@@ -16,7 +16,7 @@
 #'   az_add_units(daily)
 #'
 #' #unit conversions with `units::set_units()`
-#' daily_units$sol_rad_total |> units::set_units("kW h m-2")
+#' daily_units$sol_rad_total %>% units::set_units("kW h m-2")
 #'
 #' #units carry through calculations
 #' climatic_balance <-
@@ -26,7 +26,7 @@
 #'
 az_add_units <- function(x) {
   rlang::check_installed("units")
-  x |>
+  x %>%
     dplyr::mutate(dplyr::across(dplyr::any_of(c(
       "dwpt",
       "heatstress_cottonC",
@@ -49,7 +49,7 @@ az_add_units <- function(x) {
       "heat_units_3413C",
       "heat_units_7C"
     )), ~units::set_units(., "degC")
-    )) |>
+    )) %>%
     dplyr::mutate(dplyr::across(dplyr::any_of(c(
       "dwpt_meanF",
       "heatstress_cotton_meanF",
@@ -75,17 +75,17 @@ az_add_units <- function(x) {
       "heat_units_50F_sum",
       "heat_units_55F_sum"
     )), ~units::set_units(., "degF")
-    )) |>
+    )) %>%
     dplyr::mutate(dplyr::across(dplyr::any_of(c(
       "wind_vector_dir",
       "wind_vector_dir_stand_dev"
     )), ~units::set_units(., "degrees")
-    )) |>
+    )) %>%
     dplyr::mutate(dplyr::across(c(
       dplyr::ends_with("_in"),
       dplyr::ends_with("_in_sum")
       ), ~units::set_units(., "in")
-      )) |>
+      )) %>%
     dplyr::mutate(dplyr::across(dplyr::any_of(c(
       "chill_hours_0C",
       "chill_hours_20C",
@@ -94,42 +94,42 @@ az_add_units <- function(x) {
       "chill_hours_68F",
       "chill_hours_7C"
     )), ~units::set_units(., "hours")
-    )) |>
+    )) %>%
     dplyr::mutate(dplyr::across(dplyr::starts_with("vp_"),
                   ~units::set_units(., "kPa")
-    )) |>
+    )) %>%
     dplyr::mutate(dplyr::across(dplyr::any_of(c(
       "sol_rad_total_ly"
     )), ~units::set_units(., "langleys")
-    )) |>
+    )) %>%
     dplyr::mutate(dplyr::across(dplyr::any_of(c(
       "sol_rad_total"
     )), ~units::set_units(., "MJ m-2")
-    )) |>
+    )) %>%
     dplyr::mutate(dplyr::across(dplyr::any_of(c(
       "eto_azmet",
       "precip_total",
       "eto_pen_mon",
       "precip_total_mm"
     )), ~units::set_units(., "mm")
-    )) |>
+    )) %>%
     dplyr::mutate(dplyr::across(dplyr::ends_with("_mph"),
                   ~units::set_units(., "mph")
-    )) |>
+    )) %>%
     dplyr::mutate(dplyr::across(dplyr::any_of(c(
       "wind_spd_max_mps",
       "wind_spd_mean_mps",
       "wind_spd_mps",
       "wind_vector_magnitude"
     )), ~units::set_units(., "m/s")
-    )) |>
+    )) %>%
     dplyr::mutate(dplyr::across(dplyr::any_of(c(
       "meta_bat_volt",
       "meta_bat_volt_max",
       "meta_bat_volt_mean",
       "meta_bat_volt_min"
     )), ~units::set_units(., "V")
-    )) |>
+    )) %>%
     dplyr::mutate(dplyr::across(dplyr::any_of(c(
       "relative_humidity_max",
       "relative_humidity_mean",
