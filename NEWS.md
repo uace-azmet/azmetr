@@ -4,6 +4,7 @@
 - added `station_info` dataset with station names, IDs, and location.
 - `az_daily()` and `az_hourly()` convert values like -999, -9999, etc. into `NA`s
 - functions now return a 0x0 tibble when no data is returned by the API
+- changed internal use of base R pipe (`|>`) to tidyverse pipe (`%>%`) instead of requiring R 4.1 or later
 
 # azmetr 0.0.0.9000
 

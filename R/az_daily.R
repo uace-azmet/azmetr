@@ -73,15 +73,15 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
    return(tibble::tibble())
  }
   # Wrangle output ----------------------------------------------------------
-  out <- out |>
+  out <- out %>%
     #move metadata to beginning
-    dplyr::select(dplyr::starts_with("meta_"), dplyr::everything()) |>
+    dplyr::select(dplyr::starts_with("meta_"), dplyr::everything()) %>%
     dplyr::mutate(dplyr::across(
       c(-"meta_station_id", -"meta_station_name", -"datetime"),
       as.numeric
-    )) |>
-    dplyr::filter(.data$meta_station_id != "az99") |>
-    dplyr::mutate(datetime = lubridate::ymd(.data$datetime)) |>
+    )) %>%
+    dplyr::filter(.data$meta_station_id != "az99") %>%
+    dplyr::mutate(datetime = lubridate::ymd(.data$datetime)) %>%
     #convert NAs
     dplyr::mutate(
       dplyr::across(

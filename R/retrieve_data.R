@@ -15,7 +15,7 @@ retrieve_data <- function(station_id, start_f, time_interval,
   res <- httr::GET(base_url, path = path, httr::accept_json())
   check_status(res)
   data_raw <- httr::content(res, as = "parsed")
-  data_tidy <- data_raw$data |>
+  data_tidy <- data_raw$data %>%
     purrr::map_df(tibble::as_tibble)
 
   if (length(data_raw$errors) > 0) {
