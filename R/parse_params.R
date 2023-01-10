@@ -1,21 +1,20 @@
 #' Parse input parameters for AZMet API
 #'
 #' @param station_id character or numeric vector
-#' @param start character; start date or date time that can be parsed by
-#'   [lubridate::ymd()] or [lubridate::ymd_h()]
-#' @param end character; end date or date time that can be parsed by
-#'   [lubridate::ymd()] or [lubridate::ymd_h()]
+#' @param start start date or date time
+#' @param end end date or date time
 #' @param hour logical; do `start` and `end` contain hours?
+#'
+#' @note If `hour = TRUE`, `start` and `end` can be character or POSIXct and
+#'   will be rounded **down** to the nearest hour.  If character, then they must
+#'   at least contain the hour (e.g. "2022-01-12 13" for 1pm on Jan 12, 2022).
+#'   If `hour = FALSE` then class Date is also accepted and values will be
+#'   rounded **down** to the nearest whole day.  Dates and times should be in
+#'   Arizona time.
 #'
 #' @return a list
 #' @noRd
 parse_params <- function(station_id, start, end, hour = FALSE) {
-
-  if(hour) {
-    parse_fun <- lubridate::ymd_h
-  } else {
-    parse_fun <- lubridate::ymd
-  }
 
   # Parse station IDs -------------------------------------------------------
   if(!is.null(station_id)) {
@@ -37,6 +36,22 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
   }
 
   # Parse Dates -------------------------------------------------------------
+
+  if(hour) {
+    # Using parse_date_time allows user to input POSIXct (YmdHMS) or a character
+    # value with at least year, month, day, and hour (e.g. "2022/01/12 13")
+    parse_fun <- function(x) {
+      lubridate::parse_date_time(x, orders = c("YmdHMS", "YmdHM", "YmdH")) %>%
+        lubridate::floor_date(unit = "hour")
+    }
+  } else {
+    parse_fun <- function(x) {
+      lubridate::parse_date_time(x, orders = c("Ymd", "YmdHMS", "YmdHM", "YmdH")) |>
+        lubridate::floor_date(unit = "day") |>
+        as_date()
+    }
+  }
+
   if(!is.null(start)) {
     #capture parsing warning and turn it into an error
     start <-
