@@ -3,6 +3,7 @@
 
 <!-- badges: start -->
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![azmetr status badge](https://cct-datascience.r-universe.dev/badges/azmetr)](https://cct-datascience.r-universe.dev)
 [![R-CMD-check](https://github.com/cct-datascience/azmetr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/cct-datascience/azmetr/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/cct-datascience/azmetr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/cct-datascience/azmetr?branch=main)
 <!-- badges: end -->
@@ -11,12 +12,25 @@ The goal of azmetr is to provide programmatic access to the [Arizona Meteorologi
 
 ## Installation
 
-You can install the development version of `azmetr` like so:
+You can install the development version of `azmetr` from r-universe:
+
+```r
+# Enable repository from cct-datascience
+options(repos = c(
+  cctdatascience = 'https://cct-datascience.r-universe.dev',
+  CRAN = 'https://cloud.r-project.org'))
+  
+# Download and install azmetr in R
+install.packages('azmetr')
+```
+
+Alternatively, you can install a development version directly from GitHub with the `remotes` package:
 
 ``` r
 # install.packages("remotes")
 remotes::install_github("cct-datascience/azmetr")
 ```
+
 
 ## Example
 
