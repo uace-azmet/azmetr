@@ -20,13 +20,17 @@ library(lubridate)
 library(ggplot2)
 ```
 
-Get the most recent day of data for all stations simply by calling `az_daily()` without any arguments.
+To retrieve the the most recent day of data for all stations simply by calling `az_daily()` or `az_hourly()` without any arguments.  `az_daily()` retrieves daily summary data and `az_hourly()` retrieves hourly data.
 
 ```{r}
-az_daily()
+daily <- az_daily()
+hourly <- az_hourly()
+
+head(daily)
+head(hourly)
 ```
 
-Get the past week of data using `start_date`
+By supplying `start_date` to `az_daily()` or `start_date_time` to `az_hourly()` you can retrieve data going back further in time.
 
 ```{r}
 last_week <- lubridate::today() - lubridate::weeks(1)
@@ -38,6 +42,15 @@ ggplot(all_wk, aes(x = datetime, y = temp_air_meanC, color = meta_station_name))
        y = "Mean air temperature (ºC)",
        color = "Station")
 ```
+
+
+
+```{r}
+last_week_hourly <- az_hourly(start_date_time = now())
+Sys.time() |> class()
+now() |> class()
+```
+
 
 Get just a subset of stations
 
