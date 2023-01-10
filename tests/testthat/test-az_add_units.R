@@ -12,21 +12,21 @@ test_that("all columns get assigned units that should", {
   hourly_units <- az_add_units(res_hourly)
   daily_units <- az_add_units(res_daily)
   expect_true(
-    heat_units |>
-      dplyr::select(-starts_with("meta_"), -datetime_last) |>
-      purrr::map_lgl(~inherits(.x, "units")) |>
+    heat_units %>%
+      dplyr::select(-starts_with("meta_"), -datetime_last) %>%
+      purrr::map_lgl(~inherits(.x, "units")) %>%
       all()
     )
   expect_true(
-    hourly_units |>
-      dplyr::select(-starts_with("meta_"), -starts_with("date_")) |>
-      purrr::map_lgl(~inherits(.x, "units")) |>
+    hourly_units %>%
+      dplyr::select(-starts_with("meta_"), -starts_with("date_")) %>%
+      purrr::map_lgl(~inherits(.x, "units")) %>%
       all()
   )
   expect_true(
-    daily_units |>
-      dplyr::select(-starts_with("meta_"), -datetime, -starts_with("date_")) |>
-      purrr::map_lgl(~inherits(.x, "units")) |>
+    daily_units %>%
+      dplyr::select(-starts_with("meta_"), -datetime, -starts_with("date_")) %>%
+      purrr::map_lgl(~inherits(.x, "units")) %>%
       all()
   )
 })

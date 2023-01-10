@@ -1,7 +1,7 @@
 library(lubridate)
 # dt <-
-#   (lubridate::now() - days(1)) |>
-#   floor_date("hour") |>
+#   (lubridate::now() - days(1)) %>%
+#   floor_date("hour") %>%
 #   format("%Y-%m-%d %H")
 dt <- "2022-09-28 12"
 
