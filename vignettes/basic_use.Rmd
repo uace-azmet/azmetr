@@ -80,14 +80,17 @@ station_info
 ```
 
 
-If you only need data for a subset of stations, you can supply `station_id`.  However, note that this will query the API once per station due to limitations of how the API works.  It may be faster to just get data for all stations and subset it after since that only queries the web API once.
+If you only need data for a subset of stations, you can supply `station_id`.  However, note that this will query the API once per station due to limitations of how the API works.  It may be faster to just get data for all stations and subset it after since that only queries the web API once and results in an identical dataset.
 
 ```{r}
 system.time(
-  sub_wk <- az_daily(station_id = c(1, 2, 8))
+  sub_wk <- az_daily(station_id = c(1, 2, 8), start_date = "2022-01-01", end_date = "2022-01-15")
 )
 system.time(
-  sub_wk2 <- subset(az_daily(), meta_station_id %in% c("az01", "az02", "az08"))
+  sub_wk2 <- subset(
+    az_daily(start_date = "2022-01-01", end_date = "2022-01-15"),
+    meta_station_id %in% c("az01", "az02", "az08")
+  )
 )
 all(sub_wk2 == sub_wk)
 ```
