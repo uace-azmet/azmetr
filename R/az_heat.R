@@ -9,12 +9,12 @@
 #'   `station_id = c(8, 37)`) or as character vector with the prefix "az" and 2
 #'   digits (e.g. `station_id = c("az08", "az37")`) If left blank data for all
 #'   stations will be returned
-#' @param start_date character; in YYYY-MM-DD or another format that can be
-#'   parsed by [lubridate::ymd()]. Defaults to January 1st of the current year
-#'   if left blank.
-#' @param end_date character; in YYYY-MM-DD in YYYY-MM-DD or another format that
-#'   can be parsed by [lubridate::ymd()].  Defaults to the current date if left
-#'   blank.
+#' @param start_date A length 1 vector of class Date, POSIXct, or character in
+#'   YYYY-MM-DD format.  Will be rounded **down** to the nearest day if more
+#'   precision is supplied.
+#' @param end_date A length 1 vector of class Date, POSIXct, or character in
+#'   YYYY-MM-DD format.  Will be rounded **down** to the nearest day if more
+#'   precision is supplied.  Defaults to the current date if left blank.
 #' @details Unlike [az_daily()], only one row of data per station is returned,
 #'   regardless of `start_date` and `end_date`. However, the data returned is
 #'   cumulative over the time period specified by `start_date` and `end_date`.

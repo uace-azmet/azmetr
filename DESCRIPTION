@@ -19,7 +19,7 @@ Imports:
     tidyselect
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.2
+RoxygenNote: 7.2.3
 URL: https://github.com/cct-datascience/azmetr
 BugReports: https://github.com/cct-datascience/azmetr/issues
 Suggests: 
