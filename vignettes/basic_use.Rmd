@@ -2,7 +2,7 @@
 title: "Basic usage of azmetr"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{daily_weather}
+  %\VignetteIndexEntry{basic_use}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
