@@ -48,7 +48,7 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
     parse_fun <- function(x) {
       lubridate::parse_date_time(x, orders = c("Ymd", "YmdHMS", "YmdHM", "YmdH")) |>
         lubridate::floor_date(unit = "day") |>
-        as_date()
+        lubridate::as_date()
     }
   }
 
