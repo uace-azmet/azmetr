@@ -7,16 +7,67 @@ test_that("station_id gets parsed", {
   expect_error(parse_params(station_id = TRUE, start = NULL, end = NULL))
 })
 
-test_that("accepts dates and date times", {
-  params_dt <-
-    parse_params(station_id = 1, start = "2022-09-09 12", end = NULL, hour = TRUE)
-  expect_type(params_dt, "list")
-  expect_equal(params_dt$start, "2022-09-09T12:00")
+test_that("accepts dates and date times in different formats", {
+  params_dt1 <-
+    parse_params(
+      station_id = 1,
+      start = "2022-09-09 12",
+      end = NULL,
+      hour = TRUE
+    )
+  expect_type(params_dt1, "list")
+  expect_equal(params_dt1$start, "2022-09-09T12:00")
 
-  params_d <-
-    parse_params(station_id = 1, start = "2022-09-09", end = NULL, hour = FALSE)
-  expect_type(params_d, "list")
-  expect_equal(params_d$start, "2022-09-09T00:00")
+  params_dt2 <-
+    parse_params(
+      station_id = 1,
+      start = "2022-09-09 12:00",
+      end = NULL,
+      hour = TRUE
+    )
+  expect_type(params_dt2, "list")
+  expect_equal(params_dt2$start, "2022-09-09T12:00")
+
+  params_dt3 <-
+    parse_params(
+      station_id = 1,
+      start = lubridate::ymd_hm("2022-09-09 12:00"),
+      end = NULL,
+      hour = TRUE
+    )
+  expect_type(params_dt3, "list")
+  expect_equal(params_dt3$start, "2022-09-09T12:00")
+
+  params_d1 <-
+    parse_params(
+      station_id = 1,
+      start = "2022-09-09",
+      end = NULL,
+      hour = FALSE
+    )
+  expect_type(params_d1, "list")
+  expect_equal(params_d1$start, "2022-09-09T00:00")
+
+  params_d2 <-
+    parse_params(
+      station_id = 1,
+      start = "2022/09/09",
+      end = NULL,
+      hour = FALSE
+    )
+  expect_type(params_d2, "list")
+  expect_equal(params_d2$start, "2022-09-09T00:00")
+
+  params_d3 <-
+    parse_params(
+      station_id = 1,
+      start = lubridate::ymd("2022/09/09"),
+      end = NULL,
+      hour = FALSE
+    )
+  expect_type(params_d3, "list")
+  expect_equal(params_d3$start, "2022-09-09T00:00")
+
   expect_error(
     parse_params(station_id = 1, start  = "last week", end = NULL),
     "`start_date` failed to parse"

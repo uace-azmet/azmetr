@@ -15,12 +15,13 @@ az_daily(station_id = NULL, start_date = NULL, end_date = NULL)
 digits (e.g. \code{station_id = c("az08", "az37")}) If left blank data for all
 stations will be returned}
 
-\item{start_date}{character; in YYYY-MM-DD or another format that can be
-parsed by \code{\link[lubridate:ymd]{lubridate::ymd()}}}
+\item{start_date}{A length 1 vector of class Date, POSIXct, or character in
+YYYY-MM-DD format.  Will be rounded \strong{down} to the nearest day if more
+precision is supplied.}
 
-\item{end_date}{character; in YYYY-MM-DD in YYYY-MM-DD or another format that
-can be parsed by \code{\link[lubridate:ymd]{lubridate::ymd()}}.  Defaults to the current date if left
-blank.}
+\item{end_date}{A length 1 vector of class Date, POSIXct, or character in
+YYYY-MM-DD format.  Will be rounded \strong{down} to the nearest day if more
+precision is supplied.  Defaults to the current date if left blank.}
 }
 \value{
 a tibble. For units and other metadata, see
