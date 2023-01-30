@@ -114,7 +114,7 @@ az_add_units <- function(x) {
     )), ~units::set_units(., "mm")
     )) %>%
     dplyr::mutate(dplyr::across(dplyr::ends_with("_mph"),
-                  ~units::set_units(., "mph")
+                  ~units::set_units(., "miles/hr")
     )) %>%
     dplyr::mutate(dplyr::across(dplyr::any_of(c(
       "wind_spd_max_mps",
