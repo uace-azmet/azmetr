@@ -1,8 +1,8 @@
 ---
-title: "Using {azmetr} with {units}"
+title: "Using azmetr with the units package"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Using {azmetr} with {units}}
+  %\VignetteIndexEntry{Using azmetr with the units package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
