@@ -1,0 +1,97 @@
+---
+title: "Basic usage of azmetr"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Basic usage of azmetr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(azmetr)
+library(lubridate)
+```
+
+## Retrieving the most recent day
+
+To retrieve the the most recent day of data for all stations simply by calling `az_daily()` or `az_hourly()` without any arguments.  `az_daily()` retrieves daily summary data and `az_hourly()` retrieves hourly data.
+
+```{r}
+daily <- az_daily()
+hourly <- az_hourly()
+
+head(daily)
+head(hourly)
+```
+
+## Specifying date ranges
+
+By supplying `start_date` to `az_daily()` or `start_date_time` to `az_hourly()` you can retrieve data going back further in time. 
+
+```{r}
+last_date <- max(daily$datetime)
+last_date
+last_week <- last_date - lubridate::weeks(1)
+wk <- az_daily(start_date = last_week)
+
+range(wk$datetime)
+```
+
+```{r}
+last_datetime <- max(hourly$date_datetime)
+last_datetime
+last_48h <- last_datetime - hours(48)
+hr <- az_hourly(start_date_time = last_48h)
+
+range(hr$date_datetime)
+```
+
+To specify an end date, use `end_date` or `end_date_time`.  You must also supply a start date if you supply an end date.
+
+```{r}
+daily_range <- az_daily(start_date = "2022-01-01", end_date = "2022-01-05")
+range(daily_range$datetime)
+```
+
+Note that the dates and datetimes can be supplied as character values in year, month, day order or they can be supplied as Date or POSIXct vectors. If the supplied date is more precise than the data, it will be rounded down.  For `az_daily()` datetimes will be rounded down to the nearest day and for `az_hourly()` datetimes will be rounded down to the nearest hour.
+
+```{r}
+char_daily <- az_daily(start_date = "2023-01-10 12:43:22", end_date = "2023-01-11 15:00:01")
+range(char_daily$datetime)
+
+char_hourly <- az_hourly(start_date = "2023-01-10 12:43:22", end_date = "2023-01-11 15:00:01")
+range(char_hourly$date_datetime)
+```
+
+
+## Filtering by station
+
+Information on the stations available is contained in the `station_info` dataset including station name, station ID, and location.
+
+```{r}
+station_info
+```
+
+
+If you only need data for a subset of stations, you can supply `station_id`.  However, note that this will query the API once per station due to limitations of how the API works.  It may be faster to just get data for all stations and subset it after since that only queries the web API once and results in an identical dataset.
+
+```{r}
+system.time(
+  sub_wk <- az_daily(station_id = c(1, 2, 8), start_date = "2022-01-01", end_date = "2022-01-15")
+)
+system.time(
+  sub_wk2 <- subset(
+    az_daily(start_date = "2022-01-01", end_date = "2022-01-15"),
+    meta_station_id %in% c("az01", "az02", "az08")
+  )
+)
+all(sub_wk2 == sub_wk)
+```
+

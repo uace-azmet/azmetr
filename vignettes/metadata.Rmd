@@ -1,0 +1,80 @@
+---
+title: "Using azmetr with the units package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using azmetr with the units package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(azmetr)
+library(units)
+library(dplyr)
+```
+
+## Adding units to data
+
+You can add the correct units to data returned by `az_daily()`, `az_hourly()`, or `az_heat()` by passing the resulting tibble to `az_add_units()`.
+
+```{r}
+hourly <- 
+  az_hourly() |> 
+  az_add_units() 
+
+hourly |> 
+  select(-starts_with("meta_"), -starts_with("date_")) |> 
+  head()
+```
+
+This requires that you have the `units` package installed and will prompt you to do so if you don't have it installed.  It may also be helpful to explicitly load the package with `library(units)` so that the resulting tibble displays the units correctly. 
+
+## Using units columns
+
+`az_add_units()` converts numeric vectors to those of class "units".  These units columns behave differently than ordinary numeric vectors and have a few useful properties. First, you can do unit conversion using `set_units()` from the `units` package.
+
+```{r}
+hourly |> 
+  transmute(wind_spd_kph = set_units(wind_spd_mps, "km/h"),
+            sol_rad_total = set_units(sol_rad_total, "W h m-2"),
+            temp_airK = set_units(temp_airF, "Kelvins"))
+```
+
+Second, it won't allow you to do math where the units aren't compatible.
+
+```{r}
+#| error: true
+hourly |> 
+  transmute(wind_rain = wind_spd_mps + precip_total)
+```
+
+That also means that you generally cannot add or subtract unitless constants.
+
+```{r}
+## This will error:
+# hourly$wind_spd_mps[1] + 10
+
+## Must use:
+hourly$wind_spd_mps[1] + set_units(10, "m/s")
+```
+
+
+## Plotting with units
+
+The `units` package works with `ggplot2` to automatically include units in axis labels.
+
+```{r}
+library(ggplot2)
+ggplot(hourly, aes(x = wind_spd_mps, y = sol_rad_total)) +
+  geom_point() +
+  labs(x = "wind speed",
+       y = "total solar radiation")
+```
+
