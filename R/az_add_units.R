@@ -74,7 +74,7 @@ az_add_units <- function(x) {
       "heat_units_9455F",
       "heat_units_50F_sum",
       "heat_units_55F_sum"
-    )), ~units::set_units(., "degF")
+    )), ~units::set_units(., "°F")
     )) %>%
     dplyr::mutate(dplyr::across(dplyr::any_of(c(
       "wind_vector_dir",
