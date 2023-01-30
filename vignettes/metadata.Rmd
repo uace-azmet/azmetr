@@ -17,7 +17,6 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(azmetr)
 library(units)
-library(ggplot2)
 library(dplyr)
 ```
 
@@ -56,11 +55,26 @@ hourly |>
   transmute(wind_rain = wind_spd_mps + precip_total)
 ```
 
-That means it will also complain when you add something unitless (e.g. a regular numeric vector) to a vector with units
+That also means that you generally cannot add or subtract unitless constants.
 
 ```{r}
+## This will error:
+# hourly$wind_spd_mps[1] + 10
 
+## Must use:
+hourly$wind_spd_mps[1] + set_units(10, "m/s")
 ```
 
 
 ## Plotting with units
+
+The `units` package works with `ggplot2` to automatically include units in axis labels.
+
+```{r}
+library(ggplot2)
+ggplot(hourly, aes(x = wind_spd_mps, y = sol_rad_total)) +
+  geom_point() +
+  labs(x = "wind speed",
+       y = "total solar radiation")
+```
+
