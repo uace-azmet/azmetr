@@ -8,6 +8,7 @@
 - exports magrittr pipe (`%>%`) so it can be used when loading only `azmetr`
 - You can now supply POSIXct or Date values to `start_date` and `end_date` arguments in addition to character ISO representations of date (e.g. YYYY-MM-DD or YYYY/MM/DD). You can supply POSIXct to `start_date_time` and `end_date_time`.  Additionally, you can use character with at least (but potentially more) precision to the hour. (e.g., YYYY-MM-DD HH:MM:SS now works and gets rounded down to the nearest hour).
 - added vignettes
+- fixed a bug where the wrong units were added to variables ending in `_mps` by `az_add_units()`
 
 # azmetr 0.0.0.9000
 
