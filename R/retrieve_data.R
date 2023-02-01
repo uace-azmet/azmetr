@@ -4,7 +4,8 @@
 #' @param start_f character; ISO formatted date time string
 #' @param time_interval character; ISO8601 formatted time interval string
 #' @param endpoint character; one of "daily", "hourly", or "hueto"
-#'
+#' @importFrom memoise memoise
+#' @importFrom cachem cache_mem
 #' @return tibble
 #' @noRd
 #'

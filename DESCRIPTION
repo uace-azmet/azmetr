@@ -8,6 +8,7 @@ Description: Provides R functions to access the Arizona Meterological Network (A
 License: MIT + file LICENSE
 Imports: 
     attempt,
+    cachem,
     curl,
     dplyr,
     httr,
