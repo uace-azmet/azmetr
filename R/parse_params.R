@@ -81,7 +81,7 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
       )
   } else {
     if (hour) {
-      end <- lubridate::now()
+      end <- lubridate::now() |> lubridate::ceiling_date("days")
     } else {
       end <- lubridate::today()
     }
