@@ -55,7 +55,7 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
   # Query API  --------------------------------------------
   if (length(station_id) <= 1) {
     out <-
-      retrieve_data(params$station_id,
+      retrieve_data_m(params$station_id,
                     params$start,
                     params$time_interval,
                     endpoint = "daily")
@@ -64,7 +64,7 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
       purrr::map_df(
         params$station_id,
         function(x) {
-          retrieve_data(x, params$start, params$time_interval, endpoint = "daily")
+          retrieve_data_m(x, params$start, params$time_interval, endpoint = "daily")
         }
       )
   }

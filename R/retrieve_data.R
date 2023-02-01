@@ -33,3 +33,8 @@ retrieve_data <- function(station_id, start_f, time_interval,
   data_tidy
   #TODO: check for 0x0 tibble and error
 }
+
+
+#memoised version
+#TODO: is this going to work if the day changes over?  Like, time_interval might be "*" regardless of the actual date.
+retrieve_data_m <- memoise::memoise(retrieve_data)
