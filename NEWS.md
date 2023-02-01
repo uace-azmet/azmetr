@@ -9,7 +9,7 @@
 - You can now supply POSIXct or Date values to `start_date` and `end_date` arguments in addition to character ISO representations of date (e.g. YYYY-MM-DD or YYYY/MM/DD). You can supply POSIXct to `start_date_time` and `end_date_time`.  Additionally, you can use character with at least (but potentially more) precision to the hour. (e.g., YYYY-MM-DD HH:MM:SS now works and gets rounded down to the nearest hour).
 - added vignettes
 - fixed a bug where the wrong units were added to variables ending in `_mps` by `az_add_units()`
-- data pulled from the API is now cached with the `memoise` package.  If you run `az_daily()`, `az_hourly()`, or `az_hueto()` twice with the same arguments, the second run will just used the cached data.  The cache expires after a day or if the R session is restarted.
+- data pulled from the API is now cached with the `memoise` package.  If you run `az_daily()`, `az_hourly()`, or `az_heat()` twice with the same arguments, the second run will just used the cached data.  The cache expires after a day or if the R session is restarted.
 
 # azmetr 0.0.0.9000
 
