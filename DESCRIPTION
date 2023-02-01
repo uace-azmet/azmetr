@@ -13,6 +13,7 @@ Imports:
     httr,
     lubridate,
     magrittr,
+    memoise,
     purrr,
     rlang,
     tibble,

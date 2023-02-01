@@ -8,33 +8,42 @@
 #' @return tibble
 #' @noRd
 #'
-retrieve_data <- function(station_id, start_f, time_interval,
-                          endpoint = c("daily", "hourly", "hueto")) {
-  endpoint <- match.arg(endpoint)
-  path <- c("v1", "observations", endpoint, station_id, start_f, time_interval)
-  res <- httr::GET(base_url, path = path, httr::accept_json())
-  check_status(res)
-  data_raw <- httr::content(res, as = "parsed")
-  data_tidy <- data_raw$data %>%
-    purrr::map_df(tibble::as_tibble)
+retrieve_data <-
+  memoise::memoise(function(station_id,
+                            start_f,
+                            time_interval,
+                            endpoint = c("daily", "hourly", "hueto")) {
+    endpoint <- match.arg(endpoint)
+    path <-
+      c("v1",
+        "observations",
+        endpoint,
+        station_id,
+        start_f,
+        time_interval)
+    res <- httr::GET(base_url, path = path, httr::accept_json())
+    check_status(res)
+    data_raw <- httr::content(res, as = "parsed")
+    data_tidy <- data_raw$data %>%
+      purrr::map_df(tibble::as_tibble)
 
-  if (length(data_raw$errors) > 0) {
-    stop(paste0(data_raw$errors, "\n "))
-  }
+    if (length(data_raw$errors) > 0) {
+      stop(paste0(data_raw$errors, "\n "))
+    }
 
-  attributes(data_tidy) <-
-    append(attributes(data_tidy), list(
-      errors = data_raw$errors,
-      i = data_raw$i,
-      l = data_raw$l,
-      s = data_raw$s,
-      t = data_raw$t
-    ))
-  data_tidy
-  #TODO: check for 0x0 tibble and error
-}
-
-
-#memoised version
-#TODO: is this going to work if the day changes over?  Like, time_interval might be "*" regardless of the actual date.
-retrieve_data_m <- memoise::memoise(retrieve_data)
+    attributes(data_tidy) <-
+      append(
+        attributes(data_tidy),
+        list(
+          errors = data_raw$errors,
+          i = data_raw$i,
+          l = data_raw$l,
+          s = data_raw$s,
+          t = data_raw$t
+        )
+      )
+    data_tidy
+    #TODO: check for 0x0 tibble and error
+  },
+  #cache expires after a 24 hrs (or when you restart R)
+  cache = cachem::cache_mem(max_age = 86400))
