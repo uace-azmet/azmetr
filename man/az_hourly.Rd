@@ -44,6 +44,7 @@ the stations by leaving \code{station_id} blank and subsetting the resulting
 dataframe.
 }
 \examples{
+\dontrun{
 # Most recent data for all stations:
 az_hourly()
 
@@ -54,6 +55,7 @@ az_hourly(station_id = c("az01", "az02"))
 # Specify dates:
 az_hourly(start_date_time = "2022-09-25 01")
 az_hourly(start_date_time = "2022-09-25 01", end_date = "2022-09-25 20")
+}
 
 }
 \seealso{
