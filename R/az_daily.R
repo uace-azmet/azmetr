@@ -30,6 +30,7 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' # Most recent data for all stations:
 #' az_daily()
 #'
@@ -40,6 +41,7 @@
 #' # Specify dates:
 #' az_daily(start_date = "2022-09-25")
 #' az_daily(start_date = "2022-09-25", end_date = "2022-09-26")
+#' }
 #'
 az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
 
