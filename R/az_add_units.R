@@ -9,7 +9,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' daily <- az_daily()
 #'
 #' daily_units <-

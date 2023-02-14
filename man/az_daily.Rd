@@ -44,6 +44,7 @@ the stations by leaving \code{station_id} blank and subsetting the resulting
 dataframe.
 }
 \examples{
+\dontrun{
 # Most recent data for all stations:
 az_daily()
 
@@ -54,6 +55,7 @@ az_daily(station_id = c("az01", "az02"))
 # Specify dates:
 az_daily(start_date = "2022-09-25")
 az_daily(start_date = "2022-09-25", end_date = "2022-09-26")
+}
 
 }
 \seealso{

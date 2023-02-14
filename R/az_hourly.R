@@ -29,6 +29,7 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' # Most recent data for all stations:
 #' az_hourly()
 #'
@@ -39,6 +40,7 @@
 #' # Specify dates:
 #' az_hourly(start_date_time = "2022-09-25 01")
 #' az_hourly(start_date_time = "2022-09-25 01", end_date = "2022-09-25 20")
+#' }
 #'
 az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time = NULL) {
 

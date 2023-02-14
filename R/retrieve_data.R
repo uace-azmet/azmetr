@@ -12,6 +12,11 @@ retrieve_data <- function(station_id, start_f, time_interval,
                           endpoint = c("daily", "hourly", "hueto")) {
   endpoint <- match.arg(endpoint)
   path <- c("v1", "observations", endpoint, station_id, start_f, time_interval)
+
+  # TODO: there are probably better ways to do this:
+  # limit request rate
+  Sys.sleep(0.2)
+
   res <- httr::GET(base_url, path = path, httr::accept_json())
   check_status(res)
   data_raw <- httr::content(res, as = "parsed")

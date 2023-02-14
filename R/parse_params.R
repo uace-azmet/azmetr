@@ -46,8 +46,8 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
     }
   } else {
     parse_fun <- function(x) {
-      lubridate::parse_date_time(x, orders = c("Ymd", "YmdHMS", "YmdHM", "YmdH")) |>
-        lubridate::floor_date(unit = "day") |>
+      lubridate::parse_date_time(x, orders = c("Ymd", "YmdHMS", "YmdHM", "YmdH")) %>%
+        lubridate::floor_date(unit = "day") %>%
         lubridate::as_date()
     }
   }
