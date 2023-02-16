@@ -18,7 +18,7 @@ retrieve_data <- function(station_id, start_f, time_interval,
     #limit rate to 4 calls per second
     httr2::req_throttle(4 / 1) |>
     #convert errors in response body to R errors
-    httr2::req_error(body = \(resp) httr2::resp_body_json(resp)$error)
+    httr2::req_error(body = function(resp) httr2::resp_body_json(resp)$error)
 
   resp <- req |>
     httr2::req_perform()
