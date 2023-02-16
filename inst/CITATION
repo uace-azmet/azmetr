@@ -1,0 +1,17 @@
+citHeader("To cite azmetr in publications use:")
+
+citEntry(
+  entry    = "Article",
+  title    = "Access Arizona weather data from the AZMet API",
+  author   = "Eric R. Scott",
+  journal  = ,
+  year     = "2023",
+  volume   = ,
+  number   = ,
+  pages    = ,
+  url      = "https://github.com/cct-datascience/azmetr",
+  textVersion = paste(
+  "Scott, Eric R."
+
+  )
+)
