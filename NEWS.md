@@ -1,5 +1,8 @@
 # azmetr (development version)
 
+- `azmetr` now uses the `httr2` package instead of `httr` for API requests. This change allowed for easier rate limiting
+- There is now a rate limit of 4 requests per second to the API.  This shouldn't cause noticible slowdowns except when using the `station_id` argument maybe
+
 # azmetr 0.1.0
 
 - functions now check if supplied `station_id` is valid and an active station before querying the API
