@@ -16,7 +16,9 @@ retrieve_data <- function(station_id, start_f, time_interval,
     httr2::req_url_path_append("observations", endpoint, station_id, start_f, time_interval) %>%
     httr2::req_headers("Accept" = "application/json") %>%
     #limit rate to 4 calls per second
-    httr2::req_throttle(4 / 1)
+    httr2::req_throttle(4 / 1) |>
+    #convert errors in response body to R errors
+    httr2::req_error(body = \(resp) httr2::resp_body_json(resp)$error)
 
   resp <- req |>
     httr2::req_perform()
@@ -25,13 +27,8 @@ retrieve_data <- function(station_id, start_f, time_interval,
   data_tidy <- data_raw$data %>%
     purrr::map_df(tibble::as_tibble)
 
-  if (length(data_raw$errors) > 0) {
-    stop(paste0(data_raw$errors, "\n "))
-  }
-
   attributes(data_tidy) <-
     append(attributes(data_tidy), list(
-      errors = data_raw$errors,
       i = data_raw$i,
       l = data_raw$l,
       s = data_raw$s,
