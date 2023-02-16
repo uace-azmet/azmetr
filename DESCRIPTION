@@ -1,5 +1,5 @@
 Package: azmetr
-Title: Access the AZMet API
+Title: Access Arizona weather data from the AZMet API
 Version: 0.1.0.9000
 Authors@R: 
     person("Eric", "Scott", , "ericrscott@arizona.edu", role = c("aut", "cre"),
