@@ -10,7 +10,7 @@ Imports:
     attempt,
     curl,
     dplyr,
-    httr,
+    httr2,
     lubridate,
     magrittr,
     purrr,
