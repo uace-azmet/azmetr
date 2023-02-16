@@ -4,10 +4,10 @@ check_internet <- function(){
 
 ping_service <- function() {
   resp <-
-    request(base_url) %>%
-    req_url_path_append("observations", "daily", "az01") %>%
-    req_error(is_error = function(resp) FALSE) %>%
-    req_perform()
+    httr2::request(base_url) %>%
+    httr2::req_url_path_append("observations", "daily", "az01") %>%
+    httr2::req_error(is_error = function(resp) FALSE) %>%
+    httr2::req_perform()
 
   status <- httr2::resp_status(resp)
   if(status == 200){
