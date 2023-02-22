@@ -1,0 +1,51 @@
+{
+    "a": "TUC",
+    "data": [
+        {
+            "date_datetime": "2022-09-28 12:00:00",
+            "date_doy": "271",
+            "date_hour": "1200",
+            "date_year": "2022",
+            "dwpt": "11.6",
+            "dwptF": "52.9",
+            "eto_azmet": "0.8",
+            "eto_azmet_in": "0.03",
+            "heatstress_cottonC": "28.7",
+            "heatstress_cottonF": "83.6",
+            "meta_bat_volt": "13.73",
+            "meta_needs_review": 0,
+            "meta_station_id": "az01",
+            "meta_station_name": "Tucson",
+            "meta_version": 1,
+            "precip_total": "0.0",
+            "precip_total_in": "0.00",
+            "relative_humidity": "26",
+            "sol_rad_total": "3.04",
+            "sol_rad_total_ly": "72.66",
+            "temp_airC": "33.6",
+            "temp_airF": "92.5",
+            "temp_soil_10cmC": "25.1",
+            "temp_soil_10cmF": "77.2",
+            "temp_soil_50cmC": "25.2",
+            "temp_soil_50cmF": "77.4",
+            "vp_actual": "1.37",
+            "vp_deficit": "3.83",
+            "wind_spd_max_mph": "16.3",
+            "wind_spd_max_mps": "7.3",
+            "wind_spd_mph": "8.5",
+            "wind_spd_mps": "3.8",
+            "wind_vector_dir": "118",
+            "wind_vector_dir_stand_dev": "23",
+            "wind_vector_magnitude": "3.5",
+            "wind_vector_magnitude_mph": "7.8"
+        }
+    ],
+    "errors": [
+
+    ],
+    "i": "PT0S",
+    "l": "az01",
+    "n": "Tucson",
+    "s": "2022-09-28T12:00",
+    "t": "hourly"
+}

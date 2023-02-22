@@ -1,11 +1,11 @@
 test_that("all columns get assigned units that should", {
-  vcr::use_cassette("daily_units", {
+  with_mock_dir("daily_default", {
     res_daily <- az_daily()
   })
-  vcr::use_cassette("hourly_units", {
+  with_mock_dir("hourly_default", {
     res_hourly <- az_hourly()
   })
-  vcr::use_cassette("heat_units", {
+  with_mock_dir("heat_default", {
     res_heat <- az_heat()
   })
   heat_units <- az_add_units(res_heat)

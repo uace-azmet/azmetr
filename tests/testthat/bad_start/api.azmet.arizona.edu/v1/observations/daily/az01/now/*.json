@@ -1,0 +1,12 @@
+{
+    "data": [
+
+    ],
+    "errors": [
+        "Start date time must be in a valid date time in formatted as YYYY-MM-DDTHH:MM."
+    ],
+    "i": "*",
+    "l": "az01",
+    "s": "NOW",
+    "t": "daily"
+}
