@@ -1,4 +1,4 @@
-vcr::use_cassette("bad_station", {
+with_mock_dir("bad_station", {
   test_that("bad station IDs error", {
 
     expect_error(
@@ -11,7 +11,7 @@ vcr::use_cassette("bad_station", {
   })
 })
 
-vcr::use_cassette("bad_start", {
+with_mock_dir("bad_start", {
   test_that("bad dates error", {
 
     expect_error(
@@ -25,7 +25,7 @@ vcr::use_cassette("bad_start", {
   })
 })
 
-vcr::use_cassette("bad_interval", {
+with_mock_dir("bad_interval", {
 
   test_that("bad time interval errors", {
     expect_error(
@@ -39,7 +39,7 @@ vcr::use_cassette("bad_interval", {
   })
 })
 
-vcr::use_cassette("bad_everything", {
+with_mock_dir("bad_everything", {
 
   test_that("multiple errors work", {
     expect_error(

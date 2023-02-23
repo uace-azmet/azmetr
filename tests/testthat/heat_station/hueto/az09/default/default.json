@@ -1,0 +1,27 @@
+{
+    "a": "BON",
+    "data": [
+        {
+            "datetime_last": "2023-02-21",
+            "eto_azmet_in": "0.06",
+            "eto_azmet_in_sum": 5.1000000000000005,
+            "eto_pen_mon_in": "0.08",
+            "eto_pen_mon_in_sum": 4.390000000000001,
+            "heat_units_45F_sum": 221.50000000000003,
+            "heat_units_50F_sum": 125.19999999999999,
+            "heat_units_55F_sum": 61.1,
+            "meta_station_id": "az09",
+            "meta_station_name": "Bonita",
+            "precip_total_in": "0.02",
+            "precip_total_in_sum": 1.9000000000000004
+        }
+    ],
+    "errors": [
+
+    ],
+    "i": "default",
+    "l": "az09",
+    "n": "Bonita",
+    "s": "default",
+    "t": "hueto"
+}

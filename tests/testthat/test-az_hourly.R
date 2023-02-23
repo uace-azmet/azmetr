@@ -8,7 +8,7 @@ dt <- "2022-09-28 12"
 test_that("start_date_time works as expected", {
   skip_if_offline()
   skip_if_not(ping_service())
-  vcr::use_cassette("hourly_start", {
+  with_mock_dir("hourly_start", {
     res <- az_hourly(
       station_id = 1,
       start_date_time = "2022-09-29 09",
@@ -22,7 +22,7 @@ test_that("start_date_time works as expected", {
 test_that("works with station_id as a vector", {
   skip_if_offline()
   skip_if_not(ping_service())
-  vcr::use_cassette("hourly_station_vector", {
+  with_mock_dir("hourly_station_vector", {
     res <-
       az_hourly(
         station_id = c(1, 2),
@@ -37,7 +37,7 @@ test_that("works with station_id as a vector", {
 test_that("data is in correct format", {
   skip_if_offline()
   skip_if_not(ping_service())
-  vcr::use_cassette("hourly", {
+  with_mock_dir("hourly", {
     res_default <- az_hourly(start_date_time = dt, end_date_time = dt)
   })
   expect_type(res_default$meta_station_name, "character")
@@ -46,7 +46,7 @@ test_that("data is in correct format", {
 })
 
 test_that("no data is returned as 0x0 tibble", {
-  vcr::use_cassette("hourly_nodata", {
+  with_mock_dir("hourly_nodata", {
     res_nodata <-
       suppressWarnings(az_hourly(start_date_time = "2100-01-01 00", end_date_time = "2100-01-02 00"))
   })

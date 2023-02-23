@@ -1,11 +1,11 @@
 test_that("all columns get assigned units that should", {
-  vcr::use_cassette("daily_units", {
+  with_mock_dir("daily_default", {
     res_daily <- az_daily()
   })
-  vcr::use_cassette("hourly_units", {
+  with_mock_dir("hourly_default", {
     res_hourly <- az_hourly()
   })
-  vcr::use_cassette("heat_units", {
+  with_mock_dir("heat_default", {
     res_heat <- az_heat()
   })
   heat_units <- az_add_units(res_heat)
@@ -19,13 +19,22 @@ test_that("all columns get assigned units that should", {
     )
   expect_true(
     hourly_units %>%
-      dplyr::select(-starts_with("meta_"), -starts_with("date_")) %>%
+      dplyr::select(
+        -starts_with("meta_"),
+        -starts_with("date_"),
+        -wind_2min_timestamp
+      ) %>%
       purrr::map_lgl(~inherits(.x, "units")) %>%
       all()
   )
   expect_true(
     daily_units %>%
-      dplyr::select(-starts_with("meta_"), -datetime, -starts_with("date_")) %>%
+      dplyr::select(
+        -starts_with("meta_"),
+        -datetime,
+        -starts_with("date_"),
+        -wind_2min_timestamp
+      ) %>%
       purrr::map_lgl(~inherits(.x, "units")) %>%
       all()
   )
