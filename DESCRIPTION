@@ -10,7 +10,7 @@ Imports:
     attempt,
     curl,
     dplyr,
-    httr,
+    httr2,
     lubridate,
     magrittr,
     purrr,
@@ -25,6 +25,7 @@ BugReports: https://github.com/cct-datascience/azmetr/issues
 Suggests: 
     covr,
     ggplot2,
+    httptest2,
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),

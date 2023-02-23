@@ -20,7 +20,8 @@
 #' @note If `station_id` is supplied as a vector, multiple successive calls to
 #'   the API will be made.  You may find better performance getting data for all
 #'   the stations by leaving `station_id` blank and subsetting the resulting
-#'   dataframe.
+#'   dataframe. Requests for data from all stations for more than 6-12 months
+#'   may take considerable time.
 #' @return a tibble. For units and other metadata, see
 #'   <https://ag.arizona.edu/azmet/raw2003.htm>
 #' @seealso [az_hourly()], [az_heat()]

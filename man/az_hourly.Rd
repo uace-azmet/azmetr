@@ -41,7 +41,8 @@ only \code{end_date_time} will result in an error.
 If \code{station_id} is supplied as a vector, multiple successive calls to
 the API will be made.  You may find better performance getting data for all
 the stations by leaving \code{station_id} blank and subsetting the resulting
-dataframe.
+dataframe. Requests for data from all stations for more than 10-15 days may
+take considerable time.
 }
 \examples{
 \dontrun{
