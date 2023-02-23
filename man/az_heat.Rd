@@ -45,6 +45,7 @@ the stations by leaving \code{station_id} blank and subsetting the resulting
 dataframe.
 }
 \examples{
+\dontrun{
 # Most recent data for all stations:
 az_heat()
 
@@ -60,6 +61,7 @@ az_heat(start_date = "2022-10-01")
 yr <- format(Sys.Date(), "\%Y")
 
 az_heat(end_date = paste(yr, "03", "31", sep = "-"))
+}
 
 }
 \seealso{

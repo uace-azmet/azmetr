@@ -41,9 +41,11 @@ result in an error.
 If \code{station_id} is supplied as a vector, multiple successive calls to
 the API will be made.  You may find better performance getting data for all
 the stations by leaving \code{station_id} blank and subsetting the resulting
-dataframe.
+dataframe. Requests for data from all stations for more than 6-12 months
+may take considerable time.
 }
 \examples{
+\dontrun{
 # Most recent data for all stations:
 az_daily()
 
@@ -54,6 +56,7 @@ az_daily(station_id = c("az01", "az02"))
 # Specify dates:
 az_daily(start_date = "2022-09-25")
 az_daily(start_date = "2022-09-25", end_date = "2022-09-26")
+}
 
 }
 \seealso{

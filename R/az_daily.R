@@ -20,7 +20,8 @@
 #' @note If `station_id` is supplied as a vector, multiple successive calls to
 #'   the API will be made.  You may find better performance getting data for all
 #'   the stations by leaving `station_id` blank and subsetting the resulting
-#'   dataframe.
+#'   dataframe. Requests for data from all stations for more than 6-12 months
+#'   may take considerable time.
 #' @return a tibble. For units and other metadata, see
 #'   <https://ag.arizona.edu/azmet/raw2003.htm>
 #' @seealso [az_hourly()], [az_heat()]
@@ -30,6 +31,7 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' # Most recent data for all stations:
 #' az_daily()
 #'
@@ -40,6 +42,7 @@
 #' # Specify dates:
 #' az_daily(start_date = "2022-09-25")
 #' az_daily(start_date = "2022-09-25", end_date = "2022-09-26")
+#' }
 #'
 az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
 

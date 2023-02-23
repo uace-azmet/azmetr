@@ -1,5 +1,11 @@
 # azmetr (development version)
 
+- `azmetr` now uses the `httr2` package instead of `httr` for API requests. This change allowed for easier rate limiting
+- There is now a rate limit of 4 requests per second to the API.  This shouldn't cause noticible slowdowns except when using the `station_id` argument maybe
+- `az_add_units()` now adds units to new `wind_2min_*` variables recently added to the API
+
+# azmetr 0.1.0
+
 - functions now check if supplied `station_id` is valid and an active station before querying the API
 - added `station_info` dataset with station names, IDs, and location.
 - `az_daily()` and `az_hourly()` convert values like -999, -9999, etc. into `NA`s

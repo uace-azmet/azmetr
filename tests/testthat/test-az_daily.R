@@ -2,7 +2,7 @@
 test_that("numeric station_ids work", {
   skip_if_offline()
   skip_if_not(ping_service())
-  vcr::use_cassette("daily_station", {
+  with_mock_dir("daily_station", {
     res_station <- az_daily(station_id = 9)
   })
   expect_s3_class(res_station, "data.frame")
@@ -13,7 +13,7 @@ test_that("start_date works as expected", {
   skip_if_not(ping_service())
   start <- "2022-09-01"
   end <- "2022-09-07"
-  vcr::use_cassette("daily_start", {
+  with_mock_dir("daily_start", {
     res_start <- az_daily(station_id = 1, start_date = start, end_date = end)
   })
   expect_equal(nrow(res_start), 7)
@@ -23,7 +23,7 @@ test_that("start_date works as expected", {
 test_that("works with station_id as a vector", {
   skip_if_offline()
   skip_if_not(ping_service())
-  vcr::use_cassette("daily_station_vector", {
+  with_mock_dir("daily_station_vector", {
     res_2 <- az_daily(station_id = c(1, 2))
   })
   expect_equal(unique(res_2$meta_station_id), c("az01", "az02"))
@@ -33,7 +33,7 @@ test_that("works with station_id as a vector", {
 test_that("data is in correct format", {
   skip_if_offline()
   skip_if_not(ping_service())
-  vcr::use_cassette("daily_default", {
+  with_mock_dir("daily_default", {
     res_default <- az_daily()
   })
   expect_type(res_default$meta_station_name, "character")
@@ -45,7 +45,7 @@ test_that("data is in correct format", {
 test_that("NAs converted correctly", {
   skip_if_offline()
   skip_if_not(ping_service())
-  vcr::use_cassette("daily_missing", {
+  with_mock_dir("daily_missing", {
     res_missing <- az_daily(station_id = 27, start_date = "2022-09-29", end_date = "2022-09-29")
   })
   expect_true(is.na(res_missing$eto_pen_mon_in))
@@ -55,7 +55,7 @@ test_that("NAs converted correctly", {
 
 test_that("no data is returned as 0x0 tibble", {
   suppressWarnings(
-    vcr::use_cassette("daily_nodata", {
+    with_mock_dir("daily_nodata", {
       res_nodata <-
         az_daily(start_date = "2100-01-01", end_date = "2100-01-02")
     })

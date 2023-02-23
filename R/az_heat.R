@@ -30,6 +30,7 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' # Most recent data for all stations:
 #' az_heat()
 #'
@@ -45,6 +46,7 @@
 #' yr <- format(Sys.Date(), "%Y")
 #'
 #' az_heat(end_date = paste(yr, "03", "31", sep = "-"))
+#' }
 #'
 az_heat <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
 

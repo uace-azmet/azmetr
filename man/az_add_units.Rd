@@ -17,7 +17,7 @@ Assigns correct units to the output of \code{az_hourly()}, \code{az_daily()}, an
 \code{az_heat()} using the \code{units} package.
 }
 \examples{
-\donttest{
+\dontrun{
 daily <- az_daily()
 
 daily_units <-

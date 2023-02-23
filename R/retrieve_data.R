@@ -14,19 +14,18 @@ retrieve_data <-
                             start_f,
                             time_interval,
                             endpoint = c("daily", "hourly", "hueto")) {
-    endpoint <- match.arg(endpoint)
-    path <-
-      c("v1",
-        "observations",
-        endpoint,
-        station_id,
-        start_f,
-        time_interval)
-    res <- httr::GET(base_url, path = path, httr::accept_json())
-    check_status(res)
-    data_raw <- httr::content(res, as = "parsed")
-    data_tidy <- data_raw$data %>%
-      purrr::map_df(tibble::as_tibble)
+  endpoint <- match.arg(endpoint)
+
+  req <- httr2::request(base_url) %>%
+    httr2::req_url_path_append("observations", endpoint, station_id, start_f, time_interval) %>%
+    httr2::req_headers("Accept" = "application/json") %>%
+    #limit rate to 4 calls per second
+    httr2::req_throttle(4 / 1)
+
+  resp <- req |>
+    httr2::req_perform()
+
+  data_raw <- httr2::resp_body_json(resp)
 
     if (length(data_raw$errors) > 0) {
       stop(paste0(data_raw$errors, "\n "))

@@ -1,6 +1,6 @@
 Package: azmetr
 Title: Access the AZMet API
-Version: 0.0.0.9000
+Version: 0.1.0.9000
 Authors@R: 
     person("Eric", "Scott", , "ericrscott@arizona.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-7430-7879"))
@@ -11,7 +11,7 @@ Imports:
     cachem,
     curl,
     dplyr,
-    httr,
+    httr2,
     lubridate,
     magrittr,
     memoise,
@@ -27,6 +27,7 @@ BugReports: https://github.com/cct-datascience/azmetr/issues
 Suggests: 
     covr,
     ggplot2,
+    httptest2,
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),

@@ -1,0 +1,12 @@
+{
+    "data": [
+
+    ],
+    "errors": [
+        "Station requested is not found."
+    ],
+    "i": "default",
+    "l": "bz01",
+    "s": "default",
+    "t": "daily"
+}

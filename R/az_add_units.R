@@ -9,7 +9,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' daily <- az_daily()
 #'
 #' daily_units <-
@@ -78,6 +78,7 @@ az_add_units <- function(x) {
     )) %>%
     dplyr::mutate(dplyr::across(dplyr::any_of(c(
       "wind_vector_dir",
+      "wind_2min_vector_dir",
       "wind_vector_dir_stand_dev"
     )), ~units::set_units(., "degrees")
     )) %>%
@@ -113,13 +114,13 @@ az_add_units <- function(x) {
       "precip_total_mm"
     )), ~units::set_units(., "mm")
     )) %>%
-    dplyr::mutate(dplyr::across(dplyr::ends_with("_mph"),
-                  ~units::set_units(., "miles/hr")
+    dplyr::mutate(dplyr::across(dplyr::matches("^wind.*_mph$"),
+                                ~units::set_units(., "miles/hr")
+    )) %>%
+    dplyr::mutate(dplyr::across(dplyr::matches("^wind.*_mps$"),
+                                ~units::set_units(., "m/s")
     )) %>%
     dplyr::mutate(dplyr::across(dplyr::any_of(c(
-      "wind_spd_max_mps",
-      "wind_spd_mean_mps",
-      "wind_spd_mps",
       "wind_vector_magnitude"
     )), ~units::set_units(., "m/s")
     )) %>%
