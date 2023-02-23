@@ -1,17 +1,16 @@
 citHeader("To cite azmetr in publications use:")
 
 citEntry(
-  entry    = "Article",
-  title    = "Access Arizona weather data from the AZMet API",
-  author   = "Eric R. Scott",
-  journal  = ,
+  entry    = "Misc",
+  title    = "azmetr: Access Arizona weather data from the AZMet API",
+  author   = c(person(given = c("Eric", "R."),
+                      family = "Scott",
+                      role = c("aut", "cre"),
+                      email = "scottericr@gmail.com")),
   year     = "2023",
-  volume   = ,
-  number   = ,
-  pages    = ,
-  url      = "https://github.com/cct-datascience/azmetr",
+  version = as.package_version("0.1.0.9000"),
+  url = "https://github.com/cct-datascience/azmetr",
   textVersion = paste(
-  "Scott, Eric R."
-
+    'Scott ER (2023). “azmetr: Access Arizona weather data from the AZMet API.”'
   )
 )
