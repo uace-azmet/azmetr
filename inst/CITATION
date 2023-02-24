@@ -1,4 +1,4 @@
-citHeader("To cite azmetr in publications use:")
+citHeader("To cite azmetr in publications please cite both the R package and the data source:")
 
 citEntry(
   entry    = "Misc",
@@ -14,3 +14,13 @@ citEntry(
     'Scott ER (2023). “azmetr: Access Arizona weather data from the AZMet API.”'
   )
 )
+
+citEntry(
+  entry = "Misc",
+  title = "Arizona Meteorological Network (AZMet) Data. Accessed <date accessed>",
+  author = "Arizona Meteorological Network",
+  url = "https://azmet.arizona.edu",
+  textVersion = "Arizona Meteorological Network, Arizona Meteorological Network (AZMet) Data. Accessed <date accessed>, https://azmet.arizona.edu"
+)
+
+
