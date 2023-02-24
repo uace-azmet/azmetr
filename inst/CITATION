@@ -10,8 +10,9 @@ citEntry(
   year     = "2023",
   version = as.package_version("0.2.0"),
   url = "https://github.com/cct-datascience/azmetr",
+  doi = "10.5281/zenodo.7675685",
   textVersion = paste(
-    'Scott ER (2023). “azmetr: Access Arizona weather data from the AZMet API.”'
+    'Scott ER (2023). “azmetr: Access Arizona weather data from the AZMet API. DOI:10.5281/zenodo.7675685”'
   )
 )
 

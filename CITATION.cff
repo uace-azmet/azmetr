@@ -20,6 +20,7 @@ authors:
   orcid: https://orcid.org/0000-0002-7430-7879
 repository-code: https://github.com/cct-datascience/azmetr
 url: https://github.com/cct-datascience/azmetr
+doi: 10.5281/zenodo.7675685
 contact:
 - family-names: Scott
   given-names: Eric R.

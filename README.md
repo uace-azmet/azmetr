@@ -6,6 +6,7 @@
 [![azmetr status badge](https://cct-datascience.r-universe.dev/badges/azmetr)](https://cct-datascience.r-universe.dev)
 [![R-CMD-check](https://github.com/cct-datascience/azmetr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/cct-datascience/azmetr/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/cct-datascience/azmetr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/cct-datascience/azmetr?branch=main)
+[![DOI](https://zenodo.org/badge/541809363.svg)](https://zenodo.org/badge/latestdoi/541809363)
 <!-- badges: end -->
 
 The goal of azmetr is to provide programmatic access to the [Arizona Meteorological Network](https://ag.arizona.edu/azmet/) (AZMet) [API](https://app.swaggerhub.com/apis/mattjh/AZMetAPI/1.0#/) in R.
