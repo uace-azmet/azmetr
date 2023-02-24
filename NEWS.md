@@ -1,3 +1,5 @@
+# azmetr (development version)
+
 # azmetr 0.2.0
 
 - `azmetr` now uses the `httr2` package instead of `httr` for API requests. This change allowed for easier rate limiting
