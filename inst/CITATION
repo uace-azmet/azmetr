@@ -1,0 +1,26 @@
+citHeader("To cite azmetr in publications please cite both the R package and the data source:")
+
+citEntry(
+  entry    = "Misc",
+  title    = "azmetr: Access Arizona weather data from the AZMet API",
+  author   = c(person(given = c("Eric", "R."),
+                      family = "Scott",
+                      role = c("aut", "cre"),
+                      email = "scottericr@gmail.com")),
+  year     = "2023",
+  version = as.package_version("0.1.1"),
+  url = "https://github.com/cct-datascience/azmetr",
+  textVersion = paste(
+    'Scott ER (2023). “azmetr: Access Arizona weather data from the AZMet API.”'
+  )
+)
+
+citEntry(
+  entry = "Misc",
+  title = "Arizona Meteorological Network (AZMet) Data. Accessed <date accessed>",
+  author = "Arizona Meteorological Network",
+  url = "https://azmet.arizona.edu",
+  textVersion = "Arizona Meteorological Network, Arizona Meteorological Network (AZMet) Data. Accessed <date accessed>, https://azmet.arizona.edu"
+)
+
+
