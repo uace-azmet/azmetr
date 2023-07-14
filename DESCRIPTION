@@ -4,7 +4,7 @@ Version: 0.2.0.9000
 Authors@R: c(
     person("Eric", "Scott", , "ericrscott@arizona.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-7430-7879")),
-    person("Jeremy", "Weiss", , "jlweiss@email.arizona.edu", role = "ctb",
+    person("Jeremy", "Weiss", , "jlweiss@email.arizona.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-3597-0712"))
   )
 Description: Provides R functions to access the Arizona Meterological Network (AZMet) API.  Functions are more than just "thin wrappers" and do some parsing of input parameters and wrangling of output data.
