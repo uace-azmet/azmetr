@@ -4,7 +4,7 @@
 #' stations
 #'
 #' @format
-#' A tibble with 28 rows and 4 columns:
+#' A tibble with 30 rows and 4 columns:
 #' \describe{
 #'   \item{`meta_station_name`}{Station name}
 #'   \item{`meta_station_id`}{Station ID}
