@@ -23,7 +23,7 @@ Alternatively, you can install a development version directly from GitHub with t
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("cct-datascience/azmetr")
+remotes::install_github("uace-azmet/azmetr")
 ```
 
 
