@@ -14,15 +14,19 @@ abstract: Provides R functions to access the Arizona Meterological Network (AZMe
   API. Functions are more than just "thin wrappers" and do some parsing of input parameters
   and wrangling of output data.
 authors:
+- family-names: Weiss
+  given-names: Jeremy
+  email: jlweiss@email.arizona.edu
+  orcid: https://orcid.org/0000-0003-3597-0712
 - family-names: Scott
   given-names: Eric R.
   email: ericrscott@arizona.edu
   orcid: https://orcid.org/0000-0002-7430-7879
-repository-code: https://github.com/cct-datascience/azmetr
-url: https://github.com/cct-datascience/azmetr
+repository-code: https://github.com/uace-azmet/azmetr
+url: https://github.com/uace-azmet/azmetr
 doi: 10.5281/zenodo.7675685
 contact:
-- family-names: Scott
-  given-names: Eric R.
-  email: ericrscott@arizona.edu
-  orcid: https://orcid.org/0000-0002-7430-7879
+- family-names: Weiss
+  given-names: Jeremy
+  email: jlweiss@email.arizona.edu
+  orcid: https://orcid.org/0000-0003-3597-0712
