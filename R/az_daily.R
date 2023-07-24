@@ -79,11 +79,9 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
   }
 
   #Check if any data is missing
-  expected_dates <- seq(as.Date(start_date), as.Date(end_date), by = "day")
   n_obs <- out %>%
-    dplyr::group_by(.data$meta_station_id) %>%
-    dplyr::summarise(n = n()) %>%
-    dplyr::filter(n < length(expected_dates))
+    dplyr::summarise(n = dplyr::n(), .by = all_of("meta_station_id")) %>%
+    dplyr::filter(n < as.numeric(lubridate::period(params$time_interval), "day") + 1)
   if(nrow(n_obs) != 0) {
     warning("Some requested data were unavailable")
   }
