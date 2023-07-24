@@ -71,11 +71,23 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
         }
       )
   }
- if(nrow(out) == 0) {
-   warning("No data retrieved from API")
-   #return 0x0 tibble for type consistency
-   return(tibble::tibble())
- }
+
+  if(nrow(out) == 0) {
+    warning("No data retrieved from API")
+    #return 0x0 tibble for type consistency
+    return(tibble::tibble())
+  }
+
+  #Check if any data is missing
+  expected_dates <- seq(as.Date(start_date), as.Date(end_date), by = "day")
+  n_obs <- out %>%
+    dplyr::group_by(.data$meta_station_id) %>%
+    dplyr::summarise(n = n()) %>%
+    dplyr::filter(n < length(expected_dates))
+  if(nrow(n_obs) != 0) {
+    warning("Some requested data were unavailable")
+  }
+
   # Wrangle output ----------------------------------------------------------
   out <- out %>%
     #move metadata to beginning
