@@ -1,6 +1,7 @@
 # azmetr (development version)
 
-- Transfered maintainance of package to Jeremy Weiss 
+- Transfered maintainance of package to Jeremy Weiss
+- Timestamp for hourly and daily maximum two-minute sustained wind speeds now appears in downloaded data
 
 # azmetr 0.2.0
 
