@@ -91,7 +91,8 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
       as.numeric
     )) %>%
     dplyr::filter(.data$meta_station_id != "az99") %>%
-    dplyr::mutate(date_datetime = lubridate::ymd_hms(.data$date_datetime)) %>%
+    dplyr::mutate(date_datetime = lubridate::force_tz(lubridate::ymd_hms(.data$date_datetime), tzone = "America/Phoenix")) %>%
+    dplyr::mutate(wind_2min_timestamp = lubridate::with_tz(lubridate::parse_date_time(.data$wind_2min_timestamp, orders = "ymdHMSz"), tzone = "America/Phoenix")) %>%
     #convert NAs
     dplyr::mutate(
       dplyr::across(
