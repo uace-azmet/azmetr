@@ -2,6 +2,8 @@
 
 - Transfered maintainance of package to Jeremy Weiss
 - Timestamp for hourly and daily maximum two-minute sustained wind speeds now appears in downloaded data
+- Variable type for hourly and daily `wind_2min_timestamp` now is date-time instead of character with correct time zone, `tzone = "America/Phoenix"`
+- Values for hourly `date_datetime` variable now have `tzone = "America/Phoenix"` assigned 
 
 # azmetr 0.2.0
 
