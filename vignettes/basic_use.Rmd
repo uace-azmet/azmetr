@@ -47,7 +47,8 @@ range(wk$datetime)
 ```{r}
 last_datetime <- max(hourly$date_datetime)
 last_datetime
-last_48h <- last_datetime - hours(48)
+#format() is used here to ensure the time part doesn't get dropped
+last_48h <- format(last_datetime - hours(48), "%Y-%m-%d %H:%M:%S")
 hr <- az_hourly(start_date_time = last_48h)
 
 range(hr$date_datetime)
