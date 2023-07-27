@@ -91,7 +91,10 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
       as.numeric
     )) %>%
     dplyr::filter(.data$meta_station_id != "az99") %>%
-    dplyr::mutate(date_datetime = lubridate::ymd_hms(.data$date_datetime, tz = "America/Phoenix")) %>%
+    dplyr::mutate(
+      date_datetime = lubridate::ymd_hms(.data$date_datetime, tz = "America/Phoenix") %>%
+        lubridate::ceiling_date("hour") #rounds 23:59:59 up to 00:00:00 (midnight)
+      ) %>%
     #convert NAs
     dplyr::mutate(
       dplyr::across(
