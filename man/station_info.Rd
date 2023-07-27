@@ -5,7 +5,7 @@
 \alias{station_info}
 \title{AZMet station names and locations}
 \format{
-A tibble with 28 rows and 4 columns:
+A tibble with 30 rows and 4 columns:
 \describe{
 \item{\code{meta_station_name}}{Station name}
 \item{\code{meta_station_id}}{Station ID}
