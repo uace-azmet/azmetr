@@ -1,6 +1,7 @@
 # azmetr (development version)
 
-- Transfered maintainance of package to Jeremy Weiss 
+- Transferred maintenance of package to Jeremy Weiss
+- `az_daily()` and `az_hourly()` now print a warning if there is any missing data for the combination of dates and stations requested
 
 # azmetr 0.2.0
 
