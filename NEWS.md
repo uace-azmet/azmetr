@@ -1,7 +1,9 @@
 # azmetr (development version)
 
-- Transfered maintainance of package to Jeremy Weiss
+- Transferred maintenance of package to Jeremy Weiss
 - Timestamp for hourly and daily maximum two-minute sustained wind speeds, `wind_2min_timestamp` now appears in downloaded data
+- Hourly data now has the `date_datetime` column rounded up so that midnight is "2023-01-02 00:00:00" instead of "2023-01-01 23:59:59" (for example)
+- Corrected timezone for the `date_datetime` column returned by `az_hourly()` to be "Arizona/Phoenix"
 
 # azmetr 0.2.0
 
