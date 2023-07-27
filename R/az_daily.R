@@ -80,8 +80,8 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
 
   #Check if any data is missing
   n_obs <- out %>%
-    dplyr::summarise(n = dplyr::n(), .by = all_of("meta_station_id")) %>%
-    dplyr::filter(n < as.numeric(lubridate::period(params$time_interval), "day") + 1)
+    dplyr::summarise(n = dplyr::n(), .by = dplyr::all_of("meta_station_id")) %>%
+    dplyr::filter(.data$n < as.numeric(lubridate::period(params$time_interval), "day") + 1)
   if(nrow(n_obs) != 0) {
     warning("Some requested data were unavailable")
   }
