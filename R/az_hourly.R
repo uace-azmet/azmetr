@@ -94,7 +94,8 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
         -"meta_station_id",
         -"meta_station_name",
         -"date_datetime",
-        -"date_hour"
+        -"date_hour",
+        -"wind_2min_timestamp"
       ),
       as.numeric
     )) %>%

@@ -91,7 +91,7 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
     #move metadata to beginning
     dplyr::select(dplyr::starts_with("meta_"), dplyr::everything()) %>%
     dplyr::mutate(dplyr::across(
-      c(-"meta_station_id", -"meta_station_name", -"datetime"),
+      c(-"meta_station_id", -"meta_station_name", -"datetime", -"wind_2min_timestamp"),
       as.numeric
     )) %>%
     dplyr::filter(.data$meta_station_id != "az99") %>%

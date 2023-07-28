@@ -2,6 +2,8 @@
 
 - Transferred maintenance of package to Jeremy Weiss
 - `az_daily()` and `az_hourly()` now print a warning if there is any missing data for the combination of dates and stations requested
+- Transferred maintenance of package to Jeremy Weiss
+- Timestamp for hourly and daily maximum two-minute sustained wind speeds, `wind_2min_timestamp` now appears in downloaded data
 
 # azmetr 0.2.0
 
