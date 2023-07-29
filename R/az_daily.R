@@ -86,13 +86,26 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
     )) %>%
     dplyr::filter(.data$meta_station_id != "az99") %>%
     dplyr::mutate(datetime = lubridate::ymd(.data$datetime)) %>%
-    dplyr::mutate(wind_2min_timestamp = lubridate::with_tz(lubridate::parse_date_time(.data$wind_2min_timestamp, orders = "ymdHMSz"), tzone = "America/Phoenix")) %>%
     #convert NAs
     dplyr::mutate(
       dplyr::across(
-        tidyselect::where(is.numeric),
+        c(tidyselect::where(is.numeric)),
         function(x)
-          dplyr::if_else(x %in% c(-999, -9999, -99999, -7999, 999, 999.9, 9999), NA_real_, x))
+          dplyr::if_else(x %in% c(-999, -9999, -99999, -7999, 999, 999.9, 9999), NA_real_, x)
+      )
+    ) %>%
+    dplyr::mutate(
+      dplyr::across(
+        wind_2min_timestamp,
+        function(x)
+          dplyr::if_else(x == as.character(-99999), NA_character_, x)
+      )
+    ) %>%
+    dplyr::mutate(
+      wind_2min_timestamp = lubridate::with_tz(
+        lubridate::parse_date_time(.data$wind_2min_timestamp, orders = "ymdHMSz"),
+        tzone = "America/Phoenix"
+        )
     )
   return(out)
 }
