@@ -89,7 +89,7 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
     #convert NAs
     dplyr::mutate(
       dplyr::across(
-        c(tidyselect::where(is.numeric)),
+       tidyselect::where(is.numeric),
         function(x)
           dplyr::if_else(x %in% c(-999, -9999, -99999, -7999, 999, 999.9, 9999), NA_real_, x)
       )
