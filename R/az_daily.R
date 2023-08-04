@@ -100,7 +100,6 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
         NA_character_,
         wind_2min_timestamp
       )
-    )
     ) %>%
     dplyr::mutate(
       wind_2min_timestamp = lubridate::with_tz(

@@ -106,10 +106,10 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
           dplyr::if_else(x %in% c(-999, -9999, -99999, -7999, 999, 999.9, 9999), NA_real_, x))
     ) %>%
     dplyr::mutate(
-      dplyr::across(
-        wind_2min_timestamp,
-        function(x)
-          dplyr::if_else(x == as.character(-99999), NA_character_, x)
+      wind_2min_timestamp = dplyr::if_else(
+        wind_2min_timestamp == as.character(-99999),
+        NA_character_,
+        wind_2min_timestamp
       )
     ) %>%
     dplyr::mutate(
