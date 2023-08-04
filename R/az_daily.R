@@ -95,11 +95,12 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
       )
     ) %>%
     dplyr::mutate(
-      dplyr::across(
-        wind_2min_timestamp,
-        function(x)
-          dplyr::if_else(x == as.character(-99999), NA_character_, x)
+      wind_2min_timestamp = dplyr::if_else(
+        wind_2min_timestamp == as.character(-99999),
+        NA_character_,
+        wind_2min_timestamp
       )
+    )
     ) %>%
     dplyr::mutate(
       wind_2min_timestamp = lubridate::with_tz(
