@@ -23,7 +23,7 @@ Imports:
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-URL: https://github.com/uace-azmet/azmetr
+URL: https://github.com/uace-azmet/azmetr, https://uace-azmet.github.io/azmetr/
 BugReports: https://github.com/uace-azmet/azmetr/issues
 Suggests: 
     covr,
