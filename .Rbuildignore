@@ -8,3 +8,6 @@
 ^doc$
 ^Meta$
 ^CITATION\.cff$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
