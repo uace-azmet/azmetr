@@ -63,3 +63,11 @@ test_that("no data is returned as 0x0 tibble", {
   expect_true(nrow(res_nodata) == 0)
   expect_s3_class(res_nodata, "tbl_df")
 })
+
+test_that("warn when some data missing", {
+  expect_warning(
+    with_mock_dir("daily_partial", {
+      az_daily(station_id = "az43", start_date = "2023-01-01", end_date = "2023-07-23")
+    })
+  )
+})

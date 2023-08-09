@@ -1,6 +1,7 @@
 # azmetr (development version)
 
-- Transfered maintainance of package to Jeremy Weiss
+- `az_daily()` and `az_hourly()` now print a warning if there is any missing data for the combination of dates and stations requested
+- Transferred maintenance of package to Jeremy Weiss
 - Timestamp for hourly and daily maximum two-minute sustained wind speeds, `wind_2min_timestamp` now appears in downloaded data
 - Variable type for hourly and daily `wind_2min_timestamp` now is date-time instead of character with correct time zone, `tzone = "America/Phoenix"`
 - Values for hourly `date_datetime` variable now have `tzone = "America/Phoenix"` assigned 

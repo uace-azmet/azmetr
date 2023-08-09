@@ -76,6 +76,15 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
     #return 0x0 tibble
     return(tibble::tibble())
   }
+
+  #Check if any data is missing
+  n_obs <- out %>%
+    dplyr::summarise(n = dplyr::n(), .by = dplyr::all_of("meta_station_id")) %>%
+    dplyr::filter(.data$n < as.numeric(lubridate::period(params$time_interval), "hour"))
+  if(nrow(n_obs) != 0) {
+    warning("Some requested data were unavailable")
+  }
+
   # Wrangle output ----------------------------------------------------------
   out <- out %>%
     #move metadata to beginning
