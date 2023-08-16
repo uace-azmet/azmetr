@@ -4,8 +4,8 @@
 <!-- badges: start -->
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![azmetr status badge](https://cct-datascience.r-universe.dev/badges/azmetr)](https://cct-datascience.r-universe.dev)
-[![R-CMD-check](https://github.com/cct-datascience/azmetr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/cct-datascience/azmetr/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/cct-datascience/azmetr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/cct-datascience/azmetr?branch=main)
+[![R-CMD-check](https://github.com/uace-azmet/azmetr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/cct-datascience/azmetr/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/uace-azmet/azmetr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/uace-azmet/azmetr?branch=main)
 [![DOI](https://zenodo.org/badge/541809363.svg)](https://zenodo.org/badge/latestdoi/541809363)
 <!-- badges: end -->
 
