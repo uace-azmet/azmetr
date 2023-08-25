@@ -81,9 +81,10 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
       )
   } else {
     if (hour) {
-      end <- lubridate::now()
+      #API is always about one timestep behind
+      end <- lubridate::now() - lubridate::hours(1)
     } else {
-      end <- lubridate::today()
+      end <- lubridate::today() - lubridate::days(1)
     }
   }
 
