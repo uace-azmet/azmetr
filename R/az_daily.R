@@ -46,7 +46,6 @@
 #'
 az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
 
-  #TODO: document output columns or link to API docs if appropriate
   #TODO: check for valid station IDs
   check_internet()
   if(!is.null(end_date) & is.null(start_date)) {

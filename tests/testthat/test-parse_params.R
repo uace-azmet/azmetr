@@ -74,9 +74,9 @@ test_that("accepts dates and date times in different formats", {
   )
 })
 
-test_that("end defaults to current date", {
+test_that("end defaults to yesterday's date", {
   start <- "2022-10-01"
-  end <- today()
+  end <- today() - days(1)
   time_interval <- format_ISO8601(as.period(ymd(end) - ymd(start)))
   params <- parse_params(station_id = NULL, start = start, end = NULL)
   expect_equal(params$time_interval, time_interval)

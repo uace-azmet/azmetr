@@ -45,7 +45,6 @@
 #'
 az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time = NULL) {
 
-  #TODO: document output columns or link to API docs if appropriate
   #TODO: check for valid station IDs
   check_internet()
   if(!is.null(end_date_time) & is.null(start_date_time)) {
