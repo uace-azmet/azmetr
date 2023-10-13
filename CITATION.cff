@@ -8,7 +8,7 @@ message: 'To cite package "azmetr" in publications use:'
 type: software
 license: MIT
 title: 'azmetr: Access Arizona weather data from the AZMet API'
-version: 0.2.0
+version: 0.2.1
 year: 2023
 abstract: Provides R functions to access the Arizona Meterological Network (AZMet)
   API. Functions are more than just "thin wrappers" and do some parsing of input parameters
