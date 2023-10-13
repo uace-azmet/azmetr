@@ -115,9 +115,9 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
     ) %>%
     dplyr::mutate(
       wind_2min_timestamp = dplyr::if_else(
-        wind_2min_timestamp == as.character(-99999),
+        .data$wind_2min_timestamp == as.character(-99999),
         NA_character_,
-        wind_2min_timestamp
+        .data$wind_2min_timestamp
       )
     ) %>%
     dplyr::mutate(

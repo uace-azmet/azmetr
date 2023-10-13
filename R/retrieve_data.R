@@ -18,7 +18,7 @@ retrieve_data <- function(station_id, start_f, time_interval,
     #limit rate to 4 calls per second
     httr2::req_throttle(4 / 1)
 
-  resp <- req |>
+  resp <- req %>%
     httr2::req_perform()
 
   data_raw <- httr2::resp_body_json(resp)

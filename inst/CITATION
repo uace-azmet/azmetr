@@ -5,14 +5,14 @@ bibentry(
   header  = "To cite this package in publications, please use:",
   title   = "azmetr: Access Arizona weather data from the AZMet API",
   author  = c(
-    person("Jeremy", "Weiss", , "jlweiss@email.arizona.edu", role = c("aut", "cre"),
+    person("Jeremy", "Weiss", , "jlweiss@arizona.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-3597-0712")),
     person("Eric", "Scott", , "ericrscott@arizona.edu", role = c("aut"),
            comment = c(ORCID = "0000-0002-7430-7879"))
   ),
   year    = year,
   note    = sprintf("R package version %s", meta$Version),
-  url = "https://github.com/cct-datascience/azmetr",
+  url = "https://github.com/uace-azmet/azmetr",
   doi = "10.5281/zenodo.7675685"
 )
 
