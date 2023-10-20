@@ -17,11 +17,14 @@ stations will be returned}
 
 \item{start_date_time}{A length 1 vector of class POSIXct or character in
 YYYY-MM-DD HH format.  Will be rounded \strong{down} to the nearest hour if more
-precision is supplied.}
+precision is supplied. If only a date (YYYY-MM-DD) is supplied, data will
+be requested starting at 01:00:00 of that day}
 
 \item{end_date_time}{A length 1 vector of class POSIXct or character in
 YYYY-MM-DD HH format.  Will be rounded \strong{down} to the nearest hour if more
-precision is supplied.  Defaults to the current time if left blank.}
+precision is supplied.  If only a date (YYYY-MM-DD) is supplied, data will
+be requested through the \emph{end} of that day (23:59:59). Defaults to the
+current time if left blank.}
 }
 \value{
 a tibble. For units and other metadata, see
