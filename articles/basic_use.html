@@ -167,7 +167,7 @@ retrieve data going back further in time.</p>
 <span><span class="co">#&gt; unavailable</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">hr</span><span class="op">$</span><span class="va">date_datetime</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "2023-10-17 23:59:59 MST" "2023-10-20 11:00:00 MST"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "2023-10-17 23:00:00 MST" "2023-10-20 11:00:00 MST"</span></span></code></pre></div>
 <p>To specify an end date, use <code>end_date</code> or
 <code>end_date_time</code>. You must also supply a start date if you
 supply an end date.</p>
@@ -187,10 +187,8 @@ rounded down to the nearest hour.</p>
 <span><span class="co">#&gt; [1] "2023-01-10" "2023-01-11"</span></span>
 <span></span>
 <span><span class="va">char_hourly</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/az_hourly.html">az_hourly</a></span><span class="op">(</span>start_date <span class="op">=</span> <span class="st">"2023-01-10 12:43:22"</span>, end_date <span class="op">=</span> <span class="st">"2023-01-11 15:00:01"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in az_hourly(start_date = "2023-01-10 12:43:22", end_date = "2023-01-11</span></span>
-<span><span class="co">#&gt; 15:00:01"): Some requested data were unavailable</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">char_hourly</span><span class="op">$</span><span class="va">date_datetime</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "2023-01-10 13:00:00 MST" "2023-01-11 14:00:00 MST"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "2023-01-10 12:00:00 MST" "2023-01-11 15:00:00 MST"</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="filtering-by-station">Filtering by station<a class="anchor" aria-label="anchor" href="#filtering-by-station"></a>
@@ -224,7 +222,7 @@ queries the web API once and results in an identical dataset.</p>
 <span>  <span class="va">sub_wk</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/az_daily.html">az_daily</a></span><span class="op">(</span>station_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">8</span><span class="op">)</span>, start_date <span class="op">=</span> <span class="st">"2022-01-01"</span>, end_date <span class="op">=</span> <span class="st">"2022-01-15"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.156   0.008   0.849</span></span>
+<span><span class="co">#&gt;   0.132   0.000   0.980</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span></span>
 <span>  <span class="va">sub_wk2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span></span>
 <span>    <span class="fu"><a href="../reference/az_daily.html">az_daily</a></span><span class="op">(</span>start_date <span class="op">=</span> <span class="st">"2022-01-01"</span>, end_date <span class="op">=</span> <span class="st">"2022-01-15"</span><span class="op">)</span>,</span>
@@ -232,7 +230,7 @@ queries the web API once and results in an identical dataset.</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.479   0.000   0.684</span></span>
+<span><span class="co">#&gt;   0.348   0.000   0.869</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/all.html" class="external-link">all</a></span><span class="op">(</span><span class="va">sub_wk2</span> <span class="op">==</span> <span class="va">sub_wk</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] NA</span></span></code></pre></div>
 </div>
