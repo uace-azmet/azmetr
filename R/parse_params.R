@@ -46,9 +46,9 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
       # if end date and only ymd is supplied, round up to end of day.
       # AZMet uses days that go from 1:00:00 to 23:59:59
       if(is_ymd(x) & isTRUE(end)) {
-        hour(parsed) <- 23
-        minute(parsed) <- 59
-        second(parsed) <- 59
+        lubridate::hour(parsed) <- 23
+        lubridate::minute(parsed) <- 59
+        lubridate::second(parsed) <- 59
 
       } else {
         parsed <- parsed %>%
@@ -57,7 +57,7 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
       parsed
     }
   } else {
-    parse_fun <- function(x, end = NULL) {
+    parse_fun <- function(x, end = FALSE) {
       lubridate::parse_date_time(x, orders = c("Ymd", "YmdHMS", "YmdHM", "YmdH")) %>%
         lubridate::floor_date(unit = "day") %>%
         lubridate::as_date()
@@ -110,7 +110,9 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
     # round_date() is necessary here because although the AZMet API counts
     # 23:59 as a valid time, it considers the time interval between 23 and 23:59
     # as one full hour.
-    d <- lubridate::as.period(round_date(end_parsed, unit = "hour") - round_date(start_parsed, unit = "hour"))
+    d <- lubridate::as.period(
+      lubridate::round_date(end_parsed, unit = "hour") - lubridate::round_date(start_parsed, unit = "hour")
+    )
     time_interval <- lubridate::format_ISO8601(d)
   } else {
     time_interval <- "*"
