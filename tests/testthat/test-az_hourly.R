@@ -55,7 +55,7 @@ test_that("no data is returned as 0x0 tibble", {
 })
 
 test_that("requests with 23:59:59 work", {
-  with_mock_dir("hourly_23:59", {
+  with_mock_dir("hourly_lasthour", {
     h <-
       az_hourly(
         station_id = "az01",
