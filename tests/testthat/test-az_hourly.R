@@ -53,15 +53,3 @@ test_that("no data is returned as 0x0 tibble", {
   expect_true(nrow(res_nodata) == 0)
   expect_s3_class(res_nodata, "tbl_df")
 })
-
-test_that("requests with 23:59:59 work", {
-  with_mock_dir("hourly_23:59", {
-    h <-
-      az_hourly(
-        station_id = "az01",
-        start_date_time = "2023-01-01 23:00",
-        end_date_time = "2023-01-01 23:59"
-      )
-  })
-  expect_equal(nrow(h), 2)
-})

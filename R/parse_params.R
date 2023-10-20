@@ -107,10 +107,7 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
 
 
     # Construct time interval for API -----------------------------------------
-    # round_date() is necessary here because although the AZMet API counts
-    # 23:59 as a valid time, it considers the time interval between 23 and 23:59
-    # as one full hour.
-    d <- lubridate::as.period(round_date(end_parsed, unit = "hour") - round_date(start_parsed, unit = "hour"))
+    d <- lubridate::as.period(end_parsed - start_parsed)
     time_interval <- lubridate::format_ISO8601(d)
   } else {
     time_interval <- "*"
