@@ -1,5 +1,7 @@
 # azmetr (development version)
 
+- `az_hourly()` now accepts dates for `start_date_time` and `end_date_time`
+
 # azmetr 0.2.1
 
 - `az_daily()` and `az_hourly()` now print a warning if there is any missing data for the combination of dates and stations requested
