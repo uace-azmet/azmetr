@@ -1,4 +1,8 @@
 library(lubridate)
+calc_end_date <- function(params) {
+  (lubridate::ymd_hm(params$start) + lubridate::as.duration(params$time_interval)) %>%
+    format("%Y-%m-%dT%H:%M")
+}
 test_that("station_id gets parsed", {
   expect_equal(parse_params(station_id = 1, start = NULL, end = NULL)$station_id, "az01")
   expect_equal(parse_params(station_id = "az01", start = NULL, end = NULL)$station_id, "az01")
@@ -7,66 +11,84 @@ test_that("station_id gets parsed", {
   expect_error(parse_params(station_id = TRUE, start = NULL, end = NULL))
 })
 
-test_that("accepts dates and date times in different formats", {
+test_that("accepts datetimes in different formats", {
   params_dt1 <-
     parse_params(
       station_id = 1,
       start = "2022-09-09 12",
-      end = NULL,
+      end = "2022-09-10 12",
       hour = TRUE
     )
   expect_type(params_dt1, "list")
   expect_equal(params_dt1$start, "2022-09-09T12:00")
+  expect_equal(calc_end_date(params_dt1), "2022-09-10T12:00")
 
   params_dt2 <-
     parse_params(
       station_id = 1,
       start = "2022-09-09 12:00",
-      end = NULL,
+      end = "2022-09-10 12:00",
       hour = TRUE
     )
-  expect_type(params_dt2, "list")
   expect_equal(params_dt2$start, "2022-09-09T12:00")
+  expect_equal(calc_end_date(params_dt2), "2022-09-10T12:00")
+
 
   params_dt3 <-
     parse_params(
       station_id = 1,
       start = lubridate::ymd_hm("2022-09-09 12:00"),
-      end = NULL,
+      end = lubridate::ymd_hm("2022-09-10 12:00"),
       hour = TRUE
     )
-  expect_type(params_dt3, "list")
   expect_equal(params_dt3$start, "2022-09-09T12:00")
+  expect_equal(calc_end_date(params_dt3), "2022-09-10T12:00")
 
+})
+
+test_that("dates get rounded to correct datetime when hour = TRUE", {
+  params_dt4 <-
+    parse_params(
+      station_id = 1,
+      start = "2022-09-09",
+      end = "2022-09-10",
+      hour = TRUE
+    )
+  expect_equal(params_dt4$start, "2022-09-09T00:00")
+  expect_equal(params_dt4$time_interval, "P2D")
+})
+
+test_that("dates are accepted in different formats", {
   params_d1 <-
     parse_params(
       station_id = 1,
       start = "2022-09-09",
-      end = NULL,
+      end = "2022-09-10",
       hour = FALSE
     )
   expect_type(params_d1, "list")
   expect_equal(params_d1$start, "2022-09-09T00:00")
+  expect_equal(calc_end_date(params_d1), "2022-09-10T00:00")
 
   params_d2 <-
     parse_params(
       station_id = 1,
       start = "2022/09/09",
-      end = NULL,
+      end = "2022/09/10",
       hour = FALSE
     )
-  expect_type(params_d2, "list")
   expect_equal(params_d2$start, "2022-09-09T00:00")
+  expect_equal(calc_end_date(params_d2), "2022-09-10T00:00")
 
   params_d3 <-
     parse_params(
       station_id = 1,
       start = lubridate::ymd("2022/09/09"),
-      end = NULL,
+      end = lubridate::ymd("2022/09/10"),
       hour = FALSE
     )
-  expect_type(params_d3, "list")
   expect_equal(params_d3$start, "2022-09-09T00:00")
+  expect_equal(calc_end_date(params_d3), "2022-09-10T00:00")
 
   expect_error(
     parse_params(station_id = 1, start  = "last week", end = NULL),
