@@ -36,28 +36,16 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
   }
 
   # Parse Dates -------------------------------------------------------------
-  #TODO: this got real complicated real fast.  Could probably benefit from
-  #refactoring at some point
+
   if(hour) {
     # Using parse_date_time allows user to input POSIXct (YmdHMS) or a character
     # value with at least year, month, day, and hour (e.g. "2022/01/12 13")
-    parse_fun <- function(x, end = FALSE) {
-      parsed <- lubridate::parse_date_time(x, orders = c("YmdHMS", "YmdHM", "YmdH", "Ymd"))
-      # if end date and only ymd is supplied, round up to end of day.
-      # AZMet uses days that go from 1:00:00 to 23:59:59
-      if(is_ymd(x) & isTRUE(end)) {
-        hour(parsed) <- 23
-        minute(parsed) <- 59
-        second(parsed) <- 59
-
-      } else {
-        parsed <- parsed %>%
-          lubridate::floor_date(unit = "min")
-      }
-      parsed
+    parse_fun <- function(x) {
+      lubridate::parse_date_time(x, orders = c("YmdHMS", "YmdHM", "YmdH")) %>%
+        lubridate::floor_date(unit = "hour")
     }
   } else {
-    parse_fun <- function(x, end = NULL) {
+    parse_fun <- function(x) {
       lubridate::parse_date_time(x, orders = c("Ymd", "YmdHMS", "YmdHM", "YmdH")) %>%
         lubridate::floor_date(unit = "day") %>%
         lubridate::as_date()
@@ -66,7 +54,7 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
 
   if(!is.null(start)) {
     #capture parsing warning and turn it into an error
-    start_parsed <-
+    start <-
       withCallingHandlers(
         parse_fun(start),
         warning = function(w) {
@@ -75,16 +63,16 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
           }
         }
       )
-    start_f <- format(start_parsed, format = "%Y-%m-%dT%H:%M")
+    start_f <- format(start, format = "%Y-%m-%dT%H:%M")
   } else {
     start_f <- "*" #default is today
   }
 
   if(!is.null(end)) {
     #capture parsing warning and turn it into an error
-    end_parsed <-
+    end <-
       withCallingHandlers(
-        parse_fun(end, end = TRUE),
+        parse_fun(end),
         warning = function(w) {
           if (conditionMessage(w) == "All formats failed to parse. No formats found.") {
             stop("`end_date` failed to parse", call. = FALSE)
@@ -94,20 +82,20 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
   } else {
     if (hour) {
       #API is always about one timestep behind
-      end_parsed <- lubridate::now() - lubridate::hours(1)
+      end <- lubridate::now() - lubridate::hours(1)
     } else {
-      end_parsed <- lubridate::today() - lubridate::days(1)
+      end <- lubridate::today() - lubridate::days(1)
     }
   }
 
   if (!is.null(start)) {
-    if(end_parsed < start_parsed) {
+    if(end < start) {
       stop("`end_date` is before `start_date`!")
     }
 
 
     # Construct time interval for API -----------------------------------------
-    d <- lubridate::as.period(end_parsed - start_parsed)
+    d <- lubridate::as.period(end - start)
     time_interval <- lubridate::format_ISO8601(d)
   } else {
     time_interval <- "*"
@@ -121,9 +109,4 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
     start = utils::URLencode(start_f),
     time_interval = utils::URLencode(time_interval)
   )
-}
-
-
-is_ymd <- function(x) {
-  !is.na(lubridate::ymd(x, quiet = TRUE))
 }
