@@ -55,7 +55,7 @@ test_that("dates get rounded to correct datetime when hour = TRUE", {
       hour = TRUE
     )
   expect_equal(params_dt4$start, "2022-09-09T00:00")
-  expect_equal(calc_end_date(params_dt4), "2022-09-10T23:59")
+  expect_equal(params_dt4$time_interval, "P2D")
 })
 
 test_that("dates are accepted in different formats", {
