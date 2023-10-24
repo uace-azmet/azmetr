@@ -36,6 +36,11 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
   }
 
   # Parse Dates -------------------------------------------------------------
+
+  if (is.null(start) & is.null(end)) {
+    message("Querying most recent day of data")
+  }
+
   #TODO: this got real complicated real fast.  Could probably benefit from
   #refactoring at some point
   if(hour) {
@@ -49,6 +54,7 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
         lubridate::hour(parsed) <- 23
         lubridate::minute(parsed) <- 59
         lubridate::second(parsed) <- 59
+        message("Querying data through ", parsed)
 
       } else {
         parsed <- parsed %>%
@@ -99,6 +105,11 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
       end_parsed <- lubridate::today(tzone = "America/Phoenix") - lubridate::days(1)
     }
   }
+  end_parsed <- lubridate::round_date(end_parsed, "hour")
+
+  if(is.null(end) & !is.null(start)) {
+    message("Querying data through ", end_parsed)
+  }
 
   if (!is.null(start)) {
     if(end_parsed < start_parsed) {
@@ -110,8 +121,7 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
     # round_date() is necessary here because although the AZMet API counts
     # 23:59 as a valid time, it considers the time interval between 23 and 23:59
     # as one full hour.
-    d <- lubridate::as.period(
-      lubridate::round_date(end_parsed, unit = "hour") - lubridate::round_date(start_parsed, unit = "hour")
+    d <- lubridate::as.period(end_parsed - lubridate::round_date(start_parsed, unit = "hour")
     )
     time_interval <- lubridate::format_ISO8601(d)
   } else {
