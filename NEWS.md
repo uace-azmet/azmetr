@@ -1,7 +1,7 @@
 # azmetr (development version)
 
 - `az_hourly()` now accepts dates for `start_date_time` and `end_date_time`
-- Data retrieval functions now print messages clarifying what data is being queried when defaults are used or when functions round inputs up.
+- Data retrieval functions now print messages clarifying what data is being queried when defaults are used or when functions round `start_date_time` or `end_date_time` arguments.
 
 # azmetr 0.2.1
 
