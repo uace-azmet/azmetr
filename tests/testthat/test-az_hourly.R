@@ -65,3 +65,11 @@ test_that("requests with 23:59:59 work", {
   })
   expect_equal(nrow(h), 2)
 })
+
+test_that("no warning when end date isn't supplied", {
+  #note that if there truly is missing data, this test will fail :-(
+  yesterday <- lubridate::today(tz = "America/Phoenix") - lubridate::days(1)
+  expect_no_warning(
+    az_hourly(station_id = 1, start_date_time = yesterday)
+  )
+})

@@ -42,7 +42,7 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
     # Using parse_date_time allows user to input POSIXct (YmdHMS) or a character
     # value with at least year, month, day, and hour (e.g. "2022/01/12 13")
     parse_fun <- function(x, end = FALSE) {
-      parsed <- lubridate::parse_date_time(x, orders = c("YmdHMS", "YmdHM", "YmdH", "Ymd"))
+      parsed <- lubridate::parse_date_time(x, orders = c("YmdHMS", "YmdHM", "YmdH", "Ymd"), tz = "America/Phoenix")
       # if end date and only ymd is supplied, round up to end of day.
       # AZMet uses days that go from 1:00:00 to 23:59:59
       if(is_ymd(x) & isTRUE(end)) {
@@ -58,7 +58,7 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
     }
   } else {
     parse_fun <- function(x, end = FALSE) {
-      lubridate::parse_date_time(x, orders = c("Ymd", "YmdHMS", "YmdHM", "YmdH")) %>%
+      lubridate::parse_date_time(x, orders = c("Ymd", "YmdHMS", "YmdHM", "YmdH"), tz = "America/Phoenix") %>%
         lubridate::floor_date(unit = "day") %>%
         lubridate::as_date()
     }
@@ -94,9 +94,9 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
   } else {
     if (hour) {
       #API is always about one timestep behind
-      end_parsed <- lubridate::now() - lubridate::hours(1)
+      end_parsed <- lubridate::now(tzone = "America/Phoenix") - lubridate::hours(1)
     } else {
-      end_parsed <- lubridate::today() - lubridate::days(1)
+      end_parsed <- lubridate::today(tzone = "America/Phoenix") - lubridate::days(1)
     }
   }
 
