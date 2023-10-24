@@ -16,15 +16,15 @@ digits (e.g. \code{station_id = c("az08", "az37")}) If left blank data for all
 stations will be returned}
 
 \item{start_date_time}{A length 1 vector of class POSIXct or character in
-YYYY-MM-DD HH format.  Will be rounded \strong{down} to the nearest hour if more
-precision is supplied. If only a date (YYYY-MM-DD) is supplied, data will
-be requested starting at 01:00:00 of that day}
+YYYY-MM-DD HH format, in AZ time.  Will be rounded \strong{down} to the nearest
+hour if more precision is supplied. If only a date (YYYY-MM-DD) is
+supplied, data will be requested starting at 01:00:00 of that day}
 
 \item{end_date_time}{A length 1 vector of class POSIXct or character in
-YYYY-MM-DD HH format.  Will be rounded \strong{down} to the nearest hour if more
-precision is supplied.  If only a date (YYYY-MM-DD) is supplied, data will
-be requested through the \emph{end} of that day (23:59:59). Defaults to the
-current time if left blank.}
+YYYY-MM-DD HH format, in AZ time.  Will be rounded \strong{down} to the nearest
+hour if more precision is supplied.  If only a date (YYYY-MM-DD) is
+supplied, data will be requested through the \emph{end} of that day (23:59:59).
+Defaults to the current time if left blank.}
 }
 \value{
 a tibble. For units and other metadata, see

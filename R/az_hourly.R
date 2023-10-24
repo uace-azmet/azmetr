@@ -8,14 +8,14 @@
 #'   digits (e.g. `station_id = c("az08", "az37")`) If left blank data for all
 #'   stations will be returned
 #' @param start_date_time A length 1 vector of class POSIXct or character in
-#'   YYYY-MM-DD HH format.  Will be rounded **down** to the nearest hour if more
-#'   precision is supplied. If only a date (YYYY-MM-DD) is supplied, data will
-#'   be requested starting at 01:00:00 of that day
+#'   YYYY-MM-DD HH format, in AZ time.  Will be rounded **down** to the nearest
+#'   hour if more precision is supplied. If only a date (YYYY-MM-DD) is
+#'   supplied, data will be requested starting at 01:00:00 of that day
 #' @param end_date_time A length 1 vector of class POSIXct or character in
-#'   YYYY-MM-DD HH format.  Will be rounded **down** to the nearest hour if more
-#'   precision is supplied.  If only a date (YYYY-MM-DD) is supplied, data will
-#'   be requested through the *end* of that day (23:59:59). Defaults to the
-#'   current time if left blank.
+#'   YYYY-MM-DD HH format, in AZ time.  Will be rounded **down** to the nearest
+#'   hour if more precision is supplied.  If only a date (YYYY-MM-DD) is
+#'   supplied, data will be requested through the *end* of that day (23:59:59).
+#'   Defaults to the current time if left blank.
 #' @details If neither `start_date_time` nor `end_date_time` are supplied, the
 #'   most recent day of data will be returned.  If only `start_date_time` is
 #'   supplied, then `end_date_time` defaults to the current time.  Supplying
