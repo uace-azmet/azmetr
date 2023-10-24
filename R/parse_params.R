@@ -38,7 +38,7 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
   # Parse Dates -------------------------------------------------------------
 
   if (is.null(start) & is.null(end)) {
-    message("Querying most recent day of data")
+    message("Querying data from yesterday")
   }
 
   #TODO: this got real complicated real fast.  Could probably benefit from
