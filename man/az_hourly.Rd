@@ -24,7 +24,7 @@ supplied, data will be requested starting at 01:00:00 of that day}
 YYYY-MM-DD HH format, in AZ time.  Will be rounded \strong{down} to the nearest
 hour if more precision is supplied.  If only a date (YYYY-MM-DD) is
 supplied, data will be requested through the \emph{end} of that day (23:59:59).
-Defaults to the current time if left blank.}
+Defaults to the current date and time if left blank and \code{start_date_time} is specified.}
 }
 \value{
 a tibble. For units and other metadata, see
