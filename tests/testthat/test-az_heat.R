@@ -45,7 +45,7 @@ test_that("data is in correct format", {
     res_default <- az_heat()
   })
   expect_s3_class(res_default, "data.frame")
-  expect_equal(nrow(res_default), 28)
+  expect_equal(nrow(res_default), nrow(station_info))
   expect_type(res_default$meta_station_name, "character")
   expect_type(res_default$eto_pen_mon_in, "double")
   expect_s3_class(res_default$datetime_last, "Date")
