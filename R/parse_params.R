@@ -105,14 +105,14 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
       end_parsed <- lubridate::today(tzone = "America/Phoenix") - lubridate::days(1)
     }
   }
-  end_parsed <- lubridate::round_date(end_parsed, "hour")
+  end_rounded <- lubridate::round_date(end_parsed, "hour")
 
   if(is.null(end) & !is.null(start)) {
-    message("Querying data through ", end_parsed)
+    message("Querying data through ", end_rounded)
   }
 
   if (!is.null(start)) {
-    if(end_parsed < start_parsed) {
+    if(end_rounded < start_parsed) {
       stop("`end_date` is before `start_date`!")
     }
 
@@ -121,7 +121,7 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
     # round_date() is necessary here because although the AZMet API counts
     # 23:59 as a valid time, it considers the time interval between 23 and 23:59
     # as one full hour.
-    d <- lubridate::as.period(end_parsed - lubridate::round_date(start_parsed, unit = "hour")
+    d <- lubridate::as.period(end_rounded - lubridate::round_date(start_parsed, unit = "hour")
     )
     time_interval <- lubridate::format_ISO8601(d)
   } else {
@@ -134,6 +134,7 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
   list(
     station_id = sapply(station_id, utils::URLencode, USE.NAMES = FALSE),
     start = utils::URLencode(start_f),
+    end = end_parsed, #not used in API, but useful for warning messages and such
     time_interval = utils::URLencode(time_interval)
   )
 }

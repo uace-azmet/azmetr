@@ -84,6 +84,16 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
   if(nrow(n_obs) != 0) {
     warning("Some requested data were unavailable")
   }
+  #Warn if the missing data is just at the end
+  if (lubridate::ymd(max(out$datetime), tz = "America/Phoenix") < params$end) {
+    warning(
+      "You requested data through ",
+      params$end,
+      " but only data through ",
+      max(out$datetime),
+      " were available"
+    )
+  }
 
   # Wrangle output ----------------------------------------------------------
   out <- out %>%
@@ -98,7 +108,7 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
     #convert NAs
     dplyr::mutate(
       dplyr::across(
-       tidyselect::where(is.numeric),
+        tidyselect::where(is.numeric),
         function(x)
           dplyr::if_else(x %in% c(-999, -9999, -99999, -7999, 999, 999.9, 9999), NA_real_, x)
       )
@@ -114,7 +124,7 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
       wind_2min_timestamp = lubridate::with_tz(
         lubridate::parse_date_time(.data$wind_2min_timestamp, orders = "ymdHMSz"),
         tzone = "America/Phoenix"
-        )
+      )
     )
   return(out)
 }

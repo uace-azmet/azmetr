@@ -87,6 +87,18 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
     warning("Some requested data were unavailable")
   }
 
+  #Warn if the missing data is just at the end
+  if (lubridate::ymd_hms(max(out$date_datetime), tz = "America/Phoenix") < params$end) {
+    warning(
+      "You requested data through ",
+      params$end,
+      " but only data through ",
+      max(out$date_datetime),
+      " were available"
+    )
+  }
+
+
   # Wrangle output ----------------------------------------------------------
   out <- out %>%
     #move metadata to beginning
