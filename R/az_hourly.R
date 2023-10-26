@@ -58,10 +58,21 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
                  end = end_date_time, hour = TRUE)
 
   # Query API --------------------------------------------
+  if (params$start_f == "*" & params$time_interval == "*") {
+    message("Querying the most recent data")
+  }
+  if (params$start_f != "*" & params$time_interval == "*") {
+    message("Querying data since ", format(params$start, "%Y-%m-%d %H:%M"))
+  }
+  if (params$start_f != "*" & params$time_interval != "*") {
+    message("Querying data from ", format(params$start, "%Y-%m-%d %H:%M"),
+            " to ", format(params$end, "%Y-%m-%d %H:%M"))
+  }
+
   if (length(station_id) <= 1) {
     out <-
       retrieve_data(params$station_id,
-                    params$start,
+                    params$start_f,
                     params$time_interval,
                     endpoint = "hourly")
   } else if (length(station_id) > 1) {
@@ -69,7 +80,10 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
       purrr::map_df(
         params$station_id,
         function(x) {
-          retrieve_data(x, params$start, params$time_interval, endpoint = "hourly")
+          retrieve_data(x,
+                        params$start_f,
+                        params$time_interval,
+                        endpoint = "hourly")
         }
       )
   }

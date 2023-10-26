@@ -14,9 +14,13 @@ test_that("start_date works as expected", {
   start <- "2022-09-01"
   end <- "2022-09-07"
   with_mock_dir("daily_start", {
-    res_start <- az_daily(station_id = 1, start_date = start, end_date = end)
+    expect_message(
+      res_start <- az_daily(station_id = 1, start_date = start, end_date = end),
+      "Querying data from 2022-09-01 to 2022-09-07"
+    )
   })
   expect_equal(nrow(res_start), 7)
+
 })
 
 
@@ -71,3 +75,4 @@ test_that("warn when some data missing", {
     })
   )
 })
+

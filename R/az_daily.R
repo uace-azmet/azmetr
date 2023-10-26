@@ -55,10 +55,21 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
     parse_params(station_id = station_id, start = start_date, end = end_date)
 
   # Query API  --------------------------------------------
+  if (params$start_f == "*" & params$time_interval == "*") {
+    message("Querying the most recent data")
+  }
+  if (params$start_f != "*" & params$time_interval == "*") {
+    message("Querying data since ", format(params$start, "%Y-%m-%d"))
+  }
+  if (params$start_f != "*" & params$time_interval != "*") {
+    message("Querying data from ", format(params$start, "%Y-%m-%d"),
+            " to ", format(params$end, "%Y-%m-%d"))
+  }
+
   if (length(station_id) <= 1) {
     out <-
       retrieve_data(params$station_id,
-                    params$start,
+                    params$start_f,
                     params$time_interval,
                     endpoint = "daily")
   } else if (length(station_id) > 1) {
@@ -66,7 +77,10 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
       purrr::map_df(
         params$station_id,
         function(x) {
-          retrieve_data(x, params$start, params$time_interval, endpoint = "daily")
+          retrieve_data(x,
+                        params$start_f,
+                        params$time_interval,
+                        endpoint = "daily")
         }
       )
   }

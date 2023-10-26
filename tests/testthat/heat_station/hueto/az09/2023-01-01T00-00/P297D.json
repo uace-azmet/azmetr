@@ -1,0 +1,34 @@
+{
+    "a": "BON",
+    "data": [
+        {
+            "chill_hours_0C_sum": 319.0,
+            "chill_hours_20C_sum": 3114.0,
+            "chill_hours_32F_sum": 319.0,
+            "chill_hours_45F_sum": 1179.0,
+            "chill_hours_68F_sum": 3114.0,
+            "chill_hours_7C_sum": 1179.0,
+            "datetime_last": "2023-10-24",
+            "eto_azmet_in": 0.09,
+            "eto_azmet_in_sum": 63.65,
+            "eto_pen_mon_in": 0.1,
+            "eto_pen_mon_in_sum": 57.79,
+            "heat_units_45F_sum": 5833.4,
+            "heat_units_50F_sum": 4674.4,
+            "heat_units_55F_sum": 3634.7,
+            "heat_units_9455F_sum": 3863.0,
+            "meta_station_id": "az09",
+            "meta_station_name": "Bonita",
+            "precip_total_in": 0.15,
+            "precip_total_in_sum": 3.61
+        }
+    ],
+    "errors": [
+
+    ],
+    "i": "P297D",
+    "l": "az09",
+    "n": "Bonita",
+    "s": "2023-01-01T00:00",
+    "t": "hueto"
+}

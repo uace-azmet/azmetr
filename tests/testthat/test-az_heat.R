@@ -21,9 +21,12 @@ test_that("az_heat() returns only one row per station even with dates", {
 test_that("end_date can be specified without start_date", {
   skip_if_offline()
   skip_if_not(ping_service())
-  end <- "2022-09-27"
+  end <- lubridate::today(tzone = "America/Phoenix")
   with_mock_dir("heat_end", {
-    res_end <- az_heat(station_id = 1, end_date = end)
+    expect_message(
+      res_end <- az_heat(station_id = 1, end_date = end),
+      paste("Querying data from", lubridate::floor_date(end, "year"), "to", end)
+    )
   })
   expect_s3_class(res_end, "data.frame")
 })

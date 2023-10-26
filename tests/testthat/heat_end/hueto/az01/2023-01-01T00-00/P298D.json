@@ -1,0 +1,34 @@
+{
+    "a": "TUC",
+    "data": [
+        {
+            "chill_hours_0C_sum": 95.0,
+            "chill_hours_20C_sum": 4151.0,
+            "chill_hours_32F_sum": 95.0,
+            "chill_hours_45F_sum": 633.0,
+            "chill_hours_68F_sum": 4151.0,
+            "chill_hours_7C_sum": 633.0,
+            "datetime_last": "2023-10-25",
+            "eto_azmet_in": 0.13,
+            "eto_azmet_in_sum": 70.76,
+            "eto_pen_mon_in": 0.1,
+            "eto_pen_mon_in_sum": 61.83,
+            "heat_units_45F_sum": 7483.1,
+            "heat_units_50F_sum": 6177.7,
+            "heat_units_55F_sum": 4951.6,
+            "heat_units_9455F_sum": 5461.6,
+            "meta_station_id": "az01",
+            "meta_station_name": "Tucson",
+            "precip_total_in": 0.0,
+            "precip_total_in_sum": 6.48
+        }
+    ],
+    "errors": [
+
+    ],
+    "i": "P298D",
+    "l": "az01",
+    "n": "Tucson",
+    "s": "2023-01-01T00:00",
+    "t": "hueto"
+}

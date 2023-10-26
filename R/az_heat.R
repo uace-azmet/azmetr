@@ -52,23 +52,36 @@ az_heat <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
 
   #TODO: document output columns or link to API docs if appropriate
   #TODO: check for valid station IDs
-  #TODO: allow end_date to be specified without start_date
   check_internet()
-
+  # If no start date supplied, default is Jan 1 of current year.
+  if (is.null(start_date)) {
+    start_date <- lubridate::floor_date(lubridate::today(), "year")
+  }
   params <- parse_params(station_id, start = start_date, end = end_date)
 
   # Query API --------------------------------------------
+  if (params$start_f != "*" & params$time_interval == "*") {
+    message("Querying data since ", format(params$start, "%Y-%m-%d"))
+  }
+  if (params$start_f != "*" & params$time_interval != "*") {
+    message("Querying data from ", format(params$start, "%Y-%m-%d"),
+            " to ", format(params$end, "%Y-%m-%d"))
+  }
+
   if (length(station_id) <= 1) {
     out <-
       retrieve_data(params$station_id,
-                    params$start,
+                    params$start_f,
                     params$time_interval,
                     endpoint = "hueto")
   } else if (length(station_id) > 1) {
     out <- purrr::map_df(
       params$station_id,
       function(x) {
-        retrieve_data(x, params$start, params$time_interval, endpoint = "hueto")
+        retrieve_data(x,
+                      params$start_f,
+                      params$time_interval,
+                      endpoint = "hueto")
       }
     )
   }
@@ -79,7 +92,7 @@ az_heat <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
     return(tibble::tibble())
   }
 
-# Wrangle output ----------------------------------------------------------
+  # Wrangle output ----------------------------------------------------------
   out <- out %>%
     #move metadata to beginning
     dplyr::select(dplyr::starts_with("meta_"), dplyr::everything()) %>%

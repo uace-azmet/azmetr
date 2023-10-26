@@ -18,8 +18,8 @@
             "heat_units_9455F_sum": 4874.5,
             "meta_station_id": "az07",
             "meta_station_name": "Aguila",
-            "precip_total_in": 0.01,
-            "precip_total_in_sum": 7.12
+            "precip_total_in": 0.0,
+            "precip_total_in_sum": 7.11
         },
         {
             "chill_hours_0C_sum": 319.0,
@@ -165,8 +165,8 @@
             "heat_units_9455F_sum": 5446.3,
             "meta_station_id": "az23",
             "meta_station_name": "Harquahala",
-            "precip_total_in": 0.02,
-            "precip_total_in_sum": 3.9
+            "precip_total_in": 0.0,
+            "precip_total_in_sum": 3.88
         },
         {
             "chill_hours_0C_sum": 28.0,
@@ -459,8 +459,8 @@
             "heat_units_9455F_sum": 4484.7,
             "meta_station_id": "az41",
             "meta_station_name": "Salome",
-            "precip_total_in": 0.01,
-            "precip_total_in_sum": 4.63
+            "precip_total_in": 0.0,
+            "precip_total_in_sum": 4.62
         },
         {
             "chill_hours_0C_sum": 243.0,
@@ -634,8 +634,8 @@
     "errors": [
 
     ],
-    "i": "default",
+    "i": "P297D",
     "l": "default",
-    "s": "default",
+    "s": "2023-01-01T00:00",
     "t": "hueto"
 }
