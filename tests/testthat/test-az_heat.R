@@ -18,6 +18,15 @@ test_that("az_heat() returns only one row per station even with dates", {
   expect_equal(nrow(res_start), 1)
 })
 
+test_that("start and end dates interpreted correctly", {
+  skip_if_offline()
+  skip_if_not(ping_service())
+  with_mock_dir("heat_start_end", {
+    res <- az_heat(station_id = 1, start_date = "2023-10-10", end_date = "2023-10-30")
+  })
+  expect_equal(res$datetime_last, lubridate::ymd("2023-10-30"))
+})
+
 test_that("end_date can be specified without start_date", {
   skip_if_offline()
   skip_if_not(ping_service())
@@ -26,6 +35,7 @@ test_that("end_date can be specified without start_date", {
     res_end <- az_heat(station_id = 1, end_date = end)
   })
   expect_s3_class(res_end, "data.frame")
+  expect_equal(res_end$datetime_last, lubridate::ymd("2022-09-27"))
 })
 
 test_that("works with station_id as a vector", {
