@@ -56,6 +56,12 @@ az_heat <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
   check_internet()
 
   params <- parse_params(station_id, start = start_date, end = end_date)
+  # always add a day to time_interval for heat endpoint to match how API works
+  if (params$time_interval != "*") {
+    params$time_interval <-
+      lubridate::format_ISO8601(lubridate::as.period(params$time_interval) +
+                                  lubridate::days(1))
+  }
 
   # Query API --------------------------------------------
   if (length(station_id) <= 1) {
@@ -79,7 +85,7 @@ az_heat <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
     return(tibble::tibble())
   }
 
-# Wrangle output ----------------------------------------------------------
+  # Wrangle output ----------------------------------------------------------
   out <- out %>%
     #move metadata to beginning
     dplyr::select(dplyr::starts_with("meta_"), dplyr::everything()) %>%
