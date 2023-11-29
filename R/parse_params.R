@@ -80,7 +80,11 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
       )
     }
   } else {
-    start_ <- start
+    if (isTRUE(hour) & is_ymd(start)) {
+      start_ <- paste(start, "01:00:00")
+    } else {
+      start_ <- start
+    }
   }
 
 
@@ -113,11 +117,12 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
         }
       }
     )
-  # if start wasn't supplied, then we actually pass "*" to the API as a default to get the most recent data
-  if (!is.null(start)) {
+
+  # if start wasn't supplied, then we actually pass "*" to the API as a default to get the most recent data.  However, we don't want the default behavior if it is hourly data.
+  if (!is.null(start) | isTRUE(hour)) {
     start_f <- format(start_parsed, format = "%Y-%m-%dT%H:%M")
   } else {
-    start_f <- "*" #for API
+    start_f <- "*"
   }
 
   #capture parsing warning and turn it into an error
