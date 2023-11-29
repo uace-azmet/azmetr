@@ -55,7 +55,7 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
     parse_params(station_id = station_id, start = start_date, end = end_date)
 
   # Query API  --------------------------------------------
-  if (params$start_f == "*" & params$time_interval == "*") {
+  if (is.null(start_date) & is.null(end_date)) {
     message("Querying data from ", params$start)
   } else {
     message("Querying data since ", params$start, " through ", params$end)
@@ -84,10 +84,6 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
     warning("No data retrieved from API")
     #return 0x0 tibble for type consistency
     return(tibble::tibble())
-  } else if (params$start_f == "*" & params$time_interval == "*") {
-    message("Returning data from ", unique(out$datetime))
-  } else {
-    message("Returning data since ", min(out$datetime), " through ", max(out$datetime))
   }
 
   #Check if any data is missing
@@ -131,5 +127,11 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
         tzone = "America/Phoenix"
       )
     )
+
+  if (length(unique(out$datetime)) == 1) {
+    message("Returning data from ", unique(out$datetime))
+  } else {
+    message("Returning data since ", min(out$datetime), " through ", max(out$datetime))
+  }
   return(out)
 }

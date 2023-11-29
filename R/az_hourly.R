@@ -58,15 +58,11 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
                  end = end_date_time, hour = TRUE)
 
   # Query API --------------------------------------------
-  if (params$start_f == "*" & params$time_interval == "*") {
-    message("Querying the most recent data")
-  }
-  if (params$start_f != "*" & params$time_interval == "*") {
-    message("Querying data since ", format(params$start, "%Y-%m-%d %H:%M"))
-  }
-  if (params$start_f != "*" & params$time_interval != "*") {
-    message("Querying data from ", format(params$start, "%Y-%m-%d %H:%M"),
-            " to ", format(params$end, "%Y-%m-%d %H:%M"))
+  if (is.null(start_date_time) & is.null(end_date_time)) {
+    message("Querying data from ", format(params$start, "%Y-%m-%d %H:%M"))
+  } else {
+    message("Querying data since ", format(params$start, "%Y-%m-%d %H:%M"),
+            " through ", format(params$end, "%Y-%m-%d %H:%M"))
   }
 
   if (length(station_id) <= 1) {
@@ -156,5 +152,12 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
           tzone = "America/Phoenix"
         )
     )
+
+  if (length(unique(out$date_datetime)) == 1) {
+    message("Returning data from ", format(unique(out$date_datetime), "%Y-%m-%d %H:%M"))
+  } else {
+    message("Returning data since ", format(min(out$date_datetime), "%Y-%m-%d %H:%M"),
+            " through ", format(max(out$date_datetime), "%Y-%m-%d %H:%M"))
+  }
   return(out)
 }
