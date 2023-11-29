@@ -135,10 +135,27 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
         }
       }
     )
-
+if (isTRUE(hour)) {
+  if (start_parsed >= lubridate::floor_date(lubridate::now(tzone = tz), "hour")) {
+    stop("Please supply a `start_date_time` earlier than now.")
+  }
+  if (end_parsed >= lubridate::floor_date(lubridate::now(tzone = tz), "hour")) {
+    stop("Please supply an `end_date_time` earlier than now.")
+  }
+  if(end_parsed < start_parsed) {
+    stop("`end_date_time` is before `start_date_time`!")
+  }
+} else {
+  if (start_parsed >= lubridate::today()) {
+    stop("Please supply a `start_date` earlier than today.")
+  }
+  if (end_parsed >= lubridate::today()) {
+    stop("Please supply an `end_date` earlier than today.")
+  }
   if(end_parsed < start_parsed) {
     stop("`end_date` is before `start_date`!")
   }
+}
 
   if (!is.null(start)) {
     # Construct time interval for API -----------------------------------------

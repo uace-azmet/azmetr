@@ -54,8 +54,8 @@ test_that("dates get rounded to correct datetime when hour = TRUE", {
       end = "2022-09-10",
       hour = TRUE
     )
-  expect_equal(params_dt4$start_f, "2022-09-09T00:00")
-  expect_equal(params_dt4$time_interval, "P2D")
+  expect_equal(params_dt4$start_f, "2022-09-09T01:00")
+  expect_equal(params_dt4$time_interval, "P1DT23H")
 })
 
 test_that("dates are accepted in different formats", {
@@ -151,11 +151,11 @@ test_that("messages and warnings are correct", {
 test_that("start and end has to be earlier than now", {
   expect_error(
     parse_params(1, start = format(lubridate::now(), "%Y-%m-%d %H"), end = NULL, hour = TRUE),
-    "Please supply a `start_datetime` earlier than now."
+    "Please supply a `start_date_time` earlier than now."
   )
   expect_error(
     parse_params(1, start = NULL, end = format(lubridate::now(), "%Y-%m-%d %H"), hour = TRUE),
-    "Please supply an `end_datetime` earlier tha now."
+    "Please supply an `end_date_time` earlier than now."
   )
   expect_error(
     parse_params(1, start = lubridate::today(), end = NULL),
