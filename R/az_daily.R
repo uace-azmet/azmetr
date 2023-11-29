@@ -56,14 +56,9 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
 
   # Query API  --------------------------------------------
   if (params$start_f == "*" & params$time_interval == "*") {
-    message("Querying the most recent data")
-  }
-  if (params$start_f != "*" & params$time_interval == "*") {
-    message("Querying data since ", format(params$start, "%Y-%m-%d"))
-  }
-  if (params$start_f != "*" & params$time_interval != "*") {
-    message("Querying data from ", format(params$start, "%Y-%m-%d"),
-            " to ", format(params$end, "%Y-%m-%d"))
+    message("Querying data from ", params$start)
+  } else {
+    message("Querying data since ", params$start, " through ", params$end)
   }
 
   if (length(station_id) <= 1) {
@@ -85,28 +80,24 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
       )
   }
 
-  if(nrow(out) == 0) {
+  if (nrow(out) == 0) {
     warning("No data retrieved from API")
     #return 0x0 tibble for type consistency
     return(tibble::tibble())
+  } else if (params$start_f == "*" & params$time_interval == "*") {
+    message("Returning data from ", unique(out$datetime))
+  } else {
+    message("Returning data since ", min(out$datetime), " through ", max(out$datetime))
   }
 
   #Check if any data is missing
   n_obs <- out %>%
     dplyr::summarise(n = dplyr::n(), .by = dplyr::all_of("meta_station_id")) %>%
     dplyr::filter(.data$n < as.numeric(lubridate::period(params$time_interval), "day") + 1)
-  if(nrow(n_obs) != 0) {
+  if(nrow(n_obs) != 0 |
+     # Also warn if the missing data is just at the end
+     lubridate::ymd(max(out$datetime), tz = "America/Phoenix") < params$end) {
     warning("Some requested data were unavailable")
-  }
-  #Warn if the missing data is just at the end
-  if (lubridate::ymd(max(out$datetime), tz = "America/Phoenix") < params$end) {
-    warning(
-      "You requested data through ",
-      params$end,
-      " but only data through ",
-      max(out$datetime),
-      " were available"
-    )
   }
 
   # Wrangle output ----------------------------------------------------------
