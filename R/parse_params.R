@@ -119,10 +119,10 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
     )
 
   # if start wasn't supplied, then we actually pass "*" to the API as a default to get the most recent data.  However, we don't want the default behavior if it is hourly data.
-  if (!is.null(start) | isTRUE(hour)) {
-    start_f <- format(start_parsed, format = "%Y-%m-%dT%H:%M")
-  } else {
+  if (is.null(start) & isFALSE(hour)) {
     start_f <- "*"
+  } else {
+    start_f <- format(start_parsed, format = "%Y-%m-%dT%H:%M")
   }
 
   #capture parsing warning and turn it into an error
@@ -135,40 +135,41 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
         }
       }
     )
-if (isTRUE(hour)) {
-  if (start_parsed >= lubridate::floor_date(lubridate::now(tzone = tz), "hour")) {
-    stop("Please supply a `start_date_time` earlier than now.")
+  if (isTRUE(hour)) {
+    if (start_parsed > lubridate::floor_date(lubridate::now(tzone = tz), "hour")) {
+      stop("Please supply a `start_date_time` earlier than now.")
+    }
+    if (end_parsed > lubridate::floor_date(lubridate::now(tzone = tz), "hour")) {
+      stop("Please supply an `end_date_time` earlier than now.")
+    }
+    if(end_parsed < start_parsed) {
+      stop("`end_date_time` is before `start_date_time`!")
+    }
+  } else {
+    if (start_parsed > lubridate::today()) {
+      stop("Please supply a `start_date` earlier than today.")
+    }
+    if (end_parsed > lubridate::today()) {
+      stop("Please supply an `end_date` earlier than today.")
+    }
+    if(end_parsed < start_parsed) {
+      stop("`end_date` is before `start_date`!")
+    }
   }
-  if (end_parsed >= lubridate::floor_date(lubridate::now(tzone = tz), "hour")) {
-    stop("Please supply an `end_date_time` earlier than now.")
-  }
-  if(end_parsed < start_parsed) {
-    stop("`end_date_time` is before `start_date_time`!")
-  }
-} else {
-  if (start_parsed >= lubridate::today()) {
-    stop("Please supply a `start_date` earlier than today.")
-  }
-  if (end_parsed >= lubridate::today()) {
-    stop("Please supply an `end_date` earlier than today.")
-  }
-  if(end_parsed < start_parsed) {
-    stop("`end_date` is before `start_date`!")
-  }
-}
 
-  if (!is.null(start)) {
-    # Construct time interval for API -----------------------------------------
-    # round_date() is necessary here because although the AZMet API counts
-    # 23:59 as a valid time, it considers the time interval between 23 and 23:59
-    # as one full hour.
+  # Construct time interval for API -----------------------------------------
+  # round_date() is necessary here because although the AZMet API counts
+  # 23:59 as a valid time, it considers the time interval between 23 and 23:59
+  # as one full hour.
+  if (is.null(start)) {
+    time_interval <- "*"
+  } else {
     end_rounded <- lubridate::round_date(end_parsed, "hour")
     start_rounded <- lubridate::round_date(start_parsed, unit = "hour")
     d <- lubridate::as.period(end_rounded - start_rounded)
     time_interval <- lubridate::format_ISO8601(d)
-  } else {
-    time_interval <- "*"
   }
+
   #return list
   #URLencode isn't strictly necessary, but it'll make the correct error print
   #when a param is not properly specified instead of a generic "bad URL" error
