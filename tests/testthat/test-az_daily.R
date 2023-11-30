@@ -48,7 +48,7 @@ with_mock_dir("daily_mocks", {
   test_that("no data is returned as 0x0 tibble", {
     suppressWarnings(
       res_nodata <-
-        az_daily(start_date = "2100-01-01", end_date = "2100-01-02")
+        az_daily(start_date = "1980-01-01", end_date = "1980-01-02")
     )
     expect_true(nrow(res_nodata) == 0)
     expect_s3_class(res_nodata, "tbl_df")

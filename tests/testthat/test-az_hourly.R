@@ -1,18 +1,15 @@
-options(httptest2.verbose = TRUE)
+# options(httptest2.verbose = TRUE)
 library(lubridate)
-# dt <-
-#   (lubridate::now() - days(1)) %>%
-#   floor_date("hour") %>%
-#   format("%Y-%m-%d %H")
+
 dt <- "2022-09-28 12"
-# skip_if_offline()
-# skip_if_not(ping_service())
-latest_hour <- lubridate::floor_date(lubridate::now(tzone = "America/Phoenix"), "hour")
+latest_hour <- floor_date(now(tzone = "America/Phoenix"), "hour") - hours(1)
 latest_hour_f <- format(latest_hour, "%Y-%m-%d %H:%M")
-dt_start <- latest_hour - lubridate::hours(2)
+dt_start <- latest_hour - hours(2)
 dt_start_f <- format(dt_start, "%Y-%m-%d %H:%M")
 
 
+# skip_if_offline()
+# skip_if_not(ping_service())
 with_mock_dir("hourly_mocks", {
 
   test_that("start_date_time works as expected", {
@@ -44,7 +41,7 @@ with_mock_dir("hourly_mocks", {
 
   test_that("no data is returned as 0x0 tibble", {
     res_nodata <-
-      suppressWarnings(az_hourly(start_date_time = "2100-01-01 00", end_date_time = "2100-01-02 00"))
+      suppressWarnings(az_hourly(start_date_time = "1980-01-01 00", end_date_time = "1980-01-02 00"))
     expect_true(nrow(res_nodata) == 0)
     expect_s3_class(res_nodata, "tbl_df")
   })
@@ -67,8 +64,9 @@ with_mock_dir("hourly_mocks", {
         )
     }, glue::glue("Querying data from {latest_hour_f}"))
 
-    expect_equal(nrow(null_null), 1)
-    expect_equal(null_null$date_datetime, latest_hour)
+    # sometimes two rows are returned if current hour is already on API
+    expect_lt(nrow(null_null), 3)
+    expect_in(latest_hour, null_null$date_datetime)
   })
 
   test_that("end=NULL works as expected", {
@@ -78,7 +76,7 @@ with_mock_dir("hourly_mocks", {
           station_id = "az01",
           start_date_time = dt_start
         )
-    }, glue::glue("Querying data from {dt_start_f} through {latest_hour_f}"))
+    }, glue::glue("Querying data since {dt_start_f} through {latest_hour_f}"))
     expect_equal(datetime_null$date_datetime, seq(dt_start, latest_hour, by = "hour"))
   })
 
@@ -93,7 +91,7 @@ with_mock_dir("hourly_mocks", {
             start_date_time = start_input
           )
       },
-      glue::glue("Querying data from {start_input} 01:00 through {latest_hour_f}")
+      glue::glue("Querying data since {start_input} 01:00 through {latest_hour_f}")
     )
     expect_equal(min(date_null$date_datetime), start_actual)
   })

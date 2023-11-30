@@ -150,7 +150,7 @@ test_that("messages and warnings are correct", {
 
 test_that("start and end has to be earlier than now", {
   expect_error(
-    parse_params(1, start = format(lubridate::now(), "%Y-%m-%d %H"), end = NULL, hour = TRUE),
+    parse_params(1, start = format(lubridate::now() + lubridate::hours(2), "%Y-%m-%d %H") , end = NULL, hour = TRUE),
     "Please supply a `start_date_time` earlier than now."
   )
   expect_error(
