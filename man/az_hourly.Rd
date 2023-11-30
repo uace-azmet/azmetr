@@ -36,7 +36,8 @@ For a list of weather stations and their locations see see \link{station_info}.
 }
 \details{
 If neither \code{start_date_time} nor \code{end_date_time} are supplied, the
-most recent day of data will be returned.  If only \code{start_date_time} is
+hour or two of data will be returned (depending on whether the current
+hour's data has reached the API yet).  If only \code{start_date_time} is
 supplied, then \code{end_date_time} defaults to the current time.  Supplying
 only \code{end_date_time} will result in an error.
 }

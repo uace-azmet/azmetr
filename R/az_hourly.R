@@ -17,7 +17,8 @@
 #'   supplied, data will be requested through the *end* of that day (23:59:59).
 #'   Defaults to the current date and time if left blank and `start_date_time` is specified.
 #' @details If neither `start_date_time` nor `end_date_time` are supplied, the
-#'   most recent day of data will be returned.  If only `start_date_time` is
+#'   hour or two of data will be returned (depending on whether the current
+#'   hour's data has reached the API yet).  If only `start_date_time` is
 #'   supplied, then `end_date_time` defaults to the current time.  Supplying
 #'   only `end_date_time` will result in an error.
 #' @note If `station_id` is supplied as a vector, multiple successive calls to
