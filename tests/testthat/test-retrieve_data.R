@@ -1,6 +1,5 @@
-with_mock_dir("bad_station", {
+with_mock_dir("retrieve_data_mocks", {
   test_that("bad station IDs error", {
-
     expect_error(
       retrieve_data(
         station_id = "bz01",
@@ -9,11 +8,8 @@ with_mock_dir("bad_station", {
         endpoint = "daily"
       ), "Station requested is not found.")
   })
-})
 
-with_mock_dir("bad_start", {
   test_that("bad dates error", {
-
     expect_error(
       retrieve_data(
         station_id = "az01",
@@ -23,9 +19,6 @@ with_mock_dir("bad_start", {
       ),
       "Start date time must be in a valid date time in formatted as YYYY-MM-DDTHH:MM.")
   })
-})
-
-with_mock_dir("bad_interval", {
 
   test_that("bad time interval errors", {
     expect_error(
@@ -37,9 +30,6 @@ with_mock_dir("bad_interval", {
       )
     )
   })
-})
-
-with_mock_dir("bad_everything", {
 
   test_that("multiple errors work", {
     expect_error(
@@ -51,4 +41,5 @@ with_mock_dir("bad_everything", {
       )
     )
   })
+
 })

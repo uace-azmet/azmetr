@@ -8,9 +8,16 @@ dt_start <- latest_hour - hours(2)
 dt_start_f <- format(dt_start, "%Y-%m-%d %H:%M")
 
 
-# skip_if_offline()
-# skip_if_not(ping_service())
-with_mock_dir("hourly_mocks", {
+# API mocking with httptest2 no longer works with some of these tests. Now that
+# az_hourly() has been changed to return the latest hour of data, which is not
+# the default for the AZMet API, the API call will change every hour when
+# start_date_time = NULL (before start was just "*" and now it's a datetime).
+
+skip_if_offline()
+skip_if_not(ping_service())
+skip_on_cran()
+
+# with_mock_dir("hourly_mocks", {
 
   test_that("start_date_time works as expected", {
     res <- az_hourly(
@@ -96,6 +103,4 @@ with_mock_dir("hourly_mocks", {
     expect_equal(min(date_null$date_datetime), start_actual)
   })
 
-
-
-})
+# })
