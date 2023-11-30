@@ -135,21 +135,23 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
         }
       }
     )
+  #If hourly
   if (isTRUE(hour)) {
-    if (start_parsed > lubridate::floor_date(lubridate::now(tzone = tz), "hour")) {
+    if (!is.null(start) & start_parsed >= lubridate::floor_date(lubridate::now(tzone = tz), "hour")) {
       stop("Please supply a `start_date_time` earlier than now.")
     }
-    if (end_parsed > lubridate::floor_date(lubridate::now(tzone = tz), "hour")) {
+    if (!is.null(end) & end_parsed >= lubridate::floor_date(lubridate::now(tzone = tz), "hour")) {
       stop("Please supply an `end_date_time` earlier than now.")
     }
     if(end_parsed < start_parsed) {
       stop("`end_date_time` is before `start_date_time`!")
     }
+  #If daily
   } else {
-    if (start_parsed > lubridate::today()) {
+    if (!is.null(start) & start_parsed >= lubridate::today()) {
       stop("Please supply a `start_date` earlier than today.")
     }
-    if (end_parsed > lubridate::today()) {
+    if (!is.null(end) & end_parsed >= lubridate::today()) {
       stop("Please supply an `end_date` earlier than today.")
     }
     if(end_parsed < start_parsed) {
