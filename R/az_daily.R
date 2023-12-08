@@ -58,7 +58,7 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
   if (is.null(start_date) & is.null(end_date)) {
     message("Querying data from ", params$start)
   } else {
-    message("Querying data since ", params$start, " through ", params$end)
+    message("Querying data from ", params$start, " through ", params$end)
   }
 
   if (length(station_id) <= 1) {
