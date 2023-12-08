@@ -131,7 +131,7 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
   if (length(unique(out$datetime)) == 1) {
     message("Returning data from ", unique(out$datetime))
   } else {
-    message("Returning data since ", min(out$datetime), " through ", max(out$datetime))
+    message("Returning data from ", min(out$datetime), " through ", max(out$datetime))
   }
   return(out)
 }
