@@ -62,7 +62,7 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
   if (is.null(start_date_time) & is.null(end_date_time)) {
     message("Querying data from ", format(params$start, "%Y-%m-%d %H:%M"))
   } else {
-    message("Querying data since ", format(params$start, "%Y-%m-%d %H:%M"),
+    message("Querying data from ", format(params$start, "%Y-%m-%d %H:%M"),
             " through ", format(params$end, "%Y-%m-%d %H:%M"))
   }
 
