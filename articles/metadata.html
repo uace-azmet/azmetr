@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Using azmetr with the units package">
 <meta property="og:description" content="azmetr">
@@ -112,19 +112,21 @@
 <code class="sourceCode R"><span><span class="va">hourly</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="fu"><a href="../reference/az_hourly.html">az_hourly</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/az_add_units.html">az_add_units</a></span><span class="op">(</span><span class="op">)</span> </span>
+<span><span class="co">#&gt; Querying most recent hour of data</span></span>
+<span><span class="co">#&gt; Returning data from 2023-12-11 15:00 through 2023-12-11 16:00</span></span>
 <span></span>
 <span><span class="va">hourly</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"meta_"</span><span class="op">)</span>, <span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"date_"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 33</span></span></span>
-<span><span class="co">#&gt;   dwpt  dwptF eto_azmet eto_azmet_in heatstress_cottonC heatstress_cottonF</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494;">[°C]</span> <span style="color: #949494;">[degF]</span>      <span style="color: #949494;">[mm]</span>         <span style="color: #949494;">[in]</span>               <span style="color: #949494;">[°C]</span>             <span style="color: #949494;">[degF]</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  3     37.5         0            0               15.6               60.2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  3.2   37.8         0            0               13.4               56.1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  3     37.5         0            0               11.9               53.3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  3     37.5         0            0               10.6               51  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  3     37.5         0            0                9.9               49.8</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>  3.2   37.8         0            0                8.8               47.8</span></span>
+<span><span class="co">#&gt;    dwpt  dwptF eto_azmet eto_azmet_in heatstress_cottonC heatstress_cottonF</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494;">[°C]</span> <span style="color: #949494;">[degF]</span>      <span style="color: #949494;">[mm]</span>         <span style="color: #949494;">[in]</span>               <span style="color: #949494;">[°C]</span>             <span style="color: #949494;">[degF]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">10.3</span>   13.5       0.1         0.01               19.8               67.7</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  -<span style="color: #BB0000;">5.7</span>   21.8       0.3         0.01               18.5               65.2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">12.7</span>    9.1       0.2         0.01               15.4               59.7</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  -<span style="color: #BB0000;">7.1</span>   19.3       0.2         0.01               18.3               65  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  -<span style="color: #BB0000;">8.2</span>   17.3       0.2         0.01               17.6               63.7</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> -<span style="color: #BB0000;">18.7</span>   -<span style="color: #BB0000;">1.6</span>       0.1         0                  18.3               64.9</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 27 more variables: precip_total [mm], precip_total_in [in],</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   relative_humidity [%], sol_rad_total [MJ/m^2], sol_rad_total_ly [langleys],</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   temp_airC [°C], temp_airF [degF], temp_soil_10cmC [°C],</span></span></span>
@@ -151,20 +153,20 @@ package.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html" class="external-link">transmute</a></span><span class="op">(</span>wind_spd_kph <span class="op">=</span> <span class="fu"><a href="https://r-quantities.github.io/units/reference/units.html" class="external-link">set_units</a></span><span class="op">(</span><span class="va">wind_spd_mps</span>, <span class="st">"km/h"</span><span class="op">)</span>,</span>
 <span>            sol_rad_total <span class="op">=</span> <span class="fu"><a href="https://r-quantities.github.io/units/reference/units.html" class="external-link">set_units</a></span><span class="op">(</span><span class="va">sol_rad_total</span>, <span class="st">"W h m-2"</span><span class="op">)</span>,</span>
 <span>            temp_airK <span class="op">=</span> <span class="fu"><a href="https://r-quantities.github.io/units/reference/units.html" class="external-link">set_units</a></span><span class="op">(</span><span class="va">temp_airF</span>, <span class="st">"Kelvins"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 720 × 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 30 × 3</span></span></span>
 <span><span class="co">#&gt;    wind_spd_kph sol_rad_total temp_airK</span></span>
 <span><span class="co">#&gt;          <span style="color: #949494;">[km/h]</span>     <span style="color: #949494;">[h*W/m^2]</span>       <span style="color: #949494;">[K]</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>         1.8            0        293.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>         0.36           0        291.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>         0              0        289.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>         0              0        288.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>         1.08           0        287.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>         0.36           0        286.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>         0             16.7      286.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>         1.8          164.       290.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>         6.12         369.       295.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>         4.32         556.       299.</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 710 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>         5.76          183.      296.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>        11.2           303.      294.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>        10.4           183.      291.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>         9.36          250       294.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>         3.96          344.      293.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>         2.52          186.      294.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>         5.76          278.      292.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>        10.4           189.      290.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>         3.96          217.      294.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>         7.2           297.      294.</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 20 more rows</span></span></span></code></pre></div>
 <p>Second, it won’t allow you to do math where the units aren’t
 compatible.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -182,7 +184,7 @@ constants.</p>
 <span></span>
 <span><span class="co">## Must use:</span></span>
 <span><span class="va">hourly</span><span class="op">$</span><span class="va">wind_spd_mps</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://r-quantities.github.io/units/reference/units.html" class="external-link">set_units</a></span><span class="op">(</span><span class="fl">10</span>, <span class="st">"m/s"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 10.5 [m/s]</span></span></code></pre></div>
+<span><span class="co">#&gt; 11.6 [m/s]</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="plotting-with-units">Plotting with units<a class="anchor" aria-label="anchor" href="#plotting-with-units"></a>
