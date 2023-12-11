@@ -1,7 +1,3 @@
-# skip_if_offline()
-# skip_if_not(ping_service())
-last_date <- lubridate::today(tzone = "America/Phoenix") - 1
-date_start <- last_date - 2
 with_mock_dir("daily_mocks", {
 
   test_that("numeric station_ids work", {
@@ -14,7 +10,7 @@ with_mock_dir("daily_mocks", {
     end <- "2022-09-07"
     expect_message(
       res_start <- az_daily(station_id = 1, start_date = start, end_date = end),
-      "Querying data since 2022-09-01 through 2022-09-07"
+      "Querying data from 2022-09-01 through 2022-09-07"
     )
 
     expect_equal(nrow(res_start), 7)
@@ -59,32 +55,40 @@ with_mock_dir("daily_mocks", {
       az_daily(station_id = "az43", start_date = "2023-01-01", end_date = "2023-07-23")
     )
   })
-
-  test_that("start=NULL, end=NULL works correctly", {
-    expect_message(
-      null_null <- az_daily(station_id = "az01"),
-      glue::glue("Querying data from {last_date}")
-    )
-    expect_message(
-      null_null <- az_daily(station_id = "az01"),
-      glue::glue("Returning data from {last_date}")
-    )
-    expect_equal(null_null$datetime, last_date)
-  })
-
-  test_that("end=NULL works correctly", {
-    expect_message(
-      date_null <- az_daily(station_id = "az01", start_date = date_start),
-      glue::glue("Querying data since {date_start} through {last_date}")
-    )
-    expect_message(
-      date_null <- az_daily(station_id = "az01", start_date = date_start),
-      glue::glue("Returning data since {date_start} through {last_date}")
-    )
-    expect_equal(date_null$datetime, seq(date_start, last_date, by = "day"))
-  })
-
-  test_that("start=NULL works correctly", {
-    expect_error(az_daily(end = last_date), "If you supply `end_date`, you must also supply `start_date`")
-  })
 })
+
+skip_if_offline()
+skip_if_not(ping_service())
+skip_on_cran()
+last_date <- lubridate::today(tzone = "America/Phoenix") - 1
+date_start <- last_date - 2
+
+test_that("start=NULL, end=NULL works correctly", {
+  expect_message(
+    null_null <- az_daily(station_id = "az01"),
+    glue::glue("Querying data from {last_date}")
+  )
+  expect_message(
+    null_null <- az_daily(station_id = "az01"),
+    glue::glue("Returning data from {last_date}")
+  )
+  expect_equal(null_null$datetime, last_date)
+})
+
+test_that("end=NULL works correctly", {
+
+  expect_message(
+    date_null <- az_daily(station_id = "az01", start_date = date_start),
+    glue::glue("Querying data from {date_start} through {last_date}")
+  )
+  expect_message(
+    date_null <- az_daily(station_id = "az01", start_date = date_start),
+    glue::glue("Returning data from {date_start} through {last_date}")
+  )
+  expect_equal(date_null$datetime, seq(date_start, last_date, by = "day"))
+})
+
+test_that("start=NULL works correctly", {
+  expect_error(az_daily(end = last_date), "If you supply `end_date`, you must also supply `start_date`")
+})
+

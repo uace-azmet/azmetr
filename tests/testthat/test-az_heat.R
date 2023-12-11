@@ -66,15 +66,19 @@ with_mock_dir("heat_mocks", {
       "Returning data from 2022-01-01 through 2022-02-01"
     )
   })
+})
 
-  test_that("start_date specified, end_date=NULL works", {
-    expect_message(
-      az_heat(station_id = 1, start_date = last_month),
-      glue::glue("Querying data from {last_month} through {yesterday}")
-    )
-    expect_message(
-      az_heat(station_id = 1, start_date = last_month),
-      glue::glue("Returning data from {last_month} through {yesterday}")
-    )
-  })
+test_that("start_date specified, end_date=NULL works", {
+  skip_if_offline()
+  skip_if_not(ping_service())
+  skip_on_cran()
+
+  expect_message(
+    az_heat(station_id = 1, start_date = last_month),
+    glue::glue("Querying data from {last_month} through {yesterday}")
+  )
+  expect_message(
+    az_heat(station_id = 1, start_date = last_month),
+    glue::glue("Returning data from {last_month} through {yesterday}")
+  )
 })
