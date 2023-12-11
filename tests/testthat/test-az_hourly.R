@@ -84,7 +84,8 @@ skip_on_cran()
           start_date_time = dt_start
         )
     }, glue::glue("Querying data from {dt_start_f} through {latest_hour_f}"))
-    expect_equal(datetime_null$date_datetime, seq(dt_start, latest_hour, by = "hour"))
+    #current hour might not be on API yet
+    expect_in(seq(dt_start, latest_hour - hours(1), by = "hour"), datetime_null$date_datetime)
   })
 
   test_that("start as date only is rounded correctly", {
