@@ -2,7 +2,7 @@
 library(lubridate)
 
 dt <- "2022-09-28 12"
-latest_hour <- floor_date(now(tzone = "America/Phoenix"), "hour") - hours(1)
+latest_hour <- floor_date(now(tzone = "America/Phoenix"), "hour")
 latest_hour_f <- format(latest_hour, "%Y-%m-%d %H:%M")
 dt_start <- latest_hour - hours(2)
 dt_start_f <- format(dt_start, "%Y-%m-%d %H:%M")
@@ -69,7 +69,7 @@ skip_on_cran()
         az_hourly(
           station_id = "az01"
         )
-    }, glue::glue("Querying data from {latest_hour_f}"))
+    }, glue::glue("Querying most recent hour of data"))
 
     # sometimes two rows are returned if current hour is already on API
     expect_lt(nrow(null_null), 3)
@@ -83,7 +83,7 @@ skip_on_cran()
           station_id = "az01",
           start_date_time = dt_start
         )
-    }, glue::glue("Querying data since {dt_start_f} through {latest_hour_f}"))
+    }, glue::glue("Querying data from {dt_start_f} through {latest_hour_f}"))
     expect_equal(datetime_null$date_datetime, seq(dt_start, latest_hour, by = "hour"))
   })
 
@@ -98,7 +98,7 @@ skip_on_cran()
             start_date_time = start_input
           )
       },
-      glue::glue("Querying data since {start_input} 01:00 through {latest_hour_f}")
+      glue::glue("Querying data from {start_input} 01:00 through {latest_hour_f}")
     )
     expect_equal(min(date_null$date_datetime), start_actual)
   })

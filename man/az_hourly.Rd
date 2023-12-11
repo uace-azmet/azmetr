@@ -24,7 +24,8 @@ supplied, data will be requested starting at 01:00:00 of that day}
 YYYY-MM-DD HH format, in AZ time.  Will be rounded \strong{down} to the nearest
 hour if more precision is supplied.  If only a date (YYYY-MM-DD) is
 supplied, data will be requested through the \emph{end} of that day (23:59:59).
-Defaults to the current date and time if left blank and \code{start_date_time} is specified.}
+Defaults to the current date and time if left blank and \code{start_date_time}
+is specified.}
 }
 \value{
 a tibble. For units and other metadata, see
@@ -36,8 +37,7 @@ For a list of weather stations and their locations see see \link{station_info}.
 }
 \details{
 If neither \code{start_date_time} nor \code{end_date_time} are supplied, the
-hour or two of data will be returned (depending on whether the current
-hour's data has reached the API yet).  If only \code{start_date_time} is
+most recent hour of data will be returned.  If only \code{start_date_time} is
 supplied, then \code{end_date_time} defaults to the current time.  Supplying
 only \code{end_date_time} will result in an error.
 }

@@ -15,10 +15,10 @@
 #'   YYYY-MM-DD HH format, in AZ time.  Will be rounded **down** to the nearest
 #'   hour if more precision is supplied.  If only a date (YYYY-MM-DD) is
 #'   supplied, data will be requested through the *end* of that day (23:59:59).
-#'   Defaults to the current date and time if left blank and `start_date_time` is specified.
+#'   Defaults to the current date and time if left blank and `start_date_time`
+#'   is specified.
 #' @details If neither `start_date_time` nor `end_date_time` are supplied, the
-#'   hour or two of data will be returned (depending on whether the current
-#'   hour's data has reached the API yet).  If only `start_date_time` is
+#'   most recent hour of data will be returned.  If only `start_date_time` is
 #'   supplied, then `end_date_time` defaults to the current time.  Supplying
 #'   only `end_date_time` will result in an error.
 #' @note If `station_id` is supplied as a vector, multiple successive calls to
@@ -60,7 +60,7 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
 
   # Query API --------------------------------------------
   if (is.null(start_date_time) & is.null(end_date_time)) {
-    message("Querying data from ", format(params$start, "%Y-%m-%d %H:%M"))
+    message("Querying most recent hour of data")
   } else {
     message("Querying data from ", format(params$start, "%Y-%m-%d %H:%M"),
             " through ", format(params$end, "%Y-%m-%d %H:%M"))
@@ -84,6 +84,14 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
         }
       )
   }
+
+  # If most recent hour is queried, make sure only one hour is returned
+  if (is.null(start_date_time) & is.null(end_date_time)) {
+  out <-
+    out |>
+    dplyr::filter(.data$date_datetime == max(.data$date_datetime), .by = "meta_station_id")
+  }
+
   if(nrow(out) == 0) {
     warning("No data retrieved from API")
     #return 0x0 tibble
@@ -91,6 +99,7 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
   }
 
   #Check if any data is missing
+  #Note, this always "passes" when both start and end are NULL (because period("*") is NA)
   n_obs <- out %>%
     dplyr::summarise(n = dplyr::n(), .by = dplyr::all_of("meta_station_id")) %>%
     dplyr::filter(.data$n < as.numeric(lubridate::period(params$time_interval), "hour"))
@@ -157,7 +166,7 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
   if (length(unique(out$date_datetime)) == 1) {
     message("Returning data from ", format(unique(out$date_datetime), "%Y-%m-%d %H:%M"))
   } else {
-    message("Returning data since ", format(min(out$date_datetime), "%Y-%m-%d %H:%M"),
+    message("Returning data from ", format(min(out$date_datetime), "%Y-%m-%d %H:%M"),
             " through ", format(max(out$date_datetime), "%Y-%m-%d %H:%M"))
   }
   return(out)

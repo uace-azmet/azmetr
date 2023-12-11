@@ -48,7 +48,7 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
   if (is.null(end)) {
     if (isTRUE(hour)) {
       end_ <- format( #keep as character until later, for consistency
-        lubridate::floor_date(lubridate::now(tzone = tz), "hour") - lubridate::hours(1),
+        lubridate::floor_date(lubridate::now(tzone = tz), "hour"),
         "%Y-%m-%d %H:%M:%S"
       )
     } else {
