@@ -1,12 +1,12 @@
+
 test_that("all columns get assigned units that should", {
-  with_mock_dir("daily_default", {
-    res_daily <- az_daily()
-  })
-  with_mock_dir("hourly_default", {
-    res_hourly <- az_hourly()
-  })
-  with_mock_dir("heat_default", {
-    res_heat <- az_heat()
+  with_mock_dir("add_units_mocks", {
+    res_daily <-
+      az_daily(station_id = 1, start_date = "2023-11-27", end_date = "2023-11-29")
+    res_hourly <-
+      az_hourly(station_id = 1, start_date_time = "2023-11-28 01", end_date_time = "2023-11-28 12")
+    res_heat <-
+      az_heat(station_id = 1, end_date = "2023-11-28")
   })
   heat_units <- az_add_units(res_heat)
   hourly_units <- az_add_units(res_hourly)

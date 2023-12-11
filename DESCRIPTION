@@ -28,6 +28,7 @@ BugReports: https://github.com/uace-azmet/azmetr/issues
 Suggests: 
     covr,
     ggplot2,
+    glue,
     httptest2,
     knitr,
     rmarkdown,

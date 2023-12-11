@@ -13,6 +13,7 @@ retrieve_data <- function(station_id, start_f, time_interval,
   endpoint <- match.arg(endpoint)
 
   req <- httr2::request(base_url) %>%
+    httr2::req_method("GET") %>%
     httr2::req_url_path_append("observations", endpoint, station_id, start_f, time_interval) %>%
     httr2::req_headers("Accept" = "application/json") %>%
     #limit rate to 4 calls per second

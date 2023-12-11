@@ -21,7 +21,9 @@ precision is supplied.}
 
 \item{end_date}{A length 1 vector of class Date, POSIXct, or character in
 YYYY-MM-DD format.  Will be rounded \strong{down} to the nearest day if more
-precision is supplied.  Defaults to the current date if left blank.}
+precision is supplied.  Defaults to the current date if left blank. If only
+an \code{end_date} is supplied, then data will be cumulative from the start of
+the year of \code{end_date}.}
 }
 \value{
 a tibble. For units and other metadata, see
