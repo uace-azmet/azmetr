@@ -167,3 +167,12 @@ test_that("start and end has to be earlier than now", {
     "Please supply an `end_date` earlier than today."
   )
 })
+
+test_that("requests for historical data error", {
+  expect_error(
+    parse_params(1, start = "2020-12-31", end = "2021-01-02")
+  )
+  expect_error(
+    parse_params(1, start = "2020-01-01", end = "2020-12-31")
+  )
+})
