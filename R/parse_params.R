@@ -148,10 +148,10 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
     }
   #If daily
   } else {
-    if (!is.null(start) & start_parsed >= lubridate::today()) {
+    if (!is.null(start) & start_parsed >= lubridate::today(tzone = tz)) {
       stop("Please supply a `start_date` earlier than today.")
     }
-    if (!is.null(end) & end_parsed >= lubridate::today()) {
+    if (!is.null(end) & end_parsed >= lubridate::today(tzone = tz)) {
       stop("Please supply an `end_date` earlier than today.")
     }
     if(end_parsed < start_parsed) {
