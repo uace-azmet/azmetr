@@ -61,7 +61,8 @@ test_that("start=NULL, end=NULL works as expected", {
   }, glue::glue("Querying most recent hour of data"))
 
   expect_equal(nrow(null_null), 1)
-  expect_equal(null_null$date_datetime, latest_hour)
+  #could be that current hour hasn't hit API yet.
+  expect_in(null_null$date_datetime, c(latest_hour, latest_hour - hours(1)))
 })
 
 test_that("end=NULL works as expected", {
