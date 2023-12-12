@@ -29,7 +29,6 @@ Suggests:
     covr,
     ggplot2,
     glue,
-    httptest2,
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
