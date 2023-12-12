@@ -88,8 +88,12 @@ test_that("start_date = NULL, end_date specified works", {
     az_heat(station_id = 1, end_date = yesterday),
     glue::glue("Returning data from {lubridate::floor_date(yesterday, 'year')} through {yesterday}")
   )
+  expect_s3_class(
+    az_heat(end_date = "2022-02-01"),
+    "tbl_df"
+  )
   expect_message(
-    az_heat(station_id = 1, end_date = "2022-02-01"),
+    az_heat(end_date = "2022-02-01"),
     "Returning data from 2022-01-01 through 2022-02-01"
   )
 })

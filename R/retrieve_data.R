@@ -35,7 +35,10 @@ retrieve_data <- function(station_id, start_f, time_interval,
   }
 
   data_tidy <- data_raw$data %>%
-    purrr::map_df(tibble::as_tibble)
+    purrr::compact() %>%
+    purrr::map(purrr::compact) %>% #removes any columns that are NULL (i.e. no data)
+    purrr::map(tibble::as_tibble) %>%
+    purrr::list_rbind() # missing columns for individual sites will be all NAs
 
   attributes(data_tidy) <-
     append(attributes(data_tidy), list(
