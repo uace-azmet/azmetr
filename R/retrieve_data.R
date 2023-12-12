@@ -4,12 +4,14 @@
 #' @param start_f character; ISO formatted date time string
 #' @param time_interval character; ISO8601 formatted time interval string
 #' @param endpoint character; one of "daily", "hourly", or "hueto"
+#' @param print_call logical; when TRUE, prints the HTTP request to the AZMet API
 #'
 #' @return tibble
 #' @noRd
 #'
 retrieve_data <- function(station_id, start_f, time_interval,
-                          endpoint = c("daily", "hourly", "hueto")) {
+                          endpoint = c("daily", "hourly", "hueto"),
+                          print_call = getOption("azmet.print_api_call")) {
   endpoint <- match.arg(endpoint)
 
   req <- httr2::request(base_url) %>%
@@ -18,6 +20,10 @@ retrieve_data <- function(station_id, start_f, time_interval,
     httr2::req_headers("Accept" = "application/json") %>%
     #limit rate to 4 calls per second
     httr2::req_throttle(4 / 1)
+
+  if (isTRUE(print_call)) {
+    print(req)
+  }
 
   resp <- req %>%
     httr2::req_perform()
