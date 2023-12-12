@@ -1,4 +1,5 @@
 library(lubridate)
+tz <- "America/Phoenix"
 calc_end_date <- function(params) {
   (lubridate::ymd_hm(params$start_f) + lubridate::as.duration(params$time_interval)) %>%
     format("%Y-%m-%dT%H:%M")
@@ -98,7 +99,7 @@ test_that("dates are accepted in different formats", {
 
 test_that("end defaults to yesterday's date", {
   start <- "2022-10-01"
-  end <- today() - days(1)
+  end <- today(tzone = tz) - days(1)
   time_interval <- format_ISO8601(as.period(ymd(end) - ymd(start)))
   params <- parse_params(station_id = NULL, start = start, end = NULL)
   expect_equal(params$time_interval, time_interval)
@@ -143,26 +144,26 @@ test_that("invalid station_id error", {
 })
 
 test_that("messages and warnings are correct", {
-  expect_no_error(parse_params(1, start = lubridate::today()-days(1), end = NULL))
+  expect_no_error(parse_params(1, start = lubridate::today(tzone = tz)-days(1), end = NULL))
   expect_no_error(parse_params(1, start = NULL, end = NULL, hour = TRUE))
   expect_no_error(parse_params(1, start = "2023-10-23 23", end = "2023-10-23 23:59"))
 })
 
 test_that("start and end has to be earlier than now", {
   expect_error(
-    parse_params(1, start = format(lubridate::now() + lubridate::hours(2), "%Y-%m-%d %H") , end = NULL, hour = TRUE),
+    parse_params(1, start = format(lubridate::now(tzone = tz) + lubridate::hours(2), "%Y-%m-%d %H") , end = NULL, hour = TRUE),
     "Please supply a `start_date_time` earlier than now."
   )
   expect_error(
-    parse_params(1, start = NULL, end = format(lubridate::now(), "%Y-%m-%d %H"), hour = TRUE),
+    parse_params(1, start = NULL, end = format(lubridate::now(tzone = tz), "%Y-%m-%d %H"), hour = TRUE),
     "Please supply an `end_date_time` earlier than now."
   )
   expect_error(
-    parse_params(1, start = lubridate::today(), end = NULL),
+    parse_params(1, start = lubridate::today(tzone = tz), end = NULL),
     "Please supply a `start_date` earlier than today."
   )
   expect_error(
-    parse_params(1, start = NULL, end = lubridate::today()),
+    parse_params(1, start = NULL, end = lubridate::today(tzone = tz)),
     "Please supply an `end_date` earlier than today."
   )
 })
