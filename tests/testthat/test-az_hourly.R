@@ -59,9 +59,8 @@ test_that("start=NULL, end=NULL works as expected", {
       )
   }, glue::glue("Querying most recent hour of data"))
 
-  # sometimes two rows are returned if current hour is already on API
-  expect_lt(nrow(null_null), 3)
-  expect_in(latest_hour, null_null$date_datetime)
+  expect_equal(nrow(null_null), 1)
+  expect_equal(null_null$date_datetime, latest_hour)
 })
 
 test_that("end=NULL works as expected", {
