@@ -118,9 +118,8 @@ az_heat <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
           dplyr::if_else(x %in% c(-999, -9999, -99999, -7999, 999, 999.9, 9999), NA_real_, x))
     )
 
-  # Since output from API doesn't contain any information about dates, this is just an assumption
   message("Returning data from ", format(params$start, "%Y-%m-%d"),
-          " through ", format(params$end, "%Y-%m-%d"))
+          " through ", format(max(out$datetime_last), "%Y-%m-%d"))
 
   return(out)
 }
