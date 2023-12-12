@@ -73,7 +73,8 @@ az_add_units <- function(x) {
       "heat_units_45F_sum",
       "heat_units_9455F",
       "heat_units_50F_sum",
-      "heat_units_55F_sum"
+      "heat_units_55F_sum",
+      "heat_units_9455F_sum"
     )), ~units::set_units(., "degF")
     )) %>%
     dplyr::mutate(dplyr::across(dplyr::any_of(c(
@@ -87,14 +88,8 @@ az_add_units <- function(x) {
       dplyr::ends_with("_in_sum")
       ), ~units::set_units(., "in")
       )) %>%
-    dplyr::mutate(dplyr::across(dplyr::any_of(c(
-      "chill_hours_0C",
-      "chill_hours_20C",
-      "chill_hours_32F",
-      "chill_hours_45F",
-      "chill_hours_68F",
-      "chill_hours_7C"
-    )), ~units::set_units(., "hours")
+    dplyr::mutate(dplyr::across(
+      dplyr::starts_with("chill_hours"), ~units::set_units(., "hours")
     )) %>%
     dplyr::mutate(dplyr::across(dplyr::starts_with("vp_"),
                   ~units::set_units(., "kPa")

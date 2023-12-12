@@ -55,10 +55,16 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
     parse_params(station_id = station_id, start = start_date, end = end_date)
 
   # Query API  --------------------------------------------
+  if (is.null(start_date) & is.null(end_date)) {
+    message("Querying data from ", params$start)
+  } else {
+    message("Querying data from ", params$start, " through ", params$end)
+  }
+
   if (length(station_id) <= 1) {
     out <-
       retrieve_data(params$station_id,
-                    params$start,
+                    params$start_f,
                     params$time_interval,
                     endpoint = "daily")
   } else if (length(station_id) > 1) {
@@ -66,12 +72,15 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
       purrr::map_df(
         params$station_id,
         function(x) {
-          retrieve_data(x, params$start, params$time_interval, endpoint = "daily")
+          retrieve_data(x,
+                        params$start_f,
+                        params$time_interval,
+                        endpoint = "daily")
         }
       )
   }
 
-  if(nrow(out) == 0) {
+  if (nrow(out) == 0) {
     warning("No data retrieved from API")
     #return 0x0 tibble for type consistency
     return(tibble::tibble())
@@ -81,7 +90,9 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
   n_obs <- out %>%
     dplyr::summarise(n = dplyr::n(), .by = dplyr::all_of("meta_station_id")) %>%
     dplyr::filter(.data$n < as.numeric(lubridate::period(params$time_interval), "day") + 1)
-  if(nrow(n_obs) != 0) {
+  if (nrow(n_obs) != 0 |
+     # Also warn if the missing data is just at the end
+     lubridate::ymd(max(out$datetime), tz = "America/Phoenix") < params$end) {
     warning("Some requested data were unavailable")
   }
 
@@ -98,7 +109,7 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
     #convert NAs
     dplyr::mutate(
       dplyr::across(
-       tidyselect::where(is.numeric),
+        tidyselect::where(is.numeric),
         function(x)
           dplyr::if_else(x %in% c(-999, -9999, -99999, -7999, 999, 999.9, 9999), NA_real_, x)
       )
@@ -114,7 +125,13 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
       wind_2min_timestamp = lubridate::with_tz(
         lubridate::parse_date_time(.data$wind_2min_timestamp, orders = "ymdHMSz"),
         tzone = "America/Phoenix"
-        )
+      )
     )
+
+  if (length(unique(out$datetime)) == 1) {
+    message("Returning data from ", unique(out$datetime))
+  } else {
+    message("Returning data from ", min(out$datetime), " through ", max(out$datetime))
+  }
   return(out)
 }

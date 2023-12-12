@@ -14,7 +14,9 @@
 #'   precision is supplied.
 #' @param end_date A length 1 vector of class Date, POSIXct, or character in
 #'   YYYY-MM-DD format.  Will be rounded **down** to the nearest day if more
-#'   precision is supplied.  Defaults to the current date if left blank.
+#'   precision is supplied.  Defaults to the current date if left blank. If only
+#'   an `end_date` is supplied, then data will be cumulative from the start of
+#'   the year of `end_date`.
 #' @details Unlike [az_daily()], only one row of data per station is returned,
 #'   regardless of `start_date` and `end_date`. However, the data returned is
 #'   cumulative over the time period specified by `start_date` and `end_date`.
@@ -52,9 +54,15 @@ az_heat <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
 
   #TODO: document output columns or link to API docs if appropriate
   #TODO: check for valid station IDs
-  #TODO: allow end_date to be specified without start_date
   check_internet()
-
+  # If no start date supplied, default is Jan 1 of current year.
+  if (is.null(start_date)) {
+    if(is.null(end_date)) {
+      start_date <- lubridate::floor_date(lubridate::today(), "year")
+    } else {
+      start_date <- lubridate::floor_date(lubridate::ymd(end_date), "year")
+    }
+  }
   params <- parse_params(station_id, start = start_date, end = end_date)
   # always add a day to time_interval for heat endpoint to match how API works
   if (params$time_interval != "*") {
@@ -64,17 +72,24 @@ az_heat <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
   }
 
   # Query API --------------------------------------------
+
+  message("Querying data from ", format(params$start, "%Y-%m-%d"),
+          " through ", format(params$end, "%Y-%m-%d"))
+
   if (length(station_id) <= 1) {
     out <-
       retrieve_data(params$station_id,
-                    params$start,
+                    params$start_f,
                     params$time_interval,
                     endpoint = "hueto")
   } else if (length(station_id) > 1) {
     out <- purrr::map_df(
       params$station_id,
       function(x) {
-        retrieve_data(x, params$start, params$time_interval, endpoint = "hueto")
+        retrieve_data(x,
+                      params$start_f,
+                      params$time_interval,
+                      endpoint = "hueto")
       }
     )
   }
@@ -102,5 +117,10 @@ az_heat <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
         function(x)
           dplyr::if_else(x %in% c(-999, -9999, -99999, -7999, 999, 999.9, 9999), NA_real_, x))
     )
+
+  # Since output from API doesn't contain any information about dates, this is just an assumption
+  message("Returning data from ", format(params$start, "%Y-%m-%d"),
+          " through ", format(params$end, "%Y-%m-%d"))
+
   return(out)
 }
