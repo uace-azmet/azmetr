@@ -61,6 +61,7 @@
 <code><a href="../reference/az_hourly.html">az_hourly()</a></code> now returns data from the previous hour when <code>start_date_time</code> and <code>end_date_time</code> are not supplied rather than returning the previous day of hourly data.</li>
 <li>
 <code>azmet</code> is now much more verbose, printing messages about which data are requested and which data are returned.</li>
+<li>Requests for data before January 1, 2021 now error, since these data are not on the AZMet API (yet).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.1" id="azmetr-021">azmetr 0.2.1<a class="anchor" aria-label="anchor" href="#azmetr-021"></a></h2>
