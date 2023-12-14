@@ -51,14 +51,14 @@
 #' }
 #'
 az_heat <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
-
+  tz <- "America/Phoenix"
   #TODO: document output columns or link to API docs if appropriate
   #TODO: check for valid station IDs
   check_internet()
   # If no start date supplied, default is Jan 1 of current year.
   if (is.null(start_date)) {
     if(is.null(end_date)) {
-      start_date <- lubridate::floor_date(lubridate::today(), "year")
+      start_date <- lubridate::floor_date(lubridate::today(tzone = tz), "year")
     } else {
       start_date <- lubridate::floor_date(lubridate::ymd(end_date), "year")
     }

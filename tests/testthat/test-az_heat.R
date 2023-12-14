@@ -35,6 +35,7 @@ test_that("data is in correct format", {
 })
 
 test_that("no data is returned as 0x0 tibble", {
+  skip("not sure how to reproduce this now that requests for historical data error")
   res_nodata <-
     suppressWarnings(az_heat(start_date = "1980-01-01", end_date = "1980-01-02"))
 
