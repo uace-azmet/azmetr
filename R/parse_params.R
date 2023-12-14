@@ -143,7 +143,7 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
     if (!is.null(end) & end_parsed >= lubridate::floor_date(lubridate::now(tzone = tz), "hour")) {
       stop("Please supply an `end_date_time` earlier than now.")
     }
-    if(end_parsed < start_parsed) {
+    if (end_parsed < start_parsed) {
       stop("`end_date_time` is before `start_date_time`!")
     }
   #If daily
@@ -154,11 +154,14 @@ parse_params <- function(station_id, start, end, hour = FALSE) {
     if (!is.null(end) & end_parsed >= lubridate::today(tzone = tz)) {
       stop("Please supply an `end_date` earlier than today.")
     }
-    if(end_parsed < start_parsed) {
+    if (end_parsed < start_parsed) {
       stop("`end_date` is before `start_date`!")
     }
   }
-
+  earliest_date <- lubridate::ymd("2021-01-01", tz = tz)
+  if (end_parsed < earliest_date | start_parsed < earliest_date) {
+    stop("No data is available before ", earliest_date, ". Please choose a later date.")
+  }
   # Construct time interval for API -----------------------------------------
   # round_date() is necessary here because although the AZMet API counts
   # 23:59 as a valid time, it considers the time interval between 23 and 23:59
