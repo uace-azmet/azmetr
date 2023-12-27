@@ -61,6 +61,8 @@
 <code><a href="../reference/az_hourly.html">az_hourly()</a></code> now returns data from the previous hour when <code>start_date_time</code> and <code>end_date_time</code> are not supplied rather than returning the previous day of hourly data.</li>
 <li>
 <code>azmet</code> is now much more verbose, printing messages about which data are requested and which data are returned.</li>
+<li>Added an option <code>"azmet.print_api_call"</code> which, when set to <code>TRUE</code> prints the HTTP request sent to the API—for debugging purposes.</li>
+<li>Fixed a bug that caused an error when data was requested from all stations but some stations didn’t have data for all variables.</li>
 <li>Requests for data before January 1, 2021 now error, since these data are not on the AZMet API (yet).</li>
 </ul></div>
     <div class="section level2">
