@@ -4,6 +4,8 @@
 - Improved messages regarding what date/time ranges are being queried and returned by data retrieval functions.
 - `az_hourly()` now returns data from the previous hour when `start_date_time` and `end_date_time` are not supplied rather than returning the previous day of hourly data.
 - `azmet` is now much more verbose, printing messages about which data are requested and which data are returned.
+- Added an option `"azmet.print_api_call"` which, when set to `TRUE` prints the HTTP request sent to the API—for debugging purposes.
+- Fixed a bug that caused an error when data was requested from all stations but some stations didn't have data for all variables.
 - Requests for data before January 1, 2021 now error, since these data are not on the AZMet API (yet).
 
 # azmetr 0.2.1

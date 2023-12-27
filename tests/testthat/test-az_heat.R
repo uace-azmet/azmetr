@@ -17,6 +17,28 @@ test_that("az_heat() returns only one row per station even with dates", {
   expect_equal(nrow(res_start), 1)
 })
 
+test_that("start and end dates interpreted correctly", {
+  res <- az_heat(station_id = 1, start_date = "2023-10-10", end_date = "2023-10-30")
+
+  expect_equal(res$datetime_last, lubridate::ymd("2023-10-30"))
+
+
+  skip("not sure of desired behavior")
+  expect_error(az_heat(station_id = 1, end_date = "2022-09-01"), "`end_date` is before `start_date`!")
+})
+
+test_that("end_date can be specified without start_date", {
+  yesterday <- lubridate::today() - lubridate::days(1)
+  res_end_old <- az_heat(station_id = 1, end_date = "2022-09-27")
+  res_end_yesterday <- az_heat(station_id = 2, end_date = yesterday)
+
+  expect_s3_class(res_end_yesterday, "data.frame")
+  expect_equal(res_end_yesterday$datetime_last, yesterday)
+
+  skip("not sure of desired behavior here")
+  expect_equal(res_end_old$datetime_last, lubridate::ymd("2022-09-27"))
+})
+
 test_that("works with station_id as a vector", {
   res_2 <- az_heat(station_id = c(1, 2))
 
@@ -67,12 +89,15 @@ test_that("start_date = NULL, end_date specified works", {
     az_heat(station_id = 1, end_date = yesterday),
     glue::glue("Returning data from {lubridate::floor_date(yesterday, 'year')} through {yesterday}")
   )
+  expect_s3_class(
+    az_heat(end_date = "2022-02-01"),
+    "tbl_df"
+  )
   expect_message(
-    az_heat(station_id = 1, end_date = "2022-02-01"),
+    az_heat(end_date = "2022-02-01"),
     "Returning data from 2022-01-01 through 2022-02-01"
   )
 })
-
 
 test_that("start_date specified, end_date=NULL works", {
   yesterday <- lubridate::today(tzone = "America/Phoenix") - 1

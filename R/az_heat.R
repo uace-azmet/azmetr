@@ -64,6 +64,12 @@ az_heat <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
     }
   }
   params <- parse_params(station_id, start = start_date, end = end_date)
+  # always add a day to time_interval for heat endpoint to match how API works
+  if (params$time_interval != "*") {
+    params$time_interval <-
+      lubridate::format_ISO8601(lubridate::as.period(params$time_interval) +
+                                  lubridate::days(1))
+  }
 
   # Query API --------------------------------------------
 
@@ -112,9 +118,8 @@ az_heat <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
           dplyr::if_else(x %in% c(-999, -9999, -99999, -7999, 999, 999.9, 9999), NA_real_, x))
     )
 
-  # Since output from API doesn't contain any information about dates, this is just an assumption
   message("Returning data from ", format(params$start, "%Y-%m-%d"),
-          " through ", format(params$end, "%Y-%m-%d"))
+          " through ", format(max(out$datetime_last), "%Y-%m-%d"))
 
   return(out)
 }
