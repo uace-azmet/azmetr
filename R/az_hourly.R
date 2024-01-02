@@ -88,7 +88,7 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
   # If most recent hour is queried, make sure only one hour is returned
   if (is.null(start_date_time) & is.null(end_date_time)) {
   out <-
-    out |>
+    out %>%
     dplyr::filter(.data$date_datetime == max(.data$date_datetime), .by = "meta_station_id")
   }
 
