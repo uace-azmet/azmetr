@@ -1,4 +1,4 @@
-# azmetr (development version)
+# azmetr 0.3.0
 
 - `az_hourly()` now accepts dates for `start_date_time` and `end_date_time`
 - Improved messages regarding what date/time ranges are being queried and returned by data retrieval functions.

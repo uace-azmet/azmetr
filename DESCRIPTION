@@ -1,6 +1,6 @@
 Package: azmetr
 Title: Access Arizona Weather Data from the AZMet API
-Version: 0.2.1.9000
+Version: 0.3.0
 Authors@R: c(
     person("Jeremy", "Weiss", , "jlweiss@email.arizona.edu", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0003-3597-0712")),
