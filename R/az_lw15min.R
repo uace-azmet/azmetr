@@ -126,11 +126,11 @@ az_lw15min <- function(station_id = NULL, start_date_time = NULL, end_date_time 
   #}
 
   # Warn if the missing data are just at the end
-  #if (lubridate::ymd_hms(max(out$datetime), tz = tz) < params$end) {
-  #  warning(
-  #    "You requested data through ", params$end, " but only data through ", max(out$datetime), " were available."
-  #  )
-  #}
+  if (lubridate::ymd_hms(max(out$datetime), tz = tz) < params$end) {
+    warning(
+      "You requested data through ", params$end, " but only data through ", max(out$datetime), " were available."
+    )
+  }
 
 
   # Wrangle output -------------------------------------------------------------

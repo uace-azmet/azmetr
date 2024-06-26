@@ -220,7 +220,7 @@ parse_params <- function(station_id, start, end, hour = FALSE, real_time = FALSE
   if (is.null(start)) {
     time_interval <- "*"
   } else {
-    end_rounded <- lubridate::round_date(end_parsed, "hour")
+    end_rounded <- lubridate::round_date(end_parsed, unit = "hour")
     start_rounded <- lubridate::round_date(start_parsed, unit = "hour")
     d <- lubridate::as.period(end_rounded - start_rounded)
     time_interval <- lubridate::format_ISO8601(d)
