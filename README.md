@@ -38,6 +38,7 @@ az_15min()
 az_daily()
 az_hourly()
 az_heat()
+az_lw15min()
 ```
 
 ## Code of Conduct
