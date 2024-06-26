@@ -15,7 +15,7 @@ retrieve_data <-
     station_id,
     start_f,
     time_interval,
-    endpoint = c("daily", "hourly", "hueto", "15min"),
+    endpoint = c("15min", "daily", "hourly", "hueto", "lw15min"),
     print_call = getOption("azmet.print_api_call")
   ) {
 

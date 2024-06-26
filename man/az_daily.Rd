@@ -15,11 +15,11 @@ az_daily(station_id = NULL, start_date = NULL, end_date = NULL)
 digits (e.g. \code{station_id = c("az08", "az37")}) If left blank data for all
 stations will be returned}
 
-\item{start_date}{A length 1 vector of class Date, POSIXct, or character in
+\item{start_date}{A length-1 vector of class Date, POSIXct, or character in
 YYYY-MM-DD format.  Will be rounded \strong{down} to the nearest day if more
 precision is supplied.}
 
-\item{end_date}{A length 1 vector of class Date, POSIXct, or character in
+\item{end_date}{A length-1 vector of class Date, POSIXct, or character in
 YYYY-MM-DD format.  Will be rounded \strong{down} to the nearest day if more
 precision is supplied.  Defaults to the current date if left blank.}
 }
@@ -29,7 +29,7 @@ a tibble. For units and other metadata, see
 }
 \description{
 Retrieves daily data from the Arizona Meteorological Network API. For a list
-of weather stations and their locations see see \link{station_info}.
+of weather stations and their locations see \link{station_info}.
 }
 \details{
 If neither \code{start_date} nor \code{end_date} are supplied, the most recent
@@ -39,7 +39,7 @@ result in an error.
 }
 \note{
 If \code{station_id} is supplied as a vector, multiple successive calls to
-the API will be made.  You may find better performance getting data for all
+the API will be made. You may find better performance getting data for all
 the stations by leaving \code{station_id} blank and subsetting the resulting
 dataframe. Requests for data from all stations for more than 6-12 months
 may take considerable time.
@@ -60,5 +60,5 @@ az_daily(start_date = "2022-09-25", end_date = "2022-09-26")
 
 }
 \seealso{
-\code{\link[=az_hourly]{az_hourly()}}, \code{\link[=az_heat]{az_heat()}}
+\code{\link[=az_15min]{az_15min()}}, \code{\link[=az_heat]{az_heat()}}, \code{\link[=az_hourly]{az_hourly()}}, \code{\link[=az_lw15min]{az_lw15min()}}
 }

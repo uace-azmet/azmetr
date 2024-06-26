@@ -15,12 +15,12 @@ az_hourly(station_id = NULL, start_date_time = NULL, end_date_time = NULL)
 digits (e.g. \code{station_id = c("az08", "az37")}) If left blank data for all
 stations will be returned}
 
-\item{start_date_time}{A length 1 vector of class POSIXct or character in
+\item{start_date_time}{A length-1 vector of class POSIXct or character in
 YYYY-MM-DD HH format, in AZ time.  Will be rounded \strong{down} to the nearest
 hour if more precision is supplied. If only a date (YYYY-MM-DD) is
 supplied, data will be requested starting at 01:00:00 of that day}
 
-\item{end_date_time}{A length 1 vector of class POSIXct or character in
+\item{end_date_time}{A length-1 vector of class POSIXct or character in
 YYYY-MM-DD HH format, in AZ time.  Will be rounded \strong{down} to the nearest
 hour if more precision is supplied.  If only a date (YYYY-MM-DD) is
 supplied, data will be requested through the \emph{end} of that day (23:59:59).
@@ -33,7 +33,7 @@ a tibble. For units and other metadata, see
 }
 \description{
 Retrieves hourly weather data from the Arizona Meteorological Network API.
-For a list of weather stations and their locations see see \link{station_info}.
+For a list of weather stations and their locations see \link{station_info}.
 }
 \details{
 If neither \code{start_date_time} nor \code{end_date_time} are supplied, the
@@ -64,5 +64,5 @@ az_hourly(start_date_time = "2022-09-25 01", end_date = "2022-09-25 20")
 
 }
 \seealso{
-\code{\link[=az_daily]{az_daily()}}, \code{\link[=az_heat]{az_heat()}}
+\code{\link[=az_15min]{az_15min()}}, \code{\link[=az_daily]{az_daily()}}, \code{\link[=az_heat]{az_heat()}}, \code{\link[=az_lw15min]{az_lw15min()}}
 }

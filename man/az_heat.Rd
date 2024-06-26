@@ -15,11 +15,11 @@ az_heat(station_id = NULL, start_date = NULL, end_date = NULL)
 digits (e.g. \code{station_id = c("az08", "az37")}) If left blank data for all
 stations will be returned}
 
-\item{start_date}{A length 1 vector of class Date, POSIXct, or character in
+\item{start_date}{A length-1 vector of class Date, POSIXct, or character in
 YYYY-MM-DD format.  Will be rounded \strong{down} to the nearest day if more
 precision is supplied.}
 
-\item{end_date}{A length 1 vector of class Date, POSIXct, or character in
+\item{end_date}{A length-1 vector of class Date, POSIXct, or character in
 YYYY-MM-DD format.  Will be rounded \strong{down} to the nearest day if more
 precision is supplied.  Defaults to the current date if left blank. If only
 an \code{end_date} is supplied, then data will be cumulative from the start of
@@ -33,7 +33,7 @@ a tibble. For units and other metadata, see
 Retrieves accumulated heat units and reference evapotranspiration units from
 the Arizona Meteorological Network API.  By default, returned values are
 cumulative since January 1 of the current year. For a list of weather
-stations and their locations see see \link{station_info}.
+stations and their locations see \link{station_info}.
 }
 \details{
 Unlike \code{\link[=az_daily]{az_daily()}}, only one row of data per station is returned,
@@ -67,5 +67,5 @@ az_heat(end_date = paste(yr, "03", "31", sep = "-"))
 
 }
 \seealso{
-\code{\link[=az_daily]{az_daily()}}, \code{\link[=az_hourly]{az_hourly()}}
+\code{\link[=az_15min]{az_15min()}}, \code{\link[=az_daily]{az_daily()}}, \code{\link[=az_hourly]{az_hourly()}}, \code{\link[=az_lw15min]{az_lw15min()}}
 }
