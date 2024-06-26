@@ -31,7 +31,7 @@ a tibble. For units and other metadata, see
 }
 \description{
 Retrieves 15-minute data from the AZMet (Arizona Meteorological Network) API.
-For a list of weather stations and their locations see see \link{station_info}.
+For a list of weather stations and their locations see \link{station_info}.
 }
 \details{
 If neither \code{start_date_time} nor \code{end_date_time} are supplied, the
