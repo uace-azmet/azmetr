@@ -1,7 +1,7 @@
 #' Retrieve 15-minute Weather Data from AZMet
 #'
 #' Retrieves 15-minute data from the AZMet (Arizona Meteorological Network) API.
-#' For a list of weather stations and their locations see see [station_info].
+#' For a list of weather stations and their locations see [station_info].
 #'
 #' @param station_id Station ID can be supplied as numeric vector (e.g.
 #'   `station_id = c(8, 37)`) or as character vector with the prefix "az" and
