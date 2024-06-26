@@ -29,11 +29,12 @@ remotes::install_github("uace-azmet/azmetr")
 
 ## Example
 
-For the most recent day of data from all stations, run functions without any arguments:
+For the most recent data from all stations, run functions without any arguments:
 
 ``` r
 library(azmetr)
 
+az_15min()
 az_daily()
 az_hourly()
 az_heat()

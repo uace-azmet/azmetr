@@ -1,5 +1,7 @@
 # azmetr (development version)
 
+- Added function `az_15min()` for downloading 15-minute (a.k.a. "real-time") data, which now are available via the API
+
 # azmetr 0.3.0
 
 - `az_hourly()` now accepts dates for `start_date_time` and `end_date_time`
