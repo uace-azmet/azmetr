@@ -1,16 +1,16 @@
 #' Retrieve Daily Weather Data from AZMET
 #'
 #' Retrieves daily data from the Arizona Meteorological Network API. For a list
-#' of weather stations and their locations see see [station_info].
+#' of weather stations and their locations see [station_info].
 #'
 #' @param station_id station ID can be supplied as numeric vector (e.g.
 #'   `station_id = c(8, 37)`) or as character vector with the prefix "az" and 2
 #'   digits (e.g. `station_id = c("az08", "az37")`) If left blank data for all
 #'   stations will be returned
-#' @param start_date A length 1 vector of class Date, POSIXct, or character in
+#' @param start_date A length-1 vector of class Date, POSIXct, or character in
 #'   YYYY-MM-DD format.  Will be rounded **down** to the nearest day if more
 #'   precision is supplied.
-#' @param end_date A length 1 vector of class Date, POSIXct, or character in
+#' @param end_date A length-1 vector of class Date, POSIXct, or character in
 #'   YYYY-MM-DD format.  Will be rounded **down** to the nearest day if more
 #'   precision is supplied.  Defaults to the current date if left blank.
 #' @details If neither `start_date` nor `end_date` are supplied, the most recent
@@ -18,13 +18,13 @@
 #'   end date defaults to the current date.  Supplying only `end_date` will
 #'   result in an error.
 #' @note If `station_id` is supplied as a vector, multiple successive calls to
-#'   the API will be made.  You may find better performance getting data for all
+#'   the API will be made. You may find better performance getting data for all
 #'   the stations by leaving `station_id` blank and subsetting the resulting
 #'   dataframe. Requests for data from all stations for more than 6-12 months
 #'   may take considerable time.
 #' @return a tibble. For units and other metadata, see
 #'   <https://ag.arizona.edu/azmet/raw2003.htm>
-#' @seealso [az_hourly()], [az_heat()]
+#' @seealso [az_15min()], [az_heat()], [az_hourly()], [az_lw15min()]
 #' @source <https://ag.arizona.edu/azmet/>
 #'
 #' @importFrom rlang .data

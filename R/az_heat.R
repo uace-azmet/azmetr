@@ -3,16 +3,16 @@
 #' Retrieves accumulated heat units and reference evapotranspiration units from
 #' the Arizona Meteorological Network API.  By default, returned values are
 #' cumulative since January 1 of the current year. For a list of weather
-#' stations and their locations see see [station_info].
+#' stations and their locations see [station_info].
 #'
 #' @param station_id station ID can be supplied as numeric vector (e.g.
 #'   `station_id = c(8, 37)`) or as character vector with the prefix "az" and 2
 #'   digits (e.g. `station_id = c("az08", "az37")`) If left blank data for all
 #'   stations will be returned
-#' @param start_date A length 1 vector of class Date, POSIXct, or character in
+#' @param start_date A length-1 vector of class Date, POSIXct, or character in
 #'   YYYY-MM-DD format.  Will be rounded **down** to the nearest day if more
 #'   precision is supplied.
-#' @param end_date A length 1 vector of class Date, POSIXct, or character in
+#' @param end_date A length-1 vector of class Date, POSIXct, or character in
 #'   YYYY-MM-DD format.  Will be rounded **down** to the nearest day if more
 #'   precision is supplied.  Defaults to the current date if left blank. If only
 #'   an `end_date` is supplied, then data will be cumulative from the start of
@@ -26,7 +26,7 @@
 #'   dataframe.
 #' @return a tibble. For units and other metadata, see
 #'   <https://ag.arizona.edu/azmet/raw2003.htm>
-#' @seealso [az_daily()], [az_hourly()]
+#' @seealso [az_15min()], [az_daily()], [az_hourly()], [az_lw15min()]
 #' @source <https://ag.arizona.edu/azmet/>
 #' @importFrom rlang .data
 #' @export

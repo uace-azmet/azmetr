@@ -1,7 +1,8 @@
-#' Retrieve 15-minute Weather Data from AZMet
+#' Retrieve 15-minute Leaf Wetness Data from AZMet
 #'
-#' Retrieves 15-minute data from the AZMet (Arizona Meteorological Network) API.
-#' For a list of weather stations and their locations see [station_info].
+#' Retrieves 15-minute leaf-wetness data from the AZMet (Arizona Meteorological
+#' Network) API. Currently, these data only are available from stations in the
+#' Yuma area. For a list of stations and their locations see [station_info].
 #'
 #' @param station_id Station ID can be supplied as numeric vector (e.g.
 #'   `station_id = c(8, 37)`) or as character vector with the prefix "az" and
@@ -26,27 +27,27 @@
 #'   the AZMet API.
 #' @return a tibble. For units and other metadata, see
 #'   <https://azmet.arizona.edu/about>
-#' @seealso [az_daily()], [az_heat()], [az_hourly()], [az_lw15min()]
+#' @seealso [az_15min()], [az_daily()], [az_heat()], [az_hourly()]
 #' @source <https://azmet.arizona.edu/>
 #' @importFrom rlang .data
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' # Most recent 15-minute data for all stations:
-#' az_15min()
+#' # Most recent 15-minute leaf-wetness data for all stations:
+#' az_lw15min()
 #'
 #' # Specify stations:
-#' az_15min(station_id = c(1, 2))
-#' az_15min(station_id = c("az01", "az02"))
+#' az_lw15min(station_id = c(1, 2))
+#' az_lw15min(station_id = c("az01", "az02"))
 #'
 #' # Specify dates:
-#' az_15min(start_date_time = "2022-09-25 01:00:00")
-#' az_15min(start_date_time = "2022-09-25 01:00:00", end_date_time = "2022-09-25 07:00:00")
+#' az_lw15min(start_date_time = "2022-09-25 01:00:00")
+#' az_lw15min(start_date_time = "2022-09-25 01:00:00", end_date_time = "2022-09-25 07:00:00")
 #' }
 
 
-az_15min <- function(station_id = NULL, start_date_time = NULL, end_date_time = NULL) {
+az_lw15min <- function(station_id = NULL, start_date_time = NULL, end_date_time = NULL) {
 
   # TODO: check for valid station IDs
 
@@ -71,7 +72,7 @@ az_15min <- function(station_id = NULL, start_date_time = NULL, end_date_time = 
   # Query API ------------------------------------------------------------------
 
   if (is.null(start_date_time) & is.null(end_date_time)) {
-    message("Querying most recent date-time of 15-minute data ...")
+    message("Querying most recent date-time of leaf wetness 15-minute data ...")
   } else {
     message(
       "Querying data from ", format(params$start, "%Y-%m-%d %H:%M:%S")," through ", format(params$end, "%Y-%m-%d %H:%M:%S", " ...")
@@ -84,7 +85,7 @@ az_15min <- function(station_id = NULL, start_date_time = NULL, end_date_time = 
         params$station_id,
         params$start_f,
         params$time_interval,
-        endpoint = "15min"
+        endpoint = "lw15min"
       )
   } else if (length(station_id) > 1) {
     out <-
@@ -95,7 +96,7 @@ az_15min <- function(station_id = NULL, start_date_time = NULL, end_date_time = 
             x,
             params$start_f,
             params$time_interval,
-            endpoint = "15min"
+            endpoint = "lw15min"
           )
         }
       )
@@ -115,7 +116,7 @@ az_15min <- function(station_id = NULL, start_date_time = NULL, end_date_time = 
     return(tibble::tibble())
   }
 
-  # Check if any data is missing. Note, this always "passes" when both start and
+  # Check if any data are missing. Note, this always "passes" when both start and
   # end are NULL (because period("*") is NA)
   #n_obs <- out %>%
   #  dplyr::summarise(n = dplyr::n(), .by = dplyr::all_of("meta_station_id")) %>%
@@ -124,7 +125,7 @@ az_15min <- function(station_id = NULL, start_date_time = NULL, end_date_time = 
   #  warning("Some requested data were unavailable.")
   #}
 
-  # Warn if the missing data is just at the end
+  # Warn if the missing data are just at the end
   #if (lubridate::ymd_hms(max(out$datetime), tz = tz) < params$end) {
   #  warning(
   #    "You requested data through ", params$end, " but only data through ", max(out$datetime), " were available."

@@ -133,7 +133,7 @@ parse_params <- function(station_id, start, end, hour = FALSE, real_time = FALSE
   } else if (isTRUE(real_time)) { # 15min data
     parse_fun <- function(x, end = FALSE) {
       lubridate::parse_date_time(x, orders = c("YmdHMS", "YmdHM", "YmdH", "Ymd"), tz = tz) %>%
-        lubridate::floor_date(unit = "min")
+        lubridate::floor_date(unit = "secs")
     }
   } else { # Daily data
     parse_fun <- function(x, end = FALSE) {
