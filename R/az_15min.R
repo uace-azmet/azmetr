@@ -8,12 +8,10 @@
 #'   two digits (e.g. `station_id = c("az08", "az37")`). If left blank, data for
 #'   all stations will be returned.
 #' @param start_date_time A length 1 vector of class POSIXct or character in
-#'   YYYY-MM-DD HH format, in AZ time. Will be rounded **down** to the nearest
-#'   second if more precision is supplied. If only a date (YYYY-MM-DD) is
+#'   YYYY-MM-DD HH:MM:SS format, in AZ time. If only a date (YYYY-MM-DD) is
 #'   supplied, data will be requested starting at 00:00:01 of that day.
 #' @param end_date_time A length 1 vector of class POSIXct or character in
-#'   YYYY-MM-DD HH format, in AZ time. Will be rounded **down** to the
-#'   nearest hour if more precision is supplied. If only a date (YYYY-MM-DD) is
+#'   YYYY-MM-DD HH:MM:SS format, in AZ time. If only a date (YYYY-MM-DD) is
 #'   supplied, data will be requested through the *end* of that day (23:59:59).
 #'   Defaults to the current date and time if left blank and `start_date_time`
 #'   is specified.
@@ -24,11 +22,11 @@
 #' @note If `station_id` is supplied as a vector, multiple successive calls to
 #'   the API will be made. You may find better performance getting data for all
 #'   the stations by leaving `station_id` blank and subsetting the resulting
-#'   dataframe. Only the most recent 96 hours of 15-minute data are stored in
+#'   dataframe. Only the most recent 48 hours of 15-minute data are stored in
 #'   the AZMet API.
 #' @return a tibble. For units and other metadata, see
 #'   <https://azmet.arizona.edu/about>
-#' @seealso [az_daily()], [az_lw15daily()], [az_lw15min()], [az_heat()], [az_hourly()]
+#' @seealso [az_daily()], [az_lw15min()], [az_lwdaily()], [az_heat()], [az_hourly()]
 #' @source <https://azmet.arizona.edu/>
 #' @importFrom rlang .data
 #' @export
