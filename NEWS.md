@@ -1,5 +1,6 @@
 # azmetr (development version)
 
+- Added function `az_lw15min()` for downloading 15-minute (a.k.a. "real-time") leaf wetness data, which now are available via the API
 - Added function `az_15min()` for downloading 15-minute (a.k.a. "real-time") data, which now are available via the API
 
 # azmetr 0.3.0
