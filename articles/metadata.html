@@ -114,7 +114,7 @@
 <span>  <span class="fu"><a href="../reference/az_hourly.html">az_hourly</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/az_add_units.html">az_add_units</a></span><span class="op">(</span><span class="op">)</span> </span>
 <span><span class="co">#&gt; Querying most recent hour of data ...</span></span>
-<span><span class="co">#&gt; Returning data from 2024-06-26 14:00</span></span></code></pre></div>
+<span><span class="co">#&gt; Returning data from 2024-06-26 16:00</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">hourly</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
@@ -123,12 +123,12 @@
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 33</span></span></span>
 <span><span class="co">#&gt;   dwpt  dwptF eto_azmet eto_azmet_in heatstress_cottonC heatstress_cottonF</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494;">[°C]</span> <span style="color: #949494;">[degF]</span>      <span style="color: #949494;">[mm]</span>         <span style="color: #949494;">[in]</span>               <span style="color: #949494;">[°C]</span>             <span style="color: #949494;">[degF]</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 17.3   63.2       1           0.04               31.5               88.8</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 17     62.6       1           0.04               32.8               91  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 15.1   59.2       1           0.04               31.4               88.5</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 19.3   66.7       0.9         0.04               32.2               89.9</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 19.6   67.3       0.9         0.03               32.8               91  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 16.1   61         0.9         0.04               31.6               88.8</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 16.3   61.4       0.8         0.03               31.8               89.2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 16.8   62.3       0.8         0.03               33.1               91.6</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 14.9   58.7       0.8         0.03               31.6               88.9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 19.2   66.5       0.7         0.03               32.6               90.6</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 16.4   61.6       0.8         0.03               33.3               92  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 15.4   59.7       0.7         0.03               32                 89.7</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 27 more variables: precip_total [mm], precip_total_in [in],</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   relative_humidity [%], sol_rad_total [MJ/m^2], sol_rad_total_ly [langleys],</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   temp_airC [°C], temp_airF [degF], temp_soil_10cmC [°C],</span></span></span>
@@ -158,16 +158,16 @@ package.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 31 × 3</span></span></span>
 <span><span class="co">#&gt;    wind_spd_kph sol_rad_total temp_airK</span></span>
 <span><span class="co">#&gt;          <span style="color: #949494;">[km/h]</span>     <span style="color: #949494;">[h*W/m^2]</span>       <span style="color: #949494;">[K]</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>        16.2           928.      310.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>        17.6           894.      313.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>        22.0           917.      311.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>         9.72          931.      311.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>         5.04          925       312.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>         7.56          919.      311.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>        15.1           903.      313.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>        16.6           947.      308.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>         9.72          917.      312.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>        14.8           903.      313.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>        17.6           733.      311.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>        16.6           714.      314.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>        20.5           706.      311.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>        11.9           728.      312.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>         9.36          728.      315.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>        10.4           717.      312.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>        14.8           717.      314.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>        16.2           636.      308.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>        10.8           706.      314.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>        13.7           711.      314.</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 21 more rows</span></span></span></code></pre></div>
 <p>Second, it won’t allow you to do math where the units aren’t
 compatible.</p>
@@ -186,7 +186,7 @@ constants.</p>
 <span></span>
 <span><span class="co">## Must use:</span></span>
 <span><span class="va">hourly</span><span class="op">$</span><span class="va">wind_spd_mps</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://r-quantities.github.io/units/reference/units.html" class="external-link">set_units</a></span><span class="op">(</span><span class="fl">10</span>, <span class="st">"m/s"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 14.5 [m/s]</span></span></code></pre></div>
+<span><span class="co">#&gt; 14.9 [m/s]</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="plotting-with-units">Plotting with units<a class="anchor" aria-label="anchor" href="#plotting-with-units"></a>
