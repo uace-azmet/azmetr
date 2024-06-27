@@ -75,7 +75,7 @@ az_lw15min <- function(station_id = NULL, start_date_time = NULL, end_date_time 
     message("Querying most recent date-time of leaf wetness 15-minute data ...")
   } else {
     message(
-      "Querying data from ", format(params$start, "%Y-%m-%d %H:%M:%S")," through ", format(params$end, "%Y-%m-%d %H:%M:%S", " ...")
+      "Querying data from ", format(params$start, "%Y-%m-%d %H:%M:%S")," through ", format(params$end, "%Y-%m-%d %H:%M:%S"), " ..."
     )
   }
 
