@@ -15,7 +15,7 @@ retrieve_data <-
     station_id,
     start_f,
     time_interval,
-    endpoint = c("15min", "daily", "hourly", "hueto", "lw15min"),
+    endpoint = c("15min", "daily", "hourly", "hueto", "lw15min", "lwdaily"),
     print_call = getOption("azmet.print_api_call")
   ) {
 
@@ -43,9 +43,9 @@ retrieve_data <-
 
   data_tidy <- data_raw$data %>%
     purrr::compact() %>%
-    purrr::map(purrr::compact) %>% #removes any columns that are NULL (i.e. no data)
+    purrr::map(purrr::compact) %>% # Removes any columns that are NULL (i.e. no data)
     purrr::map(tibble::as_tibble) %>%
-    purrr::list_rbind() # missing columns for individual sites will be all NAs
+    purrr::list_rbind() # Missing columns for individual sites will be all NAs
 
   attributes(data_tidy) <-
     append(
@@ -54,5 +54,5 @@ retrieve_data <-
     )
   data_tidy
 
-  #TODO: Check for 0x0 tibble and error
+  # TODO: Check for 0x0 tibble and error
 }

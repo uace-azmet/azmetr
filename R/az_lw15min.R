@@ -27,7 +27,7 @@
 #'   the AZMet API.
 #' @return a tibble. For units and other metadata, see
 #'   <https://azmet.arizona.edu/about>
-#' @seealso [az_15min()], [az_daily()], [az_heat()], [az_hourly()]
+#' @seealso [az_15min()], [az_daily()], [az_heat()], [az_hourly()], [az_lwdaily()]
 #' @source <https://azmet.arizona.edu/>
 #' @importFrom rlang .data
 #' @export
@@ -111,7 +111,7 @@ az_lw15min <- function(station_id = NULL, start_date_time = NULL, end_date_time 
   }
 
   if (nrow(out) == 0) {
-    warning("No data retrieved from API.")
+    warning("No data retrieved from API")
     # Return 0x0 tibble
     return(tibble::tibble())
   }

@@ -26,7 +26,7 @@
 #'   dataframe.
 #' @return a tibble. For units and other metadata, see
 #'   <https://ag.arizona.edu/azmet/raw2003.htm>
-#' @seealso [az_15min()], [az_daily()], [az_hourly()], [az_lw15min()]
+#' @seealso [az_15min()], [az_daily()], [az_hourly()], [az_lw15min()], [az_lwdaily()]
 #' @source <https://ag.arizona.edu/azmet/>
 #' @importFrom rlang .data
 #' @export
@@ -52,8 +52,8 @@
 #'
 az_heat <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
   tz <- "America/Phoenix"
-  #TODO: document output columns or link to API docs if appropriate
-  #TODO: check for valid station IDs
+  # TODO: document output columns or link to API docs if appropriate
+  # TODO: check for valid station IDs
   check_internet()
   # If no start date supplied, default is Jan 1 of current year.
   if (is.null(start_date)) {
