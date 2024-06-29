@@ -1,7 +1,8 @@
 #' Retrieve Hourly Weather Data
 #'
 #' Retrieves hourly weather data from the Arizona Meteorological Network API.
-#' For a list of weather stations and their locations see [station_info].
+#' For a list of weather stations and their locations see [station_info], or
+#' visit https://azmet.arizona.edu/about.
 #'
 #' @param station_id station ID can be supplied as numeric vector (e.g.
 #'   `station_id = c(8, 37)`) or as character vector with the prefix "az" and 2
@@ -27,9 +28,9 @@
 #'   dataframe. Requests for data from all stations for more than 10-15 days may
 #'   take considerable time.
 #' @return a tibble. For units and other metadata, see
-#'   <https://ag.arizona.edu/azmet/raw2003.htm>
+#'   <https://azmet.arizona.edu/about>
 #' @seealso [az_15min()], [az_daily()], [az_heat()], [az_lw15min()], [az_lwdaily()]
-#' @source <https://ag.arizona.edu/azmet/>
+#' @source <https://azmet.arizona.edu/>
 #' @importFrom rlang .data
 #' @export
 #'
