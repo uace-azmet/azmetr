@@ -28,7 +28,7 @@
 #'   may take considerable time.
 #' @return a tibble. For units and other metadata, see
 #'   <https://azmet.arizona.edu/about>
-#' @seealso [az_15min()], [az_daily()], [az_hourly()], [az_heat()], [az_lw15min()]
+#' @seealso [az_15min()], [az_daily()], [az_heat()], [az_hourly()], [az_lw15min()]
 #' @source <https://azmet.arizona.edu/>
 #'
 #' @importFrom rlang .data
@@ -137,7 +137,7 @@ az_lwdaily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
       )
     )
 
-  if (length(unique(out$datetime)) == 1) {
+  if (length(unique(out$date)) == 1) {
     message("Returning data from ", unique(out$date))
   } else {
     message("Returning data from ", min(out$date), " through ", max(out$date))
