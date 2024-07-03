@@ -81,7 +81,7 @@ parse_params <- function(station_id, start, end, hour = FALSE, real_time = FALSE
     # For hourly, if only ymd is supplied to `end`, round up to end of day. On a
     # given day, hourly data go from 1:00:00 to 23:59:59. For 15min, if only ymd
     # is supplied to `end`, set to current Arizona time. On a given day, 15 min
-    # data go from 00:00:01 to 23:59:59
+    # data go from 00:00:00 to 23:59:59
     if (isTRUE(hour) & is_ymd(end)) { # Hourly data
       end_ <- paste(end, "23:59:59")
     } else if (isTRUE(real_time) & is_ymd(end)) { # 15min data
@@ -112,7 +112,7 @@ parse_params <- function(station_id, start, end, hour = FALSE, real_time = FALSE
     if (isTRUE(hour) & is_ymd(start)) { # Hourly data
       start_ <- paste(start, "01:00:00")
     } else if (isTRUE(real_time) & is_ymd(start)) { # 15min data
-      start_ <- paste(start, "00:00:01")
+      start_ <- paste(start, "00:00:00")
     } else { # Daily weather and leaf wetness data
       start_ <- start
     }
