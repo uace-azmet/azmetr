@@ -3,7 +3,7 @@
 #' @param station_id character or numeric vector
 #' @param start start date or date time
 #' @param end end date or date time
-#' @param hour logical; do `start` and `end` contain hours?
+#' @param hour logical; is request for hourly data?
 #' @param real_time logical; is request for real-time data?
 #'
 #' @note If `hour = TRUE`, `start` and `end` can be character or POSIXct and

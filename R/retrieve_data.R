@@ -3,7 +3,7 @@
 #' @param station_id character; in the format of "az01"
 #' @param start_f character; ISO formatted date time string
 #' @param time_interval character; ISO8601 formatted time interval string
-#' @param endpoint character; one of "daily", "hourly", "hueto", or "fifteen"
+#' @param endpoint character; one of "15min", "daily", "hourly", "hueto", "lw15min", or "lwdaily"
 #' @param print_call logical; when TRUE, prints the HTTP request to the AZMet API
 #'
 #' @return tibble
