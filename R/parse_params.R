@@ -220,12 +220,26 @@ parse_params <- function(station_id, start, end, hour = FALSE, real_time = FALSE
   # as one full hour.
   if (is.null(start)) {
     time_interval <- "*"
-  } else {
+  } else if (real_time == FALSE) {
     end_rounded <- lubridate::round_date(end_parsed, unit = "hour")
     start_rounded <- lubridate::round_date(start_parsed, unit = "hour")
     d <- lubridate::as.period(end_rounded - start_rounded)
     time_interval <- lubridate::format_ISO8601(d)
+  } else { # real_time == TRUE
+    end_rounded <- lubridate::round_date(end_parsed, unit = "minute")
+    start_rounded <- lubridate::round_date(start_parsed, unit = "minute")
+    d <- lubridate::as.period(end_parsed - start_parsed)
+    time_interval <- lubridate::format_ISO8601(d)
   }
+
+  #if (is.null(start)) {
+  #  time_interval <- "*"
+  #} else {
+  #  end_rounded <- lubridate::round_date(end_parsed, unit = "hour")
+  #  start_rounded <- lubridate::round_date(start_parsed, unit = "hour")
+  #  d <- lubridate::as.period(end_rounded - start_rounded)
+  #  time_interval <- lubridate::format_ISO8601(d)
+  #}
 
   # Return list
 
