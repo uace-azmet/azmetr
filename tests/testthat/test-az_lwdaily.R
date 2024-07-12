@@ -40,10 +40,10 @@ test_that("NAs converted correctly", {
 
 test_that("no data is returned as 0x0 tibble", {
   skip("Not sure how to reproduce this anymore now that these dates error")
-  suppressWarnings(
-    res_nodata <-
+  res_nodata <-
+    suppressWarnings(
       az_lwdaily(start_date = "1980-01-01", end_date = "1980-01-02")
-  )
+    )
   expect_true(nrow(res_nodata) == 0)
   expect_s3_class(res_nodata, "tbl_df")
 })
