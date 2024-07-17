@@ -1,4 +1,4 @@
-# azmetr (development version)
+# azmetr 0.4.0
 
 - Added function `az_lwdaily()` for downloading daily leaf wetness data, which now are available via the API
 - Added function `az_lw15min()` for downloading 15-minute (a.k.a. "real-time") leaf wetness data, which now are available via the API
