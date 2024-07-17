@@ -36,9 +36,10 @@ library(azmetr)
 
 az_15min()
 az_daily()
-az_hourly()
 az_heat()
+az_hourly()
 az_lw15min()
+az_lwdaily()
 ```
 
 ## Code of Conduct
