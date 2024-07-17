@@ -25,7 +25,7 @@
 #'   the API will be made.  You may find better performance getting data for all
 #'   the stations by leaving `station_id` blank and subsetting the resulting
 #'   dataframe.
-#' @return a tibble. For units and other metadata, see
+#' @return A tibble. For units and other metadata, see
 #'   <https://azmet.arizona.edu/about>
 #' @seealso [az_15min()], [az_daily()], [az_hourly()], [az_lw15min()], [az_lwdaily()]
 #' @source <https://azmet.arizona.edu/>

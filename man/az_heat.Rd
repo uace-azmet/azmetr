@@ -4,7 +4,7 @@
 \alias{az_heat}
 \title{Retrieve Accumulated Heat Units and Evapotranspiration}
 \source{
-\url{https://ag.arizona.edu/azmet/}
+\url{https://azmet.arizona.edu/}
 }
 \usage{
 az_heat(station_id = NULL, start_date = NULL, end_date = NULL)
@@ -26,14 +26,15 @@ an \code{end_date} is supplied, then data will be cumulative from the start of
 the year of \code{end_date}.}
 }
 \value{
-a tibble. For units and other metadata, see
-\url{https://ag.arizona.edu/azmet/raw2003.htm}
+A tibble. For units and other metadata, see
+\url{https://azmet.arizona.edu/about}
 }
 \description{
 Retrieves accumulated heat units and reference evapotranspiration units from
-the Arizona Meteorological Network API.  By default, returned values are
+the Arizona Meteorological Network API. By default, returned values are
 cumulative since January 1 of the current year. For a list of weather
-stations and their locations see \link{station_info}.
+stations and their locations see \link{station_info}, or visit
+https://azmet.arizona.edu/about.
 }
 \details{
 Unlike \code{\link[=az_daily]{az_daily()}}, only one row of data per station is returned,
@@ -67,5 +68,5 @@ az_heat(end_date = paste(yr, "03", "31", sep = "-"))
 
 }
 \seealso{
-\code{\link[=az_15min]{az_15min()}}, \code{\link[=az_daily]{az_daily()}}, \code{\link[=az_hourly]{az_hourly()}}, \code{\link[=az_lw15min]{az_lw15min()}}
+\code{\link[=az_15min]{az_15min()}}, \code{\link[=az_daily]{az_daily()}}, \code{\link[=az_hourly]{az_hourly()}}, \code{\link[=az_lw15min]{az_lw15min()}}, \code{\link[=az_lwdaily]{az_lwdaily()}}
 }

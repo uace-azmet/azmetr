@@ -27,7 +27,7 @@
 #'   the stations by leaving `station_id` blank and subsetting the resulting
 #'   dataframe. Requests for data from all stations for more than 10-15 days may
 #'   take considerable time.
-#' @return a tibble. For units and other metadata, see
+#' @return A tibble. For units and other metadata, see
 #'   <https://azmet.arizona.edu/about>
 #' @seealso [az_15min()], [az_daily()], [az_heat()], [az_lw15min()], [az_lwdaily()]
 #' @source <https://azmet.arizona.edu/>

@@ -17,7 +17,7 @@
 #'   Defaults to the current date and time if left blank and `start_date_time`
 #'   is specified.
 #' @details If neither `start_date_time` nor `end_date_time` are supplied, the
-#'   most recent date-time of data will be returned. If only `start_date_time`
+#'   most recent datetime of data will be returned. If only `start_date_time`
 #'   is supplied, then `end_date_time` defaults to the current time. Supplying
 #'   only `end_date_time` will result in an error.
 #' @note If `station_id` is supplied as a vector, multiple successive calls to
@@ -25,7 +25,7 @@
 #'   the stations by leaving `station_id` blank and subsetting the resulting
 #'   dataframe. Only the most recent 48 hours of 15-minute data are stored in
 #'   the AZMet API.
-#' @return a tibble. For units and other metadata, see
+#' @return A tibble. For units and other metadata, see
 #'   <https://azmet.arizona.edu/about>
 #' @seealso [az_daily()], [az_heat()], [az_hourly()], [az_lw15min()], [az_lwdaily()]
 #' @source <https://azmet.arizona.edu/>

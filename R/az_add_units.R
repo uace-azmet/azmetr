@@ -3,9 +3,9 @@
 #' Assigns correct units to the output of `az_hourly()`, `az_daily()`, and
 #' `az_heat()` using the `units` package.
 #'
-#' @param x a tibble output by [az_hourly()], [az_daily()], or [az_heat()]
+#' @param x A tibble output by [az_hourly()], [az_daily()], or [az_heat()]
 #'
-#' @return a tibble with columns of class "units"
+#' @return A tibble with columns of class "units"
 #' @export
 #'
 #' @examples

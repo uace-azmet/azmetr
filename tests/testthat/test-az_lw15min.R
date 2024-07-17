@@ -36,7 +36,7 @@ test_that("data is in correct format", {
       )
     )
   expect_type(res_default$meta_station_name, "character")
-  expect_type(res_default$precip_total_mm, "double")
+  expect_type(res_default$temp_wetbulb_meanC, "double")
   expect_s3_class(res_default$datetime, "POSIXct")
 })
 
@@ -54,7 +54,7 @@ test_that("requests with 23:59:59 work", {
   h <-
     suppressWarnings(
       az_lw15min(
-        station_id = "az01",
+        station_id = "az02",
         start_date_time = paste0(lubridate::today(tzone = "America/Phoenix") - 1, " 23:00"),
         end_date_time = paste0(lubridate::today(tzone = "America/Phoenix") - 1, " 23:59")
       )
@@ -67,10 +67,10 @@ test_that("start=NULL, end=NULL works as expected", {
     null_null <-
       suppressWarnings(
         az_lw15min(
-          station_id = "az01"
+          station_id = "az02"
         )
       )
-  }, glue::glue("Querying most recent datetime of 15-minute data ..."))
+  }, glue::glue("Querying most recent datetime of leaf wetness 15-minute data ..."))
   expect_equal(nrow(null_null), 1)
 })
 
@@ -92,7 +92,7 @@ test_that("start as date only is rounded correctly", {
   start_ymd <-
     suppressWarnings(
       az_lw15min(
-        station_id = "az01",
+        station_id = "az02",
         start_date_time = start_input,
         end_date_time = end_hour
       )

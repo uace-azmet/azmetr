@@ -58,7 +58,7 @@ test_that("start=NULL, end=NULL works as expected", {
       az_hourly(
         station_id = "az01"
       )
-  }, glue::glue("Querying most recent hour of data"))
+  }, glue::glue("Querying most recent hour of data ..."))
 
   expect_equal(nrow(null_null), 1)
   #could be that current hour hasn't hit API yet.
@@ -101,4 +101,3 @@ test_that("start as date only is rounded correctly", {
   )
   expect_equal(min(date_null$date_datetime), start_actual)
 })
-
