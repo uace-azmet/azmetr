@@ -1,11 +1,12 @@
 #' Retrieve Hourly Weather Data
 #'
 #' Retrieves hourly weather data from the Arizona Meteorological Network API.
-#' For a list of weather stations and their locations see [station_info].
+#' For a list of weather stations and their locations see [station_info], or
+#' visit https://azmet.arizona.edu/about.
 #'
 #' @param station_id station ID can be supplied as numeric vector (e.g.
 #'   `station_id = c(8, 37)`) or as character vector with the prefix "az" and 2
-#'   digits (e.g. `station_id = c("az08", "az37")`) If left blank data for all
+#'   digits (e.g. `station_id = c("az08", "az37")`) If left blank, data for all
 #'   stations will be returned
 #' @param start_date_time A length-1 vector of class POSIXct or character in
 #'   YYYY-MM-DD HH format, in AZ time.  Will be rounded **down** to the nearest
@@ -26,10 +27,10 @@
 #'   the stations by leaving `station_id` blank and subsetting the resulting
 #'   dataframe. Requests for data from all stations for more than 10-15 days may
 #'   take considerable time.
-#' @return a tibble. For units and other metadata, see
-#'   <https://ag.arizona.edu/azmet/raw2003.htm>
-#' @seealso [az_15min()], [az_daily()], [az_heat()], [az_lw15min()]
-#' @source <https://ag.arizona.edu/azmet/>
+#' @return A tibble. For units and other metadata, see
+#'   <https://azmet.arizona.edu/about>
+#' @seealso [az_15min()], [az_daily()], [az_heat()], [az_lw15min()], [az_lwdaily()]
+#' @source <https://azmet.arizona.edu/>
 #' @importFrom rlang .data
 #' @export
 #'
@@ -49,7 +50,7 @@
 #'
 az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time = NULL) {
 
-  #TODO: check for valid station IDs
+  # TODO: check for valid station IDs
   check_internet()
   if(!is.null(end_date_time) & is.null(start_date_time)) {
     stop("If you supply `end_date_time`, you must also supply `start_date_time`")

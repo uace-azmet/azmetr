@@ -1,8 +1,9 @@
 #' Retrieve 15-minute Leaf Wetness Data from AZMet
 #'
 #' Retrieves 15-minute leaf-wetness data from the AZMet (Arizona Meteorological
-#' Network) API. Currently, these data only are available from stations in the
-#' Yuma area. For a list of stations and their locations see [station_info].
+#' Network) API. Currently, these data only are available from weather stations
+#' in the Yuma area. For a list of stations and their locations see
+#' [station_info], or visit https://azmet.arizona.edu/about.
 #'
 #' @param station_id Station ID can be supplied as numeric vector (e.g.
 #'   `station_id = c(8, 37)`) or as character vector with the prefix "az" and
@@ -17,7 +18,7 @@
 #'   Defaults to the current date and time if left blank and `start_date_time`
 #'   is specified.
 #' @details If neither `start_date_time` nor `end_date_time` are supplied, the
-#'   most recent date-time of data will be returned. If only `start_date_time`
+#'   most recent datetime of data will be returned. If only `start_date_time`
 #'   is supplied, then `end_date_time` defaults to the current time. Supplying
 #'   only `end_date_time` will result in an error.
 #' @note If `station_id` is supplied as a vector, multiple successive calls to
@@ -25,9 +26,9 @@
 #'   the stations by leaving `station_id` blank and subsetting the resulting
 #'   dataframe. Only the most recent 48 hours of 15-minute data are stored in
 #'   the AZMet API.
-#' @return a tibble. For units and other metadata, see
+#' @return A tibble. For units and other metadata, see
 #'   <https://azmet.arizona.edu/about>
-#' @seealso [az_15min()], [az_daily()], [az_heat()], [az_hourly()]
+#' @seealso [az_15min()], [az_daily()], [az_heat()], [az_hourly()], [az_lwdaily()]
 #' @source <https://azmet.arizona.edu/>
 #' @importFrom rlang .data
 #' @export
@@ -72,7 +73,7 @@ az_lw15min <- function(station_id = NULL, start_date_time = NULL, end_date_time 
   # Query API ------------------------------------------------------------------
 
   if (is.null(start_date_time) & is.null(end_date_time)) {
-    message("Querying most recent date-time of leaf wetness 15-minute data ...")
+    message("Querying most recent datetime of leaf wetness 15-minute data ...")
   } else {
     message(
       "Querying data from ", format(params$start, "%Y-%m-%d %H:%M:%S")," through ", format(params$end, "%Y-%m-%d %H:%M:%S"), " ..."
@@ -111,7 +112,7 @@ az_lw15min <- function(station_id = NULL, start_date_time = NULL, end_date_time 
   }
 
   if (nrow(out) == 0) {
-    warning("No data retrieved from API.")
+    warning("No data retrieved from API")
     # Return 0x0 tibble
     return(tibble::tibble())
   }

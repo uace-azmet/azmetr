@@ -7,10 +7,10 @@
 az_add_units(x)
 }
 \arguments{
-\item{x}{a tibble output by \code{\link[=az_hourly]{az_hourly()}}, \code{\link[=az_daily]{az_daily()}}, or \code{\link[=az_heat]{az_heat()}}}
+\item{x}{A tibble output by \code{\link[=az_hourly]{az_hourly()}}, \code{\link[=az_daily]{az_daily()}}, or \code{\link[=az_heat]{az_heat()}}}
 }
 \value{
-a tibble with columns of class "units"
+A tibble with columns of class "units"
 }
 \description{
 Assigns correct units to the output of \code{az_hourly()}, \code{az_daily()}, and

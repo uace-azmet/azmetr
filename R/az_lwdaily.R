@@ -1,13 +1,14 @@
-#' Retrieve Daily Weather Data from AZMET
+#' Retrieve Daily Leaf Wetness Data from AZMet
 #'
-#' Retrieves daily data from the Arizona Meteorological Network API. For a list
-#' of weather stations and their locations see [station_info], or visit
-#' https://azmet.arizona.edu/about.
+#' Retrieves daily leaf wetness data from the Arizona Meteorological Network
+#' API. Currently, these data only are available from weather stations in the
+#' Yuma area. For a list of stations and their locations see [station_info], or
+#' visit https://azmet.arizona.edu/about.
 #'
 #' @param station_id station ID can be supplied as numeric vector (e.g.
 #'   `station_id = c(8, 37)`) or as character vector with the prefix "az" and
-#'   two digits (e.g. `station_id = c("az08", "az37")`). If left blank, data for all
-#'   stations will be returned.
+#'   two digits (e.g. `station_id = c("az08", "az37")`). If left blank, data for
+#'   all stations will be returned.
 #' @param start_date A length-1 vector of class Date, POSIXct, or character in
 #'   YYYY-MM-DD format. Will be rounded **down** to the nearest day if more
 #'   precision is supplied. Defaults to the day before the current date (i.e.,
@@ -18,9 +19,8 @@
 #'   the most recent complete day) if left blank.
 #' @details If neither `start_date` nor `end_date` are supplied, the most recent
 #'   day of data will be returned. If only `start_date` is supplied, then the
-#'   end date defaults to the day before the current date (i.e.,
-#'   the most recent complete day). Supplying only `end_date` will
-#'   result in an error.
+#'   end date defaults to the day before the current date (i.e., the most recent
+#'   complete day). Supplying only `end_date` will result in an error.
 #' @note If `station_id` is supplied as a vector, multiple successive calls to
 #'   the API will be made. You may find better performance getting data for all
 #'   the stations by leaving `station_id` blank and subsetting the resulting
@@ -28,7 +28,7 @@
 #'   may take considerable time.
 #' @return A tibble. For units and other metadata, see
 #'   <https://azmet.arizona.edu/about>
-#' @seealso [az_15min()], [az_heat()], [az_hourly()], [az_lw15min()], [az_lwdaily()]
+#' @seealso [az_15min()], [az_daily()], [az_heat()], [az_hourly()], [az_lw15min()]
 #' @source <https://azmet.arizona.edu/>
 #'
 #' @importFrom rlang .data
@@ -37,25 +37,25 @@
 #' @examples
 #' \dontrun{
 #' # Most recent data for all stations:
-#' az_daily()
+#' az_lwdaily()
 #'
 #' # Specify stations:
-#' az_daily(station_id = c(1, 2))
-#' az_daily(station_id = c("az01", "az02"))
+#' az_lwdaily(station_id = c(1, 2))
+#' az_lwdaily(station_id = c("az01", "az02"))
 #'
 #' # Specify dates:
-#' az_daily(start_date = "2022-09-25")
-#' az_daily(start_date = "2022-09-25", end_date = "2022-09-26")
+#' az_lwdaily(start_date = "2022-09-25")
+#' az_lwdaily(start_date = "2022-09-25", end_date = "2022-09-26")
 #' }
 
 
-az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
+az_lwdaily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
 
   # TODO: check for valid station IDs
   check_internet()
 
   if(!is.null(end_date) & is.null(start_date)) {
-    stop("If you supply `end_date`, you must also supply `start_date`")
+    stop("If you supply `end_date`, you must also supply `start_date`.")
   }
 
   params <-
@@ -67,15 +67,13 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
       real_time = FALSE
     )
 
-  tz = "America/Phoenix"
-
 
   # Query API  -----------------------------------------------------------------
 
   if (is.null(start_date) & is.null(end_date)) {
-    message("Querying data from ", params$start)
+    message("Querying data from ", params$start, " ...")
   } else {
-    message("Querying data from ", params$start, " through ", params$end)
+    message("Querying data from ", params$start, " through ", params$end, " ...")
   }
 
   if (length(station_id) <= 1) {
@@ -84,7 +82,7 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
         params$station_id,
         params$start_f,
         params$time_interval,
-        endpoint = "daily"
+        endpoint = "lwdaily"
       )
   } else if (length(station_id) > 1) {
     out <-
@@ -95,7 +93,7 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
             x,
             params$start_f,
             params$time_interval,
-            endpoint = "daily"
+            endpoint = "lwdaily"
           )
         }
       )
@@ -113,7 +111,7 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
     dplyr::filter(.data$n < as.numeric(lubridate::period(params$time_interval), "day") + 1)
   if (nrow(n_obs) != 0 |
      # Also warn if the missing data is just at the end
-     lubridate::ymd(max(out$datetime), tz = tz) < params$end) {
+     lubridate::ymd(max(out$date)) < params$end) {
     warning("Some requested data were unavailable.")
   }
 
@@ -124,11 +122,12 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
     # Move metadata to beginning
     dplyr::select(dplyr::starts_with("meta_"), dplyr::everything()) %>%
     dplyr::mutate(dplyr::across(
-      c(-"meta_station_id", -"meta_station_name", -"datetime", -"wind_2min_timestamp"),
+      c(-"meta_station_id", -"meta_station_name", -"date", -"datetime"),
       as.numeric
     )) %>%
     dplyr::filter(.data$meta_station_id != "az99") %>%
-    dplyr::mutate(datetime = lubridate::ymd(.data$datetime)) %>%
+    dplyr::mutate(date = lubridate::ymd(.data$date)) %>%
+    dplyr::mutate(datetime = lubridate::ymd_hms(.data$datetime, tz = "America/Phoenix")) %>%
     # Convert NAs
     dplyr::mutate(
       dplyr::across(
@@ -136,25 +135,12 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
         function(x)
           dplyr::if_else(x %in% c(-999, -9999, -99999, -7999, 999, 999.9, 9999), NA_real_, x)
       )
-    ) %>%
-    dplyr::mutate(
-      wind_2min_timestamp = dplyr::if_else(
-        .data$wind_2min_timestamp == as.character(-99999),
-        NA_character_,
-        .data$wind_2min_timestamp
-      )
-    ) %>%
-    dplyr::mutate(
-      wind_2min_timestamp = lubridate::with_tz(
-        lubridate::parse_date_time(.data$wind_2min_timestamp, orders = "ymdHMSz"),
-        tzone = tz
-      )
     )
 
-  if (length(unique(out$datetime)) == 1) {
-    message("Returning data from ", unique(out$datetime))
+  if (length(unique(out$date)) == 1) {
+    message("Returning data from ", unique(out$date))
   } else {
-    message("Returning data from ", min(out$datetime), " through ", max(out$datetime))
+    message("Returning data from ", min(out$date), " through ", max(out$date))
   }
   return(out)
 }

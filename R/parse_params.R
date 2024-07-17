@@ -3,14 +3,14 @@
 #' @param station_id character or numeric vector
 #' @param start start date or date time
 #' @param end end date or date time
-#' @param hour logical; do `start` and `end` contain hours?
+#' @param hour logical; is request for hourly data?
 #' @param real_time logical; is request for real-time data?
 #'
 #' @note If `hour = TRUE`, `start` and `end` can be character or POSIXct and
-#'   will be rounded **down** to the nearest hour.  If character, then they must
+#'   will be rounded **down** to the nearest hour. If character, then they must
 #'   at least contain the hour (e.g. "2022-01-12 13" for 1pm on Jan 12, 2022).
 #'   If `hour = FALSE` then class Date is also accepted and values will be
-#'   rounded **down** to the nearest whole day.  Dates and times should be in
+#'   rounded **down** to the nearest whole day. Dates and times should be in
 #'   Arizona time.
 #'
 #' @return a list
@@ -59,18 +59,19 @@ parse_params <- function(station_id, start, end, hour = FALSE, real_time = FALSE
   # start_f/time_interval: what is actually passed to the API
   #########################################
 
+
   if (is.null(end)) {
     if (isTRUE(hour)) { # Hourly data
       end_ <- format( # Keep as character until later, for consistency
         lubridate::floor_date(lubridate::now(tzone = tz), "hour"),
         "%Y-%m-%d %H:%M:%S"
       )
-    } else if (isTRUE(real_time)) { # 15min data
+    } else if (isTRUE(real_time)) { # 15min data, both weather and leaf wetness
       end_ <- format( # Keep as character until later, for consistency
         lubridate::now(tzone = tz),
         "%Y-%m-%d %H:%M:%S"
       )
-    } else { # Daily data
+    } else { # Daily weather and leaf wetness data
       end_ <- format( # Keep as character until later, for consistency
         lubridate::today(tzone = tz) - lubridate::days(1),
         "%Y-%m-%d %H:%M:%S"
@@ -80,12 +81,12 @@ parse_params <- function(station_id, start, end, hour = FALSE, real_time = FALSE
     # For hourly, if only ymd is supplied to `end`, round up to end of day. On a
     # given day, hourly data go from 1:00:00 to 23:59:59. For 15min, if only ymd
     # is supplied to `end`, set to current Arizona time. On a given day, 15 min
-    # data go from 00:00:01 to 23:59:59
+    # data go from 00:00:00 to 23:59:59
     if (isTRUE(hour) & is_ymd(end)) { # Hourly data
       end_ <- paste(end, "23:59:59")
     } else if (isTRUE(real_time) & is_ymd(end)) { # 15min data
       end_ <- paste(end, format(lubridate::now(tzone = tz), "%H:%M:%S"))
-    } else { # Daily data
+    } else { # Daily weather data
       end_ <- end
     }
   }
@@ -101,7 +102,7 @@ parse_params <- function(station_id, start, end, hour = FALSE, real_time = FALSE
         lubridate::now(tzone = tz) - lubridate::minutes(15),
         "%Y-%m-%d %H:%M:%S"
       )
-    } else { # Daily data
+    } else { # Daily weather data
       start_ <- format( # Keep as character until later, for consistency
         lubridate::today(tzone = tz) - lubridate::days(1),
         "%Y-%m-%d"
@@ -111,8 +112,8 @@ parse_params <- function(station_id, start, end, hour = FALSE, real_time = FALSE
     if (isTRUE(hour) & is_ymd(start)) { # Hourly data
       start_ <- paste(start, "01:00:00")
     } else if (isTRUE(real_time) & is_ymd(start)) { # 15min data
-      start_ <- paste(start, "00:00:01")
-    } else { # Daily data
+      start_ <- paste(start, "00:00:00")
+    } else { # Daily weather and leaf wetness data
       start_ <- start
     }
   }
@@ -135,7 +136,7 @@ parse_params <- function(station_id, start, end, hour = FALSE, real_time = FALSE
       lubridate::parse_date_time(x, orders = c("YmdHMS", "YmdHM", "YmdH", "Ymd"), tz = tz) %>%
         lubridate::floor_date(unit = "secs")
     }
-  } else { # Daily data
+  } else { # Daily weather data
     parse_fun <- function(x, end = FALSE) {
       lubridate::parse_date_time(x, orders = c("Ymd", "YmdHMS", "YmdHM", "YmdH"), tz = tz) %>%
         lubridate::floor_date(unit = "day") %>%
@@ -193,7 +194,7 @@ parse_params <- function(station_id, start, end, hour = FALSE, real_time = FALSE
     if (end_parsed < start_parsed) {
       stop("`end_date_time` is before `start_date_time`!")
     }
-  } else { # Daily data
+  } else { # Daily weather and leaf wetness data
     if (!is.null(start) & start_parsed >= lubridate::today(tzone = tz)) {
       stop("Please supply a `start_date` earlier than today.")
     }
@@ -219,12 +220,26 @@ parse_params <- function(station_id, start, end, hour = FALSE, real_time = FALSE
   # as one full hour.
   if (is.null(start)) {
     time_interval <- "*"
-  } else {
+  } else if (real_time == FALSE) {
     end_rounded <- lubridate::round_date(end_parsed, unit = "hour")
     start_rounded <- lubridate::round_date(start_parsed, unit = "hour")
     d <- lubridate::as.period(end_rounded - start_rounded)
     time_interval <- lubridate::format_ISO8601(d)
+  } else { # real_time == TRUE
+    end_rounded <- lubridate::round_date(end_parsed, unit = "minute")
+    start_rounded <- lubridate::round_date(start_parsed, unit = "minute")
+    d <- lubridate::as.period(end_parsed - start_parsed)
+    time_interval <- lubridate::format_ISO8601(d)
   }
+
+  #if (is.null(start)) {
+  #  time_interval <- "*"
+  #} else {
+  #  end_rounded <- lubridate::round_date(end_parsed, unit = "hour")
+  #  start_rounded <- lubridate::round_date(start_parsed, unit = "hour")
+  #  d <- lubridate::as.period(end_rounded - start_rounded)
+  #  time_interval <- lubridate::format_ISO8601(d)
+  #}
 
   # Return list
 

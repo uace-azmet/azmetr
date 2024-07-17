@@ -1,9 +1,10 @@
 #' Retrieve Accumulated Heat Units and Evapotranspiration
 #'
 #' Retrieves accumulated heat units and reference evapotranspiration units from
-#' the Arizona Meteorological Network API.  By default, returned values are
+#' the Arizona Meteorological Network API. By default, returned values are
 #' cumulative since January 1 of the current year. For a list of weather
-#' stations and their locations see [station_info].
+#' stations and their locations see [station_info], or visit
+#' https://azmet.arizona.edu/about.
 #'
 #' @param station_id station ID can be supplied as numeric vector (e.g.
 #'   `station_id = c(8, 37)`) or as character vector with the prefix "az" and 2
@@ -24,10 +25,10 @@
 #'   the API will be made.  You may find better performance getting data for all
 #'   the stations by leaving `station_id` blank and subsetting the resulting
 #'   dataframe.
-#' @return a tibble. For units and other metadata, see
-#'   <https://ag.arizona.edu/azmet/raw2003.htm>
-#' @seealso [az_15min()], [az_daily()], [az_hourly()], [az_lw15min()]
-#' @source <https://ag.arizona.edu/azmet/>
+#' @return A tibble. For units and other metadata, see
+#'   <https://azmet.arizona.edu/about>
+#' @seealso [az_15min()], [az_daily()], [az_hourly()], [az_lw15min()], [az_lwdaily()]
+#' @source <https://azmet.arizona.edu/>
 #' @importFrom rlang .data
 #' @export
 #'
@@ -52,8 +53,8 @@
 #'
 az_heat <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
   tz <- "America/Phoenix"
-  #TODO: document output columns or link to API docs if appropriate
-  #TODO: check for valid station IDs
+  # TODO: document output columns or link to API docs if appropriate
+  # TODO: check for valid station IDs
   check_internet()
   # If no start date supplied, default is Jan 1 of current year.
   if (is.null(start_date)) {

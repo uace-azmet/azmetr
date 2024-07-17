@@ -26,17 +26,18 @@ Defaults to the current date and time if left blank and \code{start_date_time}
 is specified.}
 }
 \value{
-a tibble. For units and other metadata, see
+A tibble. For units and other metadata, see
 \url{https://azmet.arizona.edu/about}
 }
 \description{
 Retrieves 15-minute leaf-wetness data from the AZMet (Arizona Meteorological
-Network) API. Currently, these data only are available from stations in the
-Yuma area. For a list of stations and their locations see \link{station_info}.
+Network) API. Currently, these data only are available from weather stations
+in the Yuma area. For a list of stations and their locations see
+\link{station_info}, or visit https://azmet.arizona.edu/about.
 }
 \details{
 If neither \code{start_date_time} nor \code{end_date_time} are supplied, the
-most recent date-time of data will be returned. If only \code{start_date_time}
+most recent datetime of data will be returned. If only \code{start_date_time}
 is supplied, then \code{end_date_time} defaults to the current time. Supplying
 only \code{end_date_time} will result in an error.
 }
@@ -62,5 +63,5 @@ az_lw15min(start_date_time = "2022-09-25 01:00:00", end_date_time = "2022-09-25 
 }
 }
 \seealso{
-\code{\link[=az_15min]{az_15min()}}, \code{\link[=az_daily]{az_daily()}}, \code{\link[=az_heat]{az_heat()}}, \code{\link[=az_hourly]{az_hourly()}}
+\code{\link[=az_15min]{az_15min()}}, \code{\link[=az_daily]{az_daily()}}, \code{\link[=az_heat]{az_heat()}}, \code{\link[=az_hourly]{az_hourly()}}, \code{\link[=az_lwdaily]{az_lwdaily()}}
 }
