@@ -64,7 +64,14 @@ az_heat <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
       start_date <- lubridate::floor_date(lubridate::ymd(end_date), "year")
     }
   }
-  params <- parse_params(station_id, start = start_date, end = end_date)
+  params <-
+    parse_params(
+      station_id = station_id,
+      start = start_date,
+      end = end_date,
+      hour = FALSE,
+      real_time = FALSE
+    )
   # always add a day to time_interval for heat endpoint to match how API works
   if (params$time_interval != "*") {
     params$time_interval <-

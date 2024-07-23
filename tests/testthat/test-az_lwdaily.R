@@ -50,7 +50,7 @@ test_that("no data is returned as 0x0 tibble", {
 
 test_that("warn when some data missing", {
   expect_warning(
-    az_lwdaily(station_id = "az32", start_date = "2023-07-01", end_date = "2024-07-01")
+    az_lwdaily(station_id = "az14", start_date = "2024-01-01", end_date = "2024-07-15")
   )
 })
 
