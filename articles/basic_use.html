@@ -88,24 +88,22 @@ any arguments. <code><a href="../reference/az_daily.html">az_daily()</a></code> 
 <code><a href="../reference/az_hourly.html">az_hourly()</a></code> retrieves hourly data.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/az_daily.html">az_daily</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Querying data from 2024-07-16</span></span>
-<span><span class="co">#&gt; Returning data from 2024-07-16</span></span>
+<span><span class="co">#&gt; Querying data from 2024-07-22</span></span>
+<span><span class="co">#&gt; Returning data from 2024-07-22</span></span>
 <span><span class="va">hourly</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/az_hourly.html">az_hourly</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Querying most recent hour of data ...</span></span>
-<span><span class="co">#&gt; Warning in az_hourly(): You requested data through 2024-07-17 17:00:00 but only</span></span>
-<span><span class="co">#&gt; data through 2024-07-17 16:00:00 were available</span></span>
-<span><span class="co">#&gt; Returning data from 2024-07-17 16:00</span></span>
+<span><span class="co">#&gt; Returning data from 2024-07-23 15:00</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 75</span></span></span>
 <span><span class="co">#&gt;   meta_bat_volt_max meta_bat_volt_mean meta_bat_volt_min meta_needs_review</span></span>
 <span><span class="co">#&gt;               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>              14.0               13.2              12.9                 0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>              13.8               13.0              12.6                 0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>              14.4               13.1              12.7                 0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>              13.8               13.0              12.6                 0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>              13.8               13.0              12.6                 0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>              13.6               13.0              12.6                 0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>              13.9               13.2              12.8                 0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>              13.7               12.9              12.6                 0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>              14.4               13.0              12.6                 0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>              13.7               12.9              12.5                 0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>              13.9               13.0              12.6                 0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>              13.7               13.0              12.6                 0</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 71 more variables: meta_station_id &lt;chr&gt;, meta_station_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   meta_version &lt;dbl&gt;, chill_hours_0C &lt;dbl&gt;, chill_hours_20C &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   chill_hours_32F &lt;dbl&gt;, chill_hours_45F &lt;dbl&gt;, chill_hours_68F &lt;dbl&gt;,</span></span></span>
@@ -118,11 +116,11 @@ any arguments. <code><a href="../reference/az_daily.html">az_daily()</a></code> 
 <span><span class="co">#&gt;   meta_bat_volt meta_needs_review meta_station_id meta_station_name meta_version</span></span>
 <span><span class="co">#&gt;           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>          13.2                 0 az01            Tucson                       1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>          13.2                 0 az02            Yuma Valley                  1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>          13.5                 0 az04            Safford                      1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>          13.0                 0 az02            Yuma Valley                  1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>          13.4                 0 az04            Safford                      1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>          13.0                 0 az05            Coolidge                     1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>          13.2                 0 az06            Maricopa                     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>          13.1                 0 az07            Aguila                       1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>          13.0                 0 az07            Aguila                       1</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 37 more variables: date_datetime &lt;dttm&gt;, date_doy &lt;dbl&gt;, date_hour &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   date_year &lt;dbl&gt;, dwpt &lt;dbl&gt;, dwptF &lt;dbl&gt;, eto_azmet &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   eto_azmet_in &lt;dbl&gt;, heatstress_cottonC &lt;dbl&gt;, heatstress_cottonF &lt;dbl&gt;,</span></span></span>
@@ -140,29 +138,25 @@ retrieve data going back further in time.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">last_date</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">daily</span><span class="op">$</span><span class="va">datetime</span><span class="op">)</span></span>
 <span><span class="va">last_date</span></span>
-<span><span class="co">#&gt; [1] "2024-07-16"</span></span>
+<span><span class="co">#&gt; [1] "2024-07-22"</span></span>
 <span><span class="va">last_week</span> <span class="op">&lt;-</span> <span class="va">last_date</span> <span class="op">-</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/period.html" class="external-link">weeks</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">wk</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/az_daily.html">az_daily</a></span><span class="op">(</span>start_date <span class="op">=</span> <span class="va">last_week</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Querying data from 2024-07-09 through 2024-07-16</span></span>
-<span><span class="co">#&gt; Returning data from 2024-07-09 through 2024-07-16</span></span>
+<span><span class="co">#&gt; Querying data from 2024-07-15 through 2024-07-22</span></span>
+<span><span class="co">#&gt; Returning data from 2024-07-15 through 2024-07-22</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">wk</span><span class="op">$</span><span class="va">datetime</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "2024-07-09" "2024-07-16"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "2024-07-15" "2024-07-22"</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">last_datetime</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">hourly</span><span class="op">$</span><span class="va">date_datetime</span><span class="op">)</span></span>
 <span><span class="va">last_datetime</span></span>
-<span><span class="co">#&gt; [1] "2024-07-17 16:00:00 MST"</span></span>
+<span><span class="co">#&gt; [1] "2024-07-23 15:00:00 MST"</span></span>
 <span><span class="va">last_48h</span> <span class="op">&lt;-</span> <span class="va">last_datetime</span> <span class="op">-</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/period.html" class="external-link">hours</a></span><span class="op">(</span><span class="fl">48</span><span class="op">)</span></span>
 <span><span class="va">hr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/az_hourly.html">az_hourly</a></span><span class="op">(</span>start_date_time <span class="op">=</span> <span class="va">last_48h</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Querying data from 2024-07-15 16:00 through 2024-07-17 17:00</span></span>
-<span><span class="co">#&gt; Warning in az_hourly(start_date_time = last_48h): Some requested data were</span></span>
-<span><span class="co">#&gt; unavailable</span></span>
-<span><span class="co">#&gt; Warning in az_hourly(start_date_time = last_48h): You requested data through</span></span>
-<span><span class="co">#&gt; 2024-07-17 17:00:00 but only data through 2024-07-17 16:00:00 were available</span></span>
-<span><span class="co">#&gt; Returning data from 2024-07-15 16:00 through 2024-07-17 16:00</span></span>
+<span><span class="co">#&gt; Querying data from 2024-07-21 15:00 through 2024-07-23 15:00</span></span>
+<span><span class="co">#&gt; Returning data from 2024-07-21 15:00 through 2024-07-23 15:00</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">hr</span><span class="op">$</span><span class="va">date_datetime</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "2024-07-15 16:00:00 MST" "2024-07-17 16:00:00 MST"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "2024-07-21 15:00:00 MST" "2024-07-23 15:00:00 MST"</span></span></code></pre></div>
 <p>To specify an end date, use <code>end_date</code> or
 <code>end_date_time</code>. You must also supply a start date if you
 supply an end date.</p>
@@ -228,7 +222,7 @@ queries the web API once and results in an identical dataset.</p>
 <span><span class="co">#&gt; Querying data from 2022-01-01 through 2022-01-15</span></span>
 <span><span class="co">#&gt; Returning data from 2022-01-01 through 2022-01-15</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.098   0.005   0.805</span></span>
+<span><span class="co">#&gt;   0.098   0.004   0.634</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span></span>
 <span>  <span class="va">sub_wk2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span></span>
 <span>    <span class="fu"><a href="../reference/az_daily.html">az_daily</a></span><span class="op">(</span>start_date <span class="op">=</span> <span class="st">"2022-01-01"</span>, end_date <span class="op">=</span> <span class="st">"2022-01-15"</span><span class="op">)</span>,</span>
@@ -238,7 +232,7 @@ queries the web API once and results in an identical dataset.</p>
 <span><span class="co">#&gt; Querying data from 2022-01-01 through 2022-01-15</span></span>
 <span><span class="co">#&gt; Returning data from 2022-01-01 through 2022-01-15</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.369   0.007   0.942</span></span>
+<span><span class="co">#&gt;   0.383   0.000   0.887</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/all.html" class="external-link">all</a></span><span class="op">(</span><span class="va">sub_wk2</span> <span class="op">==</span> <span class="va">sub_wk</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] NA</span></span></code></pre></div>
 </div>
