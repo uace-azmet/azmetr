@@ -16,7 +16,7 @@ The goal of azmetr is to provide programmatic access to the [Arizona Meteorologi
 You can install the development version of `azmetr` from r-universe:
 
 ```r
-install.packages('azmetr', repos = c('https://cct-datascience.r-universe.dev', 'https://cloud.r-project.org'))
+install.packages('azmetr', repos = c('https://uace-azmet.r-universe.dev', 'https://cloud.r-project.org'))
 ```
 
 Alternatively, you can install a development version directly from GitHub with the `remotes` package:
