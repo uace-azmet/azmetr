@@ -125,7 +125,8 @@ az_lwdaily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
       c(-"meta_station_id", -"meta_station_name", -"date", -"datetime"),
       as.numeric
     )) %>%
-    dplyr::filter(.data$meta_station_id != "az99") %>%
+    # As of March 7, 2024, let Test station data through
+    #dplyr::filter(.data$meta_station_id != "az99") %>%
     dplyr::mutate(date = lubridate::ymd(.data$date)) %>%
     dplyr::mutate(datetime = lubridate::ymd_hms(.data$datetime, tz = "America/Phoenix")) %>%
     # Convert NAs
