@@ -142,7 +142,8 @@ az_15min <- function(station_id = NULL, start_date_time = NULL, end_date_time = 
       c(-"meta_station_id", -"meta_station_name", -"date_hour", -"datetime"),
       as.numeric
     )) %>%
-    dplyr::filter(.data$meta_station_id != "az99") %>%
+    # As of March 7, 2024, let Test station data through
+    #dplyr::filter(.data$meta_station_id != "az99") %>%
     dplyr::mutate(
       datetime = lubridate::force_tz(
         lubridate::ymd_hms(.data$datetime),

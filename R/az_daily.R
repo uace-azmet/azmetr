@@ -127,7 +127,8 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
       c(-"meta_station_id", -"meta_station_name", -"datetime", -"wind_2min_timestamp"),
       as.numeric
     )) %>%
-    dplyr::filter(.data$meta_station_id != "az99") %>%
+    # As of March 7, 2024, let Test station data through
+    #dplyr::filter(.data$meta_station_id != "az99") %>%
     dplyr::mutate(datetime = lubridate::ymd(.data$datetime)) %>%
     # Convert NAs
     dplyr::mutate(

@@ -116,7 +116,8 @@ az_heat <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
       c(-"meta_station_id", -"meta_station_name", -"datetime_last"),
       as.numeric
     )) %>%
-    dplyr::filter(.data$meta_station_id != "az99") %>%
+    # As of March 7, 2024, let Test station data through
+    #dplyr::filter(.data$meta_station_id != "az99") %>%
     dplyr::mutate(datetime_last = lubridate::ymd(.data$datetime_last)) %>%
     #convert NAs
     dplyr::mutate(

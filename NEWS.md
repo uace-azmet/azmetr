@@ -1,3 +1,7 @@
+# azmetr (development version)
+
+- Added Test station ("az99") to station information
+
 # azmetr 0.4.0
 
 - Added function `az_lwdaily()` for downloading daily leaf wetness data, which now are available via the API
