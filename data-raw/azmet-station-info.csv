@@ -1,5 +1,5 @@
 ﻿name,symbol,id,county,latitude,longitude,elev_ft,elev_m
-Tucson,TUC,az01,Pima,32.2802,-110.9387,2352,717
+Tucson,TUC,az01,Pima,32.2806,-110.9459,2343,714
 Yuma Valley,YUV,az02,Yuma,32.7118,-114.7041,118,36
 Safford,SAF,az04,Graham,32.8130,-109.6793,2963,903
 Coolidge,COO,az05,Pinal,32.9800,-111.6057,1388,423
@@ -30,3 +30,4 @@ Salome,SAL,az41,La Paz,33.8485,-113.5398,1919,585
 Wellton ETo,WEL,az42,Yuma,32.6932,-114.0674,240,73
 Yuma Valley ETo,YUE,az43,Yuma,32.7118,-114.7041,118,36
 Mohave ETo,MOE,az44,Mohave,34.8951,-114.6157,476,145
+Test,ZZZ,az99,Pima,32.2806,-110.9459,2343,714

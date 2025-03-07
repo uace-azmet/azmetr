@@ -73,7 +73,7 @@ range(char_hourly$date_datetime)
 
 ## Filtering by station
 
-Information on the stations available is contained in the `station_info` dataset including station name, station ID, and location.
+Information on the stations available is contained in the `station_info` dataset including station name, station ID, and location.  As AZMet includes its Test station ("az99") in this information, retrieval of data for all stations will include Test station data, which may be erroneous. Subsetting such a retrieval to omit Test station data is recommended.
 
 ```{r}
 station_info
