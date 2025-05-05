@@ -1,5 +1,6 @@
 # azmetr (development version)
 
+- Added Chino Valley station ("az45") to station information
 - Added Test station ("az99") to station information
 
 # azmetr 0.4.0
