@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   basic_use: basic_use.html
   metadata: metadata.html
-last_built: 2025-05-05T22:14Z
+last_built: 2025-05-16T20:59Z
 urls:
   reference: https://uace-azmet.github.io/azmetr/reference
   article: https://uace-azmet.github.io/azmetr/articles
