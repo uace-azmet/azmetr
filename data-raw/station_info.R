@@ -2,6 +2,6 @@
 library(tidyverse)
 station_info <-
   read_csv("data-raw/azmet-station-info.csv") %>%
-  select(meta_station_name = name, meta_station_id = id, latitude, longitude, elev_m, start_date)
+  select(meta_station_name = name, meta_station_id = id, latitude, longitude, elev_m, start_date, status)
 
 usethis::use_data(station_info, overwrite = TRUE)
