@@ -1,6 +1,6 @@
 # azmetr (development version)
 
-- Added `start_date` variable to `azmet-station-info.csv` for all currently active stations
+- Added `start_date` and `status` variables to `azmet-station-info.csv`
 - Added Chino Valley station ("az45") to station information
 - Added Test station ("az99") to station information
 
