@@ -87,22 +87,22 @@ any arguments. <code><a href="../reference/az_daily.html">az_daily()</a></code> 
 <code><a href="../reference/az_hourly.html">az_hourly()</a></code> retrieves hourly data.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/az_daily.html">az_daily</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Querying data from 2025-05-20</span></span>
-<span><span class="co">#&gt; Returning data from 2025-05-20</span></span>
+<span><span class="co">#&gt; Querying data from 2025-06-26</span></span>
+<span><span class="co">#&gt; Returning data from 2025-06-26</span></span>
 <span><span class="va">hourly</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/az_hourly.html">az_hourly</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Querying most recent hour of data ...</span></span>
-<span><span class="co">#&gt; Returning data from 2025-05-21 14:00 through 2025-05-21 15:00</span></span>
+<span><span class="co">#&gt; Returning data from 2025-06-27 15:00</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 75</span></span></span>
 <span><span class="co">#&gt;   meta_bat_volt_max meta_bat_volt_mean meta_bat_volt_min meta_needs_review</span></span>
 <span><span class="co">#&gt;               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>              14.2               13.2              12.8                 0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>              14.0               13.0              12.5                 0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>              14.4               13.0              12.5                 0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>              14.0               13.0              12.5                 0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>              14.1               13.1              12.6                 0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>              13.8               13.1              12.6                 0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>              14.0               13.2              12.8                 0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>              13.9               13.0              12.5                 0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>              13.9               13.0              12.6                 0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>              13.9               13.0              12.5                 0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>              13.9               13.0              12.6                 0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>              13.7               13.0              12.6                 0</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 71 more variables: meta_station_id &lt;chr&gt;, meta_station_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   meta_version &lt;dbl&gt;, chill_hours_0C &lt;dbl&gt;, chill_hours_20C &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   chill_hours_32F &lt;dbl&gt;, chill_hours_45F &lt;dbl&gt;, chill_hours_68F &lt;dbl&gt;,</span></span></span>
@@ -116,10 +116,10 @@ any arguments. <code><a href="../reference/az_daily.html">az_daily()</a></code> 
 <span><span class="co">#&gt;           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>          13.2                 0 az01            Tucson                       1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>          13.2                 0 az02            Yuma Valley                  1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>          13.4                 0 az04            Safford                      1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>          13.2                 0 az05            Coolidge                     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>          13.3                 0 az06            Maricopa                     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>          13.3                 0 az07            Aguila                       1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>          13.2                 0 az04            Safford                      1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>          13.1                 0 az05            Coolidge                     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>          13.2                 0 az06            Maricopa                     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>          13.2                 0 az07            Aguila                       1</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 37 more variables: date_datetime &lt;dttm&gt;, date_doy &lt;dbl&gt;, date_hour &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   date_year &lt;dbl&gt;, dwpt &lt;dbl&gt;, dwptF &lt;dbl&gt;, eto_azmet &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   eto_azmet_in &lt;dbl&gt;, heatstress_cottonC &lt;dbl&gt;, heatstress_cottonF &lt;dbl&gt;,</span></span></span>
@@ -137,25 +137,27 @@ retrieve data going back further in time.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">last_date</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">daily</span><span class="op">$</span><span class="va">datetime</span><span class="op">)</span></span>
 <span><span class="va">last_date</span></span>
-<span><span class="co">#&gt; [1] "2025-05-20"</span></span>
+<span><span class="co">#&gt; [1] "2025-06-26"</span></span>
 <span><span class="va">last_week</span> <span class="op">&lt;-</span> <span class="va">last_date</span> <span class="op">-</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/period.html" class="external-link">weeks</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">wk</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/az_daily.html">az_daily</a></span><span class="op">(</span>start_date <span class="op">=</span> <span class="va">last_week</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Querying data from 2025-05-13 through 2025-05-20</span></span>
-<span><span class="co">#&gt; Returning data from 2025-05-13 through 2025-05-20</span></span>
+<span><span class="co">#&gt; Querying data from 2025-06-19 through 2025-06-26</span></span>
+<span><span class="co">#&gt; Warning in az_daily(start_date = last_week): Some requested data were</span></span>
+<span><span class="co">#&gt; unavailable.</span></span>
+<span><span class="co">#&gt; Returning data from 2025-06-19 through 2025-06-26</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">wk</span><span class="op">$</span><span class="va">datetime</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "2025-05-13" "2025-05-20"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "2025-06-19" "2025-06-26"</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">last_datetime</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">hourly</span><span class="op">$</span><span class="va">date_datetime</span><span class="op">)</span></span>
 <span><span class="va">last_datetime</span></span>
-<span><span class="co">#&gt; [1] "2025-05-21 15:00:00 MST"</span></span>
+<span><span class="co">#&gt; [1] "2025-06-27 15:00:00 MST"</span></span>
 <span><span class="va">last_48h</span> <span class="op">&lt;-</span> <span class="va">last_datetime</span> <span class="op">-</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/period.html" class="external-link">hours</a></span><span class="op">(</span><span class="fl">48</span><span class="op">)</span></span>
 <span><span class="va">hr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/az_hourly.html">az_hourly</a></span><span class="op">(</span>start_date_time <span class="op">=</span> <span class="va">last_48h</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Querying data from 2025-05-19 15:00 through 2025-05-21 15:00</span></span>
-<span><span class="co">#&gt; Returning data from 2025-05-19 15:00 through 2025-05-21 15:00</span></span>
+<span><span class="co">#&gt; Querying data from 2025-06-25 15:00 through 2025-06-27 15:00</span></span>
+<span><span class="co">#&gt; Returning data from 2025-06-25 15:00 through 2025-06-27 15:00</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">hr</span><span class="op">$</span><span class="va">date_datetime</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "2025-05-19 15:00:00 MST" "2025-05-21 15:00:00 MST"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "2025-06-25 15:00:00 MST" "2025-06-27 15:00:00 MST"</span></span></code></pre></div>
 <p>To specify an end date, use <code>end_date</code> or
 <code>end_date_time</code>. You must also supply a start date if you
 supply an end date.</p>
@@ -198,20 +200,20 @@ station data, which may be erroneous. Subsetting such a retrieval to
 omit Test station data is recommended.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">station_info</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 33 × 7</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 34 × 7</span></span></span>
 <span><span class="co">#&gt;    meta_station_name meta_station_id latitude longitude elev_m start_date status</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Tucson            az01                32.3     -<span style="color: #BB0000;">111.</span>    714 2021-01-01 active</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Yuma Valley       az02                32.7     -<span style="color: #BB0000;">115.</span>     36 2021-01-01 active</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Safford           az04                32.8     -<span style="color: #BB0000;">110.</span>    903 2021-01-01 active</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Coolidge          az05                33.0     -<span style="color: #BB0000;">112.</span>    423 2021-01-01 active</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Maricopa          az06                33.1     -<span style="color: #BB0000;">112.</span>    362 2021-01-01 active</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Aguila            az07                33.9     -<span style="color: #BB0000;">113.</span>    657 2021-01-01 active</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Parker            az08                34.0     -<span style="color: #BB0000;">114.</span>     98 2021-01-01 active</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Bonita            az09                32.5     -<span style="color: #BB0000;">110.</span>   <span style="text-decoration: underline;">1</span>349 2021-01-01 active</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Phoenix Greenway  az12                33.6     -<span style="color: #BB0000;">112.</span>    403 2021-01-01 active</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Yuma N.Gila       az14                32.8     -<span style="color: #BB0000;">115.</span>     43 2021-01-01 active</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 23 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Tucson            az01                32.3     -<span style="color: #BB0000;">111.</span>    714 1/1/21     active</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Yuma Valley       az02                32.7     -<span style="color: #BB0000;">115.</span>     36 1/1/21     active</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Safford           az04                32.8     -<span style="color: #BB0000;">110.</span>    903 1/1/21     active</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Coolidge          az05                33.0     -<span style="color: #BB0000;">112.</span>    423 1/1/21     active</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Maricopa          az06                33.1     -<span style="color: #BB0000;">112.</span>    362 1/1/21     active</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Aguila            az07                33.9     -<span style="color: #BB0000;">113.</span>    657 1/1/21     active</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Parker            az08                34.0     -<span style="color: #BB0000;">114.</span>     98 1/1/21     active</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Bonita            az09                32.5     -<span style="color: #BB0000;">110.</span>   <span style="text-decoration: underline;">1</span>349 1/1/21     active</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Phoenix Greenway  az12                33.6     -<span style="color: #BB0000;">112.</span>    403 1/1/21     active</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Yuma N.Gila       az14                32.8     -<span style="color: #BB0000;">115.</span>     43 1/1/21     active</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 24 more rows</span></span></span></code></pre></div>
 <p>If you only need data for a subset of stations, you can supply
 <code>station_id</code>. However, note that this will query the API once
 per station due to limitations of how the API works. It may be faster to
@@ -224,7 +226,7 @@ queries the web API once and results in an identical dataset.</p>
 <span><span class="co">#&gt; Querying data from 2022-01-01 through 2022-01-15</span></span>
 <span><span class="co">#&gt; Returning data from 2022-01-01 through 2022-01-15</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.102   0.000   0.228</span></span>
+<span><span class="co">#&gt;   0.101   0.000   0.362</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span></span>
 <span>  <span class="va">sub_wk2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span></span>
 <span>    <span class="fu"><a href="../reference/az_daily.html">az_daily</a></span><span class="op">(</span>start_date <span class="op">=</span> <span class="st">"2022-01-01"</span>, end_date <span class="op">=</span> <span class="st">"2022-01-15"</span><span class="op">)</span>,</span>
@@ -234,7 +236,7 @@ queries the web API once and results in an identical dataset.</p>
 <span><span class="co">#&gt; Querying data from 2022-01-01 through 2022-01-15</span></span>
 <span><span class="co">#&gt; Returning data from 2022-01-01 through 2022-01-15</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.390   0.001   0.712</span></span>
+<span><span class="co">#&gt;   0.381   0.002   0.751</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/all.html" class="external-link">all</a></span><span class="op">(</span><span class="va">sub_wk2</span> <span class="op">==</span> <span class="va">sub_wk</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] NA</span></span></code></pre></div>
 </div>
@@ -249,7 +251,7 @@ queries the web API once and results in an identical dataset.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>
