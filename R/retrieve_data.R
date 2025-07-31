@@ -26,7 +26,7 @@ retrieve_data <-
     httr2::req_url_path_append("observations", endpoint, station_id, start_f, time_interval) %>%
     httr2::req_headers("Accept" = "application/json") %>%
     # Limit rate to 4 calls per second
-    httr2::req_throttle(4 / 1)
+    httr2::req_throttle(capacity =  100, fill_time_s = 60)
 
   if (isTRUE(print_call)) {
     print(req)
