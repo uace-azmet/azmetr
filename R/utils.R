@@ -7,7 +7,9 @@ ping_service <- function() {
     httr2::request(base_url) %>%
     httr2::req_url_path_append("observations", "daily", "az01") %>%
     httr2::req_error(is_error = function(resp) FALSE) %>%
-    httr2::req_perform()
+    httr2::req_method("HEAD") %>%
+    httr2::req_user_agent("azmetr (https://github.com/uace-azmet/azmetr)") %>% 
+    httr2::req_perform() 
 
   status <- httr2::resp_status(resp)
   if(status == 200){
