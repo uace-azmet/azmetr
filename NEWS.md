@@ -1,5 +1,7 @@
 # azmetr (development version)
 
+- Added `end_date` variable with value `NA` to `azmet-station-info.csv`
+- Reformatted `start_date` variable to work with data download functions
 - Added Elgin station ("az47") to station information
 - Added `start_date` and `status` variables to `azmet-station-info.csv`
 - Added Chino Valley station ("az45") to station information
