@@ -210,8 +210,8 @@ parse_params <- function(station_id, start, end, hour = FALSE, real_time = FALSE
     earliest_date <- min(station_info$start_date)
   } else {
     earliest_date <- station_info |>
-      dplyr::filter(meta_station_id %in% station_id) |>
-      dplyr::pull(start_date) |>
+      dplyr::filter(.data$meta_station_id %in% station_id) |>
+      dplyr::pull(.data$start_date) |>
       min()
   }
 
