@@ -1,5 +1,5 @@
 ﻿name,symbol,id,county,latitude,longitude,elev_ft,elev_m,status,start_date,end_date
-Tucson,TUC,az01,Pima,32.2806,-110.9459,2343,714,active,2021-01-01,NA
+Tucson,TUC,az01,Pima,32.2806,-110.9459,2343,714,active,2020-01-01,NA
 Yuma Valley,YUV,az02,Yuma,32.7118,-114.7041,118,36,active,2021-01-01,NA
 Safford,SAF,az04,Graham,32.813,-109.6793,2963,903,active,2021-01-01,NA
 Coolidge,COO,az05,Pinal,32.98,-111.6057,1388,423,active,2021-01-01,NA
