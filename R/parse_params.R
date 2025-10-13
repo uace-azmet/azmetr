@@ -206,7 +206,7 @@ parse_params <- function(station_id, start, end, hour = FALSE, real_time = FALSE
     }
   }
 
-  if (station_id == "*") {
+  if (length(station_id) == 1 & "*" %in% station_id) {
     earliest_date <- min(station_info$start_date)
   } else {
     earliest_date <- station_info |>
