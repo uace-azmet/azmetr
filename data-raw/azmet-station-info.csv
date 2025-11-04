@@ -1,32 +1,32 @@
 ﻿name,symbol,id,county,latitude,longitude,elev_ft,elev_m,status,start_date,end_date
 Tucson,TUC,az01,Pima,32.2806,-110.9459,2343,714,active,2020-01-01,NA
-Yuma Valley,YUV,az02,Yuma,32.7118,-114.7041,118,36,active,2021-01-01,NA
-Safford,SAF,az04,Graham,32.813,-109.6793,2963,903,active,2021-01-01,NA
-Coolidge,COO,az05,Pinal,32.98,-111.6057,1388,423,active,2021-01-01,NA
-Maricopa,MAC,az06,Pinal,33.0689,-111.9722,1188,362,active,2021-01-01,NA
-Aguila,AGU,az07,Maricopa,33.9462,-113.1865,2155,657,active,2021-01-01,NA
-Parker,PAR,az08,La Paz,33.9643,-114.4855,322,98,active,2021-01-01,NA
-Bonita,BON,az09,Graham,32.4775,-109.9327,4416,1349,active,2021-01-01,NA
-Phoenix Greenway,PGR,az12,Maricopa,33.6233,-112.1077,1322,403,active,2021-01-01,NA
-Yuma N.Gila,YUG,az14,Yuma,32.7804,-114.5163,140,43,active,2021-01-01,NA
-Phoenix Encanto,PEN,az15,Maricopa,33.4784,-112.098,1096,334,active,2021-01-01,NA
-Paloma,GIB,az19,Maricopa,32.9271,-112.8967,725,221,active,2021-01-01,NA
-Mohave,MOH,az20,Mohave,34.9675,-114.6111,482,147,active,2021-01-01,NA
-Queen Creek,QCR,az22,Maricopa,33.1939,-111.5326,1516,462,active,2021-01-01,NA
-Harquahala,HAR,az23,Maricopa,33.4907,-113.1112,1143,348,active,2021-01-01,NA
-Roll,ROL,az24,Yuma,32.7629,-113.9675,266,81,active,2021-01-01,NA
-Buckeye,BUC,az26,Maricopa,33.4092,-112.6778,988,301,active,2021-01-01,NA
-Desert Ridge,DES,az27,Maricopa,33.6882,-111.9634,1676,511,active,2021-01-01,NA
-Mohave-2,MO2,az28,Mohave,34.8782,-114.5668,466,142,active,2021-01-01,NA
-Payson,PAY,az32,Gila,34.2325,-111.345,4852,1479,active,2021-01-01,NA
-Bowie,BOW,az33,Cochise,32.2891,-109.4721,3812,1162,active,2021-01-01,NA
-Parker-2,PA2,az35,La Paz,33.8557,-114.4751,302,92,active,2021-01-01,NA
-Yuma South,YUS,az36,Yuma,32.5655,-114.744,92,28,active,2021-01-01,NA
-San Simon,SAN,az37,Cochise,32.2001,-109.1239,3707,1130,active,2021-01-01,NA
-Sahuarita,SAH,az38,Pima,31.9689,-110.9456,2756,822,active,2021-01-01,NA
-Willcox Bench,WIB,az39,Cochise,32.1181,-109.7145,4285,1306,active,2021-01-01,NA
-Ft Mohave CA,MOC,az40,San Bernandino,34.9691,-114.645,482,147,active,2021-01-01,NA
-Salome,SAL,az41,La Paz,33.8485,-113.5398,1919,585,active,2021-01-01,NA
+Yuma Valley,YUV,az02,Yuma,32.7118,-114.7041,118,36,active,2020-01-01,NA
+Safford,SAF,az04,Graham,32.813,-109.6793,2963,903,active,2020-01-01,NA
+Coolidge,COO,az05,Pinal,32.98,-111.6057,1388,423,active,2020-01-01,NA
+Maricopa,MAC,az06,Pinal,33.0689,-111.9722,1188,362,active,2020-01-01,NA
+Aguila,AGU,az07,Maricopa,33.9462,-113.1865,2155,657,active,2020-01-01,NA
+Parker,PAR,az08,La Paz,33.9643,-114.4855,322,98,active,2020-01-01,NA
+Bonita,BON,az09,Graham,32.4775,-109.9327,4416,1349,active,2020-01-01,NA
+Phoenix Greenway,PGR,az12,Maricopa,33.6233,-112.1077,1322,403,active,2020-01-01,NA
+Yuma N.Gila,YUG,az14,Yuma,32.7804,-114.5163,140,43,active,2020-01-01,NA
+Phoenix Encanto,PEN,az15,Maricopa,33.4784,-112.098,1096,334,active,2020-01-01,NA
+Paloma,GIB,az19,Maricopa,32.9271,-112.8967,725,221,active,2020-01-01,NA
+Mohave,MOH,az20,Mohave,34.9675,-114.6111,482,147,active,2020-01-01,NA
+Queen Creek,QCR,az22,Maricopa,33.1939,-111.5326,1516,462,active,2020-01-01,NA
+Harquahala,HAR,az23,Maricopa,33.4907,-113.1112,1143,348,active,2020-01-01,NA
+Roll,ROL,az24,Yuma,32.7629,-113.9675,266,81,active,2020-01-01,NA
+Buckeye,BUC,az26,Maricopa,33.4092,-112.6778,988,301,active,2020-01-01,NA
+Desert Ridge,DES,az27,Maricopa,33.6882,-111.9634,1676,511,active,2020-01-01,NA
+Mohave-2,MO2,az28,Mohave,34.8782,-114.5668,466,142,active,2020-01-01,NA
+Payson,PAY,az32,Gila,34.2325,-111.345,4852,1479,active,2020-01-01,NA
+Bowie,BOW,az33,Cochise,32.2891,-109.4721,3812,1162,active,2020-01-01,NA
+Parker-2,PA2,az35,La Paz,33.8557,-114.4751,302,92,active,2020-01-01,NA
+Yuma South,YUS,az36,Yuma,32.5655,-114.744,92,28,active,2020-01-01,NA
+San Simon,SAN,az37,Cochise,32.2001,-109.1239,3707,1130,active,2020-01-01,NA
+Sahuarita,SAH,az38,Pima,31.9689,-110.9456,2756,822,active,2020-01-01,NA
+Willcox Bench,WIB,az39,Cochise,32.1181,-109.7145,4285,1306,active,2020-01-01,NA
+Ft Mohave CA,MOC,az40,San Bernandino,34.9691,-114.645,482,147,active,2020-01-01,NA
+Salome,SAL,az41,La Paz,33.8485,-113.5398,1919,585,active,2020-01-01,NA
 Wellton ETo,WEL,az42,Yuma,32.6932,-114.0674,240,73,active,2023-05-02,NA
 Yuma Valley ETo,YUE,az43,Yuma,32.7118,-114.7041,118,36,active,2023-05-02,NA
 Mohave ETo,MOE,az44,Mohave,34.8951,-114.6157,476,145,active,2023-07-20,NA
