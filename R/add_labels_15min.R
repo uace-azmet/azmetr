@@ -1,0 +1,52 @@
+add_labels_15min <- function(data) {
+  attr(data$meta_bat_volt, "label") <- "Battery voltage"
+  attr(data$meta_needs_review, "label") <- "Data quality flag"
+  attr(data$meta_station_id, "label") <- "Station ID"
+  attr(data$meta_station_name, "label") <- "Station"
+  # attr(data$meta_version, "label") <-
+  attr(data$date_doy, "label") <- "Day of year"
+  attr(data$date_hour, "label") <- "Hour"
+  attr(data$date_seconds, "label") <- "Seconds"
+  attr(data$date_year, "label") <- "Year"
+  attr(data$datetime, "label") <- "Datetime"
+  attr(data$dwpt, "label") <- "Dewpoint (\u00b0C)"
+  attr(data$dwpt_30cm, "label") <- "Dewpoint at 30cm height (\u00b0C)"
+  
+  # TODO: come up with good labels for these
+  # attr(data$lw1_mV, "label") <- 
+  # attr(data$lw1_total_con_mins, "label") <-
+  # attr(data$lw1_total_dry_mins, "label") <-
+  # attr(data$lw1_total_wet_mins, "label") <-
+  # attr(data$lw2_mV, "label") <-
+  # attr(data$lw2_total_con_mins, "label") <-
+  # attr(data$lw2_total_dry_mins, "label") <-
+  # attr(data$lw2_total_wet_mins, "label") <-
+  
+  attr(data$precip_total_mm, "label") <- "Precipitation (mm)"
+  attr(data$relative_humidity, "label") <- "Relative humidity (%)"
+  attr(data$relative_humidity_30cm, "label") <- "Relative humidity at 30cm height (%)"
+  attr(data$sol_rad_kWm2, "label") <- "Solar radiation (kW/m^2)"
+  attr(data$sol_rad_total, "label") <- "Solar radiation (MJ/m^2)"
+  attr(data$temp_airC, "label") <- "Air temperature (\u00b0C)"
+  attr(data$temp_air_30cmC, "label") <- "Air temperature at 30cm height (\u00b0C)"
+  attr(data$temp_air_maxC, "label") <- "Max. air temperature (\u00b0C)"
+  attr(data$temp_air_minC, "label") <- "Min. air temperature (\u00b0C)"
+  attr(data$temp_panelC, "label") <- "Logger panel temperature (\u00b0C)"
+  attr(data$temp_soil_10cmC, "label") <- "Soil temperature at 10cm (\u00b0C)"
+  attr(data$temp_soil_50cmC, "label") <- "Soil temperature at 50cm (\u00b0C)"
+  attr(data$temp_wetbulbC, "label") <- "Wet-bulb temperature (\u00b0C)"
+  attr(data$vp_actual, "label") <- "Actual vapor pressure (kPa)"
+  attr(data$vp_deficit, "label") <- "Vapor pressure deficit (kPa)"
+  attr(data$vp_saturation, "label") <- "Saturation vapor pressure (kPa)"
+  attr(data$wind_2min_spd_max_mps_daily, "label") <- "Max. two-minute sustained wind speed since midnight (m/s)"
+  attr(data$wind_2min_spd_max_mps_hourly, "label") <- "Max. two-minute sustained wind speed since top of the hour (m/s)"
+  attr(data$wind_2min_spd_mean_mps, "label") <- "Avg. two-minute sustained wind speed (m/s)"
+  attr(data$wind_2min_vector_dir, "label") <- "Wind vector direction (\u00b0)"
+  attr(data$wind_2min_vector_dir_max_daily, "label") <- "Wind vector direction (\u00b0)"
+  attr(data$wind_2min_vector_dir_max_hourly, "label") <- "Wind vector direction (\u00b0)"
+  attr(data$wind_spd_max_mps, "label") <- "Max. wind speed since midnight (m/s)"
+  attr(data$wind_spd_mps, "label") <- "Wind speed (m/s)"
+  attr(data$wind_vector_dir, "label") <- "Wind vector direction (\u00b0)"
+
+  data
+}
