@@ -66,7 +66,7 @@ add_labels_daily <- function(daily) {
   attr(daily$wind_2min_spd_max_mps, "label") <- "Max. two-minute sustained wind speed (m/s)"
   attr(daily$wind_2min_spd_mean_mph, "label") <- "Avg. two-minute sustained wind speed (miles/hr)"
   attr(daily$wind_2min_spd_mean_mps, "label") <- "Avg. two-minute sustained wind speed (m/s)"
-  # attr(daily$wind_2min_timestamp, "label") <-
+  attr(daily$wind_2min_timestamp, "label") <- "Datetime"
   attr(daily$wind_2min_vector_dir, "label") <- "Wind vector direction (\u00b0)"
   attr(daily$wind_spd_max_mph, "label") <- "Max. wind speed (miles/hr)"
   attr(daily$wind_spd_max_mps, "label") <- "Max. wind speed (m/s)"
