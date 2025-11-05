@@ -74,16 +74,19 @@ test_that("start=NULL, end=NULL works as expected", {
   expect_equal(nrow(null_null), 1)
 })
 
-test_that("end=NULL works as expected", {
+test_that("end=NULL defaults to current datetime", {
   dt_start <- lubridate::now(tzone = "America/Phoenix") - lubridate::minutes(15)
-  end_null <-
+  expect_message(
     suppressWarnings(
       az_15min(
         station_id = "az02",
         start_date_time = dt_start
       )
+    ),
+    glue::glue(
+      "Querying data from {format(dt_start, '%Y-%m-%d %H:%M:%S')} through {format(now(tzone = 'America/Phoenix'), '%Y-%m-%d %H:')}"
     )
-  expect_equal(nrow(end_null), 1)
+  )
 })
 
 test_that("start as date only is rounded correctly", {
