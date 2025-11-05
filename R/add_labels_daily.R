@@ -1,5 +1,3 @@
-# fmt: skip file
-
 add_labels_daily <- function(daily) {
   attr(daily$meta_bat_volt_max, "label") <- "Max. battery voltage"
   attr(daily$meta_bat_volt_mean, "label") <- "Avg. battery voltage"
@@ -23,14 +21,14 @@ add_labels_daily <- function(daily) {
   attr(daily$eto_azmet_in, "label") <- "Potential evapotranspiration (in)"
   attr(daily$eto_pen_mon, "label") <- "Potential evapotranspiration (mm)"
   attr(daily$eto_pen_mon_in, "label") <- "Potential evapotranspiration (in)"
-  attr(daily$heat_units_10C, "label") <- "Heat units 30-10 \u00b0C	(degree-days)"
-  attr(daily$heat_units_13C, "label") <- "Heat units 30-13 \u00b0C	(degree-days)"
-  attr(daily$heat_units_3413C, "label") <- "Heat units 34-13 \u00b0C	(degree-days)"
-  attr(daily$heat_units_45F, "label") <- "Heat units 86-45 \u00b0F	(degree-days)"
-  attr(daily$heat_units_50F, "label") <- "Heat units 86-50 \u00b0F	(degree-days)"
-  attr(daily$heat_units_55F, "label") <- "Heat units 86-55 \u00b0F	(degree-days)"
-  attr(daily$heat_units_7C, "label") <- "Heat units 30-7 \u00b0C	(degree-days)"
-  attr(daily$heat_units_9455F, "label") <- "Heat units 94-55 \u00b0F (degree-days)"
+  attr(daily$heat_units_10C, "label") <- "Heat units 30-10\u00b0C	(degree-days)"
+  attr(daily$heat_units_13C, "label") <- "Heat units 30-13\u00b0C	(degree-days)"
+  attr(daily$heat_units_3413C, "label") <- "Heat units 34-13\u00b0C	(degree-days)"
+  attr(daily$heat_units_45F, "label") <- "Heat units 86-45\u00b0F	(degree-days)"
+  attr(daily$heat_units_50F, "label") <- "Heat units 86-50\u00b0F	(degree-days)"
+  attr(daily$heat_units_55F, "label") <- "Heat units 86-55\u00b0F	(degree-days)"
+  attr(daily$heat_units_7C, "label") <- "Heat units 30-7\u00b0C	(degree-days)"
+  attr(daily$heat_units_9455F, "label") <- "Heat units 94-55\u00b0F (degree-days)"
   attr(daily$heatstress_cotton_meanC, "label") <- "Cotton heatstress (\u00b0C)"
   attr(daily$heatstress_cotton_meanF, "label") <- "Cotton heatstress (\u00b0F)"
   attr(daily$precip_total_in, "label") <- "Precipitation (in)"
