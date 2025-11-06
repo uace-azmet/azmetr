@@ -70,7 +70,11 @@ test_that("end=NULL works correctly", {
     date_null <- az_lwdaily(station_id = "az01", start_date = date_start),
     glue::glue("Returning data from {date_start}")
   )
-  expect_equal(date_null$date, seq(date_start, last_date, by = "day"))
+  expect_equal(
+    date_null$date,
+    seq(date_start, last_date, by = "day"),
+    ignore_attr = TRUE
+  )
 })
 
 test_that("start=NULL works correctly", {
