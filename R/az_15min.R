@@ -154,10 +154,16 @@ az_15min <- function(station_id = NULL, start_date_time = NULL, end_date_time = 
     dplyr::mutate(
       dplyr::across(
         tidyselect::where(is.numeric),
-        function(x)
-          dplyr::if_else(x %in% c(-999, -9999, -99999, -7999, 999, 999.9, 9999), NA_real_, x)
+        function(x) {
+          dplyr::if_else(
+            x %in% c(-999, -9999, -99999, -7999, 999, 999.9, 9999),
+            NA_real_,
+            x
+          )
+        }
       )
-    )
+    ) %>%
+    add_labels_15min()
 
   if (length(unique(out$datetime)) == 1) {
     message("Returning data from ", format(unique(out$datetime), "%Y-%m-%d %H:%M:%S"))
