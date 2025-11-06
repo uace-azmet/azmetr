@@ -169,10 +169,8 @@ test_that("start and end has to be earlier than now", {
 })
 
 test_that("requests for historical data error", {
+  start_date <- min(station_info$start_date) - months(1)
   expect_error(
-    parse_params(1, start = "2020-12-31", end = "2021-01-02")
-  )
-  expect_error(
-    parse_params(1, start = "2020-01-01", end = "2020-12-31")
+    parse_params(1, start = start_date, end = start_date + months(1))
   )
 })
