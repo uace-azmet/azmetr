@@ -10,6 +10,7 @@ add_labels_lw15min <- function(lw15min) {
   attr(lw15min$datetime, "label") <- "Datetime"
   attr(lw15min$dwpt_30cm_mean, "label") <- "Dewpoint at 30cm height (\u00b0C)"
   
+  # Not sure about these
   # attr(lw15min$lw1_mean_mV, "label") <- "mV"
   # attr(lw15min$lw1_total_con_mins, "label") <-
   attr(lw15min$lw1_total_dry_mins, "label") <- "Total minutes dry"
