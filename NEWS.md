@@ -1,5 +1,6 @@
 # azmetr (development version)
 
+- Updated package to access data from 2020
 - Added `end_date` variable with value `NA` to `azmet-station-info.csv`
 - Reformatted `start_date` variable to work with data download functions
 - Added Elgin station ("az47") to station information
