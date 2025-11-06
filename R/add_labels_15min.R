@@ -13,14 +13,14 @@ add_labels_15min <- function(data) {
   attr(data$dwpt_30cm, "label") <- "Dewpoint at 30cm height (\u00b0C)"
   
   # TODO: come up with good labels for these
-  # attr(data$lw1_mV, "label") <- 
+  # attr(data$lw1_mV, "label") <- "mV"
   # attr(data$lw1_total_con_mins, "label") <-
-  # attr(data$lw1_total_dry_mins, "label") <-
-  # attr(data$lw1_total_wet_mins, "label") <-
-  # attr(data$lw2_mV, "label") <-
+  attr(data$lw1_total_dry_mins, "label") <- "Total minutes dry"
+  attr(data$lw1_total_wet_mins, "label") <- "Total minutes wet"
+  # attr(data$lw2_mV, "label") <- "mV"
   # attr(data$lw2_total_con_mins, "label") <-
-  # attr(data$lw2_total_dry_mins, "label") <-
-  # attr(data$lw2_total_wet_mins, "label") <-
+  attr(data$lw2_total_dry_mins, "label") <- "Total minutes dry"
+  attr(data$lw2_total_wet_mins, "label") <- "Total minutes wet"
   
   attr(data$precip_total_mm, "label") <- "Precipitation (mm)"
   attr(data$relative_humidity, "label") <- "Relative humidity (%)"
