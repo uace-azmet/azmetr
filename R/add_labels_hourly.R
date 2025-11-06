@@ -18,7 +18,7 @@ add_labels_hourly <- function(hourly) {
   attr(hourly$heatstress_cottonF, "label") <- "Cotton heatstress (\u00b0F)"
   attr(hourly$precip_total, "label") <- "Precipitation (mm)"
   attr(hourly$precip_total_in, "label") <- "Precipitation (in)"
-  attr(hourly$relative_humidity, "label") <- "Relative humidity (%)"
+  attr(hourly$relative_humidity, "label") <- "RH (%)"
   attr(hourly$sol_rad_total, "label") <- "Solar radiation (MJ/m^2)"
   attr(hourly$sol_rad_total_ly, "label") <- "Solar radiation (ly)"
   attr(hourly$temp_airC, "label") <- "Air temperature (\u00b0C)"

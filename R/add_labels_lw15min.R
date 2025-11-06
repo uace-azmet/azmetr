@@ -20,8 +20,8 @@ add_labels_lw15min <- function(lw15min) {
   attr(lw15min$lw2_total_dry_mins, "label") <- "Total minutes dry"
   attr(lw15min$lw2_total_wet_mins, "label") <- "Total minutes wet"
   
-  attr(lw15min$relative_humidity_30cm_mean, "label") <- "Relative humidity at 30cm height (%)"
-  attr(lw15min$relative_humidity_mean, "label") <- "Relative humidity (%)"
+  attr(lw15min$relative_humidity_30cm_mean, "label") <- "RH at 30cm height (%)"
+  attr(lw15min$relative_humidity_mean, "label") <- "RH (%)"
   attr(lw15min$temp_air_30cm_meanC, "label") <- "Air temperature at 30cm height (\u00b0C)"
   attr(lw15min$temp_air_meanC, "label") <- "Avg. air temperature (\u00b0C)"
   attr(lw15min$temp_wetbulb_meanC, "label") <- "Avg. wet-bulb temperature (\u00b0C)"

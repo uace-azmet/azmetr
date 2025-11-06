@@ -23,8 +23,8 @@ add_labels_15min <- function(data) {
   attr(data$lw2_total_wet_mins, "label") <- "Total minutes wet"
   
   attr(data$precip_total_mm, "label") <- "Precipitation (mm)"
-  attr(data$relative_humidity, "label") <- "Relative humidity (%)"
-  attr(data$relative_humidity_30cm, "label") <- "Relative humidity at 30cm height (%)"
+  attr(data$relative_humidity, "label") <- "RH (%)"
+  attr(data$relative_humidity_30cm, "label") <- "RH at 30cm height (%)"
   attr(data$sol_rad_kWm2, "label") <- "Solar radiation (kW/m^2)"
   attr(data$sol_rad_total, "label") <- "Solar radiation (MJ/m^2)"
   attr(data$temp_airC, "label") <- "Air temperature (\u00b0C)"
