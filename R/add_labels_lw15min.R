@@ -1,30 +1,32 @@
 add_labels_lw15min <- function(lw15min) {
-attr(lw15min$meta_needs_review, "label") <- "Data quality flag"
-attr(lw15min$meta_station_id, "label") <- "Station ID"
-attr(lw15min$meta_station_name, "label") <- "Station"
-# attr(lw15min$meta_version, "label") <-
-attr(lw15min$date_doy, "label") <- "Day of year"
-attr(lw15min$date_hour, "label") <- "Hour"
-attr(lw15min$date_seconds, "label") <- "Seconds"
-attr(lw15min$date_year, "label") <- "Year"
-attr(lw15min$datetime, "label") <- "Datetime"
-attr(lw15min$dwpt_30cm_mean, "label") <- "Dewpoint at 30cm height (\u00b0C)"
+  attr(lw15min$meta_needs_review, "label") <- "Data quality flag"
+  attr(lw15min$meta_station_id, "label") <- "Station ID"
+  attr(lw15min$meta_station_name, "label") <- "Station"
+  # attr(lw15min$meta_version, "label") <-
+  attr(lw15min$date_doy, "label") <- "Day of year"
+  attr(lw15min$date_hour, "label") <- "Hour"
+  attr(lw15min$date_seconds, "label") <- "Seconds"
+  attr(lw15min$date_year, "label") <- "Year"
+  attr(lw15min$datetime, "label") <- "Datetime"
+  attr(lw15min$dwpt_30cm_mean, "label") <- "Dewpoint at 30cm height (\u00b0C)"
+  
+  # attr(lw15min$lw1_mean_mV, "label") <- "mV"
+  # attr(lw15min$lw1_total_con_mins, "label") <-
+  attr(lw15min$lw1_total_dry_mins, "label") <- "Total minutes dry"
+  attr(lw15min$lw1_total_wet_mins, "label") <- "Total minutes wet"
+  # attr(lw15min$lw2_mean_mV, "label") <- "mV"
+  attr(lw15min$lw2_total_con_mins, "label") <-
+  attr(lw15min$lw2_total_dry_mins, "label") <- "Total minutes dry"
+  attr(lw15min$lw2_total_wet_mins, "label") <- "Total minutes wet"
+  
+  attr(lw15min$relative_humidity_30cm_mean, "label") <- "Relative humidity at 30cm height (%)"
+  attr(lw15min$relative_humidity_mean, "label") <- "Relative humidity (%)"
+  attr(lw15min$temp_air_30cm_meanC, "label") <- "Air temperature at 30cm height (\u00b0C)"
+  attr(lw15min$temp_air_meanC, "label") <- "Avg. air temperature (\u00b0C)"
+  attr(lw15min$temp_wetbulb_meanC, "label") <- "Avg. wet-bulb temperature (\u00b0C)"
+  attr(lw15min$wind_spd_max_mps, "label") <- "Max. wind speed (m/s)"
+  attr(lw15min$wind_spd_mean_mps, "label") <- "Avg. wind speed (m/s)"
+  attr(lw15min$wind_spd_min_mps, "label") <- "Min. wind speed (m/s)"
 
-# attr(lw15min$lw1_mean_mV, "label") <- "mV"
-# attr(lw15min$lw1_total_con_mins, "label") <-
-attr(lw15min$lw1_total_dry_mins, "label") <- "Total minutes dry"
-attr(lw15min$lw1_total_wet_mins, "label") <- "Total minutes wet"
-# attr(lw15min$lw2_mean_mV, "label") <- "mV"
-attr(lw15min$lw2_total_con_mins, "label") <-
-attr(lw15min$lw2_total_dry_mins, "label") <- "Total minutes dry"
-attr(lw15min$lw2_total_wet_mins, "label") <- "Total minutes wet"
-
-attr(lw15min$relative_humidity_30cm_mean, "label") <- "Relative humidity at 30cm height (%)"
-attr(lw15min$relative_humidity_mean, "label") <- "Relative humidity (%)"
-attr(lw15min$temp_air_30cm_meanC, "label") <- "Air temperature at 30cm height (\u00b0C)"
-attr(lw15min$temp_air_meanC, "label") <- "Avg. air temperature (\u00b0C)"
-attr(lw15min$temp_wetbulb_meanC, "label") <- "Avg. wet-bulb temperature (\u00b0C)"
-attr(lw15min$wind_spd_max_mps, "label") <- "Max. wind speed (m/s)"
-attr(lw15min$wind_spd_mean_mps, "label") <- "Avg. wind speed (m/s)"
-attr(lw15min$wind_spd_min_mps, "label") <- "Min. wind speed (m/s)"
+  lw15min
 }
