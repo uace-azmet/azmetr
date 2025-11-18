@@ -7,7 +7,7 @@ add_labels_lw15min <- function(lw15min) {
   attr(lw15min$date_hour, "label") <- "Hour"
   attr(lw15min$date_seconds, "label") <- "Seconds"
   attr(lw15min$date_year, "label") <- "Year"
-  attr(lw15min$datetime, "label") <- "Datetime"
+  attr(lw15min$datetime, "label") <- "Measurement timestamp"
   attr(lw15min$dwpt_30cm_mean, "label") <- "Avg. dewpoint at 30cm height (\u00b0C)"
   attr(lw15min$lw1_mean_mV, "label") <- "Avg. dielectric constant (mV)"
   attr(lw15min$lw1_total_con_mins, "label") <- "Total time condensation (min)"
