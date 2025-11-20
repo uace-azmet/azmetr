@@ -20,7 +20,11 @@ test_that("az_heat() returns only one row per station even with dates", {
 test_that("start and end dates interpreted correctly", {
   res <- az_heat(station_id = 1, start_date = "2023-10-10", end_date = "2023-10-30")
 
-  expect_equal(res$datetime_last, lubridate::ymd("2023-10-30"))
+  expect_equal(
+    res$datetime_last,
+    lubridate::ymd("2023-10-30"),
+    ignore_attr = TRUE
+  )
 
 
   skip("not sure of desired behavior")
@@ -33,7 +37,7 @@ test_that("end_date can be specified without start_date", {
   res_end_yesterday <- az_heat(station_id = 2, end_date = yesterday)
 
   expect_s3_class(res_end_yesterday, "data.frame")
-  expect_equal(res_end_yesterday$datetime_last, yesterday)
+  expect_equal(res_end_yesterday$datetime_last, yesterday, ignore_attr = TRUE)
 
   skip("not sure of desired behavior here")
   expect_equal(res_end_old$datetime_last, lubridate::ymd("2022-09-27"))

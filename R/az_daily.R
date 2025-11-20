@@ -124,7 +124,12 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
     # Move metadata to beginning
     dplyr::select(dplyr::starts_with("meta_"), dplyr::everything()) %>%
     dplyr::mutate(dplyr::across(
-      c(-"meta_station_id", -"meta_station_name", -"datetime", -"wind_2min_timestamp"),
+      c(
+        -"meta_station_id",
+        -"meta_station_name",
+        -"datetime",
+        -"wind_2min_timestamp"
+      ),
       as.numeric
     )) %>%
     # As of March 7, 2024, let Test station data through
@@ -150,7 +155,8 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
         lubridate::parse_date_time(.data$wind_2min_timestamp, orders = "ymdHMSz"),
         tzone = tz
       )
-    )
+    ) %>%
+    add_labels_daily()
 
   if (length(unique(out$datetime)) == 1) {
     message("Returning data from ", unique(out$datetime))
