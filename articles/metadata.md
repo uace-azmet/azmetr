@@ -30,22 +30,20 @@ hourly <-
   az_hourly() %>% 
   az_add_units() 
 #> Querying most recent hour of data ...
-#> Warning in az_hourly(): You requested data through 2025-11-20 09:00:00 but only
-#> data through 2025-11-20 08:00:00 were available
-#> Returning data from 2025-11-20 08:00
+#> Returning data from 2026-02-23 16:00
 
 hourly %>% 
   select(-starts_with("meta_"), -starts_with("date_")) %>% 
   head()
 #> # A tibble: 6 × 33
-#>   dwpt  dwptF eto_azmet eto_azmet_in heatstress_cottonC heatstress_cottonF
-#>   [°C] [degF]      [mm]         [in]               [°C]             [degF]
-#> 1  8.5   47.3         0            0               10.4               50.6
-#> 2  7.4   45.3         0            0               10.1               50.3
-#> 3  7.5   45.6         0            0                9.1               48.4
-#> 4 11.2   52.1         0            0               11.9               53.4
-#> 5 11.3   52.3         0            0               12.2               53.9
-#> 6  6.1   42.9         0            0                8.1               46.5
+#>    dwpt  dwptF eto_azmet eto_azmet_in heatstress_cottonC heatstress_cottonF
+#>    [°C] [degF]      [mm]         [in]               [°C]             [degF]
+#> 1  -7.1   19.3       0.4         0.02               24.5               76.1
+#> 2  -4.7   23.5       0.4         0.02               24.5               76.1
+#> 3 -10.3   13.5       0.4         0.02               20.3               68.5
+#> 4  -7.4   18.7       0.4         0.01               23.7               74.7
+#> 5  -6.4   20.6       0.5         0.02               23.9               75.1
+#> 6  -5     22.9       0.4         0.02               22.8               73.1
 #> # ℹ 27 more variables: precip_total [mm], precip_total_in [in],
 #> #   relative_humidity [%], sol_rad_total [MJ/m^2], sol_rad_total_ly [langleys],
 #> #   temp_airC [°C], temp_airF [degF], temp_soil_10cmC [°C],
@@ -75,20 +73,20 @@ hourly %>%
   transmute(wind_spd_kph = set_units(wind_spd_mps, "km/h"),
             sol_rad_total = set_units(sol_rad_total, "W h m-2"),
             temp_airK = set_units(temp_airF, "Kelvins"))
-#> # A tibble: 34 × 3
+#> # A tibble: 35 × 3
 #>    wind_spd_kph sol_rad_total temp_airK
 #>          [km/h]     [W*h/m^2]       [K]
-#>  1         2.88          11.1      283.
-#>  2         4.68          36.1      283.
-#>  3         5.04          66.7      282.
-#>  4         6.84          22.2      285.
-#>  5         6.12          22.2      285.
-#>  6         5.4           47.2      281.
-#>  7         6.84          41.7      283.
-#>  8        10.1           58.3      281.
-#>  9         0.36          13.9      285.
-#> 10         5.76          47.2      282.
-#> # ℹ 24 more rows
+#>  1         5.04          517.      302.
+#>  2         5.4           497.      302.
+#>  3        13.0           450       297.
+#>  4        12.6           344.      301.
+#>  5         5.76          531.      302.
+#>  6         5.4           517.      300.
+#>  7         5.04          514.      299.
+#>  8        13.0           478.      294.
+#>  9         5.4           492.      301.
+#> 10         7.92          483.      302.
+#> # ℹ 25 more rows
 ```
 
 Second, it won’t allow you to do math where the units aren’t compatible.
@@ -111,7 +109,7 @@ constants.
 
 ## Must use:
 hourly$wind_spd_mps[1] + set_units(10, "m/s")
-#> 10.8 [m/s]
+#> 11.4 [m/s]
 ```
 
 ## Plotting with units

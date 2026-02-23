@@ -2,6 +2,7 @@
 
 ## azmetr (development version)
 
+- Added Duncan station (“az46”) to station information
 - tibbles produced by `az_*()` functions now have the “labels” attribute
   set on columns. This is used for things like tooltips in the Positron
   data viewer and default axis labels for `ggplot2` plots
