@@ -27,12 +27,12 @@ package version 0.4.0, <https://github.com/uace-azmet/azmetr>.
     }
 
 Arizona Meteorological Network (2026). “Arizona Meteorological Network
-(AZMet) Data.” Accessed 2026-02-23, <https://azmet.arizona.edu>.
+(AZMet) Data.” Accessed 2026-03-05, <https://azmet.arizona.edu>.
 
     @Misc{,
       title = {Arizona Meteorological Network (AZMet) Data},
       author = {{Arizona Meteorological Network}},
       year = {2026},
-      note = {Accessed 2026-02-23},
+      note = {Accessed 2026-03-05},
       url = {https://azmet.arizona.edu},
     }

@@ -2,6 +2,13 @@
 
 ## azmetr (development version)
 
+- Updated
+  [`az_add_units()`](https://uace-azmet.github.io/azmetr/reference/az_add_units.md)
+  to include columns returned by
+  [`az_15min()`](https://uace-azmet.github.io/azmetr/reference/az_15min.md),
+  [`az_lw15min()`](https://uace-azmet.github.io/azmetr/reference/az_lw15min.md),
+  and
+  [`az_lwdaily()`](https://uace-azmet.github.io/azmetr/reference/az_lwdaily.md)
 - Added Duncan station (“az46”) to station information
 - tibbles produced by `az_*()` functions now have the “labels” attribute
   set on columns. This is used for things like tooltips in the Positron
