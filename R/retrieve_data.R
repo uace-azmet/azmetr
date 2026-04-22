@@ -33,14 +33,12 @@ retrieve_data <-
   }
 
   resp <- req %>%
+    httr2::req_error(body = \(resp) {
+      as.character(httr2::resp_body_json(resp)$errors)
+    }) %>%
     httr2::req_perform()
 
   data_raw <- httr2::resp_body_json(resp)
-
-  if (length(data_raw$errors) > 0) {
-    stop(paste0(data_raw$errors, "\n "))
-  }
-
   data_tidy <- data_raw$data %>%
     purrr::compact() %>%
     purrr::map(purrr::compact) %>% # Removes any columns that are NULL (i.e. no data)
