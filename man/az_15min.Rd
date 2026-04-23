@@ -44,8 +44,8 @@ only \code{end_date_time} will result in an error.
 If \code{station_id} is supplied as a vector, multiple successive calls to
 the API will be made. You may find better performance getting data for all
 the stations by leaving \code{station_id} blank and subsetting the resulting
-dataframe. Only the most recent 48 hours of 15-minute data are stored in
-the AZMet API.
+dataframe. Only the most recent 14 days of 15-minute data are stored in the
+AZMet API.
 }
 \examples{
 \dontrun{
