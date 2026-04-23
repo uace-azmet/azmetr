@@ -40,7 +40,7 @@ parse_params <- function(station_id, start, end, hour = FALSE, real_time = FALSE
       stop("`station_id` must be numeric or character in the format 'az01'.")
     }
 
-    active_stations <- station_info$meta_station_id
+    active_stations <- azmetr::station_info$meta_station_id
 
     if(!all(station_id %in% active_stations)) {
       stop("Invalid `station_id`")
@@ -207,9 +207,9 @@ parse_params <- function(station_id, start, end, hour = FALSE, real_time = FALSE
   }
 
   if (length(station_id) == 1 & "*" %in% station_id) {
-    earliest_date <- min(station_info$start_date)
+    earliest_date <- min(azmetr::station_info$start_date)
   } else {
-    earliest_date <- station_info %>%
+    earliest_date <- azmetr::station_info %>%
       dplyr::filter(.data$meta_station_id %in% station_id) %>%
       dplyr::pull(.data$start_date) %>%
       min()
