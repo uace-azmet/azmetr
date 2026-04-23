@@ -55,7 +55,7 @@ only `end_date_time` will result in an error.
 If `station_id` is supplied as a vector, multiple successive calls to
 the API will be made. You may find better performance getting data for
 all the stations by leaving `station_id` blank and subsetting the
-resulting dataframe. Only the most recent 48 hours of 15-minute data are
+resulting dataframe. Only the most recent 14 days of 15-minute data are
 stored in the AZMet API.
 
 ## See also
@@ -77,8 +77,13 @@ az_15min()
 az_15min(station_id = c(1, 2))
 az_15min(station_id = c("az01", "az02"))
 
-# Specify dates:
-az_15min(start_date_time = "2022-09-25 01:00:00")
-az_15min(start_date_time = "2022-09-25 01:00:00", end_date_time = "2022-09-25 07:00:00")
+# Last 5 hours of 15 min data
+az_15min(start_date_time = lubridate::now() - lubridate::hours(5))
+
+# A specific time range (note: only the last 14 days of data are available in the API)
+az_15min(
+  start_date_time = lubridate::now() - lubridate::days(14),
+  end_date_time = lubridate::now() - lubridate::days(13)
+)
 } # }
 ```

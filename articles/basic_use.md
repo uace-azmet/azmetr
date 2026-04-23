@@ -25,22 +25,22 @@ retrieves hourly data.
 
 ``` r
 daily <- az_daily()
-#> Querying data from 2026-03-04
-#> Returning data from 2026-03-04
+#> Querying data from 2026-04-22
+#> Returning data from 2026-04-22
 hourly <- az_hourly()
 #> Querying most recent hour of data ...
-#> Returning data from 2026-03-05 15:00
+#> Returning data from 2026-04-23 16:00
 
 head(daily)
 #> # A tibble: 6 × 75
 #>   meta_bat_volt_max meta_bat_volt_mean meta_bat_volt_min meta_needs_review
 #>               <dbl>              <dbl>             <dbl>             <dbl>
-#> 1              14.6               13.3              12.7                 0
-#> 2              14.4               13.3              12.8                 0
-#> 3              14.6               13.3              12.6                 0
-#> 4              14.5               13.1              12.4                 0
-#> 5              14.5               13.4              12.9                 0
-#> 6              14.2               13.1              12.5                 0
+#> 1              14.3               13.2              12.7                 0
+#> 2              14.2               13.3              12.8                 0
+#> 3              14.1               13.2              12.7                 0
+#> 4              14.1               13.3              12.9                 0
+#> 5              14.1               13.4              12.9                 0
+#> 6              14.1               13.1              12.6                 0
 #> # ℹ 71 more variables: meta_station_id <chr>, meta_station_name <chr>,
 #> #   meta_version <dbl>, chill_hours_0C <dbl>, chill_hours_20C <dbl>,
 #> #   chill_hours_32F <dbl>, chill_hours_45F <dbl>, chill_hours_68F <dbl>,
@@ -52,12 +52,12 @@ head(hourly)
 #> # A tibble: 6 × 42
 #>   meta_bat_volt meta_needs_review meta_station_id meta_station_name meta_version
 #>           <dbl>             <dbl> <chr>           <chr>                    <dbl>
-#> 1          13.6                 0 az01            Tucson                       1
-#> 2          13.5                 0 az02            Yuma Valley                  1
-#> 3          13.5                 0 az04            Safford                      1
-#> 4          13.5                 0 az05            Coolidge                     1
+#> 1          13.5                 0 az01            Tucson                       1
+#> 2          13.4                 0 az02            Yuma Valley                  1
+#> 3          13.6                 0 az04            Safford                      1
+#> 4          13.4                 0 az05            Coolidge                     1
 #> 5          13.6                 0 az06            Maricopa                     1
-#> 6          13.6                 0 az07            Aguila                       1
+#> 6          13.5                 0 az07            Aguila                       1
 #> # ℹ 37 more variables: date_datetime <dttm>, date_doy <dbl>, date_hour <chr>,
 #> #   date_year <dbl>, dwpt <dbl>, dwptF <dbl>, eto_azmet <dbl>,
 #> #   eto_azmet_in <dbl>, heatstress_cottonC <dbl>, heatstress_cottonF <dbl>,
@@ -78,27 +78,27 @@ you can retrieve data going back further in time.
 ``` r
 last_date <- max(daily$datetime)
 last_date
-#> [1] "2026-03-04"
+#> [1] "2026-04-22"
 last_week <- last_date - lubridate::weeks(1)
 wk <- az_daily(start_date = last_week)
-#> Querying data from 2026-02-25 through 2026-03-04
-#> Returning data from 2026-02-25 through 2026-03-04
+#> Querying data from 2026-04-15 through 2026-04-22
+#> Returning data from 2026-04-15 through 2026-04-22
 
 range(wk$datetime)
-#> [1] "2026-02-25" "2026-03-04"
+#> [1] "2026-04-15" "2026-04-22"
 ```
 
 ``` r
 last_datetime <- max(hourly$date_datetime)
 last_datetime
-#> [1] "2026-03-05 15:00:00 MST"
+#> [1] "2026-04-23 16:00:00 MST"
 last_48h <- last_datetime - hours(48)
 hr <- az_hourly(start_date_time = last_48h)
-#> Querying data from 2026-03-03 15:00 through 2026-03-05 15:00
-#> Returning data from 2026-03-03 15:00 through 2026-03-05 15:00
+#> Querying data from 2026-04-21 16:00 through 2026-04-23 16:00
+#> Returning data from 2026-04-21 16:00 through 2026-04-23 16:00
 
 range(hr$date_datetime)
-#> [1] "2026-03-03 15:00:00 MST" "2026-03-05 15:00:00 MST"
+#> [1] "2026-04-21 16:00:00 MST" "2026-04-23 16:00:00 MST"
 ```
 
 To specify an end date, use `end_date` or `end_date_time`. You must also
@@ -178,7 +178,7 @@ system.time(
 #> Querying data from 2022-01-01 through 2022-01-15
 #> Returning data from 2022-01-01 through 2022-01-15
 #>    user  system elapsed 
-#>   0.098   0.002   0.650
+#>   0.086   0.001   0.149
 system.time(
   sub_wk2 <- subset(
     az_daily(start_date = "2022-01-01", end_date = "2022-01-15"),
@@ -188,7 +188,7 @@ system.time(
 #> Querying data from 2022-01-01 through 2022-01-15
 #> Returning data from 2022-01-01 through 2022-01-15
 #>    user  system elapsed 
-#>   0.389   0.002   0.923
+#>   0.359   0.003   0.719
 all(sub_wk2 == sub_wk)
 #> [1] NA
 ```
