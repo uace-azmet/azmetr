@@ -15,8 +15,8 @@ test_that("all columns get assigned units that should", {
     az_heat(station_id = 1, end_date = "2023-11-28")
   res_15min <- az_15min(
     station_id = 1,
-    start = lubridate::now() - lubridate::hours(6),
-    end = lubridate::now() - lubridate::hours(5)
+    start = lubridate::now(tzone = "America/Phoenix") - lubridate::hours(24),
+    end = lubridate::now(tzone = "America/Phoenix") - lubridate::hours(23)
   )
   res_lw15 <- az_lw15min(
     station_id = 1,
