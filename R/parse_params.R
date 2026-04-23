@@ -194,6 +194,14 @@ parse_params <- function(station_id, start, end, hour = FALSE, real_time = FALSE
     if (end_parsed < start_parsed) {
       stop("`end_date_time` is before `start_date_time`!")
     }
+    if (
+      !is.null(start) &
+        start_parsed < lubridate::now(tzone = tz) - lubridate::days(14)
+    ) {
+      warning(
+        "Only the previous 14 days of 15-minute data are available in the API"
+      )
+    }
   } else { # Daily weather and leaf wetness data
     if (!is.null(start) & start_parsed >= lubridate::today(tzone = tz)) {
       stop("Please supply a `start_date` earlier than today.")
