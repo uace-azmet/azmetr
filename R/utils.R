@@ -2,17 +2,25 @@ check_internet <- function(){
   attempt::stop_if_not(.x = curl::has_internet(), msg = "Please check your internet connexion")
 }
 
-ping_service <- function() {
-  resp <-
+check_status <- function() {
+  req <-
     httr2::request(base_url) %>%
-    httr2::req_url_path_append("observations", "daily", "az01") %>%
+    httr2::req_url_path_append("status") %>%
     httr2::req_error(is_error = function(resp) FALSE) %>%
-    httr2::req_method("HEAD") %>%
-    httr2::req_user_agent("azmetr (https://github.com/uace-azmet/azmetr)") %>% 
-    httr2::req_perform() 
+    httr2::req_user_agent("azmetr (https://github.com/uace-azmet/azmetr)")
 
-  status <- httr2::resp_status(resp)
-  if(status == 200){
+  resp <- httr2::req_perform(req)
+  http_status <- httr2::resp_status(resp)
+  if (http_status != 200) {
+    return(list(status = http_status))
+  } else {
+    httr2::resp_body_json(resp)
+  }
+}
+
+ping_service <- function() {
+  status <- check_status()
+  if (status$status == "OK" & status$statusdb == "OK") {
     return(TRUE)
   } else {
     return(FALSE)
