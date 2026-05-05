@@ -41,10 +41,12 @@ test_that("data is in correct format", {
 })
 
 test_that("no data is returned as 0x0 tibble", {
-  skip("not sure how to reproduce this now that request for historical data error")
   res_nodata <-
     suppressWarnings(
-      az_15min(start_date_time = "1980-01-01 00", end_date_time = "1980-01-02 00")
+      az_15min(
+        start_date_time = lubridate::now() - lubridate::days(20),
+        end_date_time = lubridate::now() - lubridate::days(19)
+      )
     )
   expect_true(nrow(res_nodata) == 0)
   expect_s3_class(res_nodata, "tbl_df")
