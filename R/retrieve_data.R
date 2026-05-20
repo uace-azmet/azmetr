@@ -33,7 +33,7 @@ retrieve_data <-
   }
 
   resp <- req %>%
-    httr2::req_error(body = \(resp) {
+    httr2::req_error(body = function(resp) {
       as.character(httr2::resp_body_json(resp)$errors)
     }) %>%
     httr2::req_perform()
