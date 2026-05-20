@@ -27,5 +27,4 @@ ping_service <- function() {
   }
 }
 
-# base_url <- "https://api.azmet.arizona.edu/v1/"
-base_url <- "https://api-azmet.colo-prod-aws.arizona.edu/v1"
+base_url <- "https://api.azmet.arizona.edu/v1/"
