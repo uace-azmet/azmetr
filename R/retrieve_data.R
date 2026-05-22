@@ -23,20 +23,31 @@ retrieve_data <-
 
   req <- httr2::request(base_url) %>%
     httr2::req_method("GET") %>%
-    httr2::req_url_path_append("observations", endpoint, station_id, start_f, time_interval) %>%
+    httr2::req_url_path_append(
+      "observations",
+      endpoint,
+      station_id,
+      start_f,
+      time_interval
+    ) %>%
     httr2::req_headers("Accept" = "application/json") %>%
-    httr2::req_throttle(capacity =  200, fill_time_s = 60) %>%
-    httr2::req_user_agent("azmetr (https://github.com/uace-azmet/azmetr)")
+    httr2::req_throttle(capacity = 200, fill_time_s = 60) %>%
+    httr2::req_user_agent("azmetr (https://github.com/uace-azmet/azmetr)") %>%
+    httr2::req_error(body = function(resp) {
+      # Some errors have text body, e.g. 502 bad gateway
+      body <- try(httr2::resp_body_json(resp), silent = TRUE)
+      if (inherits(body, "try-error")) {
+        NULL
+      } else {
+        as.character(body$errors)
+      }
+    })
 
   if (isTRUE(print_call)) {
     print(req)
   }
 
-  resp <- req %>%
-    httr2::req_error(body = function(resp) {
-      as.character(httr2::resp_body_json(resp)$errors)
-    }) %>%
-    httr2::req_perform()
+  resp <- httr2::req_perform(req)
 
   data_raw <- httr2::resp_body_json(resp)
   data_tidy <- data_raw$data %>%
