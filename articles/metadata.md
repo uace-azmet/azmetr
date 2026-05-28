@@ -1,6 +1,7 @@
 # Using azmetr with the units package
 
 ``` r
+
 library(azmetr)
 library(units)
 #> udunits database from /usr/share/xml/udunits/udunits2.xml
@@ -26,11 +27,12 @@ by passing the resulting tibble to
 [`az_add_units()`](https://uace-azmet.github.io/azmetr/reference/az_add_units.md).
 
 ``` r
+
 hourly <- 
   az_hourly() %>% 
   az_add_units() 
 #> Querying most recent hour of data ...
-#> Returning data from 2026-04-23 16:00
+#> Returning data from 2026-05-28 15:00
 
 hourly %>% 
   select(-starts_with("meta_"), -starts_with("date_")) %>% 
@@ -38,12 +40,12 @@ hourly %>%
 #> # A tibble: 6 × 33
 #>   dwpt  dwptF eto_azmet eto_azmet_in heatstress_cottonC heatstress_cottonF
 #>   [°C] [degF]      [mm]         [in]               [°C]             [degF]
-#> 1 -2.2   82.4       0.5         0.02               24.1               168.
-#> 2  3.4  101.        0.7         0.03               24.7               170.
-#> 3 -2.7   80.8       0.4         0.02               21.8               160.
-#> 4 -2.7   80.8       0.5         0.02               24.4               169.
-#> 5 -0.5   88.0       0.5         0.02               24.3               168.
-#> 6 -9.8   57.7       0.7         0.03               22.8               164.
+#> 1 -4.4   75.2       0.3         0.01               24.3               168.
+#> 2  1.7   95.0       0.8         0.03               23.8               167.
+#> 3 -9.4   59.2       0.6         0.02               26.1               174.
+#> 4  1.7   95.0       0.7         0.03               26                 174.
+#> 5  1.7   95.0       0.6         0.02               25.9               173.
+#> 6  0     89.6       0.9         0.04               23.6               166.
 #> # ℹ 27 more variables: precip_total [mm], precip_total_in [in],
 #> #   relative_humidity [%], sol_rad_total [MJ/m^2], sol_rad_total_ly [langleys],
 #> #   temp_airC [°C], temp_airF [degF], temp_soil_10cmC [°C],
@@ -69,6 +71,7 @@ properties. First, you can do unit conversion using
 from the `units` package.
 
 ``` r
+
 hourly %>% 
   transmute(wind_spd_kph = set_units(wind_spd_mps, "km/h"),
             sol_rad_total = set_units(sol_rad_total, "W h m-2"),
@@ -76,22 +79,23 @@ hourly %>%
 #> # A tibble: 35 × 3
 #>    wind_spd_kph sol_rad_total temp_airK
 #>          [km/h]     [W*h/m^2]       [K]
-#>  1        11.5           558.      301.
-#>  2        14.8           686.      302.
-#>  3        22.7           322.      298.
-#>  4        16.9           472.      302.
-#>  5        16.2           456.      302.
-#>  6        13.0           686.      300.
-#>  7         8.28          694.      301.
-#>  8        10.8           319.      296.
-#>  9        10.4           619.      301.
-#> 10        14.4           717.      303.
+#>  1         7.2           289.      302.
+#>  2         9.36          839.      301.
+#>  3        19.4           500       305.
+#>  4        18             622.      304.
+#>  5        18.4           544.      304.
+#>  6        22.7           847.      301.
+#>  7        13.0           861.      301.
+#>  8         4.68          475       300.
+#>  9        14.4           808.      303.
+#> 10        10.8           861.      300.
 #> # ℹ 25 more rows
 ```
 
 Second, it won’t allow you to do math where the units aren’t compatible.
 
 ``` r
+
 hourly %>%  
   transmute(wind_rain = wind_spd_mps + precip_total)
 #> Error in `transmute()`:
@@ -104,12 +108,13 @@ That also means that you generally cannot add or subtract unitless
 constants.
 
 ``` r
+
 ## This will error:
 # hourly$wind_spd_mps[1] + 10
 
 ## Must use:
 hourly$wind_spd_mps[1] + set_units(10, "m/s")
-#> 13.2 [m/s]
+#> 12 [m/s]
 ```
 
 ## Plotting with units
@@ -118,6 +123,7 @@ The `units` package works with `ggplot2` to automatically include units
 in axis labels.
 
 ``` r
+
 library(ggplot2)
 ggplot(hourly, aes(x = wind_spd_mps, y = sol_rad_total)) +
   geom_point() +

@@ -12,8 +12,8 @@
 <link rel="icon" sizes="any" href="favicon.ico">
 <link rel="manifest" href="site.webmanifest">
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Access Arizona Weather Data from the AZMet API">
 <meta name="description" content='Provides R functions to access the Arizona Meteorological Network (AZMet) API. Functions are more than just "thin wrappers" and do some parsing of input parameters and wrangling of output data.'>
@@ -91,6 +91,21 @@
 <span><span class="fu"><a href="reference/az_hourly.html">az_hourly</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/az_lw15min.html">az_lw15min</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/az_lwdaily.html">az_lwdaily</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>Because <code>azmetr</code> uses the <code>httr2</code> package to handle API requests, you can wrap any <code>azmetr</code> function with <code>with_verbosity()</code> to get more detailed logging of the actually HTTP requests and response headers. For example:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/with_verbosity.html" class="external-link">with_verbosity</a></span><span class="op">(</span><span class="fu"><a href="reference/az_daily.html">az_daily</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Querying data from 2026-05-19</span></span>
+<span><span class="co">#&gt; -&gt; GET /v1/observations/daily/*/*/* HTTP/2</span></span>
+<span><span class="co">#&gt; -&gt; Host: api.azmet.arizona.edu</span></span>
+<span><span class="co">#&gt; -&gt; User-Agent: azmetr (https://github.com/uace-azmet/azmetr)</span></span>
+<span><span class="co">#&gt; -&gt; Accept-Encoding: deflate, gzip</span></span>
+<span><span class="co">#&gt; -&gt; Accept: application/json</span></span>
+<span><span class="co">#&gt; -&gt; </span></span>
+<span><span class="co">#&gt; &lt;- HTTP/2 200 </span></span>
+<span><span class="co">#&gt; &lt;- date: Wed, 20 May 2026 21:49:18 GMT</span></span>
+<span><span class="co">#&gt; &lt;- content-type: application/json</span></span>
+<span><span class="co">#&gt; &lt;- server: -</span></span>
+<span><span class="co">#&gt; &lt;- </span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>

@@ -2,6 +2,8 @@
 
 ## azmetr (development version)
 
+- The AZMet API was updated to return HTTP error codes for bad requests
+  or server errors and these are now displayed to users.
 - Updated
   [`az_add_units()`](https://uace-azmet.github.io/azmetr/reference/az_add_units.md)
   to include columns returned by

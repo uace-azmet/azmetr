@@ -14,7 +14,7 @@ Source:
 
 Weiss J, Scott E (2026). *azmetr: Access Arizona weather data from the
 AZMet API*.
-[doi:10.5281/zenodo.7675685](https://doi.org/10.5281/zenodo.7675685), R
+[doi:10.5281/zenodo.7675685](https://doi.org/10.5281/zenodo.7675685). R
 package version 0.4.0, <https://github.com/uace-azmet/azmetr>.
 
     @Manual{,
@@ -27,12 +27,12 @@ package version 0.4.0, <https://github.com/uace-azmet/azmetr>.
     }
 
 Arizona Meteorological Network (2026). “Arizona Meteorological Network
-(AZMet) Data.” Accessed 2026-04-23, <https://azmet.arizona.edu>.
+(AZMet) Data.” Accessed 2026-05-28, <https://azmet.arizona.edu>.
 
     @Misc{,
       title = {Arizona Meteorological Network (AZMet) Data},
       author = {{Arizona Meteorological Network}},
       year = {2026},
-      note = {Accessed 2026-04-23},
+      note = {Accessed 2026-05-28},
       url = {https://azmet.arizona.edu},
     }
