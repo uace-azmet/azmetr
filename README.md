@@ -42,6 +42,24 @@ az_lw15min()
 az_lwdaily()
 ```
 
+Because `azmetr` uses the `httr2` package to handle API requests, you can wrap any `azmetr` function with `with_verbosity()` to get more detailed logging of the actually HTTP requests and response headers.  For example:
+
+```r
+httr2::with_verbosity(az_daily())
+#> Querying data from 2026-05-19
+#> -> GET /v1/observations/daily/*/*/* HTTP/2
+#> -> Host: api.azmet.arizona.edu
+#> -> User-Agent: azmetr (https://github.com/uace-azmet/azmetr)
+#> -> Accept-Encoding: deflate, gzip
+#> -> Accept: application/json
+#> -> 
+#> <- HTTP/2 200 
+#> <- date: Wed, 20 May 2026 21:49:18 GMT
+#> <- content-type: application/json
+#> <- server: -
+#> <- 
+```
+
 ## Code of Conduct
   
   Please note that the `azmetr` project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
