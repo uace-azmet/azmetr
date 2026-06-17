@@ -47,15 +47,19 @@
 #' az_lw15min(start_date_time = "2022-09-25 01:00:00", end_date_time = "2022-09-25 07:00:00")
 #' }
 
-
-az_lw15min <- function(station_id = NULL, start_date_time = NULL, end_date_time = NULL) {
-
+az_lw15min <- function(
+  station_id = NULL,
+  start_date_time = NULL,
+  end_date_time = NULL
+) {
   # TODO: check for valid station IDs
 
   check_internet()
 
   if (!is.null(end_date_time) & is.null(start_date_time)) {
-    stop("If you supply `end_date_time`, you must also supply `start_date_time`.")
+    stop(
+      "If you supply `end_date_time`, you must also supply `start_date_time`."
+    )
   }
 
   params <-
@@ -69,14 +73,17 @@ az_lw15min <- function(station_id = NULL, start_date_time = NULL, end_date_time 
 
   tz <- "America/Phoenix"
 
-
   # Query API ------------------------------------------------------------------
 
   if (is.null(start_date_time) & is.null(end_date_time)) {
     message("Querying most recent datetime of leaf wetness 15-minute data ...")
   } else {
     message(
-      "Querying data from ", format(params$start, "%Y-%m-%d %H:%M:%S")," through ", format(params$end, "%Y-%m-%d %H:%M:%S"), " ..."
+      "Querying data from ",
+      format(params$start, "%Y-%m-%d %H:%M:%S"),
+      " through ",
+      format(params$end, "%Y-%m-%d %H:%M:%S"),
+      " ..."
     )
   }
 
@@ -108,7 +115,10 @@ az_lw15min <- function(station_id = NULL, start_date_time = NULL, end_date_time 
   if (is.null(start_date_time) & is.null(end_date_time)) {
     out <-
       out %>%
-      dplyr::filter(.data$datetime == max(.data$datetime), .by = "meta_station_id")
+      dplyr::filter(
+        .data$datetime == max(.data$datetime),
+        .by = "meta_station_id"
+      )
   }
 
   if (nrow(out) == 0) {
@@ -117,22 +127,29 @@ az_lw15min <- function(station_id = NULL, start_date_time = NULL, end_date_time 
     return(tibble::tibble())
   }
 
-  # Check if any data are missing. Note, this always "passes" when both start and
-  # end are NULL (because period("*") is NA)
-  #n_obs <- out %>%
-  #  dplyr::summarise(n = dplyr::n(), .by = dplyr::all_of("meta_station_id")) %>%
-  #  dplyr::filter(.data$n < as.numeric(lubridate::period(params$time_interval), "hour"))
-  #if (nrow(n_obs) != 0) {
-  #  warning("Some requested data were unavailable.")
-  #}
+  # Check if any data are missing.
+  # Default period is 0 seconds—gives same results as "*"
+  p <- if (params$time_interval == "*") "PT0S" else params$time_interval
+  n_obs <- out %>%
+    dplyr::summarise(n = dplyr::n(), .by = dplyr::all_of("meta_station_id")) %>%
+    dplyr::filter(
+      # Predicted number of observations that should be returned
+      .data$n < (as.numeric(lubridate::period(p), "minutes") + 15) / 15
+    )
+  if (nrow(n_obs) != 0) {
+    warning("Some requested data were unavailable.")
+  }
 
   # Warn if the missing data are just at the end
   if (lubridate::ymd_hms(max(out$datetime), tz = tz) < params$end) {
     warning(
-      "You requested data through ", params$end, " but only data through ", max(out$datetime), " were available."
+      "You requested data through ",
+      params$end,
+      " but only data through ",
+      max(out$datetime),
+      " were available."
     )
   }
-
 
   # Wrangle output -------------------------------------------------------------
 
@@ -167,10 +184,17 @@ az_lw15min <- function(station_id = NULL, start_date_time = NULL, end_date_time 
     add_labels_lw15min()
 
   if (length(unique(out$datetime)) == 1) {
-    message("Returning data from ", format(unique(out$datetime), "%Y-%m-%d %H:%M:%S"))
+    message(
+      "Returning data from ",
+      format(unique(out$datetime), "%Y-%m-%d %H:%M:%S")
+    )
   } else {
     message(
-      "Returning data from ", format(min(out$datetime), "%Y-%m-%d %H:%M:%S"), " through ", format(max(out$datetime), "%Y-%m-%d %H:%M:%S"))
+      "Returning data from ",
+      format(min(out$datetime), "%Y-%m-%d %H:%M:%S"),
+      " through ",
+      format(max(out$datetime), "%Y-%m-%d %H:%M:%S")
+    )
   }
 
   return(out)

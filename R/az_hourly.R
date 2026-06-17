@@ -48,68 +48,94 @@
 #' az_hourly(start_date_time = "2022-09-25 01", end_date = "2022-09-25 20")
 #' }
 #'
-az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time = NULL) {
-
+az_hourly <- function(
+  station_id = NULL,
+  start_date_time = NULL,
+  end_date_time = NULL
+) {
   # TODO: check for valid station IDs
   check_internet()
-  if(!is.null(end_date_time) & is.null(start_date_time)) {
-    stop("If you supply `end_date_time`, you must also supply `start_date_time`")
+  if (!is.null(end_date_time) & is.null(start_date_time)) {
+    stop(
+      "If you supply `end_date_time`, you must also supply `start_date_time`"
+    )
   }
   params <-
-    parse_params(station_id = station_id, start = start_date_time,
-                 end = end_date_time, hour = TRUE)
+    parse_params(
+      station_id = station_id,
+      start = start_date_time,
+      end = end_date_time,
+      hour = TRUE
+    )
 
   # Query API --------------------------------------------
   if (is.null(start_date_time) & is.null(end_date_time)) {
     message("Querying most recent hour of data ...")
   } else {
-    message("Querying data from ", format(params$start, "%Y-%m-%d %H:%M"),
-            " through ", format(params$end, "%Y-%m-%d %H:%M"))
+    message(
+      "Querying data from ",
+      format(params$start, "%Y-%m-%d %H:%M"),
+      " through ",
+      format(params$end, "%Y-%m-%d %H:%M")
+    )
   }
 
   if (length(station_id) <= 1) {
     out <-
-      retrieve_data(params$station_id,
-                    params$start_f,
-                    params$time_interval,
-                    endpoint = "hourly")
+      retrieve_data(
+        params$station_id,
+        params$start_f,
+        params$time_interval,
+        endpoint = "hourly"
+      )
   } else if (length(station_id) > 1) {
     out <-
       purrr::map_df(
         params$station_id,
         function(x) {
-          retrieve_data(x,
-                        params$start_f,
-                        params$time_interval,
-                        endpoint = "hourly")
+          retrieve_data(
+            x,
+            params$start_f,
+            params$time_interval,
+            endpoint = "hourly"
+          )
         }
       )
   }
 
   # If most recent hour is queried, make sure only one hour is returned
   if (is.null(start_date_time) & is.null(end_date_time)) {
-  out <-
-    out %>%
-    dplyr::filter(.data$date_datetime == max(.data$date_datetime), .by = "meta_station_id")
+    out <-
+      out %>%
+      dplyr::filter(
+        .data$date_datetime == max(.data$date_datetime),
+        .by = "meta_station_id"
+      )
   }
 
-  if(nrow(out) == 0) {
+  if (nrow(out) == 0) {
     warning("No data retrieved from API")
     #return 0x0 tibble
     return(tibble::tibble())
   }
 
-  #Check if any data is missing
-  #Note, this always "passes" when both start and end are NULL (because period("*") is NA)
+  # Check if any data is missing
+  # Default period of 1 hour gives same results as "*"
+  p <- if (params$time_interval == "*") "PT1H" else params$time_interval
   n_obs <- out %>%
     dplyr::summarise(n = dplyr::n(), .by = dplyr::all_of("meta_station_id")) %>%
-    dplyr::filter(.data$n < as.numeric(lubridate::period(params$time_interval), "hour"))
-  if(nrow(n_obs) != 0) {
+    dplyr::filter(
+      .data$n < as.numeric(lubridate::period(p), "hour")
+    )
+  if (nrow(n_obs) != 0) {
     warning("Some requested data were unavailable")
   }
 
-  #Warn if the missing data is just at the end
-  if (lubridate::ymd_hms(max(out$date_datetime), tz = "America/Phoenix") < params$end) {
+  # Warn if the missing data is just at the end
+  if (
+    lubridate::ymd_hms(max(out$date_datetime), tz = "America/Phoenix") <
+      params$end
+  ) {
     warning(
       "You requested data through ",
       params$end,
@@ -118,7 +144,6 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
       " were available"
     )
   }
-
 
   # Wrangle output ----------------------------------------------------------
   out <- out %>%
@@ -174,10 +199,17 @@ az_hourly <- function(station_id = NULL, start_date_time = NULL, end_date_time =
     add_labels_hourly()
 
   if (length(unique(out$date_datetime)) == 1) {
-    message("Returning data from ", format(unique(out$date_datetime), "%Y-%m-%d %H:%M"))
+    message(
+      "Returning data from ",
+      format(unique(out$date_datetime), "%Y-%m-%d %H:%M")
+    )
   } else {
-    message("Returning data from ", format(min(out$date_datetime), "%Y-%m-%d %H:%M"),
-            " through ", format(max(out$date_datetime), "%Y-%m-%d %H:%M"))
+    message(
+      "Returning data from ",
+      format(min(out$date_datetime), "%Y-%m-%d %H:%M"),
+      " through ",
+      format(max(out$date_datetime), "%Y-%m-%d %H:%M")
+    )
   }
   return(out)
 }

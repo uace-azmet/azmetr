@@ -121,14 +121,18 @@ az_15min <- function(station_id = NULL, start_date_time = NULL, end_date_time = 
     return(tibble::tibble())
   }
 
-  # Check if any data is missing. Note, this always "passes" when both start and
-  # end are NULL (because period("*") is NA)
-  #n_obs <- out %>%
-  #  dplyr::summarise(n = dplyr::n(), .by = dplyr::all_of("meta_station_id")) %>%
-  #  dplyr::filter(.data$n < as.numeric(lubridate::period(params$time_interval), "hour"))
-  #if (nrow(n_obs) != 0) {
-  #  warning("Some requested data were unavailable.")
-  #}
+  # Check if any data is missing.
+  # Default period appears to be 15 minutes.  Gives same result as "*"
+  p <- if (params$time_interval == "*") "PT15M" else params$time_interval
+  n_obs <- out %>%
+    dplyr::summarise(n = dplyr::n(), .by = dplyr::all_of("meta_station_id")) %>%
+    dplyr::filter(
+      # Predicted number of observations that should be returned
+      .data$n < (as.numeric(lubridate::period(p), "minutes") + 15) / 15
+    )
+  if (nrow(n_obs) != 0) {
+    warning("Some requested data were unavailable.")
+  }
 
   # Warn if the missing data is just at the end
   if (lubridate::ymd_hms(max(out$datetime), tz = tz) < params$end) {
