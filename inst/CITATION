@@ -15,3 +15,14 @@ bibentry(bibtype = "Misc",
          url = "https://uace-azmet.github.io/azmetr/",
          abstract = "Provides R functions to access the Arizona Meteorological Network (AZMet) API. Functions are more than just \"thin wrappers\" and do some parsing of input parameters and wrangling of output data.",
          version = "0.4.0")
+
+bibentry(
+  bibtype = "misc",
+  header  = "Please also cite the data source:",
+  title = "Arizona Meteorological Network (AZMet) Data",
+  author = person(family = "Arizona Meteorological Network"),
+  year    = format(Sys.Date(), "%Y"),
+  note = paste("Accessed", format(Sys.Date())),
+  url = "https://azmet.arizona.edu"
+)
+

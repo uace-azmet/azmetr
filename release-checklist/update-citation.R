@@ -9,5 +9,26 @@ cff <- cff_create(
   )
 )
 
+# Write inst/CITATION
 cff_write_citation(cff, file = "inst/CITATION")
+
+# Append citation for data source
+con <- file("inst/CITATION", open = "a")
+writeLines(text = 
+  '
+bibentry(
+  bibtype = "misc",
+  header  = "Please also cite the data source:",
+  title = "Arizona Meteorological Network (AZMet) Data",
+  author = person(family = "Arizona Meteorological Network"),
+  year    = format(Sys.Date(), "%Y"),
+  note = paste("Accessed", format(Sys.Date())),
+  url = "https://azmet.arizona.edu"
+)
+',
+  con = con
+)
+close(con)
+
+# write CITATION.cff
 cff_write(cff)
