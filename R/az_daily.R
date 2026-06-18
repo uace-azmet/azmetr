@@ -112,7 +112,7 @@ az_daily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
   p <- if (params$time_interval == "*") "PT0S" else params$time_interval
   n_obs <- out %>%
     dplyr::summarise(n = dplyr::n(), .by = dplyr::all_of("meta_station_id")) %>%
-    dplyr::filter(.data$n < as.numeric(lubridate::period(params$time_interval), "day") + 1)
+    dplyr::filter(.data$n < as.numeric(lubridate::period(p), "day") + 1)
   if (nrow(n_obs) != 0 |
      # Also warn if the missing data is just at the end
      lubridate::ymd(max(out$datetime), tz = tz) < params$end) {
