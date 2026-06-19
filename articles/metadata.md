@@ -32,7 +32,7 @@ hourly <-
   az_hourly() %>% 
   az_add_units() 
 #> Querying most recent hour of data ...
-#> Returning data from 2026-05-28 15:00
+#> Returning data from 2026-06-19 09:00
 
 hourly %>% 
   select(-starts_with("meta_"), -starts_with("date_")) %>% 
@@ -40,12 +40,12 @@ hourly %>%
 #> # A tibble: 6 × 33
 #>   dwpt  dwptF eto_azmet eto_azmet_in heatstress_cottonC heatstress_cottonF
 #>   [°C] [degF]      [mm]         [in]               [°C]             [degF]
-#> 1 -4.4   75.2       0.3         0.01               24.3               168.
-#> 2  1.7   95.0       0.8         0.03               23.8               167.
-#> 3 -9.4   59.2       0.6         0.02               26.1               174.
-#> 4  1.7   95.0       0.7         0.03               26                 174.
-#> 5  1.7   95.0       0.6         0.02               25.9               173.
-#> 6  0     89.6       0.9         0.04               23.6               166.
+#> 1  5.3   107.       0.5         0.02               26.3               175.
+#> 2 10.7   124.       0.4         0.02               26.9               177.
+#> 3  4.8   105.       0.5         0.02               25.7               173.
+#> 4  3.2   100.       0.6         0.02               26.2               175.
+#> 5  3.9   102.       0.5         0.02               26.7               176.
+#> 6  3.2   100.       0.5         0.02               25.5               172.
 #> # ℹ 27 more variables: precip_total [mm], precip_total_in [in],
 #> #   relative_humidity [%], sol_rad_total [MJ/m^2], sol_rad_total_ly [langleys],
 #> #   temp_airC [°C], temp_airF [degF], temp_soil_10cmC [°C],
@@ -79,16 +79,16 @@ hourly %>%
 #> # A tibble: 35 × 3
 #>    wind_spd_kph sol_rad_total temp_airK
 #>          [km/h]     [W*h/m^2]       [K]
-#>  1         7.2           289.      302.
-#>  2         9.36          839.      301.
-#>  3        19.4           500       305.
-#>  4        18             622.      304.
-#>  5        18.4           544.      304.
-#>  6        22.7           847.      301.
-#>  7        13.0           861.      301.
-#>  8         4.68          475       300.
-#>  9        14.4           808.      303.
-#> 10        10.8           861.      300.
+#>  1         5.04          567.      304.
+#>  2         2.88          531.      304.
+#>  3         6.12          600       303.
+#>  4         7.2           606.      304.
+#>  5         8.64          558.      305.
+#>  6         7.56          583.      303.
+#>  7        13.0           550       303.
+#>  8         2.16          597.      301.
+#>  9         3.96          556.      304.
+#> 10         6.84          528.      304.
 #> # ℹ 25 more rows
 ```
 
@@ -114,7 +114,7 @@ constants.
 
 ## Must use:
 hourly$wind_spd_mps[1] + set_units(10, "m/s")
-#> 12 [m/s]
+#> 11.4 [m/s]
 ```
 
 ## Plotting with units
