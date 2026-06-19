@@ -14,3 +14,4 @@
 ^data-raw$
 ^.vscode$
 ^air.toml$
+^release-checklist$
