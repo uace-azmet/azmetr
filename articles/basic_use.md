@@ -186,7 +186,7 @@ system.time(
 #> Querying data from 2022-01-01 through 2022-01-15
 #> Returning data from 2022-01-01 through 2022-01-15
 #>    user  system elapsed 
-#>   0.096   0.003   0.257
+#>   0.108   0.000   0.244
 system.time(
   sub_wk2 <- subset(
     az_daily(start_date = "2022-01-01", end_date = "2022-01-15"),
@@ -196,7 +196,7 @@ system.time(
 #> Querying data from 2022-01-01 through 2022-01-15
 #> Returning data from 2022-01-01 through 2022-01-15
 #>    user  system elapsed 
-#>   0.444   0.006   0.967
+#>   0.535   0.024   1.018
 all(sub_wk2 == sub_wk)
 #> [1] NA
 ```
