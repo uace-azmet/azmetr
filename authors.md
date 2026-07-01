@@ -28,12 +28,12 @@ AZMet API.”
     }
 
 Arizona Meteorological Network (2026). “Arizona Meteorological Network
-(AZMet) Data.” Accessed 2026-06-19, <https://azmet.arizona.edu>.
+(AZMet) Data.” Accessed 2026-07-01, <https://azmet.arizona.edu>.
 
     @Misc{,
       title = {Arizona Meteorological Network (AZMet) Data},
       author = {{Arizona Meteorological Network}},
       year = {2026},
-      note = {Accessed 2026-06-19},
+      note = {Accessed 2026-07-01},
       url = {https://azmet.arizona.edu},
     }
