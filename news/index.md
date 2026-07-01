@@ -1,6 +1,6 @@
 # Changelog
 
-## azmetr (development version)
+## azmetr 0.5.0
 
 - The AZMet API was updated to return HTTP error codes for bad requests
   or server errors and these are now displayed to users.

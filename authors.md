@@ -24,7 +24,7 @@ AZMet API.”
       doi = {10.5281/zenodo.7675685},
       url = {https://uace-azmet.github.io/azmetr/},
       abstract = {Provides R functions to access the Arizona Meteorological Network (AZMet) API. Functions are more than just "thin wrappers" and do some parsing of input parameters and wrangling of output data.},
-      version = {0.4.0},
+      version = {0.5.0},
     }
 
 Arizona Meteorological Network (2026). “Arizona Meteorological Network
