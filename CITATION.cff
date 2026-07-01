@@ -8,7 +8,7 @@ message: 'To cite package "azmetr" in publications use:'
 type: software
 license: MIT
 title: 'azmetr: Access Arizona Weather Data from the AZMet API'
-version: 0.4.0
+version: 0.5.0
 doi: 10.5281/zenodo.7675685
 identifiers:
 - type: url
@@ -27,7 +27,7 @@ authors:
   orcid: https://orcid.org/0000-0002-7430-7879
 repository-code: https://github.com/uace-azmet/azmetr
 url: https://uace-azmet.github.io/azmetr/
-date-released: '2026-06-17'
+date-released: '2026-07-01'
 contact:
 - family-names: Weiss
   given-names: Jeremy
