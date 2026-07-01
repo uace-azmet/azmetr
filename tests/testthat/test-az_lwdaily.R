@@ -2,6 +2,10 @@ skip_if_offline()
 skip_if_not(ping_service())
 skip_on_cran()
 
+test_that("works with default args", {
+  expect_s3_class(az_lwdaily(), "data.frame")
+})
+
 test_that("numeric station_ids work", {
   res_station <- az_lwdaily(station_id = 9)
   expect_s3_class(res_station, "data.frame")

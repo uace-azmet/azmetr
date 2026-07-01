@@ -62,6 +62,4 @@ retrieve_data <-
       list(i = data_raw$i, l = data_raw$l, s = data_raw$s, t = data_raw$t)
     )
   data_tidy
-
-  # TODO: Check for 0x0 tibble and error
 }

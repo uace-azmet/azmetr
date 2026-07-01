@@ -106,13 +106,24 @@ az_lwdaily <- function(station_id = NULL, start_date = NULL, end_date = NULL) {
   }
 
   # Check if any data are missing
+  # Default period is 0 seconds—gives same results as "*"
+  p <- if (params$time_interval == "*") "PT0S" else params$time_interval
   n_obs <- out %>%
     dplyr::summarise(n = dplyr::n(), .by = dplyr::all_of("meta_station_id")) %>%
-    dplyr::filter(.data$n < as.numeric(lubridate::period(params$time_interval), "day") + 1)
-  if (nrow(n_obs) != 0 |
-     # Also warn if the missing data is just at the end
-     lubridate::ymd(max(out$date)) < params$end) {
+    dplyr::filter(.data$n < as.numeric(lubridate::period(p), "day") + 1)
+
+  if (nrow(n_obs) != 0) {
     warning("Some requested data were unavailable.")
+  }
+  # Also warn if the missing data is just at the end
+  if (lubridate::ymd(max(out$date, na.rm = TRUE)) < params$end) {
+    warning(
+      "You requested data through ",
+      params$end,
+      " but only data through ",
+      max(out$datetime),
+      " were available."
+    )
   }
 
 
