@@ -2,6 +2,8 @@
 
 ## azmetr (development version)
 
+- Added Eloy station (“az16”) to station information
+
 ## azmetr 0.5.0
 
 - The AZMet API was updated to return HTTP error codes for bad requests

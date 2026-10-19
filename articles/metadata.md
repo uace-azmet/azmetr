@@ -32,7 +32,7 @@ hourly <-
   az_hourly() %>% 
   az_add_units() 
 #> Querying most recent hour of data ...
-#> Returning data from 2026-07-01 13:00 through 2026-07-01 14:00
+#> Returning data from 2026-10-19 11:00
 
 hourly %>% 
   select(-starts_with("meta_"), -starts_with("date_")) %>% 
@@ -40,12 +40,12 @@ hourly %>%
 #> # A tibble: 6 × 33
 #>   dwpt  dwptF eto_azmet eto_azmet_in heatstress_cottonC heatstress_cottonF
 #>   [°C] [degF]      [mm]         [in]               [°C]             [degF]
-#> 1 -5.7   71.2         1         0.04               28.8               183.
-#> 2  6.1  109.          1         0.04               29.1               184.
-#> 3  2.5   97.5         1         0.04               29.1               184.
-#> 4 -1.7   84.2         1         0.04               28.5               182.
-#> 5 -4.7   74.3         1         0.04               28.3               181.
-#> 6 -0.2   88.9         1         0.04               27.1               177.
+#> 1 14.3   136.       0.5         0.02               25.3               171.
+#> 2 10.1   123.       0.5         0.02               24.9               170.
+#> 3 14.3   136.       0.5         0.02               20.4               156.
+#> 4 14     135.       0.4         0.02               23.9               167.
+#> 5 13.1   132.       0.3         0.01               23.1               164.
+#> 6  9.7   121.       0.5         0.02               22.7               163.
 #> # ℹ 27 more variables: precip_total [mm], precip_total_in [in],
 #> #   relative_humidity [%], sol_rad_total [MJ/m^2], sol_rad_total_ly [langleys],
 #> #   temp_airC [°C], temp_airF [degF], temp_soil_10cmC [°C],
@@ -76,20 +76,20 @@ hourly %>%
   transmute(wind_spd_kph = set_units(wind_spd_mps, "km/h"),
             sol_rad_total = set_units(sol_rad_total, "W h m-2"),
             temp_airK = set_units(temp_airF, "Kelvins"))
-#> # A tibble: 35 × 3
+#> # A tibble: 36 × 3
 #>    wind_spd_kph sol_rad_total temp_airK
 #>          [km/h]     [W*h/m^2]       [K]
-#>  1        10.1           972.      310.
-#>  2        10.8           997.      309.
-#>  3         9.72          964.      309.
-#>  4         7.92         1019.      309.
-#>  5         8.28          989.      309.
-#>  6        12.6           958.      306.
-#>  7        10.4           922.      306.
-#>  8        15.1           989.      306.
-#>  9         7.56          975       307.
-#> 10        10.8           944.      308.
-#> # ℹ 25 more rows
+#>  1         3.24          622.      301.
+#>  2         9             600       301.
+#>  3        15.1           633.      294.
+#>  4        10.8           489.      299.
+#>  5         2.52          403.      298.
+#>  6         4.32          625       298.
+#>  7         2.52          614.      299.
+#>  8        11.5           661.      294.
+#>  9         2.52          600       300.
+#> 10        10.4           619.      301.
+#> # ℹ 26 more rows
 ```
 
 Second, it won’t allow you to do math where the units aren’t compatible.
@@ -114,7 +114,7 @@ constants.
 
 ## Must use:
 hourly$wind_spd_mps[1] + set_units(10, "m/s")
-#> 12.8 [m/s]
+#> 10.9 [m/s]
 ```
 
 ## Plotting with units
