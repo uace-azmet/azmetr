@@ -1,4 +1,4 @@
-﻿name,symbol,id,county,latitude,longitude,elev_ft,elev_m,status,start_date,end_date
+name,symbol,id,county,latitude,longitude,elev_ft,elev_m,status,start_date,end_date
 Tucson,TUC,az01,Pima,32.2806,-110.9459,2343,714,active,2020-01-01,NA
 Yuma Valley,YUV,az02,Yuma,32.7118,-114.7041,118,36,active,2020-01-01,NA
 Safford,SAF,az04,Graham,32.813,-109.6793,2963,903,active,2020-01-01,NA
@@ -10,6 +10,7 @@ Bonita,BON,az09,Graham,32.4775,-109.9327,4416,1349,active,2020-01-01,NA
 Phoenix Greenway,PGR,az12,Maricopa,33.6233,-112.1077,1322,403,active,2020-01-01,NA
 Yuma N.Gila,YUG,az14,Yuma,32.7804,-114.5163,140,43,active,2020-01-01,NA
 Phoenix Encanto,PEN,az15,Maricopa,33.4784,-112.098,1096,334,active,2020-01-01,NA
+Eloy,ELO,az16,Pinal,32.7861,-111.5594,1526,465,active,2026-10-09,NA
 Paloma,GIB,az19,Maricopa,32.9271,-112.8967,725,221,active,2020-01-01,NA
 Mohave,MOH,az20,Mohave,34.9675,-114.6111,482,147,active,2020-01-01,NA
 Queen Creek,QCR,az22,Maricopa,33.1939,-111.5326,1516,462,active,2020-01-01,NA
